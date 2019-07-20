@@ -22,6 +22,32 @@ Scripts provided in `package.json`. It's safe to modify or add additional script
 yarn start
 ```
 
+### AWS Amplify configure
+
+```bash
+amplify configure
+```
+
+choose region
+
+```bash
+us-west-2
+```
+
+user name:
+
+```bash
+agendabledev
+```
+
+User our AWS keys.
+
+```bash
+amplify init
+```
+
+Choose our profile
+
 ### Build project
 
 ```bash
