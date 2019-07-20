@@ -7,7 +7,6 @@ export default {
   getAntdSerials(color: string): string[] {
     const lightCount = 9;
     const divide = 10;
-    // 淡化（即less的tint）
     let lightens = new Array(lightCount).fill(0);
     lightens = lightens.map((_, i) => client.varyColor.lighten(color, i / divide));
     const colorPalettes = generate(color);
