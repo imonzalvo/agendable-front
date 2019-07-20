@@ -50,6 +50,8 @@
     "@types/lodash.debounce": "^4.0.6",
     "@types/react-router": "^5.0.2",
     "antd": "^3.20.0",
+    "aws-amplify": "^1.1.32",
+    "aws-amplify-react": "^2.3.11",
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
