@@ -1,19 +1,21 @@
 {
-    "agendable": {
-        "awscloudformation": {
-            "AuthRoleName": "agendable-agendable-20190720181419-authRole",
-            "UnauthRoleArn": "arn:aws:iam::343146248340:role/agendable-agendable-20190720181419-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::343146248340:role/agendable-agendable-20190720181419-authRole",
-            "Region": "us-west-2",
-            "DeploymentBucketName": "agendable-agendable-20190720181419-deployment",
-            "UnauthRoleName": "agendable-agendable-20190720181419-unauthRole",
-            "StackName": "agendable-agendable-20190720181419",
-            "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/agendable-agendable-20190720181419/5597e310-ab33-11e9-8b93-025cdb5d2002"
-        },
-        "categories": {
-            "auth": {
-                "agendable9976c90f": {}
-            }
+  "agendable": {
+    "awscloudformation": {
+      "AuthRoleName": "agendable-agendable-20190720181419-authRole",
+      "UnauthRoleArn": "arn:aws:iam::343146248340:role/agendable-agendable-20190720181419-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::343146248340:role/agendable-agendable-20190720181419-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "agendable-agendable-20190720181419-deployment",
+      "UnauthRoleName": "agendable-agendable-20190720181419-unauthRole",
+      "StackName": "agendable-agendable-20190720181419",
+      "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/agendable-agendable-20190720181419/5597e310-ab33-11e9-8b93-025cdb5d2002"
+    },
+    "categories": {
+      "auth": {
+        "agendable17f5a704": {
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"ab0aec1f7ef279b0d9d954705cae5ff1\"},{\"ProviderName\":\"Google\",\"client_id\":\"997269797206-ir9cl70i56luah9sav5m76d8u1g3f2jp.apps.googleusercontent.com\",\"client_secret\":\"vxN-rmH2wNFfhCgomU7Ue-GE\"}]"
         }
+      }
     }
+  }
 }
