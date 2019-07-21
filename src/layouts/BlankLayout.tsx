@@ -1,11 +1,9 @@
-import React from 'react';
-import CopyBlock from '@/components/CopyBlock';
+import React, { Fragment } from 'react';
 
 const Layout: React.FC = ({ children }) => (
-  <>
+  <Fragment>
     <div>{children}</div>
-    <CopyBlock id={Date.now()} />
-  </>
+  </Fragment>
 );
 
 export default Layout;
