@@ -12,7 +12,13 @@
     },
     "categories": {
       "auth": {
-        "agendable9976c90f": {}
+        "agendable17f5a704": {
+          "facebookAppIdUserPool": "381076525880234",
+          "facebookAppSecretUserPool": "ab0aec1f7ef279b0d9d954705cae5ff1",
+          "googleAppIdUserPool": "997269797206-ir9cl70i56luah9sav5m76d8u1g3f2jp.apps.googleusercontent.com",
+          "googleAppSecretUserPool": "vxN-rmH2wNFfhCgomU7Ue-GE",
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"ab0aec1f7ef279b0d9d954705cae5ff1\"},{\"ProviderName\":\"Google\",\"client_id\":\"997269797206-ir9cl70i56luah9sav5m76d8u1g3f2jp.apps.googleusercontent.com\",\"client_secret\":\"vxN-rmH2wNFfhCgomU7Ue-GE\"}]"
+        }
       }
     }
   }
