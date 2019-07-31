@@ -1,9 +1,0 @@
-{
-  "auth": {
-    "agendable17f5a704": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
-    }
-  }
-}
