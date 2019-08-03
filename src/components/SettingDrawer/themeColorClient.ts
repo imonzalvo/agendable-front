@@ -17,11 +17,11 @@ export default {
     const options = {
       // new colors array, one-to-one corresponde with `matchColors`
       newColors: this.getAntdSerials(color),
-      changeUrl(cssUrl: string): string {
-        console.log('cssurl', cssUrl);
-        // while router is not `hash` mode, it needs absolute path
-        return `/${cssUrl}`;
-      },
+      // changeUrl(cssUrl: string): string {
+      //   console.log('cssurl', cssUrl);
+      //   // while router is not `hash` mode, it needs absolute path
+      //   return `/${cssUrl}`;
+      // },
     };
     return client.changer.changeColor(options, Promise);
   },
