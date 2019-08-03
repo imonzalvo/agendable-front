@@ -14,7 +14,10 @@ export default (): React.ReactNode => (
       type="primary"
       htmlType="submit"
       onClick={() => {
-        themeColorClient.changeColor('#FF0000');
+        themeColorClient
+          .changeColor('#FF0000')
+          .then(() => console.log('colors!'))
+          .catch(err => console.log('error!', err));
       }}
     >
       Cambiar colores
