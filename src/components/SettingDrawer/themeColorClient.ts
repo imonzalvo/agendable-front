@@ -1,5 +1,3 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable import/no-extraneous-dependencies */
 import client from 'webpack-theme-color-replacer/client';
 import generate from '@ant-design/colors/lib/generate';
 
@@ -20,6 +18,7 @@ export default {
       // new colors array, one-to-one corresponde with `matchColors`
       newColors: this.getAntdSerials(color),
       changeUrl(cssUrl: string): string {
+        console.log('cssurl', cssUrl);
         // while router is not `hash` mode, it needs absolute path
         return `/${cssUrl}`;
       },
