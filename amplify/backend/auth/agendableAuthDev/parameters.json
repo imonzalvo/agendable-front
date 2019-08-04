@@ -1,18 +1,19 @@
 {
-    "identityPoolName": "agendableUserDevAuth",
+    "identityPoolName": "agendableIdentityDev",
     "allowUnauthenticatedIdentities": true,
-    "openIdLambdaRoleName": "agendae06f7e08_openid_lambda_role",
-    "resourceNameTruncated": "agendae06f7e08",
-    "userPoolName": "agendablee06f7e08_userpool_e06f7e08",
+    "openIdLambdaRoleName": "agenda3c3dd693_openid_lambda_role",
+    "resourceNameTruncated": "agenda3c3dd693",
+    "userPoolName": "agendableUserPoolDev",
     "autoVerifiedAttributes": [
         "phone_number"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
-        "SMS Text Message"
+        "SMS Text Message",
+        "TOTP"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Your code is: {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
@@ -22,7 +23,7 @@
         "family_name",
         "given_name"
     ],
-    "userpoolClientName": "agendae06f7e08_app_client",
+    "userpoolClientName": "agenda3c3dd693_app_client",
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
@@ -31,31 +32,32 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "mfaLambdaRole": "agendae06f7e08_totp_lambda_role",
-    "userpoolClientLambdaRole": "agendae06f7e08_userpoolclient_lambda_role",
+    "mfaLambdaRole": "agenda3c3dd693_totp_lambda_role",
+    "userpoolClientLambdaRole": "agenda3c3dd693_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "agendableDevAuth",
+    "resourceName": "agendableAuthDev",
     "thirdPartyAuth": true,
     "authProviders": [
         "graph.facebook.com",
         "accounts.google.com"
     ],
-    "usernameAttributes": [
-        "email, phone_number"
-    ],
     "triggers": "{}",
     "hostedUI": true,
-    "hostedUIDomainName": "agendablee06f7e08-e06f7e08",
+    "hostedUIDomainName": "agendable-oauth-dev",
     "newCallbackURLs": [
-        "http://localhost:19002/"
+        "https://agendable.io/dev/signin/"
     ],
     "newLogoutURLs": [
-        "http://localhost:19002/"
+        "https://agendable.io/dev/signout/"
     ],
     "AllowedOAuthFlows": "code",
     "AllowedOAuthScopes": [
+        "phone",
+        "email",
+        "openid",
+        "profile",
         "aws.cognito.signin.user.admin"
     ],
     "authProvidersUserPool": [
@@ -64,7 +66,7 @@
     ],
     "selectedParties": "{\"graph.facebook.com\":\"381076525880234\",\"accounts.google.com\":\"AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs\"}",
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"public_profile\",\"AttributeMapping\":{\"family_name\":\"last_name\",\"given_name\":\"given_name\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid profile\",\"AttributeMapping\":{\"family_name\":\"family_name\",\"given_name\":\"given_name\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:19002/\"],\"LogoutURLs\":[\"http://localhost:19002/\"]}",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://agendable.io/dev/signin/\"],\"LogoutURLs\":[\"https://agendable.io/dev/signout/\"]}",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },

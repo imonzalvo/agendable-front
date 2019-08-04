@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"agendableDevAuth": {
+		"agendableAuthDev": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
