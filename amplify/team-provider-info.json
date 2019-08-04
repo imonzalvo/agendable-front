@@ -12,14 +12,14 @@
         },
         "categories": {
             "auth": {
-                "agendableDevAuth": {
+                "agendableAuthDev": {
                     "facebookAppId": "381076525880234",
                     "facebookAppIdUserPool": "381076525880234",
                     "facebookAppSecretUserPool": "381076525880234",
                     "googleClientId": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs",
-                    "googleAppIdUserPool": "381076525880234",
+                    "googleAppIdUserPool": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs",
                     "googleAppSecretUserPool": "381076525880234",
-                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"381076525880234\"},{\"ProviderName\":\"Google\",\"client_id\":\"381076525880234\",\"client_secret\":\"381076525880234\"}]"
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"381076525880234\"},{\"ProviderName\":\"Google\",\"client_id\":\"AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs\",\"client_secret\":\"381076525880234\"}]"
                 }
             }
         }
