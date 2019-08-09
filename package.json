@@ -52,11 +52,14 @@
     "antd": "^3.20.0",
     "aws-amplify": "^1.1.32",
     "aws-amplify-react": "^2.3.11",
+    "aws-appsync": "^1.8.1",
+    "aws-appsync-react": "^1.2.9",
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
     "dva": "^2.4.1",
     "gg-editor": "^2.0.2",
+    "graphql-tag": "^2.10.1",
     "hash.js": "^1.1.5",
     "lodash": "^4.17.11",
     "lodash-decorators": "^6.0.1",
@@ -70,6 +73,8 @@
     "prop-types": "^15.7.2",
     "qs": "^6.7.0",
     "react": "^16.8.6",
+    "react-apollo": "^2.5.8",
+    "react-apollo-hooks": "^0.5.0",
     "react-container-query": "^0.11.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
@@ -133,5 +138,8 @@
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ]
+  ],
+  "resolutions": {
+    "apollo-client": "2.6.3"
+  }
 }

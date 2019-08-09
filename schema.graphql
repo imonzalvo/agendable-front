@@ -1,0 +1,679 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type AvailabilityItem @aws_cognito_user_pools @aws_iam {
+  day: Day
+  employee: Employee
+  from: String!
+  id: ID!
+  to: String!
+}
+
+type Booking @aws_cognito_user_pools @aws_iam {
+  branch: Branch!
+  client: User!
+  createdAt: AWSDateTime!
+  employee: Employee
+  end: AWSDateTime!
+  id: ID!
+  service: Service!
+  start: AWSDateTime!
+  status: BookingStatus!
+}
+
+type Branch @aws_cognito_user_pools @aws_iam {
+  address: String!
+  bookings(filter: ModelBookingFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBookingConnection
+  business: Business!
+  email: AWSEmail!
+  employees(filter: ModelBranchEmployeesFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBranchEmployeesConnection
+  id: ID!
+  name: String!
+  phone: AWSPhone!
+  services(filter: ModelBranchServicesFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBranchServicesConnection
+}
+
+type BranchEmployees @aws_cognito_user_pools @aws_iam {
+  branch: Branch
+  employee: Employee
+  id: ID!
+}
+
+type BranchServices @aws_cognito_user_pools @aws_iam {
+  branch: Branch
+  id: ID!
+  service: Service
+}
+
+type Business @aws_cognito_user_pools @aws_iam {
+  branches(filter: ModelBranchFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBranchConnection
+  email: String!
+  id: ID!
+  name: String!
+  owners(filter: ModelUserBusinessesFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelUserBusinessesConnection
+  phone: String!
+}
+
+type Employee @aws_cognito_user_pools @aws_iam {
+  availability(filter: ModelAvailabilityItemFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelAvailabilityItemConnection
+  bookings(filter: ModelBookingFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBookingConnection
+  branches(filter: ModelBranchEmployeesFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBranchEmployeesConnection
+  familyName: String!
+  givenName: String!
+  id: ID!
+  phone: String
+  services(filter: ModelEmployeeServicesFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelEmployeeServicesConnection
+  user: User
+}
+
+type EmployeeServices @aws_cognito_user_pools @aws_iam {
+  employee: Employee
+  id: ID!
+  service: Service
+}
+
+type ModelAvailabilityItemConnection @aws_cognito_user_pools @aws_iam {
+  items: [AvailabilityItem]
+  nextToken: String
+}
+
+type ModelBookingConnection @aws_cognito_user_pools @aws_iam {
+  items: [Booking]
+  nextToken: String
+}
+
+type ModelBranchConnection @aws_cognito_user_pools @aws_iam {
+  items: [Branch]
+  nextToken: String
+}
+
+type ModelBranchEmployeesConnection @aws_cognito_user_pools @aws_iam {
+  items: [BranchEmployees]
+  nextToken: String
+}
+
+type ModelBranchServicesConnection @aws_cognito_user_pools @aws_iam {
+  items: [BranchServices]
+  nextToken: String
+}
+
+type ModelBusinessConnection @aws_cognito_user_pools @aws_iam {
+  items: [Business]
+  nextToken: String
+}
+
+type ModelEmployeeConnection @aws_cognito_user_pools @aws_iam {
+  items: [Employee]
+  nextToken: String
+}
+
+type ModelEmployeeServicesConnection @aws_cognito_user_pools @aws_iam {
+  items: [EmployeeServices]
+  nextToken: String
+}
+
+type ModelServiceConnection @aws_cognito_user_pools @aws_iam {
+  items: [Service]
+  nextToken: String
+}
+
+type ModelUserBusinessesConnection @aws_cognito_user_pools @aws_iam {
+  items: [UserBusinesses]
+  nextToken: String
+}
+
+type ModelUserConnection @aws_cognito_user_pools @aws_iam {
+  items: [User]
+  nextToken: String
+}
+
+type Mutation {
+  createAvailabilityItem(input: CreateAvailabilityItemInput!): AvailabilityItem
+  createBooking(input: CreateBookingInput!): Booking
+  createBranch(input: CreateBranchInput!): Branch
+  createBranchEmployees(input: CreateBranchEmployeesInput!): BranchEmployees
+  createBranchServices(input: CreateBranchServicesInput!): BranchServices
+  createBusiness(input: CreateBusinessInput!): Business
+  createEmployee(input: CreateEmployeeInput!): Employee
+  createEmployeeServices(input: CreateEmployeeServicesInput!): EmployeeServices
+  createService(input: CreateServiceInput!): Service
+  createUser(input: CreateUserInput!): User
+  createUserBusinesses(input: CreateUserBusinessesInput!): UserBusinesses
+  deleteAvailabilityItem(input: DeleteAvailabilityItemInput!): AvailabilityItem
+  deleteBooking(input: DeleteBookingInput!): Booking
+  deleteBranch(input: DeleteBranchInput!): Branch
+  deleteBranchEmployees(input: DeleteBranchEmployeesInput!): BranchEmployees
+  deleteBranchServices(input: DeleteBranchServicesInput!): BranchServices
+  deleteBusiness(input: DeleteBusinessInput!): Business
+  deleteEmployee(input: DeleteEmployeeInput!): Employee
+  deleteEmployeeServices(input: DeleteEmployeeServicesInput!): EmployeeServices
+  deleteService(input: DeleteServiceInput!): Service
+  deleteUser(input: DeleteUserInput!): User
+  deleteUserBusinesses(input: DeleteUserBusinessesInput!): UserBusinesses
+  updateAvailabilityItem(input: UpdateAvailabilityItemInput!): AvailabilityItem
+  updateBooking(input: UpdateBookingInput!): Booking
+  updateBranch(input: UpdateBranchInput!): Branch
+  updateBranchEmployees(input: UpdateBranchEmployeesInput!): BranchEmployees
+  updateBranchServices(input: UpdateBranchServicesInput!): BranchServices
+  updateBusiness(input: UpdateBusinessInput!): Business
+  updateEmployee(input: UpdateEmployeeInput!): Employee
+  updateEmployeeServices(input: UpdateEmployeeServicesInput!): EmployeeServices
+  updateService(input: UpdateServiceInput!): Service
+  updateUser(input: UpdateUserInput!): User
+  updateUserBusinesses(input: UpdateUserBusinessesInput!): UserBusinesses
+}
+
+type Query @aws_cognito_user_pools @aws_iam {
+  getAvailabilityItem(id: ID!): AvailabilityItem
+  getBooking(id: ID!): Booking
+  getBranch(id: ID!): Branch
+  getBranchEmployees(id: ID!): BranchEmployees
+  getBranchServices(id: ID!): BranchServices
+  getBusiness(id: ID!): Business
+  getEmployee(id: ID!): Employee
+  getEmployeeServices(id: ID!): EmployeeServices
+  getService(id: ID!): Service
+  getUser(id: ID!): User
+  getUserBusinesses(id: ID!): UserBusinesses
+  listAvailabilityItems(filter: ModelAvailabilityItemFilterInput, limit: Int, nextToken: String): ModelAvailabilityItemConnection
+  listBookings(filter: ModelBookingFilterInput, limit: Int, nextToken: String): ModelBookingConnection
+  listBranchEmployeess(filter: ModelBranchEmployeesFilterInput, limit: Int, nextToken: String): ModelBranchEmployeesConnection
+  listBranchServicess(filter: ModelBranchServicesFilterInput, limit: Int, nextToken: String): ModelBranchServicesConnection
+  listBranchs(filter: ModelBranchFilterInput, limit: Int, nextToken: String): ModelBranchConnection
+  listBusinesss(filter: ModelBusinessFilterInput, limit: Int, nextToken: String): ModelBusinessConnection
+  listEmployeeServicess(filter: ModelEmployeeServicesFilterInput, limit: Int, nextToken: String): ModelEmployeeServicesConnection
+  listEmployees(filter: ModelEmployeeFilterInput, limit: Int, nextToken: String): ModelEmployeeConnection
+  listServices(filter: ModelServiceFilterInput, limit: Int, nextToken: String): ModelServiceConnection
+  listUserBusinessess(filter: ModelUserBusinessesFilterInput, limit: Int, nextToken: String): ModelUserBusinessesConnection
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+}
+
+type Service @aws_cognito_user_pools @aws_iam {
+  bookings(filter: ModelBookingFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBookingConnection
+  branch(filter: ModelBranchServicesFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBranchServicesConnection
+  currency: String
+  description: String
+  duration: Int!
+  employees(filter: ModelEmployeeServicesFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelEmployeeServicesConnection
+  id: ID!
+  name: String!
+  price: Float!
+}
+
+type Subscription {
+  onCreateAvailabilityItem: AvailabilityItem @aws_subscribe(mutations : ["createAvailabilityItem"])
+  onCreateBooking: Booking @aws_subscribe(mutations : ["createBooking"])
+  onCreateBranch: Branch @aws_subscribe(mutations : ["createBranch"])
+  onCreateBranchEmployees: BranchEmployees @aws_subscribe(mutations : ["createBranchEmployees"])
+  onCreateBranchServices: BranchServices @aws_subscribe(mutations : ["createBranchServices"])
+  onCreateBusiness: Business @aws_subscribe(mutations : ["createBusiness"])
+  onCreateEmployee: Employee @aws_subscribe(mutations : ["createEmployee"])
+  onCreateEmployeeServices: EmployeeServices @aws_subscribe(mutations : ["createEmployeeServices"])
+  onCreateService: Service @aws_subscribe(mutations : ["createService"])
+  onCreateUser: User @aws_subscribe(mutations : ["createUser"])
+  onCreateUserBusinesses: UserBusinesses @aws_subscribe(mutations : ["createUserBusinesses"])
+  onDeleteAvailabilityItem: AvailabilityItem @aws_subscribe(mutations : ["deleteAvailabilityItem"])
+  onDeleteBooking: Booking @aws_subscribe(mutations : ["deleteBooking"])
+  onDeleteBranch: Branch @aws_subscribe(mutations : ["deleteBranch"])
+  onDeleteBranchEmployees: BranchEmployees @aws_subscribe(mutations : ["deleteBranchEmployees"])
+  onDeleteBranchServices: BranchServices @aws_subscribe(mutations : ["deleteBranchServices"])
+  onDeleteBusiness: Business @aws_subscribe(mutations : ["deleteBusiness"])
+  onDeleteEmployee: Employee @aws_subscribe(mutations : ["deleteEmployee"])
+  onDeleteEmployeeServices: EmployeeServices @aws_subscribe(mutations : ["deleteEmployeeServices"])
+  onDeleteService: Service @aws_subscribe(mutations : ["deleteService"])
+  onDeleteUser: User @aws_subscribe(mutations : ["deleteUser"])
+  onDeleteUserBusinesses: UserBusinesses @aws_subscribe(mutations : ["deleteUserBusinesses"])
+  onUpdateAvailabilityItem: AvailabilityItem @aws_subscribe(mutations : ["updateAvailabilityItem"])
+  onUpdateBooking: Booking @aws_subscribe(mutations : ["updateBooking"])
+  onUpdateBranch: Branch @aws_subscribe(mutations : ["updateBranch"])
+  onUpdateBranchEmployees: BranchEmployees @aws_subscribe(mutations : ["updateBranchEmployees"])
+  onUpdateBranchServices: BranchServices @aws_subscribe(mutations : ["updateBranchServices"])
+  onUpdateBusiness: Business @aws_subscribe(mutations : ["updateBusiness"])
+  onUpdateEmployee: Employee @aws_subscribe(mutations : ["updateEmployee"])
+  onUpdateEmployeeServices: EmployeeServices @aws_subscribe(mutations : ["updateEmployeeServices"])
+  onUpdateService: Service @aws_subscribe(mutations : ["updateService"])
+  onUpdateUser: User @aws_subscribe(mutations : ["updateUser"])
+  onUpdateUserBusinesses: UserBusinesses @aws_subscribe(mutations : ["updateUserBusinesses"])
+}
+
+type User @aws_cognito_user_pools @aws_iam {
+  bookings(filter: ModelBookingFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelBookingConnection
+  businesses(filter: ModelUserBusinessesFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelUserBusinessesConnection
+  email: AWSEmail
+  familyName: String!
+  givenName: String!
+  id: ID!
+  phone: AWSPhone
+  userName: String!
+  userType: UserType!
+}
+
+type UserBusinesses @aws_cognito_user_pools @aws_iam {
+  business: Business
+  id: ID!
+  owner: User
+}
+
+enum BookingStatus {
+  CANCELLED
+  COMPLETED
+  CONFIRMED
+  PENDING
+}
+
+enum Day {
+  FRIDAY
+  MONDAY
+  SATURDAY
+  SUNDAY
+  THURSDAY
+  TUESDAY
+  WEDNESDAY
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+enum UserType {
+  ADMIN
+  GUEST
+  USER
+}
+
+input CreateAvailabilityItemInput {
+  availabilityItemEmployeeId: ID
+  day: Day
+  from: String!
+  id: ID
+  to: String!
+}
+
+input CreateBookingInput {
+  bookingBranchId: ID!
+  bookingClientId: ID!
+  bookingEmployeeId: ID
+  bookingServiceId: ID!
+  createdAt: AWSDateTime!
+  end: AWSDateTime!
+  id: ID
+  start: AWSDateTime!
+  status: BookingStatus!
+}
+
+input CreateBranchEmployeesInput {
+  branchEmployeesBranchId: ID
+  branchEmployeesEmployeeId: ID
+  id: ID
+}
+
+input CreateBranchInput {
+  address: String!
+  branchBusinessId: ID!
+  email: AWSEmail!
+  id: ID
+  name: String!
+  phone: AWSPhone!
+}
+
+input CreateBranchServicesInput {
+  branchServicesBranchId: ID
+  branchServicesServiceId: ID
+  id: ID
+}
+
+input CreateBusinessInput {
+  email: String!
+  id: ID
+  name: String!
+  phone: String!
+}
+
+input CreateEmployeeInput {
+  employeeUserId: ID
+  familyName: String!
+  givenName: String!
+  id: ID
+  phone: String
+}
+
+input CreateEmployeeServicesInput {
+  employeeServicesEmployeeId: ID
+  employeeServicesServiceId: ID
+  id: ID
+}
+
+input CreateServiceInput {
+  currency: String
+  description: String
+  duration: Int!
+  id: ID
+  name: String!
+  price: Float!
+}
+
+input CreateUserBusinessesInput {
+  id: ID
+  userBusinessesBusinessId: ID
+  userBusinessesOwnerId: ID
+}
+
+input CreateUserInput {
+  email: AWSEmail
+  familyName: String!
+  givenName: String!
+  id: ID
+  phone: AWSPhone
+  userName: String!
+  userType: UserType!
+}
+
+input DeleteAvailabilityItemInput {
+  id: ID
+}
+
+input DeleteBookingInput {
+  id: ID
+}
+
+input DeleteBranchEmployeesInput {
+  id: ID
+}
+
+input DeleteBranchInput {
+  id: ID
+}
+
+input DeleteBranchServicesInput {
+  id: ID
+}
+
+input DeleteBusinessInput {
+  id: ID
+}
+
+input DeleteEmployeeInput {
+  id: ID
+}
+
+input DeleteEmployeeServicesInput {
+  id: ID
+}
+
+input DeleteServiceInput {
+  id: ID
+}
+
+input DeleteUserBusinessesInput {
+  id: ID
+}
+
+input DeleteUserInput {
+  id: ID
+}
+
+input ModelAvailabilityItemFilterInput {
+  and: [ModelAvailabilityItemFilterInput]
+  day: ModelDayFilterInput
+  from: ModelStringFilterInput
+  id: ModelIDFilterInput
+  not: ModelAvailabilityItemFilterInput
+  or: [ModelAvailabilityItemFilterInput]
+  to: ModelStringFilterInput
+}
+
+input ModelBookingFilterInput {
+  and: [ModelBookingFilterInput]
+  createdAt: ModelStringFilterInput
+  end: ModelStringFilterInput
+  id: ModelIDFilterInput
+  not: ModelBookingFilterInput
+  or: [ModelBookingFilterInput]
+  start: ModelStringFilterInput
+  status: ModelBookingStatusFilterInput
+}
+
+input ModelBookingStatusFilterInput {
+  eq: BookingStatus
+  ne: BookingStatus
+}
+
+input ModelBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input ModelBranchEmployeesFilterInput {
+  and: [ModelBranchEmployeesFilterInput]
+  id: ModelIDFilterInput
+  not: ModelBranchEmployeesFilterInput
+  or: [ModelBranchEmployeesFilterInput]
+}
+
+input ModelBranchFilterInput {
+  address: ModelStringFilterInput
+  and: [ModelBranchFilterInput]
+  email: ModelStringFilterInput
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  not: ModelBranchFilterInput
+  or: [ModelBranchFilterInput]
+  phone: ModelStringFilterInput
+}
+
+input ModelBranchServicesFilterInput {
+  and: [ModelBranchServicesFilterInput]
+  id: ModelIDFilterInput
+  not: ModelBranchServicesFilterInput
+  or: [ModelBranchServicesFilterInput]
+}
+
+input ModelBusinessFilterInput {
+  and: [ModelBusinessFilterInput]
+  email: ModelStringFilterInput
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  not: ModelBusinessFilterInput
+  or: [ModelBusinessFilterInput]
+  phone: ModelStringFilterInput
+}
+
+input ModelDayFilterInput {
+  eq: Day
+  ne: Day
+}
+
+input ModelEmployeeFilterInput {
+  and: [ModelEmployeeFilterInput]
+  familyName: ModelStringFilterInput
+  givenName: ModelStringFilterInput
+  id: ModelIDFilterInput
+  not: ModelEmployeeFilterInput
+  or: [ModelEmployeeFilterInput]
+  phone: ModelStringFilterInput
+}
+
+input ModelEmployeeServicesFilterInput {
+  and: [ModelEmployeeServicesFilterInput]
+  id: ModelIDFilterInput
+  not: ModelEmployeeServicesFilterInput
+  or: [ModelEmployeeServicesFilterInput]
+}
+
+input ModelFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input ModelIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input ModelIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input ModelServiceFilterInput {
+  and: [ModelServiceFilterInput]
+  currency: ModelStringFilterInput
+  description: ModelStringFilterInput
+  duration: ModelIntFilterInput
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  not: ModelServiceFilterInput
+  or: [ModelServiceFilterInput]
+  price: ModelFloatFilterInput
+}
+
+input ModelStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input ModelUserBusinessesFilterInput {
+  and: [ModelUserBusinessesFilterInput]
+  id: ModelIDFilterInput
+  not: ModelUserBusinessesFilterInput
+  or: [ModelUserBusinessesFilterInput]
+}
+
+input ModelUserFilterInput {
+  and: [ModelUserFilterInput]
+  email: ModelStringFilterInput
+  familyName: ModelStringFilterInput
+  givenName: ModelStringFilterInput
+  id: ModelIDFilterInput
+  not: ModelUserFilterInput
+  or: [ModelUserFilterInput]
+  phone: ModelStringFilterInput
+  userName: ModelStringFilterInput
+  userType: ModelUserTypeFilterInput
+}
+
+input ModelUserTypeFilterInput {
+  eq: UserType
+  ne: UserType
+}
+
+input UpdateAvailabilityItemInput {
+  availabilityItemEmployeeId: ID
+  day: Day
+  from: String
+  id: ID!
+  to: String
+}
+
+input UpdateBookingInput {
+  bookingBranchId: ID
+  bookingClientId: ID
+  bookingEmployeeId: ID
+  bookingServiceId: ID
+  createdAt: AWSDateTime
+  end: AWSDateTime
+  id: ID!
+  start: AWSDateTime
+  status: BookingStatus
+}
+
+input UpdateBranchEmployeesInput {
+  branchEmployeesBranchId: ID
+  branchEmployeesEmployeeId: ID
+  id: ID!
+}
+
+input UpdateBranchInput {
+  address: String
+  branchBusinessId: ID
+  email: AWSEmail
+  id: ID!
+  name: String
+  phone: AWSPhone
+}
+
+input UpdateBranchServicesInput {
+  branchServicesBranchId: ID
+  branchServicesServiceId: ID
+  id: ID!
+}
+
+input UpdateBusinessInput {
+  email: String
+  id: ID!
+  name: String
+  phone: String
+}
+
+input UpdateEmployeeInput {
+  employeeUserId: ID
+  familyName: String
+  givenName: String
+  id: ID!
+  phone: String
+}
+
+input UpdateEmployeeServicesInput {
+  employeeServicesEmployeeId: ID
+  employeeServicesServiceId: ID
+  id: ID!
+}
+
+input UpdateServiceInput {
+  currency: String
+  description: String
+  duration: Int
+  id: ID!
+  name: String
+  price: Float
+}
+
+input UpdateUserBusinessesInput {
+  id: ID!
+  userBusinessesBusinessId: ID
+  userBusinessesOwnerId: ID
+}
+
+input UpdateUserInput {
+  email: AWSEmail
+  familyName: String
+  givenName: String
+  id: ID!
+  phone: AWSPhone
+  userName: String
+  userType: UserType
+}

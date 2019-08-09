@@ -83,8 +83,8 @@ type BranchServices @model {
 type Business @model {
  id: ID!
  name: String!
- email: String!
- phone: String!
+ email: AWSEmail!
+ phone: AWSPhone!
  owners: [UserBusinesses!]! @connection(name: "BusinessOwners")
  branches: [Branch!] @connection(name: "BusinessBranch")
 }
