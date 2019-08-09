@@ -93,6 +93,11 @@ export default {
           component: './home',
         },
         {
+          path: '/services',
+          exact: true,
+          component: './services',
+        },
+        {
           path: '/user',
           component: '../layouts/UserLayout',
           routes: [

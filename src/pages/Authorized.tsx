@@ -3,11 +3,16 @@ import Amplify from 'aws-amplify';
 import { Authenticator } from 'aws-amplify-react';
 
 Amplify.configure({
+  API: {
+    graphql_endpoint:
+      'https://l5hs5h46lrcp7ppzlmbamqjoa4.appsync-api.us-west-2.amazonaws.com/graphql',
+    graphql_endpoint_iam_region: 'us-west-2',
+  },
   Auth: {
-    identityPoolId: 'us-west-2:e7d6cb26-9d6e-49cb-8e38-0cd72d88fae0',
+    identityPoolId: 'us-west-2:69c0a3f7-e59e-45b1-822a-adf88f0b11ba',
     region: 'us-west-2',
-    userPoolId: 'us-west-2_3J3rX6Mt2',
-    userPoolWebClientId: '7dvumk2uu0gvs90oe1ptspcbjk',
+    userPoolId: 'us-west-2_Y62JDY67L',
+    userPoolWebClientId: '4o48ujknlhjip6r97pcavgvrbc',
   },
 });
 
