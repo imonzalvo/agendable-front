@@ -38,10 +38,12 @@ type Employee @model {
 }
 
 
-type EmployeeServices @model {
+type EmployeeServices @model @key(fields: ["serviceId", "employeeId"]) {
   id: ID!
   service: Service @connection(name: "ServiceEmployees")
   employee: Employee @connection(name: "EmployeeServices")
+  serviceId: ID!
+  employeeId: ID!
 }
 
 type Service @model {
@@ -68,16 +70,20 @@ type Branch @model {
  employees: [BranchEmployees!]! @connection(name: "BranchEmployees")
 }
 
-type BranchEmployees @model {
+type BranchEmployees @model @key(fields: ["branchId", "employeeId"]) {
   id: ID!
   branch: Branch @connection(name: "BranchEmployees")
   employee: Employee @connection(name: "EmployeeBranches")
+  branchId: ID!
+  employeeId: ID!
 }
 
-type BranchServices @model {
+type BranchServices @model @key(fields: ["branchId", "serviceId"]) {
   id: ID!
   branch: Branch @connection(name: "BranchServices")
   service: Service @connection(name: "ServiceBranches")
+  branchId: ID!
+  serviceId: ID!
 }
 
 type Business @model {
@@ -89,10 +95,12 @@ type Business @model {
  branches: [Branch!] @connection(name: "BusinessBranch")
 }
 
-type UserBusinesses @model {
+type UserBusinesses @model @key(fields: ["ownerId", "businessId"]){
   id: ID!
   owner: User @connection(name: "OwnerBusinesses")
   business: Business @connection(name: "BusinessOwners")
+  ownerId: ID!
+  businessId: ID!
 }
 
 type User @model {

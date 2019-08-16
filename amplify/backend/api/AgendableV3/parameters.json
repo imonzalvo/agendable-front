@@ -1,6 +1,7 @@
 {
-    "AppSyncApiName": "AgendableGraphAPI",
+    "AppSyncApiName": "AgendableV3",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
     "AuthCognitoUserPoolId": {
         "Fn::GetAtt": [
             "authagendableAuthDev",

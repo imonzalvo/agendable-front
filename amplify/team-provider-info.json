@@ -1,27 +1,27 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "agendable-dev-20190731181704-authRole",
-      "UnauthRoleArn": "arn:aws:iam::343146248340:role/agendable-dev-20190731181704-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::343146248340:role/agendable-dev-20190731181704-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "agendable-dev-20190731181704-deployment",
-      "UnauthRoleName": "agendable-dev-20190731181704-unauthRole",
-      "StackName": "agendable-dev-20190731181704",
-      "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/agendable-dev-20190731181704/89e3b420-b3d8-11e9-b402-02fcc3dcb248"
-    },
-    "categories": {
-      "auth": {
-        "agendableAuthDev": {
-          "facebookAppId": "381076525880234",
-          "facebookAppIdUserPool": "381076525880234",
-          "facebookAppSecretUserPool": "381076525880234",
-          "googleClientId": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs",
-          "googleAppIdUserPool": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs",
-          "googleAppSecretUserPool": "381076525880234",
-          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"381076525880234\"},{\"ProviderName\":\"Google\",\"client_id\":\"AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs\",\"client_secret\":\"381076525880234\"}]"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "agendable-dev-20190731181704-authRole",
+            "UnauthRoleArn": "arn:aws:iam::343146248340:role/agendable-dev-20190731181704-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::343146248340:role/agendable-dev-20190731181704-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "agendable-dev-20190731181704-deployment",
+            "UnauthRoleName": "agendable-dev-20190731181704-unauthRole",
+            "StackName": "agendable-dev-20190731181704",
+            "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/agendable-dev-20190731181704/89e3b420-b3d8-11e9-b402-02fcc3dcb248"
+        },
+        "categories": {
+            "auth": {
+                "agendableAuthDev": {
+                    "facebookAppId": "381076525880234",
+                    "facebookAppIdUserPool": "381076525880234",
+                    "facebookAppSecretUserPool": "381076525880234",
+                    "googleClientId": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs",
+                    "googleAppIdUserPool": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs",
+                    "googleAppSecretUserPool": "381076525880234",
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"381076525880234\"},{\"ProviderName\":\"Google\",\"client_id\":\"AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs\",\"client_secret\":\"381076525880234\"}]"
+                }
+            }
         }
-      }
     }
-  }
 }

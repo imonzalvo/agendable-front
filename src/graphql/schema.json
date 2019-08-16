@@ -201,10 +201,23 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "getEmployeeServices",
+          "name" : "getEmployeeServicess",
           "description" : null,
           "args" : [ {
-            "name" : "id",
+            "name" : "serviceId",
+            "description" : null,
+            "type" : {
+              "kind" : "NON_NULL",
+              "name" : null,
+              "ofType" : {
+                "kind" : "SCALAR",
+                "name" : "ID",
+                "ofType" : null
+              }
+            },
+            "defaultValue" : null
+          }, {
+            "name" : "employeeId",
             "description" : null,
             "type" : {
               "kind" : "NON_NULL",
@@ -219,20 +232,38 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "EmployeeServices",
+            "name" : "EmployeeServicess",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "listEmployeeServicess",
+          "name" : "listEmployeeServicesss",
           "description" : null,
           "args" : [ {
+            "name" : "serviceId",
+            "description" : null,
+            "type" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            },
+            "defaultValue" : null
+          }, {
+            "name" : "employeeId",
+            "description" : null,
+            "type" : {
+              "kind" : "INPUT_OBJECT",
+              "name" : "ModelIDKeyConditionInput",
+              "ofType" : null
+            },
+            "defaultValue" : null
+          }, {
             "name" : "filter",
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelEmployeeServicesFilterInput",
+              "name" : "ModelEmployeeServicessFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
@@ -257,7 +288,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "ModelEmployeeServicesConnection",
+            "name" : "ModelEmployeeServicessConnection",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -918,7 +949,7 @@
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelEmployeeServicesFilterInput",
+              "name" : "ModelEmployeeServicessFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
@@ -952,7 +983,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "ModelEmployeeServicesConnection",
+            "name" : "ModelEmployeeServicessConnection",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -2312,7 +2343,7 @@
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelEmployeeServicesFilterInput",
+              "name" : "ModelEmployeeServicessFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
@@ -2346,7 +2377,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "ModelEmployeeServicesConnection",
+            "name" : "ModelEmployeeServicessConnection",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -2472,7 +2503,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "ModelEmployeeServicesConnection",
+        "name" : "ModelEmployeeServicessConnection",
         "description" : null,
         "fields" : [ {
           "name" : "items",
@@ -2483,7 +2514,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "OBJECT",
-              "name" : "EmployeeServices",
+              "name" : "EmployeeServicess",
               "ofType" : null
             }
           },
@@ -2507,7 +2538,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "EmployeeServices",
+        "name" : "EmployeeServicess",
         "description" : null,
         "fields" : [ {
           "name" : "id",
@@ -2546,6 +2577,36 @@
           },
           "isDeprecated" : false,
           "deprecationReason" : null
+        }, {
+          "name" : "serviceId",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "employeeId",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
         } ],
         "inputFields" : null,
         "interfaces" : [ ],
@@ -2553,11 +2614,29 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "ModelEmployeeServicesFilterInput",
+        "name" : "ModelEmployeeServicessFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
           "name" : "id",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIDFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "serviceId",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIDFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "employeeId",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -2573,7 +2652,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelEmployeeServicesFilterInput",
+              "name" : "ModelEmployeeServicessFilterInput",
               "ofType" : null
             }
           },
@@ -2586,7 +2665,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelEmployeeServicesFilterInput",
+              "name" : "ModelEmployeeServicessFilterInput",
               "ofType" : null
             }
           },
@@ -2596,7 +2675,7 @@
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelEmployeeServicesFilterInput",
+            "name" : "ModelEmployeeServicessFilterInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -3470,6 +3549,82 @@
         "enumValues" : null,
         "possibleTypes" : null
       }, {
+        "kind" : "INPUT_OBJECT",
+        "name" : "ModelIDKeyConditionInput",
+        "description" : null,
+        "fields" : null,
+        "inputFields" : [ {
+          "name" : "eq",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "le",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "lt",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "ge",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "gt",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "between",
+          "description" : null,
+          "type" : {
+            "kind" : "LIST",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "beginsWith",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        } ],
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
         "kind" : "OBJECT",
         "name" : "ModelServiceConnection",
         "description" : null,
@@ -4295,7 +4450,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "createEmployeeServices",
+          "name" : "createEmployeeServicess",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -4305,7 +4460,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "CreateEmployeeServicesInput",
+                "name" : "CreateEmployeeServicessInput",
                 "ofType" : null
               }
             },
@@ -4313,13 +4468,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "EmployeeServices",
+            "name" : "EmployeeServicess",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "updateEmployeeServices",
+          "name" : "updateEmployeeServicess",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -4329,7 +4484,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "UpdateEmployeeServicesInput",
+                "name" : "UpdateEmployeeServicessInput",
                 "ofType" : null
               }
             },
@@ -4337,13 +4492,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "EmployeeServices",
+            "name" : "EmployeeServicess",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "deleteEmployeeServices",
+          "name" : "deleteEmployeeServicess",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -4353,7 +4508,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "DeleteEmployeeServicesInput",
+                "name" : "DeleteEmployeeServicessInput",
                 "ofType" : null
               }
             },
@@ -4361,7 +4516,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "EmployeeServices",
+            "name" : "EmployeeServicess",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -5383,7 +5538,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "CreateEmployeeServicesInput",
+        "name" : "CreateEmployeeServicessInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -5396,7 +5551,33 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "employeeServicesServiceId",
+          "name" : "serviceId",
+          "description" : null,
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "employeeId",
+          "description" : null,
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "employeeServicessServiceId",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -5405,7 +5586,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "employeeServicesEmployeeId",
+          "name" : "employeeServicessEmployeeId",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -5419,7 +5600,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "UpdateEmployeeServicesInput",
+        "name" : "UpdateEmployeeServicessInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -5436,7 +5617,33 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "employeeServicesServiceId",
+          "name" : "serviceId",
+          "description" : null,
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "employeeId",
+          "description" : null,
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "employeeServicessServiceId",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -5445,7 +5652,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "employeeServicesEmployeeId",
+          "name" : "employeeServicessEmployeeId",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -5459,16 +5666,33 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "DeleteEmployeeServicesInput",
+        "name" : "DeleteEmployeeServicessInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
+          "name" : "serviceId",
           "description" : null,
           "type" : {
-            "kind" : "SCALAR",
-            "name" : "ID",
-            "ofType" : null
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "employeeId",
+          "description" : null,
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
           },
           "defaultValue" : null
         } ],
@@ -6495,34 +6719,34 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onCreateEmployeeServices",
+          "name" : "onCreateEmployeeServicess",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "EmployeeServices",
+            "name" : "EmployeeServicess",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onUpdateEmployeeServices",
+          "name" : "onUpdateEmployeeServicess",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "EmployeeServices",
+            "name" : "EmployeeServicess",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onDeleteEmployeeServices",
+          "name" : "onDeleteEmployeeServicess",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "EmployeeServices",
+            "name" : "EmployeeServicess",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -7604,30 +7828,34 @@
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "aws_auth",
-        "description" : "Directs the schema to enforce authorization on a field",
-        "locations" : [ "FIELD_DEFINITION" ],
+        "name" : "deprecated",
+        "description" : null,
+        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
         "args" : [ {
-          "name" : "cognito_groups",
-          "description" : "List of cognito user pool groups which have access on this field",
+          "name" : "reason",
+          "description" : null,
           "type" : {
-            "kind" : "LIST",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "String",
-              "ofType" : null
-            }
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
           },
-          "defaultValue" : null
+          "defaultValue" : "\"No longer supported\""
         } ],
         "onOperation" : false,
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "aws_cognito_user_pools",
-        "description" : "Tells the service this field/object has access authorized by a Cognito User Pools token.",
+        "name" : "aws_api_key",
+        "description" : "Tells the service this field/object has access authorized by an API key.",
         "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
+        "args" : [ ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
+        "name" : "aws_auth",
+        "description" : "Directs the schema to enforce authorization on a field",
+        "locations" : [ "FIELD_DEFINITION" ],
         "args" : [ {
           "name" : "cognito_groups",
           "description" : "List of cognito user pool groups which have access on this field",
@@ -7675,26 +7903,22 @@
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "aws_api_key",
-        "description" : "Tells the service this field/object has access authorized by an API key.",
+        "name" : "aws_cognito_user_pools",
+        "description" : "Tells the service this field/object has access authorized by a Cognito User Pools token.",
         "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
-        "args" : [ ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
-        "name" : "deprecated",
-        "description" : null,
-        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
         "args" : [ {
-          "name" : "reason",
-          "description" : null,
+          "name" : "cognito_groups",
+          "description" : "List of cognito user pool groups which have access on this field",
           "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
+            "kind" : "LIST",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "String",
+              "ofType" : null
+            }
           },
-          "defaultValue" : "\"No longer supported\""
+          "defaultValue" : null
         } ],
         "onOperation" : false,
         "onFragment" : false,

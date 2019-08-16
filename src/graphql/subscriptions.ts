@@ -406,6 +406,8 @@ export const onCreateEmployee = `subscription OnCreateEmployee {
     services {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -461,6 +463,8 @@ export const onUpdateEmployee = `subscription OnUpdateEmployee {
     services {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -516,6 +520,8 @@ export const onDeleteEmployee = `subscription OnDeleteEmployee {
     services {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -547,8 +553,8 @@ export const onDeleteEmployee = `subscription OnDeleteEmployee {
   }
 }
 `;
-export const onCreateEmployeeServices = `subscription OnCreateEmployeeServices {
-  onCreateEmployeeServices {
+export const onCreateEmployeeServicess = `subscription OnCreateEmployeeServicess {
+  onCreateEmployeeServicess {
     id
     service {
       id
@@ -594,11 +600,13 @@ export const onCreateEmployeeServices = `subscription OnCreateEmployeeServices {
         nextToken
       }
     }
+    serviceId
+    employeeId
   }
 }
 `;
-export const onUpdateEmployeeServices = `subscription OnUpdateEmployeeServices {
-  onUpdateEmployeeServices {
+export const onUpdateEmployeeServicess = `subscription OnUpdateEmployeeServicess {
+  onUpdateEmployeeServicess {
     id
     service {
       id
@@ -644,11 +652,13 @@ export const onUpdateEmployeeServices = `subscription OnUpdateEmployeeServices {
         nextToken
       }
     }
+    serviceId
+    employeeId
   }
 }
 `;
-export const onDeleteEmployeeServices = `subscription OnDeleteEmployeeServices {
-  onDeleteEmployeeServices {
+export const onDeleteEmployeeServicess = `subscription OnDeleteEmployeeServicess {
+  onDeleteEmployeeServicess {
     id
     service {
       id
@@ -694,6 +704,8 @@ export const onDeleteEmployeeServices = `subscription OnDeleteEmployeeServices {
         nextToken
       }
     }
+    serviceId
+    employeeId
   }
 }
 `;
@@ -707,6 +719,8 @@ export const onCreateService = `subscription OnCreateService {
     employees {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -740,6 +754,8 @@ export const onUpdateService = `subscription OnUpdateService {
     employees {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -773,6 +789,8 @@ export const onDeleteService = `subscription OnDeleteService {
     employees {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }

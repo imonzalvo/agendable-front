@@ -406,6 +406,8 @@ export const createEmployee = `mutation CreateEmployee($input: CreateEmployeeInp
     services {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -461,6 +463,8 @@ export const updateEmployee = `mutation UpdateEmployee($input: UpdateEmployeeInp
     services {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -516,6 +520,8 @@ export const deleteEmployee = `mutation DeleteEmployee($input: DeleteEmployeeInp
     services {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -547,8 +553,8 @@ export const deleteEmployee = `mutation DeleteEmployee($input: DeleteEmployeeInp
   }
 }
 `;
-export const createEmployeeServices = `mutation CreateEmployeeServices($input: CreateEmployeeServicesInput!) {
-  createEmployeeServices(input: $input) {
+export const createEmployeeServicess = `mutation CreateEmployeeServicess($input: CreateEmployeeServicessInput!) {
+  createEmployeeServicess(input: $input) {
     id
     service {
       id
@@ -594,11 +600,13 @@ export const createEmployeeServices = `mutation CreateEmployeeServices($input: C
         nextToken
       }
     }
+    serviceId
+    employeeId
   }
 }
 `;
-export const updateEmployeeServices = `mutation UpdateEmployeeServices($input: UpdateEmployeeServicesInput!) {
-  updateEmployeeServices(input: $input) {
+export const updateEmployeeServicess = `mutation UpdateEmployeeServicess($input: UpdateEmployeeServicessInput!) {
+  updateEmployeeServicess(input: $input) {
     id
     service {
       id
@@ -644,11 +652,13 @@ export const updateEmployeeServices = `mutation UpdateEmployeeServices($input: U
         nextToken
       }
     }
+    serviceId
+    employeeId
   }
 }
 `;
-export const deleteEmployeeServices = `mutation DeleteEmployeeServices($input: DeleteEmployeeServicesInput!) {
-  deleteEmployeeServices(input: $input) {
+export const deleteEmployeeServicess = `mutation DeleteEmployeeServicess($input: DeleteEmployeeServicessInput!) {
+  deleteEmployeeServicess(input: $input) {
     id
     service {
       id
@@ -694,6 +704,8 @@ export const deleteEmployeeServices = `mutation DeleteEmployeeServices($input: D
         nextToken
       }
     }
+    serviceId
+    employeeId
   }
 }
 `;
@@ -707,6 +719,8 @@ export const createService = `mutation CreateService($input: CreateServiceInput!
     employees {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -740,6 +754,8 @@ export const updateService = `mutation UpdateService($input: UpdateServiceInput!
     employees {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -773,6 +789,8 @@ export const deleteService = `mutation DeleteService($input: DeleteServiceInput!
     employees {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }

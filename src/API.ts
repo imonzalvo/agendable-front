@@ -95,20 +95,25 @@ export type DeleteEmployeeInput = {
   id?: string | null,
 };
 
-export type CreateEmployeeServicesInput = {
+export type CreateEmployeeServicessInput = {
   id?: string | null,
-  employeeServicesServiceId?: string | null,
-  employeeServicesEmployeeId?: string | null,
+  serviceId: string,
+  employeeId: string,
+  employeeServicessServiceId?: string | null,
+  employeeServicessEmployeeId?: string | null,
 };
 
-export type UpdateEmployeeServicesInput = {
+export type UpdateEmployeeServicessInput = {
   id: string,
-  employeeServicesServiceId?: string | null,
-  employeeServicesEmployeeId?: string | null,
+  serviceId: string,
+  employeeId: string,
+  employeeServicessServiceId?: string | null,
+  employeeServicessEmployeeId?: string | null,
 };
 
-export type DeleteEmployeeServicesInput = {
-  id?: string | null,
+export type DeleteEmployeeServicessInput = {
+  serviceId: string,
+  employeeId: string,
 };
 
 export type CreateServiceInput = {
@@ -312,11 +317,23 @@ export type ModelEmployeeFilterInput = {
   not?: ModelEmployeeFilterInput | null,
 };
 
-export type ModelEmployeeServicesFilterInput = {
+export type ModelIDKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export type ModelEmployeeServicessFilterInput = {
   id?: ModelIDFilterInput | null,
-  and?: Array< ModelEmployeeServicesFilterInput | null > | null,
-  or?: Array< ModelEmployeeServicesFilterInput | null > | null,
-  not?: ModelEmployeeServicesFilterInput | null,
+  serviceId?: ModelIDFilterInput | null,
+  employeeId?: ModelIDFilterInput | null,
+  and?: Array< ModelEmployeeServicessFilterInput | null > | null,
+  or?: Array< ModelEmployeeServicessFilterInput | null > | null,
+  not?: ModelEmployeeServicessFilterInput | null,
 };
 
 export type ModelServiceFilterInput = {
@@ -443,7 +460,7 @@ export type CreateAvailabilityItemMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -490,7 +507,7 @@ export type UpdateAvailabilityItemMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -537,7 +554,7 @@ export type DeleteAvailabilityItemMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -621,7 +638,7 @@ export type CreateBookingMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -651,7 +668,7 @@ export type CreateBookingMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -735,7 +752,7 @@ export type UpdateBookingMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -765,7 +782,7 @@ export type UpdateBookingMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -849,7 +866,7 @@ export type DeleteBookingMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -879,7 +896,7 @@ export type DeleteBookingMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -928,10 +945,12 @@ export type CreateEmployeeMutation = {
     } | null,
     phone: string | null,
     services:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -999,10 +1018,12 @@ export type UpdateEmployeeMutation = {
     } | null,
     phone: string | null,
     services:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -1070,10 +1091,12 @@ export type DeleteEmployeeMutation = {
     } | null,
     phone: string | null,
     services:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -1111,13 +1134,13 @@ export type DeleteEmployeeMutation = {
   } | null,
 };
 
-export type CreateEmployeeServicesMutationVariables = {
-  input: CreateEmployeeServicesInput,
+export type CreateEmployeeServicessMutationVariables = {
+  input: CreateEmployeeServicessInput,
 };
 
-export type CreateEmployeeServicesMutation = {
-  createEmployeeServices:  {
-    __typename: "EmployeeServices",
+export type CreateEmployeeServicessMutation = {
+  createEmployeeServicess:  {
+    __typename: "EmployeeServicess",
     id: string,
     service:  {
       __typename: "Service",
@@ -1127,7 +1150,7 @@ export type CreateEmployeeServicesMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -1157,7 +1180,7 @@ export type CreateEmployeeServicesMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -1173,16 +1196,18 @@ export type CreateEmployeeServicesMutation = {
         nextToken: string | null,
       } | null,
     } | null,
+    serviceId: string,
+    employeeId: string,
   } | null,
 };
 
-export type UpdateEmployeeServicesMutationVariables = {
-  input: UpdateEmployeeServicesInput,
+export type UpdateEmployeeServicessMutationVariables = {
+  input: UpdateEmployeeServicessInput,
 };
 
-export type UpdateEmployeeServicesMutation = {
-  updateEmployeeServices:  {
-    __typename: "EmployeeServices",
+export type UpdateEmployeeServicessMutation = {
+  updateEmployeeServicess:  {
+    __typename: "EmployeeServicess",
     id: string,
     service:  {
       __typename: "Service",
@@ -1192,7 +1217,7 @@ export type UpdateEmployeeServicesMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -1222,7 +1247,7 @@ export type UpdateEmployeeServicesMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -1238,16 +1263,18 @@ export type UpdateEmployeeServicesMutation = {
         nextToken: string | null,
       } | null,
     } | null,
+    serviceId: string,
+    employeeId: string,
   } | null,
 };
 
-export type DeleteEmployeeServicesMutationVariables = {
-  input: DeleteEmployeeServicesInput,
+export type DeleteEmployeeServicessMutationVariables = {
+  input: DeleteEmployeeServicessInput,
 };
 
-export type DeleteEmployeeServicesMutation = {
-  deleteEmployeeServices:  {
-    __typename: "EmployeeServices",
+export type DeleteEmployeeServicessMutation = {
+  deleteEmployeeServicess:  {
+    __typename: "EmployeeServicess",
     id: string,
     service:  {
       __typename: "Service",
@@ -1257,7 +1284,7 @@ export type DeleteEmployeeServicesMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -1287,7 +1314,7 @@ export type DeleteEmployeeServicesMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -1303,6 +1330,8 @@ export type DeleteEmployeeServicesMutation = {
         nextToken: string | null,
       } | null,
     } | null,
+    serviceId: string,
+    employeeId: string,
   } | null,
 };
 
@@ -1319,10 +1348,12 @@ export type CreateServiceMutation = {
     currency: string | null,
     duration: number,
     employees:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -1363,10 +1394,12 @@ export type UpdateServiceMutation = {
     currency: string | null,
     duration: number,
     employees:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -1407,10 +1440,12 @@ export type DeleteServiceMutation = {
     currency: string | null,
     duration: number,
     employees:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -1664,7 +1699,7 @@ export type CreateBranchEmployeesMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -1735,7 +1770,7 @@ export type UpdateBranchEmployeesMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -1806,7 +1841,7 @@ export type DeleteBranchEmployeesMutation = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -1868,7 +1903,7 @@ export type CreateBranchServicesMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -1927,7 +1962,7 @@ export type UpdateBranchServicesMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -1986,7 +2021,7 @@ export type DeleteBranchServicesMutation = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -2375,7 +2410,7 @@ export type GetAvailabilityItemQuery = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -2486,7 +2521,7 @@ export type GetBookingQuery = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -2516,7 +2551,7 @@ export type GetBookingQuery = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -2620,10 +2655,12 @@ export type GetEmployeeQuery = {
     } | null,
     phone: string | null,
     services:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -2687,7 +2724,7 @@ export type ListEmployeesQuery = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -2707,13 +2744,14 @@ export type ListEmployeesQuery = {
   } | null,
 };
 
-export type GetEmployeeServicesQueryVariables = {
-  id: string,
+export type GetEmployeeServicessQueryVariables = {
+  serviceId: string,
+  employeeId: string,
 };
 
-export type GetEmployeeServicesQuery = {
-  getEmployeeServices:  {
-    __typename: "EmployeeServices",
+export type GetEmployeeServicessQuery = {
+  getEmployeeServicess:  {
+    __typename: "EmployeeServicess",
     id: string,
     service:  {
       __typename: "Service",
@@ -2723,7 +2761,7 @@ export type GetEmployeeServicesQuery = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -2753,7 +2791,7 @@ export type GetEmployeeServicesQuery = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -2769,20 +2807,24 @@ export type GetEmployeeServicesQuery = {
         nextToken: string | null,
       } | null,
     } | null,
+    serviceId: string,
+    employeeId: string,
   } | null,
 };
 
-export type ListEmployeeServicessQueryVariables = {
-  filter?: ModelEmployeeServicesFilterInput | null,
+export type ListEmployeeServicesssQueryVariables = {
+  serviceId?: string | null,
+  employeeId?: ModelIDKeyConditionInput | null,
+  filter?: ModelEmployeeServicessFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListEmployeeServicessQuery = {
-  listEmployeeServicess:  {
-    __typename: "ModelEmployeeServicesConnection",
+export type ListEmployeeServicesssQuery = {
+  listEmployeeServicesss:  {
+    __typename: "ModelEmployeeServicessConnection",
     items:  Array< {
-      __typename: "EmployeeServices",
+      __typename: "EmployeeServicess",
       id: string,
       service:  {
         __typename: "Service",
@@ -2800,6 +2842,8 @@ export type ListEmployeeServicessQuery = {
         familyName: string,
         phone: string | null,
       } | null,
+      serviceId: string,
+      employeeId: string,
     } | null > | null,
     nextToken: string | null,
   } | null,
@@ -2818,10 +2862,12 @@ export type GetServiceQuery = {
     currency: string | null,
     duration: number,
     employees:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -2866,7 +2912,7 @@ export type ListServicesQuery = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -3033,7 +3079,7 @@ export type GetBranchEmployeesQuery = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -3127,7 +3173,7 @@ export type GetBranchServicesQuery = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -3409,7 +3455,7 @@ export type OnCreateAvailabilityItemSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -3452,7 +3498,7 @@ export type OnUpdateAvailabilityItemSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -3495,7 +3541,7 @@ export type OnDeleteAvailabilityItemSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -3575,7 +3621,7 @@ export type OnCreateBookingSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -3605,7 +3651,7 @@ export type OnCreateBookingSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -3685,7 +3731,7 @@ export type OnUpdateBookingSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -3715,7 +3761,7 @@ export type OnUpdateBookingSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -3795,7 +3841,7 @@ export type OnDeleteBookingSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -3825,7 +3871,7 @@ export type OnDeleteBookingSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -3870,10 +3916,12 @@ export type OnCreateEmployeeSubscription = {
     } | null,
     phone: string | null,
     services:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -3937,10 +3985,12 @@ export type OnUpdateEmployeeSubscription = {
     } | null,
     phone: string | null,
     services:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -4004,10 +4054,12 @@ export type OnDeleteEmployeeSubscription = {
     } | null,
     phone: string | null,
     services:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -4045,9 +4097,9 @@ export type OnDeleteEmployeeSubscription = {
   } | null,
 };
 
-export type OnCreateEmployeeServicesSubscription = {
-  onCreateEmployeeServices:  {
-    __typename: "EmployeeServices",
+export type OnCreateEmployeeServicessSubscription = {
+  onCreateEmployeeServicess:  {
+    __typename: "EmployeeServicess",
     id: string,
     service:  {
       __typename: "Service",
@@ -4057,7 +4109,7 @@ export type OnCreateEmployeeServicesSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -4087,7 +4139,7 @@ export type OnCreateEmployeeServicesSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -4103,12 +4155,14 @@ export type OnCreateEmployeeServicesSubscription = {
         nextToken: string | null,
       } | null,
     } | null,
+    serviceId: string,
+    employeeId: string,
   } | null,
 };
 
-export type OnUpdateEmployeeServicesSubscription = {
-  onUpdateEmployeeServices:  {
-    __typename: "EmployeeServices",
+export type OnUpdateEmployeeServicessSubscription = {
+  onUpdateEmployeeServicess:  {
+    __typename: "EmployeeServicess",
     id: string,
     service:  {
       __typename: "Service",
@@ -4118,7 +4172,7 @@ export type OnUpdateEmployeeServicesSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -4148,7 +4202,7 @@ export type OnUpdateEmployeeServicesSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -4164,12 +4218,14 @@ export type OnUpdateEmployeeServicesSubscription = {
         nextToken: string | null,
       } | null,
     } | null,
+    serviceId: string,
+    employeeId: string,
   } | null,
 };
 
-export type OnDeleteEmployeeServicesSubscription = {
-  onDeleteEmployeeServices:  {
-    __typename: "EmployeeServices",
+export type OnDeleteEmployeeServicessSubscription = {
+  onDeleteEmployeeServicess:  {
+    __typename: "EmployeeServicess",
     id: string,
     service:  {
       __typename: "Service",
@@ -4179,7 +4235,7 @@ export type OnDeleteEmployeeServicesSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -4209,7 +4265,7 @@ export type OnDeleteEmployeeServicesSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -4225,6 +4281,8 @@ export type OnDeleteEmployeeServicesSubscription = {
         nextToken: string | null,
       } | null,
     } | null,
+    serviceId: string,
+    employeeId: string,
   } | null,
 };
 
@@ -4237,10 +4295,12 @@ export type OnCreateServiceSubscription = {
     currency: string | null,
     duration: number,
     employees:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -4277,10 +4337,12 @@ export type OnUpdateServiceSubscription = {
     currency: string | null,
     duration: number,
     employees:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -4317,10 +4379,12 @@ export type OnDeleteServiceSubscription = {
     currency: string | null,
     duration: number,
     employees:  {
-      __typename: "ModelEmployeeServicesConnection",
+      __typename: "ModelEmployeeServicessConnection",
       items:  Array< {
-        __typename: "EmployeeServices",
+        __typename: "EmployeeServicess",
         id: string,
+        serviceId: string,
+        employeeId: string,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -4558,7 +4622,7 @@ export type OnCreateBranchEmployeesSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -4625,7 +4689,7 @@ export type OnUpdateBranchEmployeesSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -4692,7 +4756,7 @@ export type OnDeleteBranchEmployeesSubscription = {
       } | null,
       phone: string | null,
       services:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       availability:  {
@@ -4750,7 +4814,7 @@ export type OnCreateBranchServicesSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -4805,7 +4869,7 @@ export type OnUpdateBranchServicesSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {
@@ -4860,7 +4924,7 @@ export type OnDeleteBranchServicesSubscription = {
       currency: string | null,
       duration: number,
       employees:  {
-        __typename: "ModelEmployeeServicesConnection",
+        __typename: "ModelEmployeeServicessConnection",
         nextToken: string | null,
       } | null,
       branch:  {

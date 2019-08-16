@@ -221,6 +221,8 @@ export const getEmployee = `query GetEmployee($id: ID!) {
     services {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
@@ -289,8 +291,8 @@ export const listEmployees = `query ListEmployees(
   }
 }
 `;
-export const getEmployeeServices = `query GetEmployeeServices($id: ID!) {
-  getEmployeeServices(id: $id) {
+export const getEmployeeServicess = `query GetEmployeeServicess($serviceId: ID!, $employeeId: ID!) {
+  getEmployeeServicess(serviceId: $serviceId, employeeId: $employeeId) {
     id
     service {
       id
@@ -336,15 +338,25 @@ export const getEmployeeServices = `query GetEmployeeServices($id: ID!) {
         nextToken
       }
     }
+    serviceId
+    employeeId
   }
 }
 `;
-export const listEmployeeServicess = `query ListEmployeeServicess(
-  $filter: ModelEmployeeServicesFilterInput
+export const listEmployeeServicesss = `query ListEmployeeServicesss(
+  $serviceId: ID
+  $employeeId: ModelIDKeyConditionInput
+  $filter: ModelEmployeeServicessFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listEmployeeServicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listEmployeeServicesss(
+    serviceId: $serviceId
+    employeeId: $employeeId
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
     items {
       id
       service {
@@ -361,6 +373,8 @@ export const listEmployeeServicess = `query ListEmployeeServicess(
         familyName
         phone
       }
+      serviceId
+      employeeId
     }
     nextToken
   }
@@ -376,6 +390,8 @@ export const getService = `query GetService($id: ID!) {
     employees {
       items {
         id
+        serviceId
+        employeeId
       }
       nextToken
     }
