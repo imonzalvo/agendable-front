@@ -9,7 +9,7 @@ import { Spin } from 'antd';
 import awsconfig from '../../aws-exports';
 import { cognitoAuth, iamAuth } from './config';
 
-const createClient = auth =>
+const createClient = (auth: any) =>
   new AWSAppSyncClient({
     url: awsconfig.aws_appsync_graphqlEndpoint,
     region: awsconfig.aws_project_region,
