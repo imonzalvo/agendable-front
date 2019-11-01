@@ -12,11 +12,12 @@ interface ServiceDetail {
 }
 
 interface CustomCardProps {
-  loading: boolean;
+  id: string;
+  loading?: boolean;
   image: string;
   title: string;
   details: string;
-  onClick: React.MouseEventHandler<HTMLElement>;
+  handleClick: (id: string) => void;
   service?: ServiceDetail;
 }
 
@@ -33,18 +34,24 @@ const renderDescription = (details: string, service?: ServiceDetail) => (
 );
 
 const CustomCard = ({
+  id,
   loading = false,
   image,
   title,
   details,
-  onClick,
+  handleClick,
   service,
 }: CustomCardProps) => (
   <Card
-    style={{ width: 300, margin: '20px auto', boxShadow: '0 10px 15px rgba(0,0,0,.15)' }}
+    style={{ width: 350, margin: '20px auto', boxShadow: '0 10px 15px rgba(0,0,0,.15)' }}
     cover={<Image alt="header" src={image} />}
     actions={[
-      <Button type="primary" style={{ width: '90%', height: 40 }} onClick={onClick} block>
+      <Button
+        type="primary"
+        style={{ width: '90%', height: 40 }}
+        onClick={() => handleClick(id)}
+        block
+      >
         Select
       </Button>,
     ]}
