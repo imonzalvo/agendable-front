@@ -4,11 +4,10 @@ import Card from './index';
 
 const customData1 = {
   id: '1',
-  image: 'http://macari.com.uy/sitio/prod/wp-content/uploads/2017/02/pocitos.jpg',
   title: 'Pocitos',
   details:
     'El barrio Pocitos, o de los Pocitos como se lo conocía anteriormente, reúne varias de las características que tanto montevideanos como extranjeros buscan a la hora de adquirir su vivienda.pocitosLa cercanía con la Rambla de Montevideo, única en todos los sentidos, hace dePocitos un barrio privilegiado y dirigido a familias de clase media-alta. La vista nocturna que ofrece es inigualable y la preferida de montevideanos y turistas en cualquier época del año',
-  handleClick: (id: string) => {},
+  handleClick: () => {},
 };
 const customData2 = {
   id: '2',
@@ -17,7 +16,7 @@ const customData2 = {
   title: 'Carrasco',
   details:
     'Carrasco es un barrio ubicado a 15 km del centro de la ciudad uruguaya de Montevideo al sudeste de la misma, sobre el Río de la Plata y el arroyo Carrasco. Sus ejes principales son: la rambla costanera y las avenidas Italia, Bolivia, y Rivera.',
-  handleClick: (id: string) => {},
+  handleClick: () => {},
 };
 const customData3 = {
   id: '3',
@@ -26,7 +25,7 @@ const customData3 = {
   title: 'Prado',
   details:
     'El Prado es el primer parque público de la ciudad. Se conformó como un proceso de agregación en el tiempo de calificadas estructuras verdes urbanas, que se localizan alrededor del arroyo Miguelete, que es su principal conector y vertebrador.',
-  handleClick: (id: string) => {},
+  handleClick: () => {},
 };
 const customData4 = {
   id: '4',
@@ -35,7 +34,7 @@ const customData4 = {
   title: 'Haircut',
   details:
     'Precision haircutting means the exact shape and technique used. This can mean a perfect fringe or an A-Line bob with almost no imperfections. In hairdressing we know our job can only be as good as the tools we use. Sometimes it can be difficult to determine which tools are the most effective in order to achieve the ideal end result.',
-  handleClick: (id: string) => {},
+  handleClick: () => {},
   service: {
     duration: '1',
     price: 450,
@@ -47,7 +46,7 @@ const customData5 = {
   title: 'Nicky Liam',
   details: 'Hairdresser',
   loading: true,
-  handleClick: (id: string) => {},
+  handleClick: () => {},
 };
 
 const Test = () => (

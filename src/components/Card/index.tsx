@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Button, Typography } from 'antd';
 
 import { Image, ServiceDetail } from './styles';
@@ -14,24 +14,12 @@ interface ServiceDetail {
 interface CustomCardProps {
   id: string;
   loading?: boolean;
-  image: string;
+  image?: string;
   title: string;
   details: string;
   handleClick: (id: string) => void;
   service?: ServiceDetail;
 }
-
-const renderDescription = (details: string, service?: ServiceDetail) => (
-  <>
-    <Paragraph ellipsis={{ rows: 2, expandable: true }}>{details}</Paragraph>
-    {service && (
-      <ServiceDetail>
-        <Text>{`${service.duration} hr.`}</Text>
-        <Text strong>{`$${service.price}`}</Text>
-      </ServiceDetail>
-    )}
-  </>
-);
 
 const CustomCard = ({
   id,
@@ -41,11 +29,37 @@ const CustomCard = ({
   details,
   handleClick,
   service,
-}: CustomCardProps) => (
-  <Card
-    style={{ width: 350, margin: '20px auto', boxShadow: '0 10px 15px rgba(0,0,0,.15)' }}
-    cover={<Image alt="header" src={image} />}
-    actions={[
+}: CustomCardProps) => {
+  const [isSelected, setSelected] = useState(false);
+
+  const renderDescription = () => (
+    <>
+      <Paragraph ellipsis={{ rows: 2, expandable: true }}>{details}</Paragraph>
+      {!!service && (
+        <ServiceDetail>
+          <Text>{`${service.duration} hr.`}</Text>
+          <Text strong>{`$${service.price}`}</Text>
+        </ServiceDetail>
+      )}
+    </>
+  );
+
+  const handleServiceClick = () => {
+    handleClick(id);
+    setSelected(prevSelected => !prevSelected);
+  };
+
+  const renderAction = () => {
+    if (service) {
+      const type = isSelected ? 'danger' : 'primary';
+      const text = isSelected ? 'Remove' : 'Select';
+      return (
+        <Button type={type} style={{ width: '90%', height: 40 }} onClick={handleServiceClick} block>
+          {text}
+        </Button>
+      );
+    }
+    return (
       <Button
         type="primary"
         style={{ width: '90%', height: 40 }}
@@ -53,15 +67,20 @@ const CustomCard = ({
         block
       >
         Select
-      </Button>,
-    ]}
-    loading={loading}
-  >
-    <Meta
-      title={<Title level={4}>{title}</Title>}
-      description={renderDescription(details, service)}
-    />
-  </Card>
-);
+      </Button>
+    );
+  };
+
+  return (
+    <Card
+      style={{ width: 350, margin: 8 }}
+      cover={image ? <Image alt="header" src={image} /> : null}
+      actions={[renderAction()]}
+      loading={loading}
+    >
+      <Meta title={<Title level={4}>{title}</Title>} description={renderDescription()} />
+    </Card>
+  );
+};
 
 export default CustomCard;

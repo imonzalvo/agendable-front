@@ -78,6 +78,11 @@ export default {
           component: './services',
         },
         {
+          path: '/test-card',
+          exact: true,
+          component: './testCard',
+        },
+        {
           path: '/',
           component: '../layouts/AdminLayout',
           Routes: ['src/pages/Authorized'],
