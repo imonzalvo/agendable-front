@@ -1,13 +1,17 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { Button } from '@storybook/react/demo';
+import { Button } from 'antd';
 
-storiesOf('Button', module)
-  .add('with text', () => <Button>Hello Button</Button>)
-  .add('with emoji', () => (
-    <Button>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
-  ));
+export default {
+  title: 'Button',
+  component: Button,
+  // includeStories: ['withText', 'withEmoji']
+};
+
+export const withText = () => <Button>Hello</Button>;
+export const withEmoji = () => (
+  <Button>
+    <span role="img" aria-label="so cool">
+      😀 😎 👍 💯
+    </span>
+  </Button>
+);
