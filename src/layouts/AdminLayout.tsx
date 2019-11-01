@@ -10,37 +10,25 @@ import { isAntDesignPro } from '@/utils/utils';
 import logo from '../assets/logo.svg';
 
 export interface AdminLayoutProps extends ProLayoutProps {
-  breadcrumbNameMap: {
-    [path: string]: MenuDataItem;
-  };
+  breadcrumbNameMap: { [path: string]: MenuDataItem };
   settings: Settings;
 }
 export type AdminLayoutContext = { [K in 'location']: AdminLayoutProps[K] } & {
-  breadcrumbNameMap: {
-    [path: string]: MenuDataItem;
-  };
+  breadcrumbNameMap: { [path: string]: MenuDataItem };
 };
-
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
   menuList.map(item => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return localItem;
   });
-
 const footerRender: AdminLayoutProps['footerRender'] = (_, defaultDom) => {
   if (!isAntDesignPro()) {
     return defaultDom;
   }
-
   return (
     <>
       {defaultDom}
-      <div
-        style={{
-          padding: '0px 24px 24px',
-          textAlign: 'center',
-        }}
-      >
+      <div style={{ padding: '0px 24px 24px', textAlign: 'center' }}>
         <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
           <img
             src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
@@ -52,10 +40,8 @@ const footerRender: AdminLayoutProps['footerRender'] = (_, defaultDom) => {
     </>
   );
 };
-
 const AdminLayout: React.FC<AdminLayoutProps> = props => {
   const { children, settings } = props;
-
   return (
     <>
       <ProLayout
@@ -64,17 +50,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
           if (menuItemProps.isUrl) {
             return defaultDom;
           }
-
           return <Link to={menuItemProps.path}>{defaultDom}</Link>;
         }}
         breadcrumbRender={(routers = []) => [
-          {
-            path: '/',
-            breadcrumbName: formatMessage({
-              id: 'menu.home',
-              defaultMessage: 'Home',
-            }),
-          },
+          { path: '/', breadcrumbName: formatMessage({ id: 'menu.home', defaultMessage: 'Home' }) },
           ...routers,
         ]}
         itemRender={(route, _params, routes, paths) => {
@@ -96,5 +75,4 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
     </>
   );
 };
-
 export default AdminLayout;

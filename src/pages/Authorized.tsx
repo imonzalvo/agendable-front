@@ -1,6 +1,7 @@
-import React from 'react';
-import Amplify from 'aws-amplify';
-import { Authenticator } from 'aws-amplify-react';
+import React, { useEffect, useState } from 'react';
+import { Spin } from 'antd';
+import Amplify, { Auth } from 'aws-amplify';
+import SignUp from '@/components/Authorized';
 
 Amplify.configure({
   API: {
@@ -11,16 +12,30 @@ Amplify.configure({
   Auth: {
     identityPoolId: 'us-west-2:69c0a3f7-e59e-45b1-822a-adf88f0b11ba',
     region: 'us-west-2',
-    userPoolId: 'us-west-2_Y62JDY67L',
-    userPoolWebClientId: '4o48ujknlhjip6r97pcavgvrbc',
+    userPoolId: 'us-west-2_0cMsztLZw',
+    userPoolWebClientId: '47gq87m8nk8n0llu29647s9o5f',
   },
 });
 
-export default ({ children }: { children: any }): React.ReactNode => (
-  <Authenticator>
-    <App>{children}</App>
-  </Authenticator>
-);
+export default ({ children }: { children: any }): React.ReactNode => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setAuthenticated] = useState(false);
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        setAuthenticated(true);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setAuthenticated(false);
+        setIsLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <Spin size="large" />;
+
+  return isAuthenticated ? <App>{children}</App> : <SignUp />;
+};
 
 const App = ({
   children,
@@ -36,4 +51,4 @@ const App = ({
     | 'requireNewPassword'
     | 'verifyContact'
     | 'signedIn';
-}) => authState === 'signedIn' && children;
+}) => children;

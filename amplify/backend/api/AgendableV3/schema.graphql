@@ -1,42 +1,41 @@
 type AvailabilityItem @model {
- id: ID!
- day: Day
- from: String!
- to: String!
- employee: Employee @connection(name: "EmployeeAvailability")
+  id: ID!
+  day: Day
+  from: String!
+  to: String!
+  employee: Employee @connection(name: "EmployeeAvailability")
 }
 
 type Booking @model {
- id: ID!
- createdAt: AWSDateTime!
- start: AWSDateTime!
- end: AWSDateTime!
- status: BookingStatus!
- client: User! @connection(name: "BookingUser")
- branch: Branch! @connection(name: "BranchBookings")
- service: Service! @connection(name: "ServiceBookings")
- employee: Employee @connection(name: "BookingEmployee")
+  id: ID!
+  createdAt: AWSDateTime!
+  start: AWSDateTime!
+  end: AWSDateTime!
+  status: String
+  client: User! @connection(name: "BookingUser")
+  branch: Branch! @connection(name: "BranchBookings")
+  service: Service! @connection(name: "ServiceBookings")
+  employee: Employee @connection(name: "BookingEmployee")
 }
 
 enum BookingStatus {
- COMPLETED
- CONFIRMED
- PENDING
- CANCELLED
+  COMPLETED
+  CONFIRMED
+  PENDING
+  CANCELLED
 }
 
 type Employee @model {
- id: ID!
- givenName: String!
- familyName: String!
- user: User @connection
- phone: String
- services: [EmployeeServices!] @connection (name: "EmployeeServices")
- availability: [AvailabilityItem!]! @connection(name: "EmployeeAvailability")
- bookings: [Booking!]! @connection(name: "BookingEmployee")
- branches: [BranchEmployees!]! @connection(name: "EmployeeBranches")
+  id: ID!
+  givenName: String!
+  familyName: String!
+  user: User @connection
+  phone: String
+  services: [EmployeeServices!] @connection(name: "EmployeeServices")
+  availability: [AvailabilityItem!]! @connection(name: "EmployeeAvailability")
+  bookings: [Booking!]! @connection(name: "BookingEmployee")
+  branches: [BranchEmployees!]! @connection(name: "EmployeeBranches")
 }
-
 
 type EmployeeServices @model @key(fields: ["serviceId", "employeeId"]) {
   id: ID!
@@ -47,27 +46,27 @@ type EmployeeServices @model @key(fields: ["serviceId", "employeeId"]) {
 }
 
 type Service @model {
- id: ID!
- name: String!
- price: Float!
- currency: String
- duration: Int!
- employees: [EmployeeServices!]! @connection(name: "ServiceEmployees")
- branch: [BranchServices!] @connection(name: "ServiceBranches")
- description: String
- bookings: [Booking!] @connection(name: "ServiceBookings")
+  id: ID!
+  name: String!
+  price: Float!
+  currency: String
+  duration: Int!
+  employees: [EmployeeServices!]! @connection(name: "ServiceEmployees")
+  branch: [BranchServices!] @connection(name: "ServiceBranches")
+  description: String
+  bookings: [Booking!] @connection(name: "ServiceBookings")
 }
 
 type Branch @model {
- id: ID!
- address: String!
- phone: AWSPhone!
- email: AWSEmail!
- name: String!
- bookings: [Booking!] @connection(name: "BranchBookings")
- services: [BranchServices!]! @connection(name: "BranchServices")
- business: Business! @connection(name: "BusinessBranch")
- employees: [BranchEmployees!]! @connection(name: "BranchEmployees")
+  id: ID!
+  address: String!
+  phone: AWSPhone!
+  email: AWSEmail!
+  name: String!
+  bookings: [Booking!] @connection(name: "BranchBookings")
+  services: [BranchServices!]! @connection(name: "BranchServices")
+  business: Business! @connection(name: "BusinessBranch")
+  employees: [BranchEmployees!]! @connection(name: "BranchEmployees")
 }
 
 type BranchEmployees @model @key(fields: ["branchId", "employeeId"]) {
@@ -87,15 +86,15 @@ type BranchServices @model @key(fields: ["branchId", "serviceId"]) {
 }
 
 type Business @model {
- id: ID!
- name: String!
- email: AWSEmail!
- phone: AWSPhone!
- owners: [UserBusinesses!]! @connection(name: "BusinessOwners")
- branches: [Branch!] @connection(name: "BusinessBranch")
+  id: ID!
+  name: String!
+  email: AWSEmail!
+  phone: AWSPhone!
+  owners: [UserBusinesses!]! @connection(name: "BusinessOwners")
+  branches: [Branch!] @connection(name: "BusinessBranch")
 }
 
-type UserBusinesses @model @key(fields: ["ownerId", "businessId"]){
+type UserBusinesses @model @key(fields: ["ownerId", "businessId"]) {
   id: ID!
   owner: User @connection(name: "OwnerBusinesses")
   business: Business @connection(name: "BusinessOwners")
@@ -104,29 +103,29 @@ type UserBusinesses @model @key(fields: ["ownerId", "businessId"]){
 }
 
 type User @model {
- id: ID!
- givenName: String!
- familyName: String!
- userName: String!
- email: AWSEmail
- phone: AWSPhone
- userType: UserType!
- bookings: [Booking!] @connection(name: "BookingUser")
- businesses: [UserBusinesses] @connection(name: "OwnerBusinesses")
+  id: ID!
+  givenName: String!
+  familyName: String!
+  userName: String!
+  email: AWSEmail
+  phone: AWSPhone
+  userType: UserType!
+  bookings: [Booking!] @connection(name: "BookingUser")
+  businesses: [UserBusinesses] @connection(name: "OwnerBusinesses")
 }
 
 enum UserType {
- ADMIN
- USER
- GUEST
+  ADMIN
+  USER
+  GUEST
 }
 
 enum Day {
- MONDAY
- TUESDAY
- WEDNESDAY
- THURSDAY
- FRIDAY
- SATURDAY
- SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
 }

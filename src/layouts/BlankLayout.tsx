@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import AWSAppSyncClient from 'aws-appsync';
+import AWS from 'aws-sdk';
 import { Auth } from 'aws-amplify';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks';
@@ -22,6 +23,12 @@ async function getClient() {
   const auth = credentials.authenticated ? cognitoAuth : iamAuth;
   return createClient(auth);
 }
+
+AWS.config.update({
+  accessKeyId: 'AKIAU7ZI4HCKF4ONGVTM',
+  secretAccessKey: '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',
+  region: 'us-west-2',
+});
 
 const renderSpin = () => (
   <div>
