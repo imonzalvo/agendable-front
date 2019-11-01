@@ -41,10 +41,10 @@ const CustomCard = ({
   service,
 }: CustomCardProps) => (
   <Card
-    style={{ width: 300, margin: '20px auto' }}
+    style={{ width: 300, margin: '20px auto', boxShadow: '0 10px 15px rgba(0,0,0,.15)' }}
     cover={<Image alt="header" src={image} />}
     actions={[
-      <Button style={{ width: '90%' }} onClick={onClick} block>
+      <Button type="primary" style={{ width: '90%', height: 40 }} onClick={onClick} block>
         Select
       </Button>,
     ]}
