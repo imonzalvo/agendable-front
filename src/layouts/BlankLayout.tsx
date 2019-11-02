@@ -5,7 +5,10 @@ import { Auth } from 'aws-amplify';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks';
 import { Rehydrated } from 'aws-appsync-react';
-import { Spin } from 'antd';
+import { Spin, ConfigProvider } from 'antd';
+import es_ES from 'antd/es/locale-provider/es_ES';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
 
 import awsconfig from '../../aws-exports';
 import { cognitoAuth, iamAuth } from './config';
@@ -51,7 +54,9 @@ const Layout: React.FC = ({ children }) => {
       <ApolloProviderHooks client={client}>
         <Rehydrated>
           <Fragment>
-            <div>{children}</div>
+            <ConfigProvider locale={es_ES}>
+              <div>{children}</div>
+            </ConfigProvider>
           </Fragment>
         </Rehydrated>
       </ApolloProviderHooks>

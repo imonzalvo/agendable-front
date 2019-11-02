@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Spin } from 'antd';
+import { Spin, ConfigProvider } from 'antd';
+import es_ES from 'antd/es/locale-provider/es_ES';
 import Amplify, { Auth } from 'aws-amplify';
 import SignUp from '@/components/AuthFlow';
 
@@ -41,7 +42,13 @@ export default ({ children }: { children: any }): React.ReactNode => {
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
-      {isAuthenticated ? <App>{children}</App> : <SignUp />}
+      {isAuthenticated ? (
+        <ConfigProvider locale={es_ES}>
+          <App>{children}</App>
+        </ConfigProvider>
+      ) : (
+        <SignUp />
+      )}
     </AuthContext.Provider>
   );
 };

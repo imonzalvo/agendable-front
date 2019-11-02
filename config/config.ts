@@ -83,6 +83,11 @@ export default {
           component: './testCard',
         },
         {
+          path: '/date-time-picker',
+          exact: true,
+          component: './testDateTimePicker',
+        },
+        {
           path: '/',
           component: '../layouts/AdminLayout',
           Routes: ['src/pages/Authorized'],
