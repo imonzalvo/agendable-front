@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
-import { Row, Col, Button } from 'antd';
+import React from 'react';
+import { Row, Col } from 'antd';
 
-import SignUp from './SignUp';
-import Login from './Login';
-import { CustomCard, AuthFlowStyles } from './styles';
+import AuthFlowCard from './AuthFlowCard';
 
 function AuthFlow() {
-  const [isLogin, setLogin] = useState(true);
   return (
     <>
-      <AuthFlowStyles />
       <Row
         align="middle"
         justify="center"
@@ -21,20 +17,7 @@ function AuthFlow() {
           md={{ span: 12, offset: 6 }}
           lg={{ span: 9, offset: 7 }}
         >
-          <CustomCard
-            title={isLogin ? 'Login' : 'Sign Up'}
-            bordered
-            actions={[
-              <div>
-                {isLogin ? 'Need an account?' : 'Already have an account?'}
-                <Button type="link" onClick={() => setLogin(pS => !pS)}>
-                  {isLogin ? 'Sign Up' : 'Login'}
-                </Button>
-              </div>,
-            ]}
-          >
-            {isLogin ? <Login /> : <SignUp />}
-          </CustomCard>
+          <AuthFlowCard />
         </Col>
       </Row>
     </>
@@ -47,3 +30,4 @@ export { default as SignUp } from './SignUp';
 export { default as SignUp1stStep } from './SignUp1stStep';
 export { default as SignUp2ndStep } from './SignUp2ndStep';
 export { default as SignUp3rdStep } from './SignUp3rdStep';
+export { default as AuthFlowCard } from './AuthFlowCard';
