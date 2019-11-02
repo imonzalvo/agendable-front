@@ -3,7 +3,7 @@ import { Form, Icon, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { Auth } from 'aws-amplify';
 
-import { AuthContext } from '@/pages/Authorized';
+import { AuthContext } from '@/layouts';
 import { SingleFormButtonContainer } from './styles';
 
 interface LoginProps extends FormComponentProps {

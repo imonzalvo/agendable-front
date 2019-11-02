@@ -8,14 +8,16 @@ import { Button } from 'antd';
 import { Auth } from 'aws-amplify';
 import Link from 'umi/link';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { match } from 'react-router-dom';
 
 import { isAntDesignPro } from '@/utils/utils';
+import AuthLayout from '@/layouts/AuthLayout';
 import { AuthContext } from '@/layouts';
-import logo from '../assets/logo.svg';
 
 export interface AdminLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
   settings: Settings;
+  match: match<{ businessHandle: string }>;
 }
 export type AdminLayoutContext = { [K in 'location']: AdminLayoutProps[K] } & {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -57,7 +59,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
   return (
     <>
       <ProLayout
-        logo={logo}
+        title={`${props.match.params.businessHandle} ADMIN`}
         menuItemRender={(menuItemProps, defaultDom) => {
           if (menuItemProps.isUrl) {
             return defaultDom;
@@ -88,4 +90,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
     </>
   );
 };
-export default AdminLayout;
+
+export default (props: any) => (
+  <AuthLayout>
+    <AdminLayout {...props} />
+  </AuthLayout>
+);
