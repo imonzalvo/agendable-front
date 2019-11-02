@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Spin } from 'antd';
 import Amplify, { Auth } from 'aws-amplify';
-import SignUp from '@/components/Authorized';
+import SignUp from '@/components/AuthFlow';
 
 Amplify.configure({
   API: {
@@ -15,6 +15,11 @@ Amplify.configure({
     userPoolId: 'us-west-2_0cMsztLZw',
     userPoolWebClientId: '47gq87m8nk8n0llu29647s9o5f',
   },
+});
+
+export const AuthContext = React.createContext({
+  isAuthenticated: false,
+  setAuthenticated: (_value: boolean) => {},
 });
 
 export default ({ children }: { children: any }): React.ReactNode => {
@@ -34,7 +39,11 @@ export default ({ children }: { children: any }): React.ReactNode => {
 
   if (isLoading) return <Spin size="large" />;
 
-  return isAuthenticated ? <App>{children}</App> : <SignUp />;
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
+      {isAuthenticated ? <App>{children}</App> : <SignUp />}
+    </AuthContext.Provider>
+  );
 };
 
 const App = ({

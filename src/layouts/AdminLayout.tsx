@@ -1,12 +1,16 @@
+import React, { useContext } from 'react';
 import ProLayout, {
   MenuDataItem,
   BasicLayoutProps as ProLayoutProps,
   Settings,
 } from '@ant-design/pro-layout';
-import React from 'react';
+import { Button } from 'antd';
+import { Auth } from 'aws-amplify';
 import Link from 'umi/link';
 import { formatMessage } from 'umi-plugin-react/locale';
+
 import { isAntDesignPro } from '@/utils/utils';
+import { AuthContext } from '@/pages/Authorized';
 import logo from '../assets/logo.svg';
 
 export interface AdminLayoutProps extends ProLayoutProps {
@@ -41,7 +45,15 @@ const footerRender: AdminLayoutProps['footerRender'] = (_, defaultDom) => {
   );
 };
 const AdminLayout: React.FC<AdminLayoutProps> = props => {
+  const { setAuthenticated } = useContext(AuthContext);
   const { children, settings } = props;
+
+  const handleSignOut = () => {
+    Auth.signOut().finally(() => {
+      setAuthenticated(false);
+    });
+  };
+
   return (
     <>
       <ProLayout
@@ -67,6 +79,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
         footerRender={footerRender}
         menuDataRender={menuDataRender}
         formatMessage={formatMessage}
+        rightContentRender={() => <Button onClick={handleSignOut}>Sign Out</Button>}
         {...props}
         {...settings}
       >

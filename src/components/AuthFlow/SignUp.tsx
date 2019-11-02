@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Steps, Row, Col } from 'antd';
+import { Steps } from 'antd';
 
 import GlobalStyles from './styles';
 import SignUp1stStep from './SignUp1stStep';
@@ -12,14 +12,11 @@ function SignUp(): JSX.Element {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const nextStep = () => setCurrentStep(s => s + 1);
-  const prevStep = () => setCurrentStep(s => s - 1);
-
   const renderStep = () => {
     if (currentStep === 0) {
       return (
         <SignUp1stStep
-          nextStep={nextStep}
+          setCurrentStep={setCurrentStep}
           stateEmail={email}
           setEmail={setEmail}
           setPhoneNumber={setPhoneNumber}
@@ -30,8 +27,7 @@ function SignUp(): JSX.Element {
     if (currentStep === 1) {
       return (
         <SignUp2ndStep
-          nextStep={nextStep}
-          prevStep={prevStep}
+          setCurrentStep={setCurrentStep}
           email={email}
           phoneNumber={phoneNumber}
           username={username}
@@ -39,29 +35,21 @@ function SignUp(): JSX.Element {
       );
     }
     if (currentStep === 2) {
-      return <SignUp3rdStep prevStep={prevStep} username={username} nextStep={nextStep} />;
+      return <SignUp3rdStep setCurrentStep={setCurrentStep} username={username} />;
     }
     return null;
   };
 
   return (
-    <Row>
+    <>
       <GlobalStyles />
-      <Col
-        xs={{ span: 16, offset: 4 }}
-        sm={{ span: 14, offset: 4 }}
-        md={{ span: 12, offset: 6 }}
-        lg={{ span: 9, offset: 7 }}
-      >
-        <h1>Create your Agendable account</h1>
-        <Steps current={currentStep}>
-          {[0, 1, 2].map(item => (
-            <Steps.Step key={item} />
-          ))}
-        </Steps>
-        <div className="steps-content">{renderStep()}</div>
-      </Col>
-    </Row>
+      <Steps current={currentStep}>
+        {[0, 1, 2].map(item => (
+          <Steps.Step key={item} />
+        ))}
+      </Steps>
+      <div className="steps-content">{renderStep()}</div>
+    </>
   );
 }
 export default SignUp;
