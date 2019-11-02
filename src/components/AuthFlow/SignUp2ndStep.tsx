@@ -6,8 +6,7 @@ import { Auth } from 'aws-amplify';
 import { FormButtonsContainer } from './styles';
 
 interface ISignUpFormProps extends FormComponentProps {
-  nextStep: () => void;
-  prevStep: () => void;
+  setCurrentStep: (step: number) => void;
   email: string;
   phoneNumber: string;
   username: string;
@@ -17,14 +16,15 @@ function SignUp2ndStepForm({
   form,
   email,
   username,
-  nextStep,
-  prevStep,
+  setCurrentStep,
 }: ISignUpFormProps): JSX.Element {
   const [confirmDirty, toggleConfirmDirty] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    form.validateFieldsAndScroll((error, { givenName, familyName, password }) => {
+    form.validateFields((error, { givenName, familyName, password }) => {
+      setLoading(true);
       if (!error) {
         Auth.signUp({
           username,
@@ -37,11 +37,12 @@ function SignUp2ndStepForm({
           },
         })
           .then(() => {
-            nextStep();
+            setCurrentStep(2);
           })
           // TODO: send error to sentry
           // TODO: Format error msg
-          .catch(err => message.error(JSON.stringify(err)));
+          .catch(err => message.error(JSON.stringify(err)))
+          .finally(() => setLoading(false));
       }
     });
   };
@@ -116,13 +117,18 @@ function SignUp2ndStepForm({
 
       <FormButtonsContainer>
         <Form.Item>
-          <Button type="ghost" onClick={prevStep}>
+          <Button
+            type="ghost"
+            onClick={() => {
+              setCurrentStep(0);
+            }}
+          >
             Back
           </Button>
         </Form.Item>
         {/* SUBMIT */}
         <Form.Item>
-          <Button type="primary" htmlType="submit" style={{ marginLeft: 10 }}>
+          <Button type="primary" htmlType="submit" style={{ marginLeft: 10 }} loading={isLoading}>
             Register
           </Button>
         </Form.Item>

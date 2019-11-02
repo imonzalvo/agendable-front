@@ -1,5 +1,17 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { Form } from 'antd';
+import { Form, Card } from 'antd';
+
+export const CustomCard = styled(Card)`
+  .ant-card-body {
+    padding-bottom: 0;
+  }
+`;
+
+export const AuthFlowStyles = createGlobalStyle`
+  .ant-form-item-control-wrapper {
+    width: unset !important;
+  }
+`;
 
 export default createGlobalStyle`
   @media (max-width:480px) {

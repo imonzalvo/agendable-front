@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Select, Button, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 
 import { checkUsername } from '../../utils/lambdaFunctions';
@@ -12,7 +12,7 @@ interface ISignUp1stStepProps extends FormComponentProps {
   setEmail: (email: string) => void;
   setPhoneNumber: (phoneNumber: string) => void;
   setUsername: (username: string) => void;
-  nextStep: () => void;
+  setCurrentStep: (value: number) => void;
 }
 
 function SignUp1stStep({
@@ -21,25 +21,26 @@ function SignUp1stStep({
   setEmail,
   setPhoneNumber,
   setUsername,
-  nextStep,
+  setCurrentStep,
 }: ISignUp1stStepProps): JSX.Element {
   // Should set to false on initial when we start accepting phone numbers
   // [useEmail, toggleUseEmail]
   const [useEmail] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   const validationSuccess = (phoneNumberParam?: string, emailParam?: string) => {
     setEmail(emailParam || '');
     setPhoneNumber(phoneNumberParam || '');
     setUsername(emailParam || phoneNumberParam || '');
-    nextStep();
+    setCurrentStep(1);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    form.validateFieldsAndScroll((err, { email, phone, prefix }) => {
+    form.validateFields((err, { email, phone, prefix }) => {
       if (!err) {
         const phoneNumber = phone ? `+${prefix}${phone}` : '';
-        // TODO: set next button as loading while it's loading...
+        setLoading(true);
         checkUsername(email)
           .then(response => {
             const respObject = JSON.parse(
@@ -61,7 +62,8 @@ function SignUp1stStep({
             // The backend will stop the user from signing up at the end if there's an error
             // TODO: log this error in sentry
             validationSuccess(phoneNumber, email);
-          });
+          })
+          .finally(() => setLoading(false));
       }
     });
   };
@@ -92,7 +94,12 @@ function SignUp1stStep({
               },
             ],
             initialValue: stateEmail,
-          })(<Input size="large" />)}
+          })(
+            <Input
+              prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Email"
+            />,
+          )}
         </Form.Item>
       );
     }
@@ -100,7 +107,7 @@ function SignUp1stStep({
       <Form.Item label="Phone Number">
         {getFieldDecorator('phone', {
           rules: [{ required: true, message: 'Please input your phone number!' }],
-        })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} size="large" />)}
+        })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
       </Form.Item>
     );
   };
@@ -128,7 +135,7 @@ function SignUp1stStep({
 
       {/* SUBMIT */}
       <SingleFormButtonContainer>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Next
         </Button>
       </SingleFormButtonContainer>
