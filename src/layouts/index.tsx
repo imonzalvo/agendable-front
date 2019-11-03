@@ -1,32 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import AWSAppSyncClient from 'aws-appsync';
+import { createAppSyncLink } from 'aws-appsync';
 import AWS from 'aws-sdk';
 import Amplify, { Auth } from 'aws-amplify';
-import { ApolloProvider } from 'react-apollo';
-import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks';
-import { Rehydrated } from 'aws-appsync-react';
+import { ApolloProvider } from '@apollo/react-hooks';
+// import { Rehydrated } from 'aws-appsync-react'; aws does not supports apollo 3.0
 import { ConfigProvider } from 'antd';
+import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
+// import Rehydrated from './Rehydrated'; trying to create a custom one from https://github.com/awslabs/aws-mobile-appsync-sdk-js/issues/448
 import es from 'antd/es/locale-provider/es_ES';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
 import awsconfig from '../../aws-exports';
 import PageLoading from '@/components/PageLoading';
-import { cognitoAuth, iamAuth } from './config';
-
-const createClient = (auth: any) =>
-  new AWSAppSyncClient({
-    url: awsconfig.aws_appsync_graphqlEndpoint,
-    region: awsconfig.aws_project_region,
-    auth,
-    disableOffline: true,
-  });
-
-async function getClient() {
-  const credentials = await Auth.currentCredentials();
-  const auth = credentials.authenticated ? cognitoAuth : iamAuth;
-  return createClient(auth);
-}
 
 AWS.config.update({
   accessKeyId: 'AKIAU7ZI4HCKF4ONGVTM',
@@ -37,7 +26,7 @@ AWS.config.update({
 Amplify.configure({
   API: {
     graphql_endpoint:
-      'https://l5hs5h46lrcp7ppzlmbamqjoa4.appsync-api.us-west-2.amazonaws.com/graphql',
+      'https://73tghdodqnbyvpyelxgj6crp4e.appsync-api.us-west-2.amazonaws.com/graphql',
     graphql_endpoint_iam_region: 'us-west-2',
   },
   Auth: {
@@ -57,7 +46,6 @@ export const AuthContext = React.createContext({
 });
 
 const Layout: React.FC = ({ children }) => {
-  const [client, setClient] = useState();
   const [isAuthCheckLoading, setAuthCheckLoading] = useState(true);
   const [isAuthenticated, setAuthenticated] = useState(false);
 
@@ -73,24 +61,36 @@ const Layout: React.FC = ({ children }) => {
       });
   }, []);
 
-  useEffect(() => {
-    getClient().then(c => {
-      setClient(c);
-    });
-  }, []);
+  const httpLink = createHttpLink({
+    uri: awsconfig.aws_appsync_graphqlEndpoint,
+  });
+
+  const awsLink = createAppSyncLink({
+    url: awsconfig.aws_appsync_graphqlEndpoint,
+    region: awsconfig.aws_appsync_region,
+    auth: {
+      type: awsconfig.aws_appsync_authenticationType,
+      credentials: () => Auth.currentCredentials(),
+      jwtToken: async () => (await Auth.currentSession()).getAccessToken().getJwtToken(),
+    },
+    complexObjectsCredentials: () => Auth.currentCredentials(),
+  });
+
+  const client = new ApolloClient({
+    link: awsLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
 
   if (!client) return renderSpin();
   return (
     <ApolloProvider client={client}>
-      <ApolloProviderHooks client={client}>
-        <Rehydrated>
-          <ConfigProvider locale={es}>
-            <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>
-              {children}
-            </AuthContext.Provider>
-          </ConfigProvider>
-        </Rehydrated>
-      </ApolloProviderHooks>
+      {/* <Rehydrated> */}
+      <ConfigProvider locale={es}>
+        <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>
+          {children}
+        </AuthContext.Provider>
+      </ConfigProvider>
+      {/* </Rehydrated> */}
     </ApolloProvider>
   );
 };

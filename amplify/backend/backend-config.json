@@ -1,19 +1,13 @@
 {
+	"function": {},
 	"auth": {
-		"agendableAuthDev": {
+		"AgendableEast": {
 			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	},
-	"hosting": {
-		"S3AndCloudFront": {
-			"service": "S3AndCloudFront",
 			"providerPlugin": "awscloudformation"
 		}
 	},
 	"api": {
-		"AgendableV3": {
+		"AgendableEastApi": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SelectBranch from './select-branch';
+
 export default function Book() {
-  return <div>BOOK</div>;
+  return <SelectBranch />;
 }

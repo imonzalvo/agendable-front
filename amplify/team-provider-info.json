@@ -1,23 +1,25 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "agendable-dev-20190731181704-authRole",
-      "UnauthRoleArn": "arn:aws:iam::343146248340:role/agendable-dev-20190731181704-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::343146248340:role/agendable-dev-20190731181704-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "agendable-dev-20190731181704-deployment",
-      "UnauthRoleName": "agendable-dev-20190731181704-unauthRole",
-      "StackName": "agendable-dev-20190731181704",
-      "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/agendable-dev-20190731181704/89e3b420-b3d8-11e9-b402-02fcc3dcb248"
-    },
-    "categories": {
-      "auth": {
-        "agendableAuthDev": {
-          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"381076525880234\"},{\"ProviderName\":\"Google\",\"client_id\":\"AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs\",\"client_secret\":\"381076525880234\"}]",
-          "facebookAppId": "381076525880234",
-          "googleClientId": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs"
+    "eastenv": {
+        "awscloudformation": {
+            "AuthRoleName": "agendable-eastenv-20191101134041-authRole",
+            "UnauthRoleArn": "arn:aws:iam::343146248340:role/agendable-eastenv-20191101134041-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::343146248340:role/agendable-eastenv-20191101134041-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "agendable-eastenv-20191101134041-deployment",
+            "UnauthRoleName": "agendable-eastenv-20191101134041-unauthRole",
+            "StackName": "agendable-eastenv-20191101134041",
+            "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/agendable-eastenv-20191101134041/58fde830-fcc6-11e9-9759-0ad539b374b4"
+        },
+        "categories": {
+            "auth": {
+                "AgendableEast": {
+                    "facebookAppIdUserPool": "381076525880234",
+                    "facebookAppSecretUserPool": "381076525880234",
+                    "googleAppIdUserPool": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs",
+                    "googleAppSecretUserPool": "381076525880234",
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"381076525880234\"},{\"ProviderName\":\"Google\",\"client_id\":\"AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs\",\"client_secret\":\"381076525880234\"}]"
+                }
+            }
         }
-      }
     }
-  }
 }
