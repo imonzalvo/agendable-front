@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, Typography } from 'antd';
 import ProLayout, { BasicLayoutProps } from '@ant-design/pro-layout';
-import { match } from 'react-router-dom';
 
 import icon from '@/assets/agendable-icon.svg';
 import { Login, SignUp } from '@/components/AuthFlow';
+import { BusinessContext } from '@/pages/a/$businessHandle/_layout';
 
 export interface BusinessLayoutProps extends BasicLayoutProps {
-  match: match<{ businessHandle: string }>;
   children: any;
 }
 
-export default function BusinessLayout(props: BusinessLayoutProps) {
+export default function BusinessLayout({ children }: BusinessLayoutProps) {
   const [whichAuthModalVisible, setAuthModalVisible] = useState<'LOGIN' | 'SIGNUP' | null>(null);
+  const { businessName } = useContext(BusinessContext);
 
   return (
     <>
       <ProLayout
-        title={props.match.params.businessHandle}
+        title={businessName}
         logo={null}
         navTheme="light"
         layout="topmenu"
@@ -50,7 +50,7 @@ export default function BusinessLayout(props: BusinessLayoutProps) {
           </div>
         )}
       >
-        {props.children}
+        {children}
       </ProLayout>
       <Modal
         title="Login"

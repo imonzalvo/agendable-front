@@ -19,6 +19,7 @@ export const createAvailabilityItem = `mutation CreateAvailabilityItem($input: C
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -31,7 +32,13 @@ export const createAvailabilityItem = `mutation CreateAvailabilityItem($input: C
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
   }
@@ -55,6 +62,7 @@ export const updateAvailabilityItem = `mutation UpdateAvailabilityItem($input: U
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -67,7 +75,13 @@ export const updateAvailabilityItem = `mutation UpdateAvailabilityItem($input: U
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
   }
@@ -91,6 +105,7 @@ export const deleteAvailabilityItem = `mutation DeleteAvailabilityItem($input: D
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -103,6 +118,198 @@ export const deleteAvailabilityItem = `mutation DeleteAvailabilityItem($input: D
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+  }
+}
+`;
+export const createBookingServices = `mutation CreateBookingServices($input: CreateBookingServicesInput!) {
+  createBookingServices(input: $input) {
+    id
+    booking {
+      id
+      createdAt
+      start
+      end
+      status
+      client {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      clientEmail
+      clientPhone
+      clientName
+      clientFamilyName
+      services {
+        nextToken
+      }
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      branch {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const updateBookingServices = `mutation UpdateBookingServices($input: UpdateBookingServicesInput!) {
+  updateBookingServices(input: $input) {
+    id
+    booking {
+      id
+      createdAt
+      start
+      end
+      status
+      client {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      clientEmail
+      clientPhone
+      clientName
+      clientFamilyName
+      services {
+        nextToken
+      }
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      branch {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const deleteBookingServices = `mutation DeleteBookingServices($input: DeleteBookingServicesInput!) {
+  deleteBookingServices(input: $input) {
+    id
+    booking {
+      id
+      createdAt
+      start
+      end
+      status
+      client {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      clientEmail
+      clientPhone
+      clientName
+      clientFamilyName
+      services {
+        nextToken
+      }
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      branch {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
         nextToken
       }
     }
@@ -124,51 +331,27 @@ export const createBooking = `mutation CreateBooking($input: CreateBookingInput!
       email
       phone
       userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
       business {
         id
         name
         email
         phone
+        handle
       }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
       bookings {
         nextToken
       }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
     }
     employee {
       id
@@ -182,6 +365,7 @@ export const createBooking = `mutation CreateBooking($input: CreateBookingInput!
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -194,7 +378,38 @@ export const createBooking = `mutation CreateBooking($input: CreateBookingInput!
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
         nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
       }
     }
   }
@@ -215,51 +430,27 @@ export const updateBooking = `mutation UpdateBooking($input: UpdateBookingInput!
       email
       phone
       userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
       business {
         id
         name
         email
         phone
+        handle
       }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
       bookings {
         nextToken
       }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
     }
     employee {
       id
@@ -273,6 +464,7 @@ export const updateBooking = `mutation UpdateBooking($input: UpdateBookingInput!
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -285,7 +477,38 @@ export const updateBooking = `mutation UpdateBooking($input: UpdateBookingInput!
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
         nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
       }
     }
   }
@@ -306,51 +529,27 @@ export const deleteBooking = `mutation DeleteBooking($input: DeleteBookingInput!
       email
       phone
       userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
       business {
         id
         name
         email
         phone
+        handle
       }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
       bookings {
         nextToken
       }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
     }
     employee {
       id
@@ -364,6 +563,7 @@ export const deleteBooking = `mutation DeleteBooking($input: DeleteBookingInput!
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -376,7 +576,38 @@ export const deleteBooking = `mutation DeleteBooking($input: DeleteBookingInput!
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
         nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
       }
     }
   }
@@ -395,19 +626,22 @@ export const createEmployee = `mutation CreateEmployee($input: CreateEmployeeInp
       email
       phone
       userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
       bookings {
         nextToken
       }
-      businesses {
-        nextToken
-      }
+      owner
     }
     phone
     services {
       items {
         id
-        serviceId
-        employeeId
       }
       nextToken
     }
@@ -427,14 +661,37 @@ export const createEmployee = `mutation CreateEmployee($input: CreateEmployeeInp
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
     branches {
-      items {
-        id
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
       }
-      nextToken
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
     }
   }
 }
@@ -452,19 +709,22 @@ export const updateEmployee = `mutation UpdateEmployee($input: UpdateEmployeeInp
       email
       phone
       userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
       bookings {
         nextToken
       }
-      businesses {
-        nextToken
-      }
+      owner
     }
     phone
     services {
       items {
         id
-        serviceId
-        employeeId
       }
       nextToken
     }
@@ -484,14 +744,37 @@ export const updateEmployee = `mutation UpdateEmployee($input: UpdateEmployeeInp
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
     branches {
-      items {
-        id
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
       }
-      nextToken
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
     }
   }
 }
@@ -509,19 +792,22 @@ export const deleteEmployee = `mutation DeleteEmployee($input: DeleteEmployeeInp
       email
       phone
       userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
       bookings {
         nextToken
       }
-      businesses {
-        nextToken
-      }
+      owner
     }
     phone
     services {
       items {
         id
-        serviceId
-        employeeId
       }
       nextToken
     }
@@ -541,38 +827,44 @@ export const deleteEmployee = `mutation DeleteEmployee($input: DeleteEmployeeInp
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
     branches {
-      items {
-        id
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
       }
-      nextToken
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
     }
   }
 }
 `;
-export const createEmployeeServicess = `mutation CreateEmployeeServicess($input: CreateEmployeeServicessInput!) {
-  createEmployeeServicess(input: $input) {
+export const createEmployeeServices = `mutation CreateEmployeeServices($input: CreateEmployeeServicesInput!) {
+  createEmployeeServices(input: $input) {
     id
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
-      }
-    }
     employee {
       id
       givenName
@@ -585,6 +877,7 @@ export const createEmployeeServicess = `mutation CreateEmployeeServicess($input:
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -597,17 +890,15 @@ export const createEmployeeServicess = `mutation CreateEmployeeServicess($input:
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
-    serviceId
-    employeeId
-  }
-}
-`;
-export const updateEmployeeServicess = `mutation UpdateEmployeeServicess($input: UpdateEmployeeServicessInput!) {
-  updateEmployeeServicess(input: $input) {
-    id
     service {
       id
       name
@@ -617,14 +908,20 @@ export const updateEmployeeServicess = `mutation UpdateEmployeeServicess($input:
       employees {
         nextToken
       }
-      branch {
-        nextToken
-      }
       description
       bookings {
         nextToken
       }
+      branch {
+        nextToken
+      }
     }
+  }
+}
+`;
+export const updateEmployeeServices = `mutation UpdateEmployeeServices($input: UpdateEmployeeServicesInput!) {
+  updateEmployeeServices(input: $input) {
+    id
     employee {
       id
       givenName
@@ -637,6 +934,7 @@ export const updateEmployeeServicess = `mutation UpdateEmployeeServicess($input:
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -649,17 +947,15 @@ export const updateEmployeeServicess = `mutation UpdateEmployeeServicess($input:
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
-    serviceId
-    employeeId
-  }
-}
-`;
-export const deleteEmployeeServicess = `mutation DeleteEmployeeServicess($input: DeleteEmployeeServicessInput!) {
-  deleteEmployeeServicess(input: $input) {
-    id
     service {
       id
       name
@@ -669,14 +965,20 @@ export const deleteEmployeeServicess = `mutation DeleteEmployeeServicess($input:
       employees {
         nextToken
       }
-      branch {
-        nextToken
-      }
       description
       bookings {
         nextToken
       }
+      branch {
+        nextToken
+      }
     }
+  }
+}
+`;
+export const deleteEmployeeServices = `mutation DeleteEmployeeServices($input: DeleteEmployeeServicesInput!) {
+  deleteEmployeeServices(input: $input) {
+    id
     employee {
       id
       givenName
@@ -689,6 +991,7 @@ export const deleteEmployeeServicess = `mutation DeleteEmployeeServicess($input:
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -701,11 +1004,32 @@ export const deleteEmployeeServicess = `mutation DeleteEmployeeServicess($input:
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
         nextToken
       }
     }
-    serviceId
-    employeeId
   }
 }
 `;
@@ -719,14 +1043,6 @@ export const createService = `mutation CreateService($input: CreateServiceInput!
     employees {
       items {
         id
-        serviceId
-        employeeId
-      }
-      nextToken
-    }
-    branch {
-      items {
-        id
       }
       nextToken
     }
@@ -734,10 +1050,12 @@ export const createService = `mutation CreateService($input: CreateServiceInput!
     bookings {
       items {
         id
-        createdAt
-        start
-        end
-        status
+      }
+      nextToken
+    }
+    branch {
+      items {
+        id
       }
       nextToken
     }
@@ -754,14 +1072,6 @@ export const updateService = `mutation UpdateService($input: UpdateServiceInput!
     employees {
       items {
         id
-        serviceId
-        employeeId
-      }
-      nextToken
-    }
-    branch {
-      items {
-        id
       }
       nextToken
     }
@@ -769,10 +1079,12 @@ export const updateService = `mutation UpdateService($input: UpdateServiceInput!
     bookings {
       items {
         id
-        createdAt
-        start
-        end
-        status
+      }
+      nextToken
+    }
+    branch {
+      items {
+        id
       }
       nextToken
     }
@@ -789,14 +1101,6 @@ export const deleteService = `mutation DeleteService($input: DeleteServiceInput!
     employees {
       items {
         id
-        serviceId
-        employeeId
-      }
-      nextToken
-    }
-    branch {
-      items {
-        id
       }
       nextToken
     }
@@ -804,10 +1108,12 @@ export const deleteService = `mutation DeleteService($input: DeleteServiceInput!
     bookings {
       items {
         id
-        createdAt
-        start
-        end
-        status
+      }
+      nextToken
+    }
+    branch {
+      items {
+        id
       }
       nextToken
     }
@@ -821,6 +1127,8 @@ export const createBranch = `mutation CreateBranch($input: CreateBranchInput!) {
     phone
     email
     name
+    description
+    image
     bookings {
       items {
         id
@@ -828,6 +1136,19 @@ export const createBranch = `mutation CreateBranch($input: CreateBranchInput!) {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      nextToken
+    }
+    employees {
+      items {
+        id
+        givenName
+        familyName
+        phone
       }
       nextToken
     }
@@ -843,17 +1164,19 @@ export const createBranch = `mutation CreateBranch($input: CreateBranchInput!) {
       email
       phone
       owners {
-        nextToken
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
       }
+      handle
       branches {
         nextToken
       }
-    }
-    employees {
-      items {
-        id
-      }
-      nextToken
     }
   }
 }
@@ -865,6 +1188,8 @@ export const updateBranch = `mutation UpdateBranch($input: UpdateBranchInput!) {
     phone
     email
     name
+    description
+    image
     bookings {
       items {
         id
@@ -872,6 +1197,19 @@ export const updateBranch = `mutation UpdateBranch($input: UpdateBranchInput!) {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      nextToken
+    }
+    employees {
+      items {
+        id
+        givenName
+        familyName
+        phone
       }
       nextToken
     }
@@ -887,17 +1225,19 @@ export const updateBranch = `mutation UpdateBranch($input: UpdateBranchInput!) {
       email
       phone
       owners {
-        nextToken
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
       }
+      handle
       branches {
         nextToken
       }
-    }
-    employees {
-      items {
-        id
-      }
-      nextToken
     }
   }
 }
@@ -909,6 +1249,8 @@ export const deleteBranch = `mutation DeleteBranch($input: DeleteBranchInput!) {
     phone
     email
     name
+    description
+    image
     bookings {
       items {
         id
@@ -916,6 +1258,19 @@ export const deleteBranch = `mutation DeleteBranch($input: DeleteBranchInput!) {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      nextToken
+    }
+    employees {
+      items {
+        id
+        givenName
+        familyName
+        phone
       }
       nextToken
     }
@@ -931,51 +1286,6 @@ export const deleteBranch = `mutation DeleteBranch($input: DeleteBranchInput!) {
       email
       phone
       owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-    employees {
-      items {
-        id
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const createBranchEmployees = `mutation CreateBranchEmployees($input: CreateBranchEmployeesInput!) {
-  createBranchEmployees(input: $input) {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    employee {
-      id
-      givenName
-      familyName
-      user {
         id
         givenName
         familyName
@@ -983,127 +1293,9 @@ export const createBranchEmployees = `mutation CreateBranchEmployees($input: Cre
         email
         phone
         userType
+        owner
       }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const updateBranchEmployees = `mutation UpdateBranchEmployees($input: UpdateBranchEmployeesInput!) {
-  updateBranchEmployees(input: $input) {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    employee {
-      id
-      givenName
-      familyName
-      user {
-        id
-        givenName
-        familyName
-        userName
-        email
-        phone
-        userType
-      }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const deleteBranchEmployees = `mutation DeleteBranchEmployees($input: DeleteBranchEmployeesInput!) {
-  deleteBranchEmployees(input: $input) {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    employee {
-      id
-      givenName
-      familyName
-      user {
-        id
-        givenName
-        familyName
-        userName
-        email
-        phone
-        userType
-      }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
+      handle
       branches {
         nextToken
       }
@@ -1114,13 +1306,35 @@ export const deleteBranchEmployees = `mutation DeleteBranchEmployees($input: Del
 export const createBranchServices = `mutation CreateBranchServices($input: CreateBranchServicesInput!) {
   createBranchServices(input: $input) {
     id
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
     branch {
       id
       address
       phone
       email
       name
+      description
+      image
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       services {
@@ -1131,71 +1345,7 @@ export const createBranchServices = `mutation CreateBranchServices($input: Creat
         name
         email
         phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const updateBranchServices = `mutation UpdateBranchServices($input: UpdateBranchServicesInput!) {
-  updateBranchServices(input: $input) {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
+        handle
       }
     }
   }
@@ -1204,13 +1354,35 @@ export const updateBranchServices = `mutation UpdateBranchServices($input: Updat
 export const deleteBranchServices = `mutation DeleteBranchServices($input: DeleteBranchServicesInput!) {
   deleteBranchServices(input: $input) {
     id
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
     branch {
       id
       address
       phone
       email
       name
+      description
+      image
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       services {
@@ -1221,26 +1393,7 @@ export const deleteBranchServices = `mutation DeleteBranchServices($input: Delet
         name
         email
         phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
+        handle
       }
     }
   }
@@ -1253,11 +1406,26 @@ export const createBusiness = `mutation CreateBusiness($input: CreateBusinessInp
     email
     phone
     owners {
-      items {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
         id
+        name
+        email
+        phone
+        handle
       }
-      nextToken
+      bookings {
+        nextToken
+      }
+      owner
     }
+    handle
     branches {
       items {
         id
@@ -1265,31 +1433,8 @@ export const createBusiness = `mutation CreateBusiness($input: CreateBusinessInp
         phone
         email
         name
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const updateBusiness = `mutation UpdateBusiness($input: UpdateBusinessInput!) {
-  updateBusiness(input: $input) {
-    id
-    name
-    email
-    phone
-    owners {
-      items {
-        id
-      }
-      nextToken
-    }
-    branches {
-      items {
-        id
-        address
-        phone
-        email
-        name
+        description
+        image
       }
       nextToken
     }
@@ -1303,11 +1448,26 @@ export const deleteBusiness = `mutation DeleteBusiness($input: DeleteBusinessInp
     email
     phone
     owners {
-      items {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
         id
+        name
+        email
+        phone
+        handle
       }
-      nextToken
+      bookings {
+        nextToken
+      }
+      owner
     }
+    handle
     branches {
       items {
         id
@@ -1315,107 +1475,10 @@ export const deleteBusiness = `mutation DeleteBusiness($input: DeleteBusinessInp
         phone
         email
         name
+        description
+        image
       }
       nextToken
-    }
-  }
-}
-`;
-export const createUserBusinesses = `mutation CreateUserBusinesses($input: CreateUserBusinessesInput!) {
-  createUserBusinesses(input: $input) {
-    id
-    owner {
-      id
-      givenName
-      familyName
-      userName
-      email
-      phone
-      userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    business {
-      id
-      name
-      email
-      phone
-      owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const updateUserBusinesses = `mutation UpdateUserBusinesses($input: UpdateUserBusinessesInput!) {
-  updateUserBusinesses(input: $input) {
-    id
-    owner {
-      id
-      givenName
-      familyName
-      userName
-      email
-      phone
-      userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    business {
-      id
-      name
-      email
-      phone
-      owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const deleteUserBusinesses = `mutation DeleteUserBusinesses($input: DeleteUserBusinessesInput!) {
-  deleteUserBusinesses(input: $input) {
-    id
-    owner {
-      id
-      givenName
-      familyName
-      userName
-      email
-      phone
-      userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    business {
-      id
-      name
-      email
-      phone
-      owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
     }
   }
 }
@@ -1429,6 +1492,26 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     email
     phone
     userType
+    business {
+      id
+      name
+      email
+      phone
+      owners {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      handle
+      branches {
+        nextToken
+      }
+    }
     bookings {
       items {
         id
@@ -1436,15 +1519,14 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
-    businesses {
-      items {
-        id
-      }
-      nextToken
-    }
+    owner
   }
 }
 `;
@@ -1457,6 +1539,26 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     email
     phone
     userType
+    business {
+      id
+      name
+      email
+      phone
+      owners {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      handle
+      branches {
+        nextToken
+      }
+    }
     bookings {
       items {
         id
@@ -1464,15 +1566,14 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
-    businesses {
-      items {
-        id
-      }
-      nextToken
-    }
+    owner
   }
 }
 `;
@@ -1485,6 +1586,26 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     email
     phone
     userType
+    business {
+      id
+      name
+      email
+      phone
+      owners {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      handle
+      branches {
+        nextToken
+      }
+    }
     bookings {
       items {
         id
@@ -1492,12 +1613,101 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
-    businesses {
+    owner
+  }
+}
+`;
+export const updateBranchServices = `mutation UpdateBranchServices($input: UpdateBranchServicesInput!) {
+  updateBranchServices(input: $input) {
+    id
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+    }
+  }
+}
+`;
+export const updateBusiness = `mutation UpdateBusiness($input: UpdateBusinessInput!) {
+  updateBusiness(input: $input) {
+    id
+    name
+    email
+    phone
+    owners {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+      bookings {
+        nextToken
+      }
+      owner
+    }
+    handle
+    branches {
       items {
         id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
       nextToken
     }

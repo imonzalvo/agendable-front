@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { createAppSyncLink } from 'aws-appsync';
+import { createAppSyncLink, AUTH_TYPE } from 'aws-appsync';
 import AWS from 'aws-sdk';
 import Amplify, { Auth } from 'aws-amplify';
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -23,19 +23,20 @@ AWS.config.update({
   region: 'us-west-2',
 });
 
-Amplify.configure({
-  API: {
-    graphql_endpoint:
-      'https://73tghdodqnbyvpyelxgj6crp4e.appsync-api.us-west-2.amazonaws.com/graphql',
-    graphql_endpoint_iam_region: 'us-west-2',
-  },
-  Auth: {
-    identityPoolId: 'us-west-2:69c0a3f7-e59e-45b1-822a-adf88f0b11ba',
-    region: 'us-west-2',
-    userPoolId: 'us-west-2_0cMsztLZw',
-    userPoolWebClientId: '47gq87m8nk8n0llu29647s9o5f',
-  },
-});
+Amplify.configure(awsconfig);
+
+// Amplify.configure({
+//   API: {
+//     graphql_endpoint: awsconfig.aws_appsync_graphqlEndpoint,
+//     graphql_endpoint_iam_region: awsconfig.aws_appsync_region,
+//   },
+//   Auth: {
+//     identityPoolId: awsconfig.aws_cognito_identity_pool_id,
+//     region: awsconfig.aws_cognito_region,
+//     userPoolId: awsconfig.aws_user_pools_id,
+//     userPoolWebClientId: awsconfig.aws_user_pools_web_client_id,
+//   },
+// });
 
 const renderSpin = () => <PageLoading />;
 
@@ -45,7 +46,7 @@ export const AuthContext = React.createContext({
   setAuthenticated: (_value: boolean) => {},
 });
 
-const Layout: React.FC = ({ children }) => {
+const Layout = ({ children }: { children: any }) => {
   const [isAuthCheckLoading, setAuthCheckLoading] = useState(true);
   const [isAuthenticated, setAuthenticated] = useState(false);
 
@@ -65,7 +66,7 @@ const Layout: React.FC = ({ children }) => {
     uri: awsconfig.aws_appsync_graphqlEndpoint,
   });
 
-  const awsLink = createAppSyncLink({
+  const awsLinkCognito = createAppSyncLink({
     url: awsconfig.aws_appsync_graphqlEndpoint,
     region: awsconfig.aws_appsync_region,
     auth: {
@@ -76,14 +77,26 @@ const Layout: React.FC = ({ children }) => {
     complexObjectsCredentials: () => Auth.currentCredentials(),
   });
 
-  const client = new ApolloClient({
-    link: awsLink.concat(httpLink),
+  const awsLinkGuest = createAppSyncLink({
+    url: awsconfig.aws_appsync_graphqlEndpoint,
+    region: awsconfig.aws_appsync_region,
+    auth: { type: AUTH_TYPE.API_KEY, apiKey: awsconfig.aws_appsync_apiKey },
+    complexObjectsCredentials: () => Auth.currentCredentials(),
+  });
+
+  const cognitoClient = new ApolloClient({
+    link: awsLinkCognito.concat(httpLink),
     cache: new InMemoryCache(),
   });
 
-  if (!client) return renderSpin();
+  const guestClient = new ApolloClient({
+    link: awsLinkGuest.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+
+  if (!cognitoClient || !guestClient) return renderSpin();
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={isAuthenticated ? cognitoClient : guestClient}>
       {/* <Rehydrated> */}
       <ConfigProvider locale={es}>
         <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>

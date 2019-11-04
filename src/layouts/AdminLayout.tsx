@@ -8,14 +8,18 @@ import { Button } from 'antd';
 import { Auth } from 'aws-amplify';
 import Link from 'umi/link';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { match } from 'react-router-dom';
 
 import { isAntDesignPro } from '@/utils/utils';
+import AuthLayout from '@/layouts/AuthLayout';
 import { AuthContext } from '@/layouts';
-import logo from '../assets/logo.svg';
+import { BusinessContext } from '@/pages/a/$businessHandle/_layout';
 
 export interface AdminLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
   settings: Settings;
+  match: match<{ businessHandle: string }>;
+  children: any;
 }
 export type AdminLayoutContext = { [K in 'location']: AdminLayoutProps[K] } & {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -44,8 +48,9 @@ const footerRender: AdminLayoutProps['footerRender'] = (_, defaultDom) => {
     </>
   );
 };
-const AdminLayout: React.FC<AdminLayoutProps> = props => {
+const AdminLayout = (props: AdminLayoutProps) => {
   const { setAuthenticated } = useContext(AuthContext);
+  const { businessName } = useContext(BusinessContext);
   const { children, settings } = props;
 
   const handleSignOut = () => {
@@ -57,7 +62,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
   return (
     <>
       <ProLayout
-        logo={logo}
+        title={`${businessName} ADMIN`}
+        logo={null}
         menuItemRender={(menuItemProps, defaultDom) => {
           if (menuItemProps.isUrl) {
             return defaultDom;
@@ -88,4 +94,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
     </>
   );
 };
-export default AdminLayout;
+
+export default (props: any) => (
+  <AuthLayout>
+    <AdminLayout {...props} />
+  </AuthLayout>
+);

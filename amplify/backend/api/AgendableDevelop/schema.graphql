@@ -1,0 +1,115 @@
+type AvailabilityItem @model {
+ id: ID!
+ day: Day
+ from: String!
+ to: String!
+ employee: Employee @connection(name: "EmployeeAvailability")
+}
+type BookingServices @model {
+  id: ID!
+  service: Service @connection(name: "ServiceBookings")
+  booking: Booking @connection(name: "BookingServices")
+}
+type Booking @model {
+ id: ID!
+ createdAt: AWSDateTime!
+ start: AWSDateTime!
+ end: AWSDateTime!
+ status: BookingStatus!
+ client: User @connection(name: "BookingUser")
+ branch: Branch! @connection(name: "BranchBookings")
+ services: [BookingServices!]! @connection(name: "BookingServices")
+ employee: Employee @connection(name: "BookingEmployee")
+ clientEmail: AWSEmail
+ clientPhone: AWSPhone
+ clientName: String
+ clientFamilyName: String
+}
+enum BookingStatus {
+ COMPLETED
+ CONFIRMED
+ PENDING
+ CANCELLED
+}
+type Employee @model {
+ id: ID!
+ givenName: String!
+ familyName: String!
+ user: User @connection
+ phone: String
+ services: [EmployeeServices!] @connection (name: "EmployeeServices")
+ availability: [AvailabilityItem!]! @connection(name: "EmployeeAvailability")
+ bookings: [Booking!]! @connection(name: "BookingEmployee")
+ branches: Branch @connection(name: "EmployeesBranch")
+}
+type EmployeeServices @model {
+  id: ID!
+  service: Service @connection(name: "ServiceEmployees")
+  employee: Employee @connection(name: "EmployeeServices")
+}
+type Service @model {
+ id: ID!
+ name: String!
+ price: Float!
+ currency: String
+ duration: Int!
+ employees: [EmployeeServices!]! @connection(name: "ServiceEmployees")
+ branch: [BranchServices!] @connection(name: "ServiceBranches")
+ bookings: [BookingServices] @connection(name: "ServiceBookings")
+ description: String
+}
+type Branch @model {
+ id: ID!
+ address: String!
+ phone: AWSPhone!
+ email: AWSEmail!
+ name: String!
+ description: String
+ image: String
+ bookings: [Booking!] @connection(name: "BranchBookings")
+ services: [BranchServices!]! @connection(name: "BranchServices")
+ business: Business! @connection(name: "BusinessBranch")
+ employees: [Employee!]! @connection(name: "EmployeesBranch")
+}
+type BranchServices @model {
+  id: ID!
+  branch: Branch @connection(name: "BranchServices")
+  service: Service @connection(name: "ServiceBranches")
+}
+type Business @model {
+ id: ID!
+ name: String!
+ email: AWSEmail!
+ phone: AWSPhone!
+ owners: User!
+ url: String
+ branches: [Branch!] @connection(name: "BusinessBranch")
+}
+type User @model {
+ id: ID!
+ givenName: String!
+ familyName: String!
+ userName: String!
+ email: AWSEmail
+ phone: AWSPhone
+ userType: UserType!
+ bookings: [Booking!]! @connection(name: "BookingUser")
+ business: Business
+}
+enum UserType {
+ ADMIN
+ USER
+ GUEST
+}
+enum Day {
+ MONDAY
+ TUESDAY
+ WEDNESDAY
+ THURSDAY
+ FRIDAY
+ SATURDAY
+ SUNDAY
+}
+type Query {
+  getEmployeeAvailableTime(id: ID, date: String, duration: Int): AWSJSON @function(name: "AvailableTimeEmployee")
+}
