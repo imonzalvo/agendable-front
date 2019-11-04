@@ -1,6 +1,171 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
+export const getEmployeeAvailableTime = `query GetEmployeeAvailableTime($id: ID, $date: String, $duration: Int) {
+  getEmployeeAvailableTime(id: $id, date: $date, duration: $duration)
+}
+`;
+export const getEmployeeServices = `query GetEmployeeServices($id: ID!) {
+  getEmployeeServices(id: $id) {
+    id
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      services {
+        nextToken
+      }
+      availability {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const listEmployeeServicess = `query ListEmployeeServicess(
+  $filter: ModelEmployeeServicesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEmployeeServicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      service {
+        id
+        name
+        price
+        currency
+        duration
+        description
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getUser = `query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    givenName
+    familyName
+    userName
+    email
+    phone
+    userType
+    business {
+      id
+      name
+      email
+      phone
+      owners {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      handle
+      branches {
+        nextToken
+      }
+    }
+    bookings {
+      items {
+        id
+        createdAt
+        start
+        end
+        status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      nextToken
+    }
+    owner
+  }
+}
+`;
+export const listUsers = `query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+      bookings {
+        nextToken
+      }
+      owner
+    }
+    nextToken
+  }
+}
+`;
 export const getAvailabilityItem = `query GetAvailabilityItem($id: ID!) {
   getAvailabilityItem(id: $id) {
     id
@@ -19,6 +184,7 @@ export const getAvailabilityItem = `query GetAvailabilityItem($id: ID!) {
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -31,7 +197,13 @@ export const getAvailabilityItem = `query GetAvailabilityItem($id: ID!) {
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
   }
@@ -59,6 +231,100 @@ export const listAvailabilityItems = `query ListAvailabilityItems(
   }
 }
 `;
+export const getBookingServices = `query GetBookingServices($id: ID!) {
+  getBookingServices(id: $id) {
+    id
+    booking {
+      id
+      createdAt
+      start
+      end
+      status
+      client {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      clientEmail
+      clientPhone
+      clientName
+      clientFamilyName
+      services {
+        nextToken
+      }
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      branch {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const listBookingServicess = `query ListBookingServicess(
+  $filter: ModelBookingServicesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBookingServicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      booking {
+        id
+        createdAt
+        start
+        end
+        status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      service {
+        id
+        name
+        price
+        currency
+        duration
+        description
+      }
+    }
+    nextToken
+  }
+}
+`;
 export const getBooking = `query GetBooking($id: ID!) {
   getBooking(id: $id) {
     id
@@ -74,51 +340,27 @@ export const getBooking = `query GetBooking($id: ID!) {
       email
       phone
       userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
       business {
         id
         name
         email
         phone
+        handle
       }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
       bookings {
         nextToken
       }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
     }
     employee {
       id
@@ -132,6 +374,7 @@ export const getBooking = `query GetBooking($id: ID!) {
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -144,7 +387,38 @@ export const getBooking = `query GetBooking($id: ID!) {
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
         nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
       }
     }
   }
@@ -170,6 +444,20 @@ export const listBookings = `query ListBookings(
         email
         phone
         userType
+        owner
+      }
+      clientEmail
+      clientPhone
+      clientName
+      clientFamilyName
+      services {
+        nextToken
+      }
+      employee {
+        id
+        givenName
+        familyName
+        phone
       }
       branch {
         id
@@ -177,20 +465,8 @@ export const listBookings = `query ListBookings(
         phone
         email
         name
-      }
-      service {
-        id
-        name
-        price
-        currency
-        duration
         description
-      }
-      employee {
-        id
-        givenName
-        familyName
-        phone
+        image
       }
     }
     nextToken
@@ -210,19 +486,22 @@ export const getEmployee = `query GetEmployee($id: ID!) {
       email
       phone
       userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
       bookings {
         nextToken
       }
-      businesses {
-        nextToken
-      }
+      owner
     }
     phone
     services {
       items {
         id
-        serviceId
-        employeeId
       }
       nextToken
     }
@@ -242,14 +521,37 @@ export const getEmployee = `query GetEmployee($id: ID!) {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
     branches {
-      items {
-        id
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
       }
-      nextToken
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
     }
   }
 }
@@ -272,6 +574,7 @@ export const listEmployees = `query ListEmployees(
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -284,134 +587,16 @@ export const listEmployees = `query ListEmployees(
         nextToken
       }
       branches {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getEmployeeServicess = `query GetEmployeeServicess($serviceId: ID!, $employeeId: ID!) {
-  getEmployeeServicess(serviceId: $serviceId, employeeId: $employeeId) {
-    id
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
-      }
-    }
-    employee {
-      id
-      givenName
-      familyName
-      user {
         id
-        givenName
-        familyName
-        userName
+        address
+        phone
         email
-        phone
-        userType
-      }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-    serviceId
-    employeeId
-  }
-}
-`;
-export const listEmployeeServicesss = `query ListEmployeeServicesss(
-  $serviceId: ID
-  $employeeId: ModelIDKeyConditionInput
-  $filter: ModelEmployeeServicessFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listEmployeeServicesss(
-    serviceId: $serviceId
-    employeeId: $employeeId
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      service {
-        id
         name
-        price
-        currency
-        duration
         description
+        image
       }
-      employee {
-        id
-        givenName
-        familyName
-        phone
-      }
-      serviceId
-      employeeId
     }
     nextToken
-  }
-}
-`;
-export const getService = `query GetService($id: ID!) {
-  getService(id: $id) {
-    id
-    name
-    price
-    currency
-    duration
-    employees {
-      items {
-        id
-        serviceId
-        employeeId
-      }
-      nextToken
-    }
-    branch {
-      items {
-        id
-      }
-      nextToken
-    }
-    description
-    bookings {
-      items {
-        id
-        createdAt
-        start
-        end
-        status
-      }
-      nextToken
-    }
   }
 }
 `;
@@ -430,15 +615,44 @@ export const listServices = `query ListServices(
       employees {
         nextToken
       }
-      branch {
-        nextToken
-      }
       description
       bookings {
         nextToken
       }
+      branch {
+        nextToken
+      }
     }
     nextToken
+  }
+}
+`;
+export const getService = `query GetService($id: ID!) {
+  getService(id: $id) {
+    id
+    name
+    price
+    currency
+    duration
+    employees {
+      items {
+        id
+      }
+      nextToken
+    }
+    description
+    bookings {
+      items {
+        id
+      }
+      nextToken
+    }
+    branch {
+      items {
+        id
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -449,6 +663,8 @@ export const getBranch = `query GetBranch($id: ID!) {
     phone
     email
     name
+    description
+    image
     bookings {
       items {
         id
@@ -456,6 +672,19 @@ export const getBranch = `query GetBranch($id: ID!) {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      nextToken
+    }
+    employees {
+      items {
+        id
+        givenName
+        familyName
+        phone
       }
       nextToken
     }
@@ -471,17 +700,19 @@ export const getBranch = `query GetBranch($id: ID!) {
       email
       phone
       owners {
-        nextToken
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
       }
+      handle
       branches {
         nextToken
       }
-    }
-    employees {
-      items {
-        id
-      }
-      nextToken
     }
   }
 }
@@ -498,7 +729,12 @@ export const listBranchs = `query ListBranchs(
       phone
       email
       name
+      description
+      image
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       services {
@@ -509,90 +745,7 @@ export const listBranchs = `query ListBranchs(
         name
         email
         phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getBranchEmployees = `query GetBranchEmployees($id: ID!) {
-  getBranchEmployees(id: $id) {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    employee {
-      id
-      givenName
-      familyName
-      user {
-        id
-        givenName
-        familyName
-        userName
-        email
-        phone
-        userType
-      }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const listBranchEmployeess = `query ListBranchEmployeess(
-  $filter: ModelBranchEmployeesFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listBranchEmployeess(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      branch {
-        id
-        address
-        phone
-        email
-        name
-      }
-      employee {
-        id
-        givenName
-        familyName
-        phone
+        handle
       }
     }
     nextToken
@@ -602,13 +755,35 @@ export const listBranchEmployeess = `query ListBranchEmployeess(
 export const getBranchServices = `query GetBranchServices($id: ID!) {
   getBranchServices(id: $id) {
     id
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
     branch {
       id
       address
       phone
       email
       name
+      description
+      image
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       services {
@@ -619,26 +794,7 @@ export const getBranchServices = `query GetBranchServices($id: ID!) {
         name
         email
         phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
+        handle
       }
     }
   }
@@ -652,13 +808,6 @@ export const listBranchServicess = `query ListBranchServicess(
   listBranchServicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      branch {
-        id
-        address
-        phone
-        email
-        name
-      }
       service {
         id
         name
@@ -667,33 +816,17 @@ export const listBranchServicess = `query ListBranchServicess(
         duration
         description
       }
-    }
-    nextToken
-  }
-}
-`;
-export const getBusiness = `query GetBusiness($id: ID!) {
-  getBusiness(id: $id) {
-    id
-    name
-    email
-    phone
-    owners {
-      items {
-        id
-      }
-      nextToken
-    }
-    branches {
-      items {
+      branch {
         id
         address
         phone
         email
         name
+        description
+        image
       }
-      nextToken
     }
+    nextToken
   }
 }
 `;
@@ -709,58 +842,6 @@ export const listBusinesss = `query ListBusinesss(
       email
       phone
       owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getUserBusinesses = `query GetUserBusinesses($id: ID!) {
-  getUserBusinesses(id: $id) {
-    id
-    owner {
-      id
-      givenName
-      familyName
-      userName
-      email
-      phone
-      userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    business {
-      id
-      name
-      email
-      phone
-      owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const listUserBusinessess = `query ListUserBusinessess(
-  $filter: ModelUserBusinessesFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listUserBusinessess(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      owner {
         id
         givenName
         familyName
@@ -768,53 +849,24 @@ export const listUserBusinessess = `query ListUserBusinessess(
         email
         phone
         userType
+        owner
       }
-      business {
-        id
-        name
-        email
-        phone
+      handle
+      branches {
+        nextToken
       }
     }
     nextToken
   }
 }
 `;
-export const getUser = `query GetUser($id: ID!) {
-  getUser(id: $id) {
+export const getBusiness = `query GetBusiness($id: ID!) {
+  getBusiness(id: $id) {
     id
-    givenName
-    familyName
-    userName
+    name
     email
     phone
-    userType
-    bookings {
-      items {
-        id
-        createdAt
-        start
-        end
-        status
-      }
-      nextToken
-    }
-    businesses {
-      items {
-        id
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const listUsers = `query ListUsers(
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+    owners {
       id
       givenName
       familyName
@@ -822,10 +874,65 @@ export const listUsers = `query ListUsers(
       email
       phone
       userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
       bookings {
         nextToken
       }
-      businesses {
+      owner
+    }
+    handle
+    branches {
+      items {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const businessByHandle = `query BusinessByHandle(
+  $handle: String
+  $sortDirection: ModelSortDirection
+  $filter: ModelBusinessFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  businessByHandle(
+    handle: $handle
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      email
+      phone
+      owners {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      handle
+      branches {
         nextToken
       }
     }

@@ -5,7 +5,7 @@ import { Auth } from 'aws-amplify';
 
 import { FormButtonsContainer } from './styles';
 
-interface ISignUpFormProps extends FormComponentProps {
+interface SignUpFormProps extends FormComponentProps {
   setCurrentStep: (step: number) => void;
   email: string;
   phoneNumber: string;
@@ -17,7 +17,7 @@ function SignUp2ndStepForm({
   email,
   username,
   setCurrentStep,
-}: ISignUpFormProps): JSX.Element {
+}: SignUpFormProps): JSX.Element {
   const [confirmDirty, toggleConfirmDirty] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
@@ -33,6 +33,9 @@ function SignUp2ndStepForm({
             family_name: familyName,
             given_name: givenName,
             email,
+            // TODO: remove address param
+            address: 'undefined',
+            name: 'undefined',
             // phone_number: phoneNumber,
           },
         })

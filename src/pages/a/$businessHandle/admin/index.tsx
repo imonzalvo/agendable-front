@@ -1,25 +1,36 @@
-import Link from 'umi/link';
-import { Result, Button } from 'antd';
-import React from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
+import React, { useState, useContext } from 'react';
+import 'moment/locale/es';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { useQuery } from '@apollo/react-hooks';
 
-export default () => (
-  <Result
-    status="403"
-    title="403"
-    style={{
-      background: 'none',
-    }}
-    subTitle={formatMessage({
-      id: 'exception-403.description.403',
-      defaultMessage: "Sorry, you don't have access to this page.",
-    })}
-    extra={
-      <Link to="/">
-        <Button type="primary">
-          {formatMessage({ id: 'exception-403.exception.back', defaultMessage: 'Back Home' })}
-        </Button>
-      </Link>
-    }
-  />
-);
+import AdminCalendar from '@/components/AdminCalendar';
+import NewBookingModal from '@/components/NewBookingModal';
+import { BusinessContext } from '@/pages/a/$businessHandle/_layout';
+import { GetBranchEmployees } from '@/queries/adminPageQueries';
+import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
+
+export default function Admin() {
+  const { branches } = useContext(BusinessContext);
+  const [whichModalOpen, setModalOpen] = useState<'NEW_BOOKING' | null>(null);
+  const employeesResponse = useQuery<IGetBranchEmployees>(GetBranchEmployees, {
+    variables: { id: branches[0].id },
+  });
+
+  return (
+    <div>
+      <AdminCalendar
+        setModalOpen={setModalOpen}
+        employeesResponse={employeesResponse}
+        branchId={branches[0].id}
+      />
+
+      <NewBookingModal
+        visible={whichModalOpen === 'NEW_BOOKING'}
+        employeesResponse={employeesResponse}
+        onOk={() => setModalOpen(null)}
+        onCancel={() => setModalOpen(null)}
+        branchId={branches[0].id}
+      />
+    </div>
+  );
+}

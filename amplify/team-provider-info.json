@@ -1,25 +1,22 @@
 {
-    "eastenv": {
-        "awscloudformation": {
-            "AuthRoleName": "agendable-eastenv-20191101134041-authRole",
-            "UnauthRoleArn": "arn:aws:iam::343146248340:role/agendable-eastenv-20191101134041-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::343146248340:role/agendable-eastenv-20191101134041-authRole",
-            "Region": "us-west-2",
-            "DeploymentBucketName": "agendable-eastenv-20191101134041-deployment",
-            "UnauthRoleName": "agendable-eastenv-20191101134041-unauthRole",
-            "StackName": "agendable-eastenv-20191101134041",
-            "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/agendable-eastenv-20191101134041/58fde830-fcc6-11e9-9759-0ad539b374b4"
-        },
-        "categories": {
-            "auth": {
-                "AgendableEast": {
-                    "facebookAppIdUserPool": "381076525880234",
-                    "facebookAppSecretUserPool": "381076525880234",
-                    "googleAppIdUserPool": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs",
-                    "googleAppSecretUserPool": "381076525880234",
-                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"381076525880234\",\"client_secret\":\"381076525880234\"},{\"ProviderName\":\"Google\",\"client_id\":\"AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs\",\"client_secret\":\"381076525880234\"}]"
-                }
-            }
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-agendabledevelop-develop-201150-authRole",
+      "UnauthRoleArn": "arn:aws:iam::343146248340:role/amplify-agendabledevelop-develop-201150-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::343146248340:role/amplify-agendabledevelop-develop-201150-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-agendabledevelop-develop-201150-deployment",
+      "UnauthRoleName": "amplify-agendabledevelop-develop-201150-unauthRole",
+      "StackName": "amplify-agendabledevelop-develop-201150",
+      "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/amplify-agendabledevelop-develop-201150/5117bf40-fe8f-11e9-aa53-0aa7561f3002"
+    },
+    "categories": {
+      "auth": {
+        "agendabledevelop5e1ec4f95e1ec4f9": {
+          "facebookAppId": "381076525880234",
+          "googleClientId": "AIzaSyDNeOCygNJycVwcl8y7I9Re8D1i3ym0fTs"
         }
+      }
     }
+  }
 }

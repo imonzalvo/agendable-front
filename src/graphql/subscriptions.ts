@@ -19,6 +19,7 @@ export const onCreateAvailabilityItem = `subscription OnCreateAvailabilityItem {
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -31,7 +32,13 @@ export const onCreateAvailabilityItem = `subscription OnCreateAvailabilityItem {
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
   }
@@ -55,6 +62,7 @@ export const onUpdateAvailabilityItem = `subscription OnUpdateAvailabilityItem {
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -67,7 +75,13 @@ export const onUpdateAvailabilityItem = `subscription OnUpdateAvailabilityItem {
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
   }
@@ -91,6 +105,7 @@ export const onDeleteAvailabilityItem = `subscription OnDeleteAvailabilityItem {
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -103,6 +118,198 @@ export const onDeleteAvailabilityItem = `subscription OnDeleteAvailabilityItem {
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+  }
+}
+`;
+export const onCreateBookingServices = `subscription OnCreateBookingServices {
+  onCreateBookingServices {
+    id
+    booking {
+      id
+      createdAt
+      start
+      end
+      status
+      client {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      clientEmail
+      clientPhone
+      clientName
+      clientFamilyName
+      services {
+        nextToken
+      }
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      branch {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onUpdateBookingServices = `subscription OnUpdateBookingServices {
+  onUpdateBookingServices {
+    id
+    booking {
+      id
+      createdAt
+      start
+      end
+      status
+      client {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      clientEmail
+      clientPhone
+      clientName
+      clientFamilyName
+      services {
+        nextToken
+      }
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      branch {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onDeleteBookingServices = `subscription OnDeleteBookingServices {
+  onDeleteBookingServices {
+    id
+    booking {
+      id
+      createdAt
+      start
+      end
+      status
+      client {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      clientEmail
+      clientPhone
+      clientName
+      clientFamilyName
+      services {
+        nextToken
+      }
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      branch {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
         nextToken
       }
     }
@@ -124,51 +331,27 @@ export const onCreateBooking = `subscription OnCreateBooking {
       email
       phone
       userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
       business {
         id
         name
         email
         phone
+        handle
       }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
       bookings {
         nextToken
       }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
     }
     employee {
       id
@@ -182,6 +365,7 @@ export const onCreateBooking = `subscription OnCreateBooking {
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -194,7 +378,38 @@ export const onCreateBooking = `subscription OnCreateBooking {
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
         nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
       }
     }
   }
@@ -215,51 +430,27 @@ export const onUpdateBooking = `subscription OnUpdateBooking {
       email
       phone
       userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
       business {
         id
         name
         email
         phone
+        handle
       }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
       bookings {
         nextToken
       }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
     }
     employee {
       id
@@ -273,6 +464,7 @@ export const onUpdateBooking = `subscription OnUpdateBooking {
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -285,7 +477,38 @@ export const onUpdateBooking = `subscription OnUpdateBooking {
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
         nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
       }
     }
   }
@@ -306,51 +529,27 @@ export const onDeleteBooking = `subscription OnDeleteBooking {
       email
       phone
       userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
       business {
         id
         name
         email
         phone
+        handle
       }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
       bookings {
         nextToken
       }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
     }
     employee {
       id
@@ -364,6 +563,7 @@ export const onDeleteBooking = `subscription OnDeleteBooking {
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -376,7 +576,38 @@ export const onDeleteBooking = `subscription OnDeleteBooking {
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
         nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
       }
     }
   }
@@ -395,19 +626,22 @@ export const onCreateEmployee = `subscription OnCreateEmployee {
       email
       phone
       userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
       bookings {
         nextToken
       }
-      businesses {
-        nextToken
-      }
+      owner
     }
     phone
     services {
       items {
         id
-        serviceId
-        employeeId
       }
       nextToken
     }
@@ -427,14 +661,37 @@ export const onCreateEmployee = `subscription OnCreateEmployee {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
     branches {
-      items {
-        id
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
       }
-      nextToken
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
     }
   }
 }
@@ -452,19 +709,22 @@ export const onUpdateEmployee = `subscription OnUpdateEmployee {
       email
       phone
       userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
       bookings {
         nextToken
       }
-      businesses {
-        nextToken
-      }
+      owner
     }
     phone
     services {
       items {
         id
-        serviceId
-        employeeId
       }
       nextToken
     }
@@ -484,14 +744,37 @@ export const onUpdateEmployee = `subscription OnUpdateEmployee {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
     branches {
-      items {
-        id
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
       }
-      nextToken
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
     }
   }
 }
@@ -509,19 +792,22 @@ export const onDeleteEmployee = `subscription OnDeleteEmployee {
       email
       phone
       userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
       bookings {
         nextToken
       }
-      businesses {
-        nextToken
-      }
+      owner
     }
     phone
     services {
       items {
         id
-        serviceId
-        employeeId
       }
       nextToken
     }
@@ -541,38 +827,44 @@ export const onDeleteEmployee = `subscription OnDeleteEmployee {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
     branches {
-      items {
-        id
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
       }
-      nextToken
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
     }
   }
 }
 `;
-export const onCreateEmployeeServicess = `subscription OnCreateEmployeeServicess {
-  onCreateEmployeeServicess {
+export const onCreateEmployeeServices = `subscription OnCreateEmployeeServices {
+  onCreateEmployeeServices {
     id
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
-      }
-    }
     employee {
       id
       givenName
@@ -585,6 +877,7 @@ export const onCreateEmployeeServicess = `subscription OnCreateEmployeeServicess
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -597,17 +890,15 @@ export const onCreateEmployeeServicess = `subscription OnCreateEmployeeServicess
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
-    serviceId
-    employeeId
-  }
-}
-`;
-export const onUpdateEmployeeServicess = `subscription OnUpdateEmployeeServicess {
-  onUpdateEmployeeServicess {
-    id
     service {
       id
       name
@@ -617,14 +908,20 @@ export const onUpdateEmployeeServicess = `subscription OnUpdateEmployeeServicess
       employees {
         nextToken
       }
-      branch {
-        nextToken
-      }
       description
       bookings {
         nextToken
       }
+      branch {
+        nextToken
+      }
     }
+  }
+}
+`;
+export const onUpdateEmployeeServices = `subscription OnUpdateEmployeeServices {
+  onUpdateEmployeeServices {
+    id
     employee {
       id
       givenName
@@ -637,6 +934,7 @@ export const onUpdateEmployeeServicess = `subscription OnUpdateEmployeeServicess
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -649,17 +947,15 @@ export const onUpdateEmployeeServicess = `subscription OnUpdateEmployeeServicess
         nextToken
       }
       branches {
-        nextToken
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
     }
-    serviceId
-    employeeId
-  }
-}
-`;
-export const onDeleteEmployeeServicess = `subscription OnDeleteEmployeeServicess {
-  onDeleteEmployeeServicess {
-    id
     service {
       id
       name
@@ -669,14 +965,20 @@ export const onDeleteEmployeeServicess = `subscription OnDeleteEmployeeServicess
       employees {
         nextToken
       }
-      branch {
-        nextToken
-      }
       description
       bookings {
         nextToken
       }
+      branch {
+        nextToken
+      }
     }
+  }
+}
+`;
+export const onDeleteEmployeeServices = `subscription OnDeleteEmployeeServices {
+  onDeleteEmployeeServices {
+    id
     employee {
       id
       givenName
@@ -689,6 +991,7 @@ export const onDeleteEmployeeServicess = `subscription OnDeleteEmployeeServicess
         email
         phone
         userType
+        owner
       }
       phone
       services {
@@ -701,11 +1004,32 @@ export const onDeleteEmployeeServicess = `subscription OnDeleteEmployeeServicess
         nextToken
       }
       branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
         nextToken
       }
     }
-    serviceId
-    employeeId
   }
 }
 `;
@@ -719,14 +1043,6 @@ export const onCreateService = `subscription OnCreateService {
     employees {
       items {
         id
-        serviceId
-        employeeId
-      }
-      nextToken
-    }
-    branch {
-      items {
-        id
       }
       nextToken
     }
@@ -734,10 +1050,12 @@ export const onCreateService = `subscription OnCreateService {
     bookings {
       items {
         id
-        createdAt
-        start
-        end
-        status
+      }
+      nextToken
+    }
+    branch {
+      items {
+        id
       }
       nextToken
     }
@@ -754,14 +1072,6 @@ export const onUpdateService = `subscription OnUpdateService {
     employees {
       items {
         id
-        serviceId
-        employeeId
-      }
-      nextToken
-    }
-    branch {
-      items {
-        id
       }
       nextToken
     }
@@ -769,10 +1079,12 @@ export const onUpdateService = `subscription OnUpdateService {
     bookings {
       items {
         id
-        createdAt
-        start
-        end
-        status
+      }
+      nextToken
+    }
+    branch {
+      items {
+        id
       }
       nextToken
     }
@@ -789,14 +1101,6 @@ export const onDeleteService = `subscription OnDeleteService {
     employees {
       items {
         id
-        serviceId
-        employeeId
-      }
-      nextToken
-    }
-    branch {
-      items {
-        id
       }
       nextToken
     }
@@ -804,10 +1108,12 @@ export const onDeleteService = `subscription OnDeleteService {
     bookings {
       items {
         id
-        createdAt
-        start
-        end
-        status
+      }
+      nextToken
+    }
+    branch {
+      items {
+        id
       }
       nextToken
     }
@@ -821,6 +1127,8 @@ export const onCreateBranch = `subscription OnCreateBranch {
     phone
     email
     name
+    description
+    image
     bookings {
       items {
         id
@@ -828,6 +1136,19 @@ export const onCreateBranch = `subscription OnCreateBranch {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      nextToken
+    }
+    employees {
+      items {
+        id
+        givenName
+        familyName
+        phone
       }
       nextToken
     }
@@ -843,17 +1164,19 @@ export const onCreateBranch = `subscription OnCreateBranch {
       email
       phone
       owners {
-        nextToken
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
       }
+      handle
       branches {
         nextToken
       }
-    }
-    employees {
-      items {
-        id
-      }
-      nextToken
     }
   }
 }
@@ -865,6 +1188,8 @@ export const onUpdateBranch = `subscription OnUpdateBranch {
     phone
     email
     name
+    description
+    image
     bookings {
       items {
         id
@@ -872,6 +1197,19 @@ export const onUpdateBranch = `subscription OnUpdateBranch {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      nextToken
+    }
+    employees {
+      items {
+        id
+        givenName
+        familyName
+        phone
       }
       nextToken
     }
@@ -887,17 +1225,19 @@ export const onUpdateBranch = `subscription OnUpdateBranch {
       email
       phone
       owners {
-        nextToken
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
       }
+      handle
       branches {
         nextToken
       }
-    }
-    employees {
-      items {
-        id
-      }
-      nextToken
     }
   }
 }
@@ -909,6 +1249,8 @@ export const onDeleteBranch = `subscription OnDeleteBranch {
     phone
     email
     name
+    description
+    image
     bookings {
       items {
         id
@@ -916,6 +1258,19 @@ export const onDeleteBranch = `subscription OnDeleteBranch {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
+      }
+      nextToken
+    }
+    employees {
+      items {
+        id
+        givenName
+        familyName
+        phone
       }
       nextToken
     }
@@ -931,51 +1286,6 @@ export const onDeleteBranch = `subscription OnDeleteBranch {
       email
       phone
       owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-    employees {
-      items {
-        id
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onCreateBranchEmployees = `subscription OnCreateBranchEmployees {
-  onCreateBranchEmployees {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    employee {
-      id
-      givenName
-      familyName
-      user {
         id
         givenName
         familyName
@@ -983,127 +1293,9 @@ export const onCreateBranchEmployees = `subscription OnCreateBranchEmployees {
         email
         phone
         userType
+        owner
       }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onUpdateBranchEmployees = `subscription OnUpdateBranchEmployees {
-  onUpdateBranchEmployees {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    employee {
-      id
-      givenName
-      familyName
-      user {
-        id
-        givenName
-        familyName
-        userName
-        email
-        phone
-        userType
-      }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onDeleteBranchEmployees = `subscription OnDeleteBranchEmployees {
-  onDeleteBranchEmployees {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    employee {
-      id
-      givenName
-      familyName
-      user {
-        id
-        givenName
-        familyName
-        userName
-        email
-        phone
-        userType
-      }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
+      handle
       branches {
         nextToken
       }
@@ -1114,13 +1306,35 @@ export const onDeleteBranchEmployees = `subscription OnDeleteBranchEmployees {
 export const onCreateBranchServices = `subscription OnCreateBranchServices {
   onCreateBranchServices {
     id
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
     branch {
       id
       address
       phone
       email
       name
+      description
+      image
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       services {
@@ -1131,71 +1345,7 @@ export const onCreateBranchServices = `subscription OnCreateBranchServices {
         name
         email
         phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onUpdateBranchServices = `subscription OnUpdateBranchServices {
-  onUpdateBranchServices {
-    id
-    branch {
-      id
-      address
-      phone
-      email
-      name
-      bookings {
-        nextToken
-      }
-      services {
-        nextToken
-      }
-      business {
-        id
-        name
-        email
-        phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
+        handle
       }
     }
   }
@@ -1204,13 +1354,35 @@ export const onUpdateBranchServices = `subscription OnUpdateBranchServices {
 export const onDeleteBranchServices = `subscription OnDeleteBranchServices {
   onDeleteBranchServices {
     id
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
     branch {
       id
       address
       phone
       email
       name
+      description
+      image
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       services {
@@ -1221,26 +1393,7 @@ export const onDeleteBranchServices = `subscription OnDeleteBranchServices {
         name
         email
         phone
-      }
-      employees {
-        nextToken
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
+        handle
       }
     }
   }
@@ -1253,11 +1406,26 @@ export const onCreateBusiness = `subscription OnCreateBusiness {
     email
     phone
     owners {
-      items {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
         id
+        name
+        email
+        phone
+        handle
       }
-      nextToken
+      bookings {
+        nextToken
+      }
+      owner
     }
+    handle
     branches {
       items {
         id
@@ -1265,31 +1433,8 @@ export const onCreateBusiness = `subscription OnCreateBusiness {
         phone
         email
         name
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onUpdateBusiness = `subscription OnUpdateBusiness {
-  onUpdateBusiness {
-    id
-    name
-    email
-    phone
-    owners {
-      items {
-        id
-      }
-      nextToken
-    }
-    branches {
-      items {
-        id
-        address
-        phone
-        email
-        name
+        description
+        image
       }
       nextToken
     }
@@ -1303,11 +1448,26 @@ export const onDeleteBusiness = `subscription OnDeleteBusiness {
     email
     phone
     owners {
-      items {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
         id
+        name
+        email
+        phone
+        handle
       }
-      nextToken
+      bookings {
+        nextToken
+      }
+      owner
     }
+    handle
     branches {
       items {
         id
@@ -1315,113 +1475,16 @@ export const onDeleteBusiness = `subscription OnDeleteBusiness {
         phone
         email
         name
+        description
+        image
       }
       nextToken
     }
   }
 }
 `;
-export const onCreateUserBusinesses = `subscription OnCreateUserBusinesses {
-  onCreateUserBusinesses {
-    id
-    owner {
-      id
-      givenName
-      familyName
-      userName
-      email
-      phone
-      userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    business {
-      id
-      name
-      email
-      phone
-      owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onUpdateUserBusinesses = `subscription OnUpdateUserBusinesses {
-  onUpdateUserBusinesses {
-    id
-    owner {
-      id
-      givenName
-      familyName
-      userName
-      email
-      phone
-      userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    business {
-      id
-      name
-      email
-      phone
-      owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onDeleteUserBusinesses = `subscription OnDeleteUserBusinesses {
-  onDeleteUserBusinesses {
-    id
-    owner {
-      id
-      givenName
-      familyName
-      userName
-      email
-      phone
-      userType
-      bookings {
-        nextToken
-      }
-      businesses {
-        nextToken
-      }
-    }
-    business {
-      id
-      name
-      email
-      phone
-      owners {
-        nextToken
-      }
-      branches {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onCreateUser = `subscription OnCreateUser {
-  onCreateUser {
+export const onCreateUser = `subscription OnCreateUser($owner: String!) {
+  onCreateUser(owner: $owner) {
     id
     givenName
     familyName
@@ -1429,6 +1492,26 @@ export const onCreateUser = `subscription OnCreateUser {
     email
     phone
     userType
+    business {
+      id
+      name
+      email
+      phone
+      owners {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      handle
+      branches {
+        nextToken
+      }
+    }
     bookings {
       items {
         id
@@ -1436,20 +1519,19 @@ export const onCreateUser = `subscription OnCreateUser {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
-    businesses {
-      items {
-        id
-      }
-      nextToken
-    }
+    owner
   }
 }
 `;
-export const onUpdateUser = `subscription OnUpdateUser {
-  onUpdateUser {
+export const onUpdateUser = `subscription OnUpdateUser($owner: String!) {
+  onUpdateUser(owner: $owner) {
     id
     givenName
     familyName
@@ -1457,6 +1539,26 @@ export const onUpdateUser = `subscription OnUpdateUser {
     email
     phone
     userType
+    business {
+      id
+      name
+      email
+      phone
+      owners {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      handle
+      branches {
+        nextToken
+      }
+    }
     bookings {
       items {
         id
@@ -1464,20 +1566,19 @@ export const onUpdateUser = `subscription OnUpdateUser {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
-    businesses {
-      items {
-        id
-      }
-      nextToken
-    }
+    owner
   }
 }
 `;
-export const onDeleteUser = `subscription OnDeleteUser {
-  onDeleteUser {
+export const onDeleteUser = `subscription OnDeleteUser($owner: String!) {
+  onDeleteUser(owner: $owner) {
     id
     givenName
     familyName
@@ -1485,6 +1586,26 @@ export const onDeleteUser = `subscription OnDeleteUser {
     email
     phone
     userType
+    business {
+      id
+      name
+      email
+      phone
+      owners {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      handle
+      branches {
+        nextToken
+      }
+    }
     bookings {
       items {
         id
@@ -1492,12 +1613,101 @@ export const onDeleteUser = `subscription OnDeleteUser {
         start
         end
         status
+        clientEmail
+        clientPhone
+        clientName
+        clientFamilyName
       }
       nextToken
     }
-    businesses {
+    owner
+  }
+}
+`;
+export const onUpdateBranchServices = `subscription OnUpdateBranchServices {
+  onUpdateBranchServices {
+    id
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      employees {
+        nextToken
+      }
+      description
+      bookings {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+    }
+  }
+}
+`;
+export const onUpdateBusiness = `subscription OnUpdateBusiness {
+  onUpdateBusiness {
+    id
+    name
+    email
+    phone
+    owners {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+      bookings {
+        nextToken
+      }
+      owner
+    }
+    handle
+    branches {
       items {
         id
+        address
+        phone
+        email
+        name
+        description
+        image
       }
       nextToken
     }
