@@ -1,16 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useQuery } from '@apollo/react-hooks';
 
 import AdminCalendar from '@/components/AdminCalendar';
 import NewBookingModal from '@/components/NewBookingModal';
-import { BusinessContext } from '@/pages/a/$businessHandle/_layout';
 import { GetBranchEmployees } from '@/queries/adminPageQueries';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
+import { useBusiness } from '@/components/BussinessGetter';
 
 export default function Admin() {
-  const { branches } = useContext(BusinessContext);
+  const { branches } = useBusiness();
   const [whichModalOpen, setModalOpen] = useState<'NEW_BOOKING' | null>(null);
   const employeesResponse = useQuery<IGetBranchEmployees>(GetBranchEmployees, {
     variables: { id: branches[0].id },

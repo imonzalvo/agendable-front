@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Col, Row, Icon, Select, Typography, Card } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
+import { isValidNumber } from 'libphonenumber-js';
 
 // import { FormButtonsContainer } from './styles';
 const { Option } = Select;
@@ -50,9 +51,22 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
             </Form.Item>
           </Col>
           <Col span={24}>
-            {/* <Form.Item label="Phone Number">
+            <Form.Item label="Phone Number">
               {getFieldDecorator('clientPhone', {
-                rules: [{ message: 'Please input your phone number!' }],
+                rules: [
+                  {
+                    validator: (rule, value, callback) => {
+                      try {
+                        if (!value || isValidNumber(`+${form.getFieldValue('prefix')}${value}`)) {
+                          callback();
+                        }
+                        throw new Error('Invalid Phone Number');
+                      } catch (err) {
+                        callback(err);
+                      }
+                    },
+                  },
+                ],
               })(
                 <Input
                   addonBefore={prefixSelector}
@@ -62,7 +76,7 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
                   size="large"
                 />,
               )}
-            </Form.Item> */}
+            </Form.Item>
           </Col>
           <Col span={24}>
             <Form.Item label="E-mail">
@@ -71,9 +85,6 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
                   {
                     type: 'email',
                     message: 'The input is not valid E-mail!',
-                  },
-                  {
-                    message: 'Please input your E-mail!',
                   },
                 ],
               })(
@@ -93,7 +104,6 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
 
 const WrapperClientDetailsForm = Form.create<FormComponentProps>({
   name: 'clientDetails',
-  withRef: true,
 })(ClientDetailsForm);
 
 export default WrapperClientDetailsForm;

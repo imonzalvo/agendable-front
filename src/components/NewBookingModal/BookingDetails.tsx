@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Select, Typography, Card, Form } from 'antd';
+import { Row, Col, Select, Typography, Card, Form, Empty } from 'antd';
 import { SingleDatePicker } from 'react-dates';
 import moment, { Moment } from 'moment';
 import produce from 'immer';
@@ -12,7 +12,10 @@ import {
   GetBranchServices as GetBranchServicesType,
   GetBranchServices_getBranch_services_items_service,
 } from './__generated__/GetBranchServices';
-import { GetBranchEmployees_getBranch_employees_items } from '@/queries/__generated__/GetBranchEmployees';
+import {
+  GetBranchEmployees as IGetBranchEmployees,
+  GetBranchEmployees_getBranch_employees_items,
+} from '@/queries/__generated__/GetBranchEmployees';
 import { GetEmployeeAvailableTime } from './queries';
 import { BookingState } from '.';
 import { getTimeslots } from '@/utils/getTimeslots';
@@ -27,7 +30,7 @@ const today = moment();
 interface BookingDetailsProps {
   setBookingState: React.Dispatch<React.SetStateAction<BookingState>>;
   servicesResponse: QueryResult<GetBranchServicesType, Record<string, any>>;
-  employeesResponse: object;
+  employeesResponse: QueryResult<IGetBranchEmployees, Record<string, any>>;
   selectedServices: BookingState['selectedServices'];
   selectedEmployee: BookingState['selectedEmployee'];
   selectedDateTime: BookingState['selectedDateTime'];
@@ -146,16 +149,57 @@ export default function BookingDetails({
 
   const renderTimeslots = () => {
     if (!calendarState.date) {
-      return <Typography.Title>Select Date</Typography.Title>;
+      return (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
+          <Empty description="Select Date" />
+        </div>
+      );
     }
     if (selectedServices.length === 0) {
-      return <Typography.Title>Select Service</Typography.Title>;
+      return (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
+          <Empty description="Select at least one Service" />
+        </div>
+      );
     }
     if (!selectedEmployee) {
-      return <Typography.Title>Select Employee</Typography.Title>;
+      return (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
+          <Empty description="Select Employee" />
+        </div>
+      );
     }
     if (employeeAvailableTimeResponse.loading || !employeeAvailableTimeResponse.data) {
-      return <PageLoading />;
+      return (
+        <div
+          style={{
+            height: '100%',
+          }}
+        >
+          <PageLoading />
+        </div>
+      );
     }
     const availablePeriods = JSON.parse(
       employeeAvailableTimeResponse.data.getEmployeeAvailableTime,
@@ -179,7 +223,18 @@ export default function BookingDetails({
         </Row>
       );
     }
-    return <Typography.Title>No timeslots left</Typography.Title>;
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+        }}
+      >
+        <Empty description="No timeslots left" />
+      </div>
+    );
   };
 
   return (

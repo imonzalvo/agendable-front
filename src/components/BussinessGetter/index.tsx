@@ -1,9 +1,11 @@
-import React, { useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useEffect } from 'react';
 import { Alert } from 'antd';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { get } from 'lodash';
 
 import PageLoading from '@/components/PageLoading';
+import PageNotFound from '@/pages/404';
+import { parsePathnameHandle } from '@/utils/parsePathnameHandle';
 import { GetBusinessByHandle } from './queries';
 import {
   GetBusinessByHandle as IGetBusinessByHandle,
@@ -11,32 +13,54 @@ import {
   GetBusinessByHandle_businessByHandle_items_branches_items,
 } from './__generated__/GetBusinessByHandle';
 
+export const useBusiness = () => {
+  const businessJSON = localStorage.getItem('business');
+  return businessJSON ? JSON.parse(businessJSON) : null;
+};
+
 export default function BusinessGetter({
   children,
-  setBusiness,
-  handle,
+  pathname,
 }: {
   children: any;
-  setBusiness: Dispatch<
-    SetStateAction<{ businessId: string; businessName: string; branches: never[] }>
-  >;
-  handle: string;
+  pathname: string;
 }) {
-  const { loading, data, error } = useQuery<IGetBusinessByHandle>(GetBusinessByHandle, {
-    variables: { handle },
-  });
+  const [getBusinessByHandle, { loading, data, error }] = useLazyQuery<IGetBusinessByHandle>(
+    GetBusinessByHandle,
+  );
+
+  const pathnameHandle = parsePathnameHandle(pathname);
+
   useEffect(() => {
-    const business: GetBusinessByHandle_businessByHandle_items = get(
-      data,
-      'businessByHandle.items[0]',
-    );
-    if (business) {
-      const branches: [GetBusinessByHandle_businessByHandle_items_branches_items] = get(
-        business,
-        'branches.items',
+    if (pathnameHandle) {
+      if (localStorage.getItem('businessHandle') !== pathnameHandle) {
+        localStorage.removeItem('business');
+        localStorage.setItem('businessHandle', pathnameHandle);
+        getBusinessByHandle({ variables: { handle: pathnameHandle } });
+      }
+    } else {
+      localStorage.removeItem('business');
+      localStorage.removeItem('businessHandle');
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    if (data) {
+      const business: GetBusinessByHandle_businessByHandle_items = get(
+        data,
+        'businessByHandle.items[0]',
       );
-      if (branches) {
-        setBusiness({ businessId: business.id, businessName: business.name, branches });
+      if (business) {
+        const branches: [GetBusinessByHandle_businessByHandle_items_branches_items] = get(
+          business,
+          'branches.items',
+        );
+        if (branches) {
+          localStorage.setItem(
+            'business',
+            JSON.stringify({ businessId: business.id, businessName: business.name, branches }),
+          );
+        }
       }
     }
   }, [data]);
@@ -47,6 +71,10 @@ export default function BusinessGetter({
 
   if (error) {
     return <Alert message="There was an error" description={JSON.stringify(error)} type="error" />;
+  }
+
+  if (pathnameHandle && !(get(data, 'businessByHandle.items[0]') || useBusiness())) {
+    return <PageNotFound />;
   }
 
   return children;
