@@ -3,6 +3,7 @@ import { createAppSyncLink, AUTH_TYPE } from 'aws-appsync';
 import AWS from 'aws-sdk';
 import Amplify, { Auth } from 'aws-amplify';
 import { ApolloProvider } from '@apollo/react-hooks';
+import RouterTypes from 'umi/routerTypes';
 // import { Rehydrated } from 'aws-appsync-react'; aws does not supports apollo 3.0
 import { ConfigProvider } from 'antd';
 import { ApolloClient } from 'apollo-client';
@@ -16,6 +17,7 @@ import 'react-dates/lib/css/_datepicker.css';
 
 import awsconfig from '../../aws-exports';
 import PageLoading from '@/components/PageLoading';
+import BusinessGetter from '../components/BussinessGetter';
 
 AWS.config.update({
   accessKeyId: 'AKIAU7ZI4HCKF4ONGVTM',
@@ -46,9 +48,14 @@ export const AuthContext = React.createContext({
   setAuthenticated: (_value: boolean) => {},
 });
 
-const Layout = ({ children }: { children: any }) => {
+interface LayoutProps extends RouterTypes {
+  children: any;
+}
+
+const Layout = ({ children, location }: LayoutProps) => {
   const [isAuthCheckLoading, setAuthCheckLoading] = useState(true);
   const [isAuthenticated, setAuthenticated] = useState(false);
+  // const [business, setBusiness] = useState({ businessId: '', businessName: '', branches: [] });
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -100,7 +107,7 @@ const Layout = ({ children }: { children: any }) => {
       {/* <Rehydrated> */}
       <ConfigProvider locale={es}>
         <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>
-          {children}
+          <BusinessGetter pathname={location.pathname}>{children}</BusinessGetter>
         </AuthContext.Provider>
       </ConfigProvider>
       {/* </Rehydrated> */}

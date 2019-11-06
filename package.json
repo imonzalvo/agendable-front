@@ -80,6 +80,8 @@
     "hash.js": "^1.1.5",
     "humps": "^2.0.1",
     "immer": "^5.0.0",
+    "libphonenumber": "^0.0.10",
+    "libphonenumber-js": "^1.7.26",
     "lodash": "^4.17.15",
     "lodash-decorators": "^6.0.1",
     "lodash.debounce": "^4.0.8",

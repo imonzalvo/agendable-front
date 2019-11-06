@@ -13,7 +13,7 @@ import { match } from 'react-router-dom';
 import { isAntDesignPro } from '@/utils/utils';
 import AuthLayout from '@/layouts/AuthLayout';
 import { AuthContext } from '@/layouts';
-import { BusinessContext } from '@/pages/a/$businessHandle/_layout';
+import { useBusiness } from '@/components/BussinessGetter';
 
 export interface AdminLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -50,7 +50,7 @@ const footerRender: AdminLayoutProps['footerRender'] = (_, defaultDom) => {
 };
 const AdminLayout = (props: AdminLayoutProps) => {
   const { setAuthenticated } = useContext(AuthContext);
-  const { businessName } = useContext(BusinessContext);
+  const business = useBusiness();
   const { children, settings } = props;
 
   const handleSignOut = () => {
@@ -62,7 +62,7 @@ const AdminLayout = (props: AdminLayoutProps) => {
   return (
     <>
       <ProLayout
-        title={`${businessName} ADMIN`}
+        title={`${business ? business.businessName : ''} ADMIN`}
         logo={null}
         menuItemRender={(menuItemProps, defaultDom) => {
           if (menuItemProps.isUrl) {

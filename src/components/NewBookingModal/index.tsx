@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Modal, Row, Col, Button, Card, Typography } from 'antd';
+import { Modal, Row, Col, Button, Card, Descriptions } from 'antd';
 import { FormProps } from 'antd/lib/form';
 import moment from 'moment';
 import 'react-dates/lib/css/_datepicker.css';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
+import { get, keyBy } from 'lodash';
 
 import BookingDetails from './BookingDetails';
 import ClientDetails from './ClientDetails';
@@ -57,7 +58,32 @@ export default function NewBookingModal({
     variables: { id: branchId },
   });
 
-  const getTotal = () => bookingState.selectedServices.reduce((acc, _service, i) => acc + i, 0);
+  const getTotal = () => {
+    const services = get(servicesResponse, 'data.getBranch.services.items');
+    if (services) {
+      const servicesObj = keyBy(services, 'service.id');
+      return bookingState.selectedServices.reduce(
+        (acc: number | undefined, serviceId: string | undefined) =>
+          serviceId ? acc + servicesObj[serviceId].service.price : 0,
+        0,
+      );
+    }
+    return 0;
+  };
+
+  const getBookingEnd = () => {
+    const services = get(servicesResponse, 'data.getBranch.services.items');
+    if (services) {
+      const servicesObj = keyBy(services, 'service.id');
+      const totalDuration = bookingState.selectedServices.reduce(
+        (acc: number | undefined, serviceId: string | undefined) =>
+          serviceId ? acc + servicesObj[serviceId].service.duration : 0,
+        0,
+      );
+      return moment(bookingState.selectedDateTime).add(totalDuration, 'minutes');
+    }
+    return moment(bookingState.selectedDateTime);
+  };
 
   return (
     <>
@@ -106,14 +132,21 @@ export default function NewBookingModal({
             gutter={32}
             justify="space-between"
             type="flex"
-            style={{ padding: '0px 15px', height: '100%', alignItems: 'center' }}
+            style={{ padding: '0px 5px', height: '100%', alignItems: 'center' }}
           >
             <Button size="large" type="ghost">
               Cancel
             </Button>
-            <Typography.Title style={{ marginBottom: 0 }}>
-              Total: <Typography.Text>${getTotal()}</Typography.Text>
-            </Typography.Title>
+            <Descriptions layout="vertical" bordered size="small">
+              <Descriptions.Item label="Scheduled Time">
+                {bookingState.selectedDateTime
+                  ? `${moment(bookingState.selectedDateTime).format(
+                      'HH:mm',
+                    )} to ${getBookingEnd().format('HH:mm')}`
+                  : 'Select Timeslot'}
+              </Descriptions.Item>
+              <Descriptions.Item label="Total">${getTotal()}</Descriptions.Item>
+            </Descriptions>
             <Button
               size="large"
               type="primary"
@@ -127,9 +160,7 @@ export default function NewBookingModal({
                         variables: {
                           createdAt: now,
                           start: bookingState.selectedDateTime,
-                          end: moment(bookingState.selectedDateTime)
-                            .add(1, 'hour')
-                            .toISOString(),
+                          end: getBookingEnd().toISOString(),
                           status: 'PENDING',
                           bookingBranchId: branchId,
                           bookingEmployeeId: bookingState.selectedEmployee,
