@@ -846,12 +846,10 @@ export interface CreateBookingMutation {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -968,12 +966,10 @@ export interface UpdateBookingMutation {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -1090,12 +1086,10 @@ export interface DeleteBookingMutation {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -1207,43 +1201,37 @@ export interface CreateEmployeeMutation {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items:
-        | ({
-            __typename: 'AvailabilityItem';
-            id: string;
-            day: Day | null;
-            from: string;
-            to: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'AvailabilityItem';
+        id: string;
+        day: Day | null;
+        from: string;
+        to: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -1315,43 +1303,37 @@ export interface UpdateEmployeeMutation {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items:
-        | ({
-            __typename: 'AvailabilityItem';
-            id: string;
-            day: Day | null;
-            from: string;
-            to: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'AvailabilityItem';
+        id: string;
+        day: Day | null;
+        from: string;
+        to: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -1423,43 +1405,37 @@ export interface DeleteEmployeeMutation {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items:
-        | ({
-            __typename: 'AvailabilityItem';
-            id: string;
-            day: Day | null;
-            from: string;
-            to: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'AvailabilityItem';
+        id: string;
+        day: Day | null;
+        from: string;
+        to: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -1725,33 +1701,27 @@ export interface CreateServiceMutation {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -1771,33 +1741,27 @@ export interface UpdateServiceMutation {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -1817,33 +1781,27 @@ export interface DeleteServiceMutation {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -1865,43 +1823,37 @@ export interface CreateBranchMutation {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items:
-        | ({
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -1946,43 +1898,37 @@ export interface UpdateBranchMutation {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items:
-        | ({
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -2027,43 +1973,37 @@ export interface DeleteBranchMutation {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items:
-        | ({
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -2253,18 +2193,16 @@ export interface CreateBusinessMutation {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items:
-        | ({
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -2307,18 +2245,16 @@ export interface DeleteBusinessMutation {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items:
-        | ({
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -2363,20 +2299,18 @@ export interface CreateUserMutation {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
@@ -2422,20 +2356,18 @@ export interface UpdateUserMutation {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
@@ -2481,20 +2413,18 @@ export interface DeleteUserMutation {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
@@ -2600,18 +2530,16 @@ export interface UpdateBusinessMutation {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items:
-        | ({
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -2708,28 +2636,26 @@ export interface ListEmployeeServicessQueryVariables {
 export interface ListEmployeeServicessQuery {
   listEmployeeServicess: {
     __typename: 'ModelEmployeeServicesConnection';
-    items:
-      | ({
-          __typename: 'EmployeeServices';
-          id: string;
-          employee: {
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null;
-          service: {
-            __typename: 'Service';
-            id: string;
-            name: string;
-            price: number;
-            currency: string | null;
-            duration: number;
-            description: string | null;
-          } | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'EmployeeServices';
+      id: string;
+      employee: {
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null;
+      service: {
+        __typename: 'Service';
+        id: string;
+        name: string;
+        price: number;
+        currency: string | null;
+        duration: number;
+        description: string | null;
+      } | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -2773,20 +2699,18 @@ export interface GetUserQuery {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
@@ -2802,31 +2726,29 @@ export interface ListUsersQueryVariables {
 export interface ListUsersQuery {
   listUsers: {
     __typename: 'ModelUserConnection';
-    items:
-      | ({
-          __typename: 'User';
-          id: string;
-          givenName: string;
-          familyName: string;
-          userName: string;
-          email: string | null;
-          phone: string | null;
-          userType: UserType;
-          business: {
-            __typename: 'Business';
-            id: string;
-            name: string;
-            email: string;
-            phone: string;
-            handle: string;
-          } | null;
-          bookings: {
-            __typename: 'ModelBookingConnection';
-            nextToken: string | null;
-          } | null;
-          owner: string | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'User';
+      id: string;
+      givenName: string;
+      familyName: string;
+      userName: string;
+      email: string | null;
+      phone: string | null;
+      userType: UserType;
+      business: {
+        __typename: 'Business';
+        id: string;
+        name: string;
+        email: string;
+        phone: string;
+        handle: string;
+      } | null;
+      bookings: {
+        __typename: 'ModelBookingConnection';
+        nextToken: string | null;
+      } | null;
+      owner: string | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -2894,22 +2816,20 @@ export interface ListAvailabilityItemsQueryVariables {
 export interface ListAvailabilityItemsQuery {
   listAvailabilityItems: {
     __typename: 'ModelAvailabilityItemConnection';
-    items:
-      | ({
-          __typename: 'AvailabilityItem';
-          id: string;
-          day: Day | null;
-          from: string;
-          to: string;
-          employee: {
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'AvailabilityItem';
+      id: string;
+      day: Day | null;
+      from: string;
+      to: string;
+      employee: {
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -2999,33 +2919,31 @@ export interface ListBookingServicessQueryVariables {
 export interface ListBookingServicessQuery {
   listBookingServicess: {
     __typename: 'ModelBookingServicesConnection';
-    items:
-      | ({
-          __typename: 'BookingServices';
-          id: string;
-          booking: {
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null;
-          service: {
-            __typename: 'Service';
-            id: string;
-            name: string;
-            price: number;
-            currency: string | null;
-            duration: number;
-            description: string | null;
-          } | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'BookingServices';
+      id: string;
+      booking: {
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null;
+      service: {
+        __typename: 'Service';
+        id: string;
+        name: string;
+        price: number;
+        currency: string | null;
+        duration: number;
+        description: string | null;
+      } | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -3071,12 +2989,10 @@ export interface GetBookingQuery {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -3161,52 +3077,50 @@ export interface ListBookingsQueryVariables {
 export interface ListBookingsQuery {
   listBookings: {
     __typename: 'ModelBookingConnection';
-    items:
-      | ({
-          __typename: 'Booking';
-          id: string;
-          createdAt: string;
-          start: string;
-          end: string;
-          status: BookingStatus;
-          client: {
-            __typename: 'User';
-            id: string;
-            givenName: string;
-            familyName: string;
-            userName: string;
-            email: string | null;
-            phone: string | null;
-            userType: UserType;
-            owner: string | null;
-          } | null;
-          clientEmail: string | null;
-          clientPhone: string | null;
-          clientName: string | null;
-          clientFamilyName: string | null;
-          services: {
-            __typename: 'ModelBookingServicesConnection';
-            nextToken: string | null;
-          } | null;
-          employee: {
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          };
-          branch: {
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          };
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'Booking';
+      id: string;
+      createdAt: string;
+      start: string;
+      end: string;
+      status: BookingStatus;
+      client: {
+        __typename: 'User';
+        id: string;
+        givenName: string;
+        familyName: string;
+        userName: string;
+        email: string | null;
+        phone: string | null;
+        userType: UserType;
+        owner: string | null;
+      } | null;
+      clientEmail: string | null;
+      clientPhone: string | null;
+      clientName: string | null;
+      clientFamilyName: string | null;
+      services: {
+        __typename: 'ModelBookingServicesConnection';
+        nextToken: string | null;
+      } | null;
+      employee: {
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      };
+      branch: {
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      };
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -3247,43 +3161,37 @@ export interface GetEmployeeQuery {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items:
-        | ({
-            __typename: 'AvailabilityItem';
-            id: string;
-            day: Day | null;
-            from: string;
-            to: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'AvailabilityItem';
+        id: string;
+        day: Day | null;
+        from: string;
+        to: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -3328,48 +3236,46 @@ export interface ListEmployeesQueryVariables {
 export interface ListEmployeesQuery {
   listEmployees: {
     __typename: 'ModelEmployeeConnection';
-    items:
-      | ({
-          __typename: 'Employee';
-          id: string;
-          givenName: string;
-          familyName: string;
-          user: {
-            __typename: 'User';
-            id: string;
-            givenName: string;
-            familyName: string;
-            userName: string;
-            email: string | null;
-            phone: string | null;
-            userType: UserType;
-            owner: string | null;
-          } | null;
-          phone: string | null;
-          services: {
-            __typename: 'ModelEmployeeServicesConnection';
-            nextToken: string | null;
-          } | null;
-          availability: {
-            __typename: 'ModelAvailabilityItemConnection';
-            nextToken: string | null;
-          } | null;
-          bookings: {
-            __typename: 'ModelBookingConnection';
-            nextToken: string | null;
-          } | null;
-          branches: {
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'Employee';
+      id: string;
+      givenName: string;
+      familyName: string;
+      user: {
+        __typename: 'User';
+        id: string;
+        givenName: string;
+        familyName: string;
+        userName: string;
+        email: string | null;
+        phone: string | null;
+        userType: UserType;
+        owner: string | null;
+      } | null;
+      phone: string | null;
+      services: {
+        __typename: 'ModelEmployeeServicesConnection';
+        nextToken: string | null;
+      } | null;
+      availability: {
+        __typename: 'ModelAvailabilityItemConnection';
+        nextToken: string | null;
+      } | null;
+      bookings: {
+        __typename: 'ModelBookingConnection';
+        nextToken: string | null;
+      } | null;
+      branches: {
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -3383,29 +3289,27 @@ export interface ListServicesQueryVariables {
 export interface ListServicesQuery {
   listServices: {
     __typename: 'ModelServiceConnection';
-    items:
-      | ({
-          __typename: 'Service';
-          id: string;
-          name: string;
-          price: number;
-          currency: string | null;
-          duration: number;
-          employees: {
-            __typename: 'ModelEmployeeServicesConnection';
-            nextToken: string | null;
-          } | null;
-          description: string | null;
-          bookings: {
-            __typename: 'ModelBookingServicesConnection';
-            nextToken: string | null;
-          } | null;
-          branch: {
-            __typename: 'ModelBranchServicesConnection';
-            nextToken: string | null;
-          } | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'Service';
+      id: string;
+      name: string;
+      price: number;
+      currency: string | null;
+      duration: number;
+      employees: {
+        __typename: 'ModelEmployeeServicesConnection';
+        nextToken: string | null;
+      } | null;
+      description: string | null;
+      bookings: {
+        __typename: 'ModelBookingServicesConnection';
+        nextToken: string | null;
+      } | null;
+      branch: {
+        __typename: 'ModelBranchServicesConnection';
+        nextToken: string | null;
+      } | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -3424,33 +3328,27 @@ export interface GetServiceQuery {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -3472,43 +3370,37 @@ export interface GetBranchQuery {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items:
-        | ({
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -3546,38 +3438,36 @@ export interface ListBranchsQueryVariables {
 export interface ListBranchsQuery {
   listBranchs: {
     __typename: 'ModelBranchConnection';
-    items:
-      | ({
-          __typename: 'Branch';
-          id: string;
-          address: string;
-          phone: string;
-          email: string;
-          name: string;
-          description: string | null;
-          image: string | null;
-          bookings: {
-            __typename: 'ModelBookingConnection';
-            nextToken: string | null;
-          } | null;
-          employees: {
-            __typename: 'ModelEmployeeConnection';
-            nextToken: string | null;
-          } | null;
-          services: {
-            __typename: 'ModelBranchServicesConnection';
-            nextToken: string | null;
-          } | null;
-          business: {
-            __typename: 'Business';
-            id: string;
-            name: string;
-            email: string;
-            phone: string;
-            handle: string;
-          };
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'Branch';
+      id: string;
+      address: string;
+      phone: string;
+      email: string;
+      name: string;
+      description: string | null;
+      image: string | null;
+      bookings: {
+        __typename: 'ModelBookingConnection';
+        nextToken: string | null;
+      } | null;
+      employees: {
+        __typename: 'ModelEmployeeConnection';
+        nextToken: string | null;
+      } | null;
+      services: {
+        __typename: 'ModelBranchServicesConnection';
+        nextToken: string | null;
+      } | null;
+      business: {
+        __typename: 'Business';
+        id: string;
+        name: string;
+        email: string;
+        phone: string;
+        handle: string;
+      };
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -3653,31 +3543,29 @@ export interface ListBranchServicessQueryVariables {
 export interface ListBranchServicessQuery {
   listBranchServicess: {
     __typename: 'ModelBranchServicesConnection';
-    items:
-      | ({
-          __typename: 'BranchServices';
-          id: string;
-          service: {
-            __typename: 'Service';
-            id: string;
-            name: string;
-            price: number;
-            currency: string | null;
-            duration: number;
-            description: string | null;
-          } | null;
-          branch: {
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'BranchServices';
+      id: string;
+      service: {
+        __typename: 'Service';
+        id: string;
+        name: string;
+        price: number;
+        currency: string | null;
+        duration: number;
+        description: string | null;
+      } | null;
+      branch: {
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -3691,31 +3579,29 @@ export interface ListBusinesssQueryVariables {
 export interface ListBusinesssQuery {
   listBusinesss: {
     __typename: 'ModelBusinessConnection';
-    items:
-      | ({
-          __typename: 'Business';
-          id: string;
-          name: string;
-          email: string;
-          phone: string;
-          owners: {
-            __typename: 'User';
-            id: string;
-            givenName: string;
-            familyName: string;
-            userName: string;
-            email: string | null;
-            phone: string | null;
-            userType: UserType;
-            owner: string | null;
-          };
-          handle: string;
-          branches: {
-            __typename: 'ModelBranchConnection';
-            nextToken: string | null;
-          } | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'Business';
+      id: string;
+      name: string;
+      email: string;
+      phone: string;
+      owners: {
+        __typename: 'User';
+        id: string;
+        givenName: string;
+        familyName: string;
+        userName: string;
+        email: string | null;
+        phone: string | null;
+        userType: UserType;
+        owner: string | null;
+      };
+      handle: string;
+      branches: {
+        __typename: 'ModelBranchConnection';
+        nextToken: string | null;
+      } | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -3757,18 +3643,16 @@ export interface GetBusinessQuery {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items:
-        | ({
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -3785,31 +3669,29 @@ export interface BusinessByHandleQueryVariables {
 export interface BusinessByHandleQuery {
   businessByHandle: {
     __typename: 'ModelBusinessConnection';
-    items:
-      | ({
-          __typename: 'Business';
-          id: string;
-          name: string;
-          email: string;
-          phone: string;
-          owners: {
-            __typename: 'User';
-            id: string;
-            givenName: string;
-            familyName: string;
-            userName: string;
-            email: string | null;
-            phone: string | null;
-            userType: UserType;
-            owner: string | null;
-          };
-          handle: string;
-          branches: {
-            __typename: 'ModelBranchConnection';
-            nextToken: string | null;
-          } | null;
-        } | null)[]
-      | null;
+    items: ({
+      __typename: 'Business';
+      id: string;
+      name: string;
+      email: string;
+      phone: string;
+      owners: {
+        __typename: 'User';
+        id: string;
+        givenName: string;
+        familyName: string;
+        userName: string;
+        email: string | null;
+        phone: string | null;
+        userType: UserType;
+        owner: string | null;
+      };
+      handle: string;
+      branches: {
+        __typename: 'ModelBranchConnection';
+        nextToken: string | null;
+      } | null;
+    } | null)[] | null;
     nextToken: string | null;
   } | null;
 }
@@ -4217,12 +4099,10 @@ export interface OnCreateBookingSubscription {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -4335,12 +4215,10 @@ export interface OnUpdateBookingSubscription {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -4453,12 +4331,10 @@ export interface OnDeleteBookingSubscription {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -4566,43 +4442,37 @@ export interface OnCreateEmployeeSubscription {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items:
-        | ({
-            __typename: 'AvailabilityItem';
-            id: string;
-            day: Day | null;
-            from: string;
-            to: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'AvailabilityItem';
+        id: string;
+        day: Day | null;
+        from: string;
+        to: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -4670,43 +4540,37 @@ export interface OnUpdateEmployeeSubscription {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items:
-        | ({
-            __typename: 'AvailabilityItem';
-            id: string;
-            day: Day | null;
-            from: string;
-            to: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'AvailabilityItem';
+        id: string;
+        day: Day | null;
+        from: string;
+        to: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -4774,43 +4638,37 @@ export interface OnDeleteEmployeeSubscription {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items:
-        | ({
-            __typename: 'AvailabilityItem';
-            id: string;
-            day: Day | null;
-            from: string;
-            to: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'AvailabilityItem';
+        id: string;
+        day: Day | null;
+        from: string;
+        to: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -5060,33 +4918,27 @@ export interface OnCreateServiceSubscription {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -5102,33 +4954,27 @@ export interface OnUpdateServiceSubscription {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -5144,33 +4990,27 @@ export interface OnDeleteServiceSubscription {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items:
-        | ({
-            __typename: 'EmployeeServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'EmployeeServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items:
-        | ({
-            __typename: 'BookingServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BookingServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -5188,43 +5028,37 @@ export interface OnCreateBranchSubscription {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items:
-        | ({
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -5265,43 +5099,37 @@ export interface OnUpdateBranchSubscription {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items:
-        | ({
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -5342,43 +5170,37 @@ export interface OnDeleteBranchSubscription {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items:
-        | ({
-            __typename: 'Employee';
-            id: string;
-            givenName: string;
-            familyName: string;
-            phone: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Employee';
+        id: string;
+        givenName: string;
+        familyName: string;
+        phone: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items:
-        | ({
-            __typename: 'BranchServices';
-            id: string;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'BranchServices';
+        id: string;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -5556,18 +5378,16 @@ export interface OnCreateBusinessSubscription {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items:
-        | ({
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -5606,18 +5426,16 @@ export interface OnDeleteBusinessSubscription {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items:
-        | ({
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;
@@ -5662,20 +5480,18 @@ export interface OnCreateUserSubscription {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
@@ -5721,20 +5537,18 @@ export interface OnUpdateUserSubscription {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
@@ -5780,20 +5594,18 @@ export interface OnDeleteUserSubscription {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items:
-        | ({
-            __typename: 'Booking';
-            id: string;
-            createdAt: string;
-            start: string;
-            end: string;
-            status: BookingStatus;
-            clientEmail: string | null;
-            clientPhone: string | null;
-            clientName: string | null;
-            clientFamilyName: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Booking';
+        id: string;
+        createdAt: string;
+        start: string;
+        end: string;
+        status: BookingStatus;
+        clientEmail: string | null;
+        clientPhone: string | null;
+        clientName: string | null;
+        clientFamilyName: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
@@ -5891,18 +5703,16 @@ export interface OnUpdateBusinessSubscription {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items:
-        | ({
-            __typename: 'Branch';
-            id: string;
-            address: string;
-            phone: string;
-            email: string;
-            name: string;
-            description: string | null;
-            image: string | null;
-          } | null)[]
-        | null;
+      items: ({
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+      } | null)[] | null;
       nextToken: string | null;
     } | null;
   } | null;

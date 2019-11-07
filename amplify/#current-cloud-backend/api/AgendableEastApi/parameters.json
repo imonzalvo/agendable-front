@@ -1,0 +1,10 @@
+{
+    "AppSyncApiName": "AgendableEastApi",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authAgendableEast",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
