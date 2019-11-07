@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "AgendableDevelop",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authagendabledevelop5e1ec4f95e1ec4f9",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
