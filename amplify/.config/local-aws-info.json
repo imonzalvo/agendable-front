@@ -3,5 +3,10 @@
         "configLevel": "project",
         "useProfile": false,
         "awsConfigFilePath": "/Users/kgelpes/.amplify/awscloudformation/56IWqjBkcP"
+    },
+    "hosting": {
+        "configLevel": "project",
+        "useProfile": false,
+        "awsConfigFilePath": "/Users/kgelpes/.amplify/awscloudformation/G46s6b2ZaG"
     }
 }
