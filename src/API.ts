@@ -1,13 +1,13 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
-export interface CreateAvailabilityItemInput {
+export type CreateAvailabilityItemInput = {
   id?: string | null;
   day?: Day | null;
   from: string;
   to: string;
   availabilityItemEmployeeId?: string | null;
-}
+};
 
 export enum Day {
   MONDAY = 'MONDAY',
@@ -25,23 +25,23 @@ export enum UserType {
   GUEST = 'GUEST',
 }
 
-export interface UpdateAvailabilityItemInput {
+export type UpdateAvailabilityItemInput = {
   id: string;
   day?: Day | null;
   from?: string | null;
   to?: string | null;
   availabilityItemEmployeeId?: string | null;
-}
+};
 
-export interface DeleteAvailabilityItemInput {
+export type DeleteAvailabilityItemInput = {
   id?: string | null;
-}
+};
 
-export interface CreateBookingServicesInput {
+export type CreateBookingServicesInput = {
   id?: string | null;
   bookingServicesServiceId?: string | null;
   bookingServicesBookingId?: string | null;
-}
+};
 
 export enum BookingStatus {
   COMPLETED = 'COMPLETED',
@@ -50,17 +50,17 @@ export enum BookingStatus {
   CANCELLED = 'CANCELLED',
 }
 
-export interface UpdateBookingServicesInput {
+export type UpdateBookingServicesInput = {
   id: string;
   bookingServicesServiceId?: string | null;
   bookingServicesBookingId?: string | null;
-}
+};
 
-export interface DeleteBookingServicesInput {
+export type DeleteBookingServicesInput = {
   id?: string | null;
-}
+};
 
-export interface CreateBookingInput {
+export type CreateBookingInput = {
   id?: string | null;
   createdAt: string;
   start: string;
@@ -73,9 +73,9 @@ export interface CreateBookingInput {
   bookingClientId?: string | null;
   bookingBranchId: string;
   bookingEmployeeId: string;
-}
+};
 
-export interface UpdateBookingInput {
+export type UpdateBookingInput = {
   id: string;
   createdAt?: string | null;
   start?: string | null;
@@ -88,73 +88,73 @@ export interface UpdateBookingInput {
   bookingClientId?: string | null;
   bookingBranchId?: string | null;
   bookingEmployeeId?: string | null;
-}
+};
 
-export interface DeleteBookingInput {
+export type DeleteBookingInput = {
   id?: string | null;
-}
+};
 
-export interface CreateEmployeeInput {
+export type CreateEmployeeInput = {
   id?: string | null;
   givenName: string;
   familyName: string;
   phone?: string | null;
   employeeUserId?: string | null;
   employeeBranchesId?: string | null;
-}
+};
 
-export interface UpdateEmployeeInput {
+export type UpdateEmployeeInput = {
   id: string;
   givenName?: string | null;
   familyName?: string | null;
   phone?: string | null;
   employeeUserId?: string | null;
   employeeBranchesId?: string | null;
-}
+};
 
-export interface DeleteEmployeeInput {
+export type DeleteEmployeeInput = {
   id?: string | null;
-}
+};
 
-export interface CreateEmployeeServicesInput {
+export type CreateEmployeeServicesInput = {
   id?: string | null;
   employeeServicesServiceId?: string | null;
   employeeServicesEmployeeId?: string | null;
-}
+};
 
-export interface UpdateEmployeeServicesInput {
+export type UpdateEmployeeServicesInput = {
   id: string;
   employeeServicesServiceId?: string | null;
   employeeServicesEmployeeId?: string | null;
-}
+};
 
-export interface DeleteEmployeeServicesInput {
+export type DeleteEmployeeServicesInput = {
   id?: string | null;
-}
+};
 
-export interface CreateServiceInput {
+export type CreateServiceInput = {
   id?: string | null;
   name: string;
   price: number;
   currency?: string | null;
   duration: number;
   description?: string | null;
-}
+};
 
-export interface UpdateServiceInput {
+export type UpdateServiceInput = {
   id: string;
   name?: string | null;
   price?: number | null;
   currency?: string | null;
   duration?: number | null;
   description?: string | null;
-}
+};
 
-export interface DeleteServiceInput {
+export type DeleteServiceInput = {
   id?: string | null;
-}
+};
 
-export interface CreateBranchInput {
+export type CreateBranchInput = {
   id?: string | null;
   address: string;
   phone: string;
@@ -163,9 +163,9 @@ export interface CreateBranchInput {
   description?: string | null;
   image?: string | null;
   branchBusinessId: string;
-}
+};
 
-export interface UpdateBranchInput {
+export type UpdateBranchInput = {
   id: string;
   address?: string | null;
   phone?: string | null;
@@ -174,35 +174,35 @@ export interface UpdateBranchInput {
   description?: string | null;
   image?: string | null;
   branchBusinessId?: string | null;
-}
+};
 
-export interface DeleteBranchInput {
+export type DeleteBranchInput = {
   id?: string | null;
-}
+};
 
-export interface CreateBranchServicesInput {
+export type CreateBranchServicesInput = {
   id?: string | null;
   branchServicesBranchId?: string | null;
   branchServicesServiceId?: string | null;
-}
+};
 
-export interface DeleteBranchServicesInput {
+export type DeleteBranchServicesInput = {
   id?: string | null;
-}
+};
 
-export interface CreateBusinessInput {
+export type CreateBusinessInput = {
   id?: string | null;
   name: string;
   email: string;
   phone: string;
   handle: string;
-}
+};
 
-export interface DeleteBusinessInput {
+export type DeleteBusinessInput = {
   id?: string | null;
-}
+};
 
-export interface CreateUserInput {
+export type CreateUserInput = {
   id?: string | null;
   givenName: string;
   familyName: string;
@@ -210,9 +210,9 @@ export interface CreateUserInput {
   email?: string | null;
   phone?: string | null;
   userType: UserType;
-}
+};
 
-export interface UpdateUserInput {
+export type UpdateUserInput = {
   id: string;
   givenName?: string | null;
   familyName?: string | null;
@@ -220,34 +220,34 @@ export interface UpdateUserInput {
   email?: string | null;
   phone?: string | null;
   userType?: UserType | null;
-}
+};
 
-export interface DeleteUserInput {
+export type DeleteUserInput = {
   id?: string | null;
-}
+};
 
-export interface UpdateBranchServicesInput {
+export type UpdateBranchServicesInput = {
   id: string;
   branchServicesBranchId?: string | null;
   branchServicesServiceId?: string | null;
-}
+};
 
-export interface UpdateBusinessInput {
+export type UpdateBusinessInput = {
   id: string;
   name?: string | null;
   email?: string | null;
   phone?: string | null;
   handle?: string | null;
-}
+};
 
-export interface ModelEmployeeServicesFilterInput {
+export type ModelEmployeeServicesFilterInput = {
   id?: ModelIDFilterInput | null;
-  and?: (ModelEmployeeServicesFilterInput | null)[] | null;
-  or?: (ModelEmployeeServicesFilterInput | null)[] | null;
+  and?: Array<ModelEmployeeServicesFilterInput | null> | null;
+  or?: Array<ModelEmployeeServicesFilterInput | null> | null;
   not?: ModelEmployeeServicesFilterInput | null;
-}
+};
 
-export interface ModelIDFilterInput {
+export type ModelIDFilterInput = {
   ne?: string | null;
   eq?: string | null;
   le?: string | null;
@@ -256,11 +256,11 @@ export interface ModelIDFilterInput {
   gt?: string | null;
   contains?: string | null;
   notContains?: string | null;
-  between?: (string | null)[] | null;
+  between?: Array<string | null> | null;
   beginsWith?: string | null;
-}
+};
 
-export interface ModelUserFilterInput {
+export type ModelUserFilterInput = {
   id?: ModelIDFilterInput | null;
   givenName?: ModelStringFilterInput | null;
   familyName?: ModelStringFilterInput | null;
@@ -268,12 +268,12 @@ export interface ModelUserFilterInput {
   email?: ModelStringFilterInput | null;
   phone?: ModelStringFilterInput | null;
   userType?: ModelUserTypeFilterInput | null;
-  and?: (ModelUserFilterInput | null)[] | null;
-  or?: (ModelUserFilterInput | null)[] | null;
+  and?: Array<ModelUserFilterInput | null> | null;
+  or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
-}
+};
 
-export interface ModelStringFilterInput {
+export type ModelStringFilterInput = {
   ne?: string | null;
   eq?: string | null;
   le?: string | null;
@@ -282,38 +282,38 @@ export interface ModelStringFilterInput {
   gt?: string | null;
   contains?: string | null;
   notContains?: string | null;
-  between?: (string | null)[] | null;
+  between?: Array<string | null> | null;
   beginsWith?: string | null;
-}
+};
 
-export interface ModelUserTypeFilterInput {
+export type ModelUserTypeFilterInput = {
   eq?: UserType | null;
   ne?: UserType | null;
-}
+};
 
-export interface ModelAvailabilityItemFilterInput {
+export type ModelAvailabilityItemFilterInput = {
   id?: ModelIDFilterInput | null;
   day?: ModelDayFilterInput | null;
   from?: ModelStringFilterInput | null;
   to?: ModelStringFilterInput | null;
-  and?: (ModelAvailabilityItemFilterInput | null)[] | null;
-  or?: (ModelAvailabilityItemFilterInput | null)[] | null;
+  and?: Array<ModelAvailabilityItemFilterInput | null> | null;
+  or?: Array<ModelAvailabilityItemFilterInput | null> | null;
   not?: ModelAvailabilityItemFilterInput | null;
-}
+};
 
-export interface ModelDayFilterInput {
+export type ModelDayFilterInput = {
   eq?: Day | null;
   ne?: Day | null;
-}
+};
 
-export interface ModelBookingServicesFilterInput {
+export type ModelBookingServicesFilterInput = {
   id?: ModelIDFilterInput | null;
-  and?: (ModelBookingServicesFilterInput | null)[] | null;
-  or?: (ModelBookingServicesFilterInput | null)[] | null;
+  and?: Array<ModelBookingServicesFilterInput | null> | null;
+  or?: Array<ModelBookingServicesFilterInput | null> | null;
   not?: ModelBookingServicesFilterInput | null;
-}
+};
 
-export interface ModelBookingFilterInput {
+export type ModelBookingFilterInput = {
   id?: ModelIDFilterInput | null;
   createdAt?: ModelStringFilterInput | null;
   start?: ModelStringFilterInput | null;
@@ -323,39 +323,39 @@ export interface ModelBookingFilterInput {
   clientPhone?: ModelStringFilterInput | null;
   clientName?: ModelStringFilterInput | null;
   clientFamilyName?: ModelStringFilterInput | null;
-  and?: (ModelBookingFilterInput | null)[] | null;
-  or?: (ModelBookingFilterInput | null)[] | null;
+  and?: Array<ModelBookingFilterInput | null> | null;
+  or?: Array<ModelBookingFilterInput | null> | null;
   not?: ModelBookingFilterInput | null;
-}
+};
 
-export interface ModelBookingStatusFilterInput {
+export type ModelBookingStatusFilterInput = {
   eq?: BookingStatus | null;
   ne?: BookingStatus | null;
-}
+};
 
-export interface ModelEmployeeFilterInput {
+export type ModelEmployeeFilterInput = {
   id?: ModelIDFilterInput | null;
   givenName?: ModelStringFilterInput | null;
   familyName?: ModelStringFilterInput | null;
   phone?: ModelStringFilterInput | null;
-  and?: (ModelEmployeeFilterInput | null)[] | null;
-  or?: (ModelEmployeeFilterInput | null)[] | null;
+  and?: Array<ModelEmployeeFilterInput | null> | null;
+  or?: Array<ModelEmployeeFilterInput | null> | null;
   not?: ModelEmployeeFilterInput | null;
-}
+};
 
-export interface ModelServiceFilterInput {
+export type ModelServiceFilterInput = {
   id?: ModelIDFilterInput | null;
   name?: ModelStringFilterInput | null;
   price?: ModelFloatFilterInput | null;
   currency?: ModelStringFilterInput | null;
   duration?: ModelIntFilterInput | null;
   description?: ModelStringFilterInput | null;
-  and?: (ModelServiceFilterInput | null)[] | null;
-  or?: (ModelServiceFilterInput | null)[] | null;
+  and?: Array<ModelServiceFilterInput | null> | null;
+  or?: Array<ModelServiceFilterInput | null> | null;
   not?: ModelServiceFilterInput | null;
-}
+};
 
-export interface ModelFloatFilterInput {
+export type ModelFloatFilterInput = {
   ne?: number | null;
   eq?: number | null;
   le?: number | null;
@@ -364,10 +364,10 @@ export interface ModelFloatFilterInput {
   gt?: number | null;
   contains?: number | null;
   notContains?: number | null;
-  between?: (number | null)[] | null;
-}
+  between?: Array<number | null> | null;
+};
 
-export interface ModelIntFilterInput {
+export type ModelIntFilterInput = {
   ne?: number | null;
   eq?: number | null;
   le?: number | null;
@@ -376,10 +376,10 @@ export interface ModelIntFilterInput {
   gt?: number | null;
   contains?: number | null;
   notContains?: number | null;
-  between?: (number | null)[] | null;
-}
+  between?: Array<number | null> | null;
+};
 
-export interface ModelBranchFilterInput {
+export type ModelBranchFilterInput = {
   id?: ModelIDFilterInput | null;
   address?: ModelStringFilterInput | null;
   phone?: ModelStringFilterInput | null;
@@ -387,39 +387,39 @@ export interface ModelBranchFilterInput {
   name?: ModelStringFilterInput | null;
   description?: ModelStringFilterInput | null;
   image?: ModelStringFilterInput | null;
-  and?: (ModelBranchFilterInput | null)[] | null;
-  or?: (ModelBranchFilterInput | null)[] | null;
+  and?: Array<ModelBranchFilterInput | null> | null;
+  or?: Array<ModelBranchFilterInput | null> | null;
   not?: ModelBranchFilterInput | null;
-}
+};
 
-export interface ModelBranchServicesFilterInput {
+export type ModelBranchServicesFilterInput = {
   id?: ModelIDFilterInput | null;
-  and?: (ModelBranchServicesFilterInput | null)[] | null;
-  or?: (ModelBranchServicesFilterInput | null)[] | null;
+  and?: Array<ModelBranchServicesFilterInput | null> | null;
+  or?: Array<ModelBranchServicesFilterInput | null> | null;
   not?: ModelBranchServicesFilterInput | null;
-}
+};
 
-export interface ModelBusinessFilterInput {
+export type ModelBusinessFilterInput = {
   id?: ModelIDFilterInput | null;
   name?: ModelStringFilterInput | null;
   email?: ModelStringFilterInput | null;
   phone?: ModelStringFilterInput | null;
   handle?: ModelStringFilterInput | null;
-  and?: (ModelBusinessFilterInput | null)[] | null;
-  or?: (ModelBusinessFilterInput | null)[] | null;
+  and?: Array<ModelBusinessFilterInput | null> | null;
+  or?: Array<ModelBusinessFilterInput | null> | null;
   not?: ModelBusinessFilterInput | null;
-}
+};
 
 export enum ModelSortDirection {
   ASC = 'ASC',
   DESC = 'DESC',
 }
 
-export interface CreateAvailabilityItemMutationVariables {
+export type CreateAvailabilityItemMutationVariables = {
   input: CreateAvailabilityItemInput;
-}
+};
 
-export interface CreateAvailabilityItemMutation {
+export type CreateAvailabilityItemMutation = {
   createAvailabilityItem: {
     __typename: 'AvailabilityItem';
     id: string;
@@ -467,13 +467,13 @@ export interface CreateAvailabilityItemMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface UpdateAvailabilityItemMutationVariables {
+export type UpdateAvailabilityItemMutationVariables = {
   input: UpdateAvailabilityItemInput;
-}
+};
 
-export interface UpdateAvailabilityItemMutation {
+export type UpdateAvailabilityItemMutation = {
   updateAvailabilityItem: {
     __typename: 'AvailabilityItem';
     id: string;
@@ -521,13 +521,13 @@ export interface UpdateAvailabilityItemMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface DeleteAvailabilityItemMutationVariables {
+export type DeleteAvailabilityItemMutationVariables = {
   input: DeleteAvailabilityItemInput;
-}
+};
 
-export interface DeleteAvailabilityItemMutation {
+export type DeleteAvailabilityItemMutation = {
   deleteAvailabilityItem: {
     __typename: 'AvailabilityItem';
     id: string;
@@ -575,13 +575,13 @@ export interface DeleteAvailabilityItemMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface CreateBookingServicesMutationVariables {
+export type CreateBookingServicesMutationVariables = {
   input: CreateBookingServicesInput;
-}
+};
 
-export interface CreateBookingServicesMutation {
+export type CreateBookingServicesMutation = {
   createBookingServices: {
     __typename: 'BookingServices';
     id: string;
@@ -651,13 +651,13 @@ export interface CreateBookingServicesMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface UpdateBookingServicesMutationVariables {
+export type UpdateBookingServicesMutationVariables = {
   input: UpdateBookingServicesInput;
-}
+};
 
-export interface UpdateBookingServicesMutation {
+export type UpdateBookingServicesMutation = {
   updateBookingServices: {
     __typename: 'BookingServices';
     id: string;
@@ -727,13 +727,13 @@ export interface UpdateBookingServicesMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface DeleteBookingServicesMutationVariables {
+export type DeleteBookingServicesMutationVariables = {
   input: DeleteBookingServicesInput;
-}
+};
 
-export interface DeleteBookingServicesMutation {
+export type DeleteBookingServicesMutation = {
   deleteBookingServices: {
     __typename: 'BookingServices';
     id: string;
@@ -803,13 +803,13 @@ export interface DeleteBookingServicesMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface CreateBookingMutationVariables {
+export type CreateBookingMutationVariables = {
   input: CreateBookingInput;
-}
+};
 
-export interface CreateBookingMutation {
+export type CreateBookingMutation = {
   createBooking: {
     __typename: 'Booking';
     id: string;
@@ -846,10 +846,10 @@ export interface CreateBookingMutation {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -923,13 +923,13 @@ export interface CreateBookingMutation {
       };
     };
   } | null;
-}
+};
 
-export interface UpdateBookingMutationVariables {
+export type UpdateBookingMutationVariables = {
   input: UpdateBookingInput;
-}
+};
 
-export interface UpdateBookingMutation {
+export type UpdateBookingMutation = {
   updateBooking: {
     __typename: 'Booking';
     id: string;
@@ -966,10 +966,10 @@ export interface UpdateBookingMutation {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -1043,13 +1043,13 @@ export interface UpdateBookingMutation {
       };
     };
   } | null;
-}
+};
 
-export interface DeleteBookingMutationVariables {
+export type DeleteBookingMutationVariables = {
   input: DeleteBookingInput;
-}
+};
 
-export interface DeleteBookingMutation {
+export type DeleteBookingMutation = {
   deleteBooking: {
     __typename: 'Booking';
     id: string;
@@ -1086,10 +1086,10 @@ export interface DeleteBookingMutation {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -1163,13 +1163,13 @@ export interface DeleteBookingMutation {
       };
     };
   } | null;
-}
+};
 
-export interface CreateEmployeeMutationVariables {
+export type CreateEmployeeMutationVariables = {
   input: CreateEmployeeInput;
-}
+};
 
-export interface CreateEmployeeMutation {
+export type CreateEmployeeMutation = {
   createEmployee: {
     __typename: 'Employee';
     id: string;
@@ -1201,26 +1201,26 @@ export interface CreateEmployeeMutation {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items: ({
+      items: Array<{
         __typename: 'AvailabilityItem';
         id: string;
         day: Day | null;
         from: string;
         to: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -1231,7 +1231,7 @@ export interface CreateEmployeeMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -1265,13 +1265,13 @@ export interface CreateEmployeeMutation {
       };
     } | null;
   } | null;
-}
+};
 
-export interface UpdateEmployeeMutationVariables {
+export type UpdateEmployeeMutationVariables = {
   input: UpdateEmployeeInput;
-}
+};
 
-export interface UpdateEmployeeMutation {
+export type UpdateEmployeeMutation = {
   updateEmployee: {
     __typename: 'Employee';
     id: string;
@@ -1303,26 +1303,26 @@ export interface UpdateEmployeeMutation {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items: ({
+      items: Array<{
         __typename: 'AvailabilityItem';
         id: string;
         day: Day | null;
         from: string;
         to: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -1333,7 +1333,7 @@ export interface UpdateEmployeeMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -1367,13 +1367,13 @@ export interface UpdateEmployeeMutation {
       };
     } | null;
   } | null;
-}
+};
 
-export interface DeleteEmployeeMutationVariables {
+export type DeleteEmployeeMutationVariables = {
   input: DeleteEmployeeInput;
-}
+};
 
-export interface DeleteEmployeeMutation {
+export type DeleteEmployeeMutation = {
   deleteEmployee: {
     __typename: 'Employee';
     id: string;
@@ -1405,26 +1405,26 @@ export interface DeleteEmployeeMutation {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items: ({
+      items: Array<{
         __typename: 'AvailabilityItem';
         id: string;
         day: Day | null;
         from: string;
         to: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -1435,7 +1435,7 @@ export interface DeleteEmployeeMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -1469,13 +1469,13 @@ export interface DeleteEmployeeMutation {
       };
     } | null;
   } | null;
-}
+};
 
-export interface CreateEmployeeServicesMutationVariables {
+export type CreateEmployeeServicesMutationVariables = {
   input: CreateEmployeeServicesInput;
-}
+};
 
-export interface CreateEmployeeServicesMutation {
+export type CreateEmployeeServicesMutation = {
   createEmployeeServices: {
     __typename: 'EmployeeServices';
     id: string;
@@ -1541,13 +1541,13 @@ export interface CreateEmployeeServicesMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface UpdateEmployeeServicesMutationVariables {
+export type UpdateEmployeeServicesMutationVariables = {
   input: UpdateEmployeeServicesInput;
-}
+};
 
-export interface UpdateEmployeeServicesMutation {
+export type UpdateEmployeeServicesMutation = {
   updateEmployeeServices: {
     __typename: 'EmployeeServices';
     id: string;
@@ -1613,13 +1613,13 @@ export interface UpdateEmployeeServicesMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface DeleteEmployeeServicesMutationVariables {
+export type DeleteEmployeeServicesMutationVariables = {
   input: DeleteEmployeeServicesInput;
-}
+};
 
-export interface DeleteEmployeeServicesMutation {
+export type DeleteEmployeeServicesMutation = {
   deleteEmployeeServices: {
     __typename: 'EmployeeServices';
     id: string;
@@ -1685,13 +1685,13 @@ export interface DeleteEmployeeServicesMutation {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface CreateServiceMutationVariables {
+export type CreateServiceMutationVariables = {
   input: CreateServiceInput;
-}
+};
 
-export interface CreateServiceMutation {
+export type CreateServiceMutation = {
   createService: {
     __typename: 'Service';
     id: string;
@@ -1701,37 +1701,37 @@ export interface CreateServiceMutation {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface UpdateServiceMutationVariables {
+export type UpdateServiceMutationVariables = {
   input: UpdateServiceInput;
-}
+};
 
-export interface UpdateServiceMutation {
+export type UpdateServiceMutation = {
   updateService: {
     __typename: 'Service';
     id: string;
@@ -1741,37 +1741,37 @@ export interface UpdateServiceMutation {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface DeleteServiceMutationVariables {
+export type DeleteServiceMutationVariables = {
   input: DeleteServiceInput;
-}
+};
 
-export interface DeleteServiceMutation {
+export type DeleteServiceMutation = {
   deleteService: {
     __typename: 'Service';
     id: string;
@@ -1781,37 +1781,37 @@ export interface DeleteServiceMutation {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface CreateBranchMutationVariables {
+export type CreateBranchMutationVariables = {
   input: CreateBranchInput;
-}
+};
 
-export interface CreateBranchMutation {
+export type CreateBranchMutation = {
   createBranch: {
     __typename: 'Branch';
     id: string;
@@ -1823,7 +1823,7 @@ export interface CreateBranchMutation {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -1834,26 +1834,26 @@ export interface CreateBranchMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items: ({
+      items: Array<{
         __typename: 'Employee';
         id: string;
         givenName: string;
         familyName: string;
         phone: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -1880,13 +1880,13 @@ export interface CreateBranchMutation {
       } | null;
     };
   } | null;
-}
+};
 
-export interface UpdateBranchMutationVariables {
+export type UpdateBranchMutationVariables = {
   input: UpdateBranchInput;
-}
+};
 
-export interface UpdateBranchMutation {
+export type UpdateBranchMutation = {
   updateBranch: {
     __typename: 'Branch';
     id: string;
@@ -1898,7 +1898,7 @@ export interface UpdateBranchMutation {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -1909,26 +1909,26 @@ export interface UpdateBranchMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items: ({
+      items: Array<{
         __typename: 'Employee';
         id: string;
         givenName: string;
         familyName: string;
         phone: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -1955,13 +1955,13 @@ export interface UpdateBranchMutation {
       } | null;
     };
   } | null;
-}
+};
 
-export interface DeleteBranchMutationVariables {
+export type DeleteBranchMutationVariables = {
   input: DeleteBranchInput;
-}
+};
 
-export interface DeleteBranchMutation {
+export type DeleteBranchMutation = {
   deleteBranch: {
     __typename: 'Branch';
     id: string;
@@ -1973,7 +1973,7 @@ export interface DeleteBranchMutation {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -1984,26 +1984,26 @@ export interface DeleteBranchMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items: ({
+      items: Array<{
         __typename: 'Employee';
         id: string;
         givenName: string;
         familyName: string;
         phone: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -2030,13 +2030,13 @@ export interface DeleteBranchMutation {
       } | null;
     };
   } | null;
-}
+};
 
-export interface CreateBranchServicesMutationVariables {
+export type CreateBranchServicesMutationVariables = {
   input: CreateBranchServicesInput;
-}
+};
 
-export interface CreateBranchServicesMutation {
+export type CreateBranchServicesMutation = {
   createBranchServices: {
     __typename: 'BranchServices';
     id: string;
@@ -2092,13 +2092,13 @@ export interface CreateBranchServicesMutation {
       };
     } | null;
   } | null;
-}
+};
 
-export interface DeleteBranchServicesMutationVariables {
+export type DeleteBranchServicesMutationVariables = {
   input: DeleteBranchServicesInput;
-}
+};
 
-export interface DeleteBranchServicesMutation {
+export type DeleteBranchServicesMutation = {
   deleteBranchServices: {
     __typename: 'BranchServices';
     id: string;
@@ -2154,13 +2154,13 @@ export interface DeleteBranchServicesMutation {
       };
     } | null;
   } | null;
-}
+};
 
-export interface CreateBusinessMutationVariables {
+export type CreateBusinessMutationVariables = {
   input: CreateBusinessInput;
-}
+};
 
-export interface CreateBusinessMutation {
+export type CreateBusinessMutation = {
   createBusiness: {
     __typename: 'Business';
     id: string;
@@ -2193,7 +2193,7 @@ export interface CreateBusinessMutation {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items: ({
+      items: Array<{
         __typename: 'Branch';
         id: string;
         address: string;
@@ -2202,17 +2202,17 @@ export interface CreateBusinessMutation {
         name: string;
         description: string | null;
         image: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface DeleteBusinessMutationVariables {
+export type DeleteBusinessMutationVariables = {
   input: DeleteBusinessInput;
-}
+};
 
-export interface DeleteBusinessMutation {
+export type DeleteBusinessMutation = {
   deleteBusiness: {
     __typename: 'Business';
     id: string;
@@ -2245,7 +2245,7 @@ export interface DeleteBusinessMutation {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items: ({
+      items: Array<{
         __typename: 'Branch';
         id: string;
         address: string;
@@ -2254,17 +2254,17 @@ export interface DeleteBusinessMutation {
         name: string;
         description: string | null;
         image: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface CreateUserMutationVariables {
+export type CreateUserMutationVariables = {
   input: CreateUserInput;
-}
+};
 
-export interface CreateUserMutation {
+export type CreateUserMutation = {
   createUser: {
     __typename: 'User';
     id: string;
@@ -2299,7 +2299,7 @@ export interface CreateUserMutation {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -2310,18 +2310,18 @@ export interface CreateUserMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
   } | null;
-}
+};
 
-export interface UpdateUserMutationVariables {
+export type UpdateUserMutationVariables = {
   input: UpdateUserInput;
-}
+};
 
-export interface UpdateUserMutation {
+export type UpdateUserMutation = {
   updateUser: {
     __typename: 'User';
     id: string;
@@ -2356,7 +2356,7 @@ export interface UpdateUserMutation {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -2367,18 +2367,18 @@ export interface UpdateUserMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
   } | null;
-}
+};
 
-export interface DeleteUserMutationVariables {
+export type DeleteUserMutationVariables = {
   input: DeleteUserInput;
-}
+};
 
-export interface DeleteUserMutation {
+export type DeleteUserMutation = {
   deleteUser: {
     __typename: 'User';
     id: string;
@@ -2413,7 +2413,7 @@ export interface DeleteUserMutation {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -2424,18 +2424,18 @@ export interface DeleteUserMutation {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
   } | null;
-}
+};
 
-export interface UpdateBranchServicesMutationVariables {
+export type UpdateBranchServicesMutationVariables = {
   input: UpdateBranchServicesInput;
-}
+};
 
-export interface UpdateBranchServicesMutation {
+export type UpdateBranchServicesMutation = {
   updateBranchServices: {
     __typename: 'BranchServices';
     id: string;
@@ -2491,13 +2491,13 @@ export interface UpdateBranchServicesMutation {
       };
     } | null;
   } | null;
-}
+};
 
-export interface UpdateBusinessMutationVariables {
+export type UpdateBusinessMutationVariables = {
   input: UpdateBusinessInput;
-}
+};
 
-export interface UpdateBusinessMutation {
+export type UpdateBusinessMutation = {
   updateBusiness: {
     __typename: 'Business';
     id: string;
@@ -2530,7 +2530,7 @@ export interface UpdateBusinessMutation {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items: ({
+      items: Array<{
         __typename: 'Branch';
         id: string;
         address: string;
@@ -2539,27 +2539,27 @@ export interface UpdateBusinessMutation {
         name: string;
         description: string | null;
         image: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface GetEmployeeAvailableTimeQueryVariables {
+export type GetEmployeeAvailableTimeQueryVariables = {
   id?: string | null;
   date?: string | null;
   duration?: number | null;
-}
+};
 
-export interface GetEmployeeAvailableTimeQuery {
+export type GetEmployeeAvailableTimeQuery = {
   getEmployeeAvailableTime: string | null;
-}
+};
 
-export interface GetEmployeeServicesQueryVariables {
+export type GetEmployeeServicesQueryVariables = {
   id: string;
-}
+};
 
-export interface GetEmployeeServicesQuery {
+export type GetEmployeeServicesQuery = {
   getEmployeeServices: {
     __typename: 'EmployeeServices';
     id: string;
@@ -2625,18 +2625,18 @@ export interface GetEmployeeServicesQuery {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface ListEmployeeServicessQueryVariables {
+export type ListEmployeeServicessQueryVariables = {
   filter?: ModelEmployeeServicesFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListEmployeeServicessQuery {
+export type ListEmployeeServicessQuery = {
   listEmployeeServicess: {
     __typename: 'ModelEmployeeServicesConnection';
-    items: ({
+    items: Array<{
       __typename: 'EmployeeServices';
       id: string;
       employee: {
@@ -2655,16 +2655,16 @@ export interface ListEmployeeServicessQuery {
         duration: number;
         description: string | null;
       } | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface GetUserQueryVariables {
+export type GetUserQueryVariables = {
   id: string;
-}
+};
 
-export interface GetUserQuery {
+export type GetUserQuery = {
   getUser: {
     __typename: 'User';
     id: string;
@@ -2699,7 +2699,7 @@ export interface GetUserQuery {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -2710,23 +2710,23 @@ export interface GetUserQuery {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
   } | null;
-}
+};
 
-export interface ListUsersQueryVariables {
+export type ListUsersQueryVariables = {
   filter?: ModelUserFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListUsersQuery {
+export type ListUsersQuery = {
   listUsers: {
     __typename: 'ModelUserConnection';
-    items: ({
+    items: Array<{
       __typename: 'User';
       id: string;
       givenName: string;
@@ -2748,16 +2748,16 @@ export interface ListUsersQuery {
         nextToken: string | null;
       } | null;
       owner: string | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface GetAvailabilityItemQueryVariables {
+export type GetAvailabilityItemQueryVariables = {
   id: string;
-}
+};
 
-export interface GetAvailabilityItemQuery {
+export type GetAvailabilityItemQuery = {
   getAvailabilityItem: {
     __typename: 'AvailabilityItem';
     id: string;
@@ -2805,18 +2805,18 @@ export interface GetAvailabilityItemQuery {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface ListAvailabilityItemsQueryVariables {
+export type ListAvailabilityItemsQueryVariables = {
   filter?: ModelAvailabilityItemFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListAvailabilityItemsQuery {
+export type ListAvailabilityItemsQuery = {
   listAvailabilityItems: {
     __typename: 'ModelAvailabilityItemConnection';
-    items: ({
+    items: Array<{
       __typename: 'AvailabilityItem';
       id: string;
       day: Day | null;
@@ -2829,16 +2829,16 @@ export interface ListAvailabilityItemsQuery {
         familyName: string;
         phone: string | null;
       } | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface GetBookingServicesQueryVariables {
+export type GetBookingServicesQueryVariables = {
   id: string;
-}
+};
 
-export interface GetBookingServicesQuery {
+export type GetBookingServicesQuery = {
   getBookingServices: {
     __typename: 'BookingServices';
     id: string;
@@ -2908,18 +2908,18 @@ export interface GetBookingServicesQuery {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface ListBookingServicessQueryVariables {
+export type ListBookingServicessQueryVariables = {
   filter?: ModelBookingServicesFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListBookingServicessQuery {
+export type ListBookingServicessQuery = {
   listBookingServicess: {
     __typename: 'ModelBookingServicesConnection';
-    items: ({
+    items: Array<{
       __typename: 'BookingServices';
       id: string;
       booking: {
@@ -2943,16 +2943,16 @@ export interface ListBookingServicessQuery {
         duration: number;
         description: string | null;
       } | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface GetBookingQueryVariables {
+export type GetBookingQueryVariables = {
   id: string;
-}
+};
 
-export interface GetBookingQuery {
+export type GetBookingQuery = {
   getBooking: {
     __typename: 'Booking';
     id: string;
@@ -2989,10 +2989,10 @@ export interface GetBookingQuery {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -3066,18 +3066,18 @@ export interface GetBookingQuery {
       };
     };
   } | null;
-}
+};
 
-export interface ListBookingsQueryVariables {
+export type ListBookingsQueryVariables = {
   filter?: ModelBookingFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListBookingsQuery {
+export type ListBookingsQuery = {
   listBookings: {
     __typename: 'ModelBookingConnection';
-    items: ({
+    items: Array<{
       __typename: 'Booking';
       id: string;
       createdAt: string;
@@ -3120,16 +3120,16 @@ export interface ListBookingsQuery {
         description: string | null;
         image: string | null;
       };
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface GetEmployeeQueryVariables {
+export type GetEmployeeQueryVariables = {
   id: string;
-}
+};
 
-export interface GetEmployeeQuery {
+export type GetEmployeeQuery = {
   getEmployee: {
     __typename: 'Employee';
     id: string;
@@ -3161,26 +3161,26 @@ export interface GetEmployeeQuery {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items: ({
+      items: Array<{
         __typename: 'AvailabilityItem';
         id: string;
         day: Day | null;
         from: string;
         to: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -3191,7 +3191,7 @@ export interface GetEmployeeQuery {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -3225,18 +3225,18 @@ export interface GetEmployeeQuery {
       };
     } | null;
   } | null;
-}
+};
 
-export interface ListEmployeesQueryVariables {
+export type ListEmployeesQueryVariables = {
   filter?: ModelEmployeeFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListEmployeesQuery {
+export type ListEmployeesQuery = {
   listEmployees: {
     __typename: 'ModelEmployeeConnection';
-    items: ({
+    items: Array<{
       __typename: 'Employee';
       id: string;
       givenName: string;
@@ -3275,21 +3275,21 @@ export interface ListEmployeesQuery {
         description: string | null;
         image: string | null;
       } | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface ListServicesQueryVariables {
+export type ListServicesQueryVariables = {
   filter?: ModelServiceFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListServicesQuery {
+export type ListServicesQuery = {
   listServices: {
     __typename: 'ModelServiceConnection';
-    items: ({
+    items: Array<{
       __typename: 'Service';
       id: string;
       name: string;
@@ -3309,16 +3309,16 @@ export interface ListServicesQuery {
         __typename: 'ModelBranchServicesConnection';
         nextToken: string | null;
       } | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface GetServiceQueryVariables {
+export type GetServiceQueryVariables = {
   id: string;
-}
+};
 
-export interface GetServiceQuery {
+export type GetServiceQuery = {
   getService: {
     __typename: 'Service';
     id: string;
@@ -3328,37 +3328,37 @@ export interface GetServiceQuery {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface GetBranchQueryVariables {
+export type GetBranchQueryVariables = {
   id: string;
-}
+};
 
-export interface GetBranchQuery {
+export type GetBranchQuery = {
   getBranch: {
     __typename: 'Branch';
     id: string;
@@ -3370,7 +3370,7 @@ export interface GetBranchQuery {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -3381,26 +3381,26 @@ export interface GetBranchQuery {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items: ({
+      items: Array<{
         __typename: 'Employee';
         id: string;
         givenName: string;
         familyName: string;
         phone: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -3427,18 +3427,18 @@ export interface GetBranchQuery {
       } | null;
     };
   } | null;
-}
+};
 
-export interface ListBranchsQueryVariables {
+export type ListBranchsQueryVariables = {
   filter?: ModelBranchFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListBranchsQuery {
+export type ListBranchsQuery = {
   listBranchs: {
     __typename: 'ModelBranchConnection';
-    items: ({
+    items: Array<{
       __typename: 'Branch';
       id: string;
       address: string;
@@ -3467,16 +3467,16 @@ export interface ListBranchsQuery {
         phone: string;
         handle: string;
       };
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface GetBranchServicesQueryVariables {
+export type GetBranchServicesQueryVariables = {
   id: string;
-}
+};
 
-export interface GetBranchServicesQuery {
+export type GetBranchServicesQuery = {
   getBranchServices: {
     __typename: 'BranchServices';
     id: string;
@@ -3532,18 +3532,18 @@ export interface GetBranchServicesQuery {
       };
     } | null;
   } | null;
-}
+};
 
-export interface ListBranchServicessQueryVariables {
+export type ListBranchServicessQueryVariables = {
   filter?: ModelBranchServicesFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListBranchServicessQuery {
+export type ListBranchServicessQuery = {
   listBranchServicess: {
     __typename: 'ModelBranchServicesConnection';
-    items: ({
+    items: Array<{
       __typename: 'BranchServices';
       id: string;
       service: {
@@ -3565,21 +3565,21 @@ export interface ListBranchServicessQuery {
         description: string | null;
         image: string | null;
       } | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface ListBusinesssQueryVariables {
+export type ListBusinesssQueryVariables = {
   filter?: ModelBusinessFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface ListBusinesssQuery {
+export type ListBusinesssQuery = {
   listBusinesss: {
     __typename: 'ModelBusinessConnection';
-    items: ({
+    items: Array<{
       __typename: 'Business';
       id: string;
       name: string;
@@ -3601,16 +3601,16 @@ export interface ListBusinesssQuery {
         __typename: 'ModelBranchConnection';
         nextToken: string | null;
       } | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface GetBusinessQueryVariables {
+export type GetBusinessQueryVariables = {
   id: string;
-}
+};
 
-export interface GetBusinessQuery {
+export type GetBusinessQuery = {
   getBusiness: {
     __typename: 'Business';
     id: string;
@@ -3643,7 +3643,7 @@ export interface GetBusinessQuery {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items: ({
+      items: Array<{
         __typename: 'Branch';
         id: string;
         address: string;
@@ -3652,24 +3652,24 @@ export interface GetBusinessQuery {
         name: string;
         description: string | null;
         image: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface BusinessByHandleQueryVariables {
+export type BusinessByHandleQueryVariables = {
   handle?: string | null;
   sortDirection?: ModelSortDirection | null;
   filter?: ModelBusinessFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
-}
+};
 
-export interface BusinessByHandleQuery {
+export type BusinessByHandleQuery = {
   businessByHandle: {
     __typename: 'ModelBusinessConnection';
-    items: ({
+    items: Array<{
       __typename: 'Business';
       id: string;
       name: string;
@@ -3691,12 +3691,12 @@ export interface BusinessByHandleQuery {
         __typename: 'ModelBranchConnection';
         nextToken: string | null;
       } | null;
-    } | null)[] | null;
+    } | null> | null;
     nextToken: string | null;
   } | null;
-}
+};
 
-export interface OnCreateAvailabilityItemSubscription {
+export type OnCreateAvailabilityItemSubscription = {
   onCreateAvailabilityItem: {
     __typename: 'AvailabilityItem';
     id: string;
@@ -3744,9 +3744,9 @@ export interface OnCreateAvailabilityItemSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnUpdateAvailabilityItemSubscription {
+export type OnUpdateAvailabilityItemSubscription = {
   onUpdateAvailabilityItem: {
     __typename: 'AvailabilityItem';
     id: string;
@@ -3794,9 +3794,9 @@ export interface OnUpdateAvailabilityItemSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnDeleteAvailabilityItemSubscription {
+export type OnDeleteAvailabilityItemSubscription = {
   onDeleteAvailabilityItem: {
     __typename: 'AvailabilityItem';
     id: string;
@@ -3844,9 +3844,9 @@ export interface OnDeleteAvailabilityItemSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnCreateBookingServicesSubscription {
+export type OnCreateBookingServicesSubscription = {
   onCreateBookingServices: {
     __typename: 'BookingServices';
     id: string;
@@ -3916,9 +3916,9 @@ export interface OnCreateBookingServicesSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnUpdateBookingServicesSubscription {
+export type OnUpdateBookingServicesSubscription = {
   onUpdateBookingServices: {
     __typename: 'BookingServices';
     id: string;
@@ -3988,9 +3988,9 @@ export interface OnUpdateBookingServicesSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnDeleteBookingServicesSubscription {
+export type OnDeleteBookingServicesSubscription = {
   onDeleteBookingServices: {
     __typename: 'BookingServices';
     id: string;
@@ -4060,9 +4060,9 @@ export interface OnDeleteBookingServicesSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnCreateBookingSubscription {
+export type OnCreateBookingSubscription = {
   onCreateBooking: {
     __typename: 'Booking';
     id: string;
@@ -4099,10 +4099,10 @@ export interface OnCreateBookingSubscription {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -4176,9 +4176,9 @@ export interface OnCreateBookingSubscription {
       };
     };
   } | null;
-}
+};
 
-export interface OnUpdateBookingSubscription {
+export type OnUpdateBookingSubscription = {
   onUpdateBooking: {
     __typename: 'Booking';
     id: string;
@@ -4215,10 +4215,10 @@ export interface OnUpdateBookingSubscription {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -4292,9 +4292,9 @@ export interface OnUpdateBookingSubscription {
       };
     };
   } | null;
-}
+};
 
-export interface OnDeleteBookingSubscription {
+export type OnDeleteBookingSubscription = {
   onDeleteBooking: {
     __typename: 'Booking';
     id: string;
@@ -4331,10 +4331,10 @@ export interface OnDeleteBookingSubscription {
     clientFamilyName: string | null;
     services: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employee: {
@@ -4408,9 +4408,9 @@ export interface OnDeleteBookingSubscription {
       };
     };
   } | null;
-}
+};
 
-export interface OnCreateEmployeeSubscription {
+export type OnCreateEmployeeSubscription = {
   onCreateEmployee: {
     __typename: 'Employee';
     id: string;
@@ -4442,26 +4442,26 @@ export interface OnCreateEmployeeSubscription {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items: ({
+      items: Array<{
         __typename: 'AvailabilityItem';
         id: string;
         day: Day | null;
         from: string;
         to: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -4472,7 +4472,7 @@ export interface OnCreateEmployeeSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -4506,9 +4506,9 @@ export interface OnCreateEmployeeSubscription {
       };
     } | null;
   } | null;
-}
+};
 
-export interface OnUpdateEmployeeSubscription {
+export type OnUpdateEmployeeSubscription = {
   onUpdateEmployee: {
     __typename: 'Employee';
     id: string;
@@ -4540,26 +4540,26 @@ export interface OnUpdateEmployeeSubscription {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items: ({
+      items: Array<{
         __typename: 'AvailabilityItem';
         id: string;
         day: Day | null;
         from: string;
         to: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -4570,7 +4570,7 @@ export interface OnUpdateEmployeeSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -4604,9 +4604,9 @@ export interface OnUpdateEmployeeSubscription {
       };
     } | null;
   } | null;
-}
+};
 
-export interface OnDeleteEmployeeSubscription {
+export type OnDeleteEmployeeSubscription = {
   onDeleteEmployee: {
     __typename: 'Employee';
     id: string;
@@ -4638,26 +4638,26 @@ export interface OnDeleteEmployeeSubscription {
     phone: string | null;
     services: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     availability: {
       __typename: 'ModelAvailabilityItemConnection';
-      items: ({
+      items: Array<{
         __typename: 'AvailabilityItem';
         id: string;
         day: Day | null;
         from: string;
         to: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -4668,7 +4668,7 @@ export interface OnDeleteEmployeeSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branches: {
@@ -4702,9 +4702,9 @@ export interface OnDeleteEmployeeSubscription {
       };
     } | null;
   } | null;
-}
+};
 
-export interface OnCreateEmployeeServicesSubscription {
+export type OnCreateEmployeeServicesSubscription = {
   onCreateEmployeeServices: {
     __typename: 'EmployeeServices';
     id: string;
@@ -4770,9 +4770,9 @@ export interface OnCreateEmployeeServicesSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnUpdateEmployeeServicesSubscription {
+export type OnUpdateEmployeeServicesSubscription = {
   onUpdateEmployeeServices: {
     __typename: 'EmployeeServices';
     id: string;
@@ -4838,9 +4838,9 @@ export interface OnUpdateEmployeeServicesSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnDeleteEmployeeServicesSubscription {
+export type OnDeleteEmployeeServicesSubscription = {
   onDeleteEmployeeServices: {
     __typename: 'EmployeeServices';
     id: string;
@@ -4906,9 +4906,9 @@ export interface OnDeleteEmployeeServicesSubscription {
       } | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnCreateServiceSubscription {
+export type OnCreateServiceSubscription = {
   onCreateService: {
     __typename: 'Service';
     id: string;
@@ -4918,33 +4918,33 @@ export interface OnCreateServiceSubscription {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnUpdateServiceSubscription {
+export type OnUpdateServiceSubscription = {
   onUpdateService: {
     __typename: 'Service';
     id: string;
@@ -4954,33 +4954,33 @@ export interface OnUpdateServiceSubscription {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnDeleteServiceSubscription {
+export type OnDeleteServiceSubscription = {
   onDeleteService: {
     __typename: 'Service';
     id: string;
@@ -4990,33 +4990,33 @@ export interface OnDeleteServiceSubscription {
     duration: number;
     employees: {
       __typename: 'ModelEmployeeServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'EmployeeServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     description: string | null;
     bookings: {
       __typename: 'ModelBookingServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BookingServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     branch: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnCreateBranchSubscription {
+export type OnCreateBranchSubscription = {
   onCreateBranch: {
     __typename: 'Branch';
     id: string;
@@ -5028,7 +5028,7 @@ export interface OnCreateBranchSubscription {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -5039,26 +5039,26 @@ export interface OnCreateBranchSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items: ({
+      items: Array<{
         __typename: 'Employee';
         id: string;
         givenName: string;
         familyName: string;
         phone: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -5085,9 +5085,9 @@ export interface OnCreateBranchSubscription {
       } | null;
     };
   } | null;
-}
+};
 
-export interface OnUpdateBranchSubscription {
+export type OnUpdateBranchSubscription = {
   onUpdateBranch: {
     __typename: 'Branch';
     id: string;
@@ -5099,7 +5099,7 @@ export interface OnUpdateBranchSubscription {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -5110,26 +5110,26 @@ export interface OnUpdateBranchSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items: ({
+      items: Array<{
         __typename: 'Employee';
         id: string;
         givenName: string;
         familyName: string;
         phone: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -5156,9 +5156,9 @@ export interface OnUpdateBranchSubscription {
       } | null;
     };
   } | null;
-}
+};
 
-export interface OnDeleteBranchSubscription {
+export type OnDeleteBranchSubscription = {
   onDeleteBranch: {
     __typename: 'Branch';
     id: string;
@@ -5170,7 +5170,7 @@ export interface OnDeleteBranchSubscription {
     image: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -5181,26 +5181,26 @@ export interface OnDeleteBranchSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     employees: {
       __typename: 'ModelEmployeeConnection';
-      items: ({
+      items: Array<{
         __typename: 'Employee';
         id: string;
         givenName: string;
         familyName: string;
         phone: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     services: {
       __typename: 'ModelBranchServicesConnection';
-      items: ({
+      items: Array<{
         __typename: 'BranchServices';
         id: string;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     business: {
@@ -5227,9 +5227,9 @@ export interface OnDeleteBranchSubscription {
       } | null;
     };
   } | null;
-}
+};
 
-export interface OnCreateBranchServicesSubscription {
+export type OnCreateBranchServicesSubscription = {
   onCreateBranchServices: {
     __typename: 'BranchServices';
     id: string;
@@ -5285,9 +5285,9 @@ export interface OnCreateBranchServicesSubscription {
       };
     } | null;
   } | null;
-}
+};
 
-export interface OnDeleteBranchServicesSubscription {
+export type OnDeleteBranchServicesSubscription = {
   onDeleteBranchServices: {
     __typename: 'BranchServices';
     id: string;
@@ -5343,9 +5343,9 @@ export interface OnDeleteBranchServicesSubscription {
       };
     } | null;
   } | null;
-}
+};
 
-export interface OnCreateBusinessSubscription {
+export type OnCreateBusinessSubscription = {
   onCreateBusiness: {
     __typename: 'Business';
     id: string;
@@ -5378,7 +5378,7 @@ export interface OnCreateBusinessSubscription {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items: ({
+      items: Array<{
         __typename: 'Branch';
         id: string;
         address: string;
@@ -5387,13 +5387,13 @@ export interface OnCreateBusinessSubscription {
         name: string;
         description: string | null;
         image: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnDeleteBusinessSubscription {
+export type OnDeleteBusinessSubscription = {
   onDeleteBusiness: {
     __typename: 'Business';
     id: string;
@@ -5426,7 +5426,7 @@ export interface OnDeleteBusinessSubscription {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items: ({
+      items: Array<{
         __typename: 'Branch';
         id: string;
         address: string;
@@ -5435,17 +5435,17 @@ export interface OnDeleteBusinessSubscription {
         name: string;
         description: string | null;
         image: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
 
-export interface OnCreateUserSubscriptionVariables {
+export type OnCreateUserSubscriptionVariables = {
   owner: string;
-}
+};
 
-export interface OnCreateUserSubscription {
+export type OnCreateUserSubscription = {
   onCreateUser: {
     __typename: 'User';
     id: string;
@@ -5480,7 +5480,7 @@ export interface OnCreateUserSubscription {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -5491,18 +5491,18 @@ export interface OnCreateUserSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
   } | null;
-}
+};
 
-export interface OnUpdateUserSubscriptionVariables {
+export type OnUpdateUserSubscriptionVariables = {
   owner: string;
-}
+};
 
-export interface OnUpdateUserSubscription {
+export type OnUpdateUserSubscription = {
   onUpdateUser: {
     __typename: 'User';
     id: string;
@@ -5537,7 +5537,7 @@ export interface OnUpdateUserSubscription {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -5548,18 +5548,18 @@ export interface OnUpdateUserSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
   } | null;
-}
+};
 
-export interface OnDeleteUserSubscriptionVariables {
+export type OnDeleteUserSubscriptionVariables = {
   owner: string;
-}
+};
 
-export interface OnDeleteUserSubscription {
+export type OnDeleteUserSubscription = {
   onDeleteUser: {
     __typename: 'User';
     id: string;
@@ -5594,7 +5594,7 @@ export interface OnDeleteUserSubscription {
     } | null;
     bookings: {
       __typename: 'ModelBookingConnection';
-      items: ({
+      items: Array<{
         __typename: 'Booking';
         id: string;
         createdAt: string;
@@ -5605,14 +5605,14 @@ export interface OnDeleteUserSubscription {
         clientPhone: string | null;
         clientName: string | null;
         clientFamilyName: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
     owner: string | null;
   } | null;
-}
+};
 
-export interface OnUpdateBranchServicesSubscription {
+export type OnUpdateBranchServicesSubscription = {
   onUpdateBranchServices: {
     __typename: 'BranchServices';
     id: string;
@@ -5668,9 +5668,9 @@ export interface OnUpdateBranchServicesSubscription {
       };
     } | null;
   } | null;
-}
+};
 
-export interface OnUpdateBusinessSubscription {
+export type OnUpdateBusinessSubscription = {
   onUpdateBusiness: {
     __typename: 'Business';
     id: string;
@@ -5703,7 +5703,7 @@ export interface OnUpdateBusinessSubscription {
     handle: string;
     branches: {
       __typename: 'ModelBranchConnection';
-      items: ({
+      items: Array<{
         __typename: 'Branch';
         id: string;
         address: string;
@@ -5712,8 +5712,8 @@ export interface OnUpdateBusinessSubscription {
         name: string;
         description: string | null;
         image: string | null;
-      } | null)[] | null;
+      } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
-}
+};
