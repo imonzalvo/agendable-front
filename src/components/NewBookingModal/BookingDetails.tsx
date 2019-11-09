@@ -20,7 +20,7 @@ import { GetEmployeeAvailableTime } from './queries';
 import { BookingState } from '.';
 import { getTimeslots } from '@/utils/getTimeslots';
 import PageLoading from '@/components/PageLoading';
-import Timeslot from './TimeSlot';
+import Timeslot from './Timeslot';
 
 moment.locale('es');
 const { Option } = Select;
