@@ -2,16 +2,20 @@
 
 const awsmobile = {
   aws_project_region: 'us-west-2',
-  aws_cognito_identity_pool_id: 'us-west-2:b05e6ebf-8c20-4bec-bb1b-669d005dc1e4',
+  aws_cognito_identity_pool_id: 'us-west-2:7fe9a04e-52be-419e-82f2-1183b6062a25',
   aws_cognito_region: 'us-west-2',
-  aws_user_pools_id: 'us-west-2_T2FcSEm2H',
-  aws_user_pools_web_client_id: '1i9b7mj5thstaskt6qbv54ivhq',
+  aws_user_pools_id: 'us-west-2_4AEukyiAn',
+  aws_user_pools_web_client_id: '38pdt1c9m5k36qkhvp0n5b2cpm',
   oauth: {},
   aws_appsync_graphqlEndpoint:
-    'https://fes5hbrbvzdm3em3rfmtmqbiwa.appsync-api.us-west-2.amazonaws.com/graphql',
+    'https://xxhw7v74fzgd5n2cn3vd4iczvu.appsync-api.us-west-2.amazonaws.com/graphql',
   aws_appsync_region: 'us-west-2',
   aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
-  aws_appsync_apiKey: 'da2-5fiikjxfujg2djhgiiwmd3u76m',
+  aws_appsync_apiKey: 'da2-j4ubq7qidzg2jfg3kw27uxk66e',
+  aws_content_delivery_bucket: 'agendable-dev-hosting-hosting',
+  aws_content_delivery_bucket_region: 'us-west-2',
+  aws_content_delivery_url:
+    'http://agendable-dev-hosting-hosting.s3-website-us-west-2.amazonaws.com',
 };
 
 export default awsmobile;

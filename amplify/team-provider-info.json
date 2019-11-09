@@ -28,5 +28,23 @@
             "UnauthRoleArn": "arn:aws:iam::343146248340:role/amplify-agendabledevelop-develop-201150-unauthRole",
             "AuthRoleArn": "arn:aws:iam::343146248340:role/amplify-agendabledevelop-develop-201150-authRole"
         }
+    },
+    "hosting": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-agendabledevelop-hosting-225120-authRole",
+            "UnauthRoleArn": "arn:aws:iam::343146248340:role/amplify-agendabledevelop-hosting-225120-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::343146248340:role/amplify-agendabledevelop-hosting-225120-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-agendabledevelop-hosting-225120-deployment",
+            "UnauthRoleName": "amplify-agendabledevelop-hosting-225120-unauthRole",
+            "StackName": "amplify-agendabledevelop-hosting-225120",
+            "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/amplify-agendabledevelop-hosting-225120/6e358230-0293-11ea-9b18-02111715c402"
+        },
+        "categories": {
+            "auth": {
+                "userPoolGroups": {},
+                "agendabledevelop5e1ec4f95e1ec4f9": {}
+            }
+        }
     }
 }

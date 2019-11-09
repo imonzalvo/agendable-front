@@ -20,8 +20,8 @@ import PageLoading from '@/components/PageLoading';
 import BusinessGetter from '../components/BussinessGetter';
 
 AWS.config.update({
-  accessKeyId: 'AKIAU7ZI4HCKF4ONGVTM',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAU7ZI4HCKNTFQZHXN',
+  secretAccessKey: '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',
   region: 'us-west-2',
 });
 
