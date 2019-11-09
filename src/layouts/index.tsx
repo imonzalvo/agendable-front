@@ -15,7 +15,7 @@ import es from 'antd/es/locale-provider/es_ES';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
-import awsconfig from '../../aws-exports';
+import awsconfig from '@/aws-exports';
 import PageLoading from '@/components/PageLoading';
 import BusinessGetter from '../components/BussinessGetter';
 
