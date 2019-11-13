@@ -22,13 +22,13 @@ export const createAvailabilityItem = `mutation CreateAvailabilityItem($input: C
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -65,13 +65,13 @@ export const updateAvailabilityItem = `mutation UpdateAvailabilityItem($input: U
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -108,13 +108,13 @@ export const deleteAvailabilityItem = `mutation DeleteAvailabilityItem($input: D
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -178,11 +178,11 @@ export const createBookingServices = `mutation CreateBookingServices($input: Cre
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -240,11 +240,11 @@ export const updateBookingServices = `mutation UpdateBookingServices($input: Upd
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -302,11 +302,11 @@ export const deleteBookingServices = `mutation DeleteBookingServices($input: Del
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -368,13 +368,13 @@ export const createBooking = `mutation CreateBooking($input: CreateBookingInput!
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -467,13 +467,13 @@ export const updateBooking = `mutation UpdateBooking($input: UpdateBookingInput!
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -566,13 +566,13 @@ export const deleteBooking = `mutation DeleteBooking($input: DeleteBookingInput!
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -639,12 +639,6 @@ export const createEmployee = `mutation CreateEmployee($input: CreateEmployeeInp
       owner
     }
     phone
-    services {
-      items {
-        id
-      }
-      nextToken
-    }
     availability {
       items {
         id
@@ -665,6 +659,12 @@ export const createEmployee = `mutation CreateEmployee($input: CreateEmployeeInp
         clientPhone
         clientName
         clientFamilyName
+      }
+      nextToken
+    }
+    services {
+      items {
+        id
       }
       nextToken
     }
@@ -722,12 +722,6 @@ export const updateEmployee = `mutation UpdateEmployee($input: UpdateEmployeeInp
       owner
     }
     phone
-    services {
-      items {
-        id
-      }
-      nextToken
-    }
     availability {
       items {
         id
@@ -748,6 +742,12 @@ export const updateEmployee = `mutation UpdateEmployee($input: UpdateEmployeeInp
         clientPhone
         clientName
         clientFamilyName
+      }
+      nextToken
+    }
+    services {
+      items {
+        id
       }
       nextToken
     }
@@ -805,12 +805,6 @@ export const deleteEmployee = `mutation DeleteEmployee($input: DeleteEmployeeInp
       owner
     }
     phone
-    services {
-      items {
-        id
-      }
-      nextToken
-    }
     availability {
       items {
         id
@@ -831,6 +825,12 @@ export const deleteEmployee = `mutation DeleteEmployee($input: DeleteEmployeeInp
         clientPhone
         clientName
         clientFamilyName
+      }
+      nextToken
+    }
+    services {
+      items {
+        id
       }
       nextToken
     }
@@ -880,13 +880,13 @@ export const createEmployeeServices = `mutation CreateEmployeeServices($input: C
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -905,11 +905,11 @@ export const createEmployeeServices = `mutation CreateEmployeeServices($input: C
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -937,13 +937,13 @@ export const updateEmployeeServices = `mutation UpdateEmployeeServices($input: U
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -962,11 +962,11 @@ export const updateEmployeeServices = `mutation UpdateEmployeeServices($input: U
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -994,13 +994,13 @@ export const deleteEmployeeServices = `mutation DeleteEmployeeServices($input: D
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -1019,11 +1019,11 @@ export const deleteEmployeeServices = `mutation DeleteEmployeeServices($input: D
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -1040,14 +1040,14 @@ export const createService = `mutation CreateService($input: CreateServiceInput!
     price
     currency
     duration
-    employees {
+    description
+    bookings {
       items {
         id
       }
       nextToken
     }
-    description
-    bookings {
+    employees {
       items {
         id
       }
@@ -1069,14 +1069,14 @@ export const updateService = `mutation UpdateService($input: UpdateServiceInput!
     price
     currency
     duration
-    employees {
+    description
+    bookings {
       items {
         id
       }
       nextToken
     }
-    description
-    bookings {
+    employees {
       items {
         id
       }
@@ -1098,14 +1098,14 @@ export const deleteService = `mutation DeleteService($input: DeleteServiceInput!
     price
     currency
     duration
-    employees {
+    description
+    bookings {
       items {
         id
       }
       nextToken
     }
-    description
-    bookings {
+    employees {
       items {
         id
       }
@@ -1312,11 +1312,11 @@ export const createBranchServices = `mutation CreateBranchServices($input: Creat
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -1360,11 +1360,11 @@ export const deleteBranchServices = `mutation DeleteBranchServices($input: Delet
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -1633,11 +1633,11 @@ export const updateBranchServices = `mutation UpdateBranchServices($input: Updat
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {

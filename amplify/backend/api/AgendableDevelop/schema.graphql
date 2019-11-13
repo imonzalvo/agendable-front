@@ -42,7 +42,7 @@ type Employee @model @auth(rules: [{allow: public, operations: [read]}, {allow: 
  bookings: [Booking!]! @connection(name: "BookingEmployee")
  branches: Branch @connection(name: "EmployeesBranch")
 }
-type EmployeeServices @model @auth(rules: [{allow: private, provider: userPools}]){
+type EmployeeServices @model  @auth(rules: [{allow: public, operations: [read]}, {allow: private, provider: userPools}]) {
   id: ID!
   service: Service @connection(name: "ServiceEmployees")
   employee: Employee @connection(name: "EmployeeServices")

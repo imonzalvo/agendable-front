@@ -1,7 +1,7 @@
 {
-	"develop": {
-		"configLevel": "project",
-		"useProfile": false,
-		"awsConfigFilePath": "/Users/kgelpes/.amplify/awscloudformation/56IWqjBkcP"
-	}
+    "develop": {
+        "configLevel": "project",
+        "useProfile": true,
+        "profileName": "AgendableDev"
+    }
 }
