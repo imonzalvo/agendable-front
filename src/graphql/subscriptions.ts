@@ -22,13 +22,13 @@ export const onCreateAvailabilityItem = `subscription OnCreateAvailabilityItem {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -65,13 +65,13 @@ export const onUpdateAvailabilityItem = `subscription OnUpdateAvailabilityItem {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -108,13 +108,13 @@ export const onDeleteAvailabilityItem = `subscription OnDeleteAvailabilityItem {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -178,11 +178,11 @@ export const onCreateBookingServices = `subscription OnCreateBookingServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -240,11 +240,11 @@ export const onUpdateBookingServices = `subscription OnUpdateBookingServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -302,11 +302,11 @@ export const onDeleteBookingServices = `subscription OnDeleteBookingServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -368,13 +368,13 @@ export const onCreateBooking = `subscription OnCreateBooking {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -467,13 +467,13 @@ export const onUpdateBooking = `subscription OnUpdateBooking {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -566,13 +566,13 @@ export const onDeleteBooking = `subscription OnDeleteBooking {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -639,12 +639,6 @@ export const onCreateEmployee = `subscription OnCreateEmployee {
       owner
     }
     phone
-    services {
-      items {
-        id
-      }
-      nextToken
-    }
     availability {
       items {
         id
@@ -665,6 +659,12 @@ export const onCreateEmployee = `subscription OnCreateEmployee {
         clientPhone
         clientName
         clientFamilyName
+      }
+      nextToken
+    }
+    services {
+      items {
+        id
       }
       nextToken
     }
@@ -722,12 +722,6 @@ export const onUpdateEmployee = `subscription OnUpdateEmployee {
       owner
     }
     phone
-    services {
-      items {
-        id
-      }
-      nextToken
-    }
     availability {
       items {
         id
@@ -748,6 +742,12 @@ export const onUpdateEmployee = `subscription OnUpdateEmployee {
         clientPhone
         clientName
         clientFamilyName
+      }
+      nextToken
+    }
+    services {
+      items {
+        id
       }
       nextToken
     }
@@ -805,12 +805,6 @@ export const onDeleteEmployee = `subscription OnDeleteEmployee {
       owner
     }
     phone
-    services {
-      items {
-        id
-      }
-      nextToken
-    }
     availability {
       items {
         id
@@ -831,6 +825,12 @@ export const onDeleteEmployee = `subscription OnDeleteEmployee {
         clientPhone
         clientName
         clientFamilyName
+      }
+      nextToken
+    }
+    services {
+      items {
+        id
       }
       nextToken
     }
@@ -880,13 +880,13 @@ export const onCreateEmployeeServices = `subscription OnCreateEmployeeServices {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -905,11 +905,11 @@ export const onCreateEmployeeServices = `subscription OnCreateEmployeeServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -937,13 +937,13 @@ export const onUpdateEmployeeServices = `subscription OnUpdateEmployeeServices {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -962,11 +962,11 @@ export const onUpdateEmployeeServices = `subscription OnUpdateEmployeeServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -994,13 +994,13 @@ export const onDeleteEmployeeServices = `subscription OnDeleteEmployeeServices {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -1019,11 +1019,11 @@ export const onDeleteEmployeeServices = `subscription OnDeleteEmployeeServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -1040,14 +1040,14 @@ export const onCreateService = `subscription OnCreateService {
     price
     currency
     duration
-    employees {
+    description
+    bookings {
       items {
         id
       }
       nextToken
     }
-    description
-    bookings {
+    employees {
       items {
         id
       }
@@ -1069,14 +1069,14 @@ export const onUpdateService = `subscription OnUpdateService {
     price
     currency
     duration
-    employees {
+    description
+    bookings {
       items {
         id
       }
       nextToken
     }
-    description
-    bookings {
+    employees {
       items {
         id
       }
@@ -1098,14 +1098,14 @@ export const onDeleteService = `subscription OnDeleteService {
     price
     currency
     duration
-    employees {
+    description
+    bookings {
       items {
         id
       }
       nextToken
     }
-    description
-    bookings {
+    employees {
       items {
         id
       }
@@ -1312,11 +1312,11 @@ export const onCreateBranchServices = `subscription OnCreateBranchServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -1360,11 +1360,11 @@ export const onDeleteBranchServices = `subscription OnDeleteBranchServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -1633,11 +1633,11 @@ export const onUpdateBranchServices = `subscription OnUpdateBranchServices {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {

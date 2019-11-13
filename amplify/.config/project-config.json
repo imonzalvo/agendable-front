@@ -1,15 +1,17 @@
 {
-  "projectName": "AgendableDevelop",
-  "version": "2.0",
-  "frontend": "javascript",
-  "javascript": {
-    "framework": "react",
-    "config": {
-      "SourceDir": "src",
-      "DistributionDir": "dist",
-      "BuildCommand": "npm.cmd run-script build",
-      "StartCommand": "npm.cmd run-script start"
-    }
-  },
-  "providers": ["awscloudformation"]
+    "projectName": "agendable",
+    "version": "2.0",
+    "frontend": "javascript",
+    "javascript": {
+        "framework": "react",
+        "config": {
+            "SourceDir": "src",
+            "DistributionDir": "build",
+            "BuildCommand": "npm.cmd run-script build",
+            "StartCommand": "npm.cmd run-script start"
+        }
+    },
+    "providers": [
+        "awscloudformation"
+    ]
 }

@@ -5,90 +5,6 @@ export const getEmployeeAvailableTime = `query GetEmployeeAvailableTime($id: ID,
   getEmployeeAvailableTime(id: $id, date: $date, duration: $duration)
 }
 `;
-export const getEmployeeServices = `query GetEmployeeServices($id: ID!) {
-  getEmployeeServices(id: $id) {
-    id
-    employee {
-      id
-      givenName
-      familyName
-      user {
-        id
-        givenName
-        familyName
-        userName
-        email
-        phone
-        userType
-        owner
-      }
-      phone
-      services {
-        nextToken
-      }
-      availability {
-        nextToken
-      }
-      bookings {
-        nextToken
-      }
-      branches {
-        id
-        address
-        phone
-        email
-        name
-        description
-        image
-      }
-    }
-    service {
-      id
-      name
-      price
-      currency
-      duration
-      employees {
-        nextToken
-      }
-      description
-      bookings {
-        nextToken
-      }
-      branch {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const listEmployeeServicess = `query ListEmployeeServicess(
-  $filter: ModelEmployeeServicesFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listEmployeeServicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      employee {
-        id
-        givenName
-        familyName
-        phone
-      }
-      service {
-        id
-        name
-        price
-        currency
-        duration
-        description
-      }
-    }
-    nextToken
-  }
-}
-`;
 export const getUser = `query GetUser($id: ID!) {
   getUser(id: $id) {
     id
@@ -187,13 +103,13 @@ export const getAvailabilityItem = `query GetAvailabilityItem($id: ID!) {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -279,11 +195,11 @@ export const getBookingServices = `query GetBookingServices($id: ID!) {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -377,13 +293,13 @@ export const getBooking = `query GetBooking($id: ID!) {
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -499,12 +415,6 @@ export const getEmployee = `query GetEmployee($id: ID!) {
       owner
     }
     phone
-    services {
-      items {
-        id
-      }
-      nextToken
-    }
     availability {
       items {
         id
@@ -525,6 +435,12 @@ export const getEmployee = `query GetEmployee($id: ID!) {
         clientPhone
         clientName
         clientFamilyName
+      }
+      nextToken
+    }
+    services {
+      items {
+        id
       }
       nextToken
     }
@@ -577,13 +493,13 @@ export const listEmployees = `query ListEmployees(
         owner
       }
       phone
-      services {
-        nextToken
-      }
       availability {
         nextToken
       }
       bookings {
+        nextToken
+      }
+      services {
         nextToken
       }
       branches {
@@ -594,6 +510,90 @@ export const listEmployees = `query ListEmployees(
         name
         description
         image
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getEmployeeServices = `query GetEmployeeServices($id: ID!) {
+  getEmployeeServices(id: $id) {
+    id
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    service {
+      id
+      name
+      price
+      currency
+      duration
+      description
+      bookings {
+        nextToken
+      }
+      employees {
+        nextToken
+      }
+      branch {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const listEmployeeServicess = `query ListEmployeeServicess(
+  $filter: ModelEmployeeServicesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEmployeeServicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+      service {
+        id
+        name
+        price
+        currency
+        duration
+        description
       }
     }
     nextToken
@@ -612,11 +612,11 @@ export const listServices = `query ListServices(
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
@@ -634,14 +634,14 @@ export const getService = `query GetService($id: ID!) {
     price
     currency
     duration
-    employees {
+    description
+    bookings {
       items {
         id
       }
       nextToken
     }
-    description
-    bookings {
+    employees {
       items {
         id
       }
@@ -761,11 +761,11 @@ export const getBranchServices = `query GetBranchServices($id: ID!) {
       price
       currency
       duration
-      employees {
-        nextToken
-      }
       description
       bookings {
+        nextToken
+      }
+      employees {
         nextToken
       }
       branch {
