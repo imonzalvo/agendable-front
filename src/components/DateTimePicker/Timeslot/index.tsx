@@ -1,23 +1,24 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
+import { Moment } from 'moment';
 
 const { Text } = Typography;
 
-interface TimeSlotProps {
-  id: number;
+interface TimeslotProps {
+  date: string;
   time: string;
-  handleClick: (id: number) => void;
+  handleClick: (date: string) => void;
   disabled?: boolean;
 }
 
-const TimeSlot = ({ id, time, handleClick, disabled = false }: TimeSlotProps) => (
+const Timeslot = ({ date, time, handleClick, disabled = false }: TimeslotProps) => (
   <Button
     disabled={disabled}
-    onClick={() => handleClick(id)}
+    onClick={() => handleClick(date)}
     style={{ width: 154, height: 50, margin: '4px 4px 0px' }}
   >
     <Text strong>{time}</Text>
   </Button>
 );
 
-export default TimeSlot;
+export default Timeslot;

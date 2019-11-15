@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
+import {
+ Form, Input, Button, message,
+} from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { Auth } from 'aws-amplify';
 

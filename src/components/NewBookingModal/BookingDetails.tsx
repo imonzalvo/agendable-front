@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Select, Typography, Card, Form, Empty } from 'antd';
+import {
+ Row, Col, Select, Typography, Card, Form, Empty,
+} from 'antd';
 import { SingleDatePicker } from 'react-dates';
 import moment, { Moment } from 'moment';
 import produce from 'immer';
@@ -71,51 +73,39 @@ export default function BookingDetails({
   }, [calendarState.date, selectedServices, selectedEmployee]);
 
   const onDateChange = (newDate: Moment) => {
-    setCalendarState(pS =>
-      produce(pS, calendar => {
+    setCalendarState(pS => produce(pS, calendar => {
         calendar.date = newDate;
         calendar.isLoading = true;
-      }),
-    );
+      }));
     setTimeout(() => {
-      setCalendarState(pS =>
-        produce(pS, calendar => {
+      setCalendarState(pS => produce(pS, calendar => {
           calendar.isLoading = false;
-        }),
-      );
+        }));
     }, 1000);
   };
 
   const onFocusChange = () => {
-    setCalendarState(pS =>
-      produce(pS, calendar => {
+    setCalendarState(pS => produce(pS, calendar => {
         calendar.isFocused = !calendar.isFocused;
-      }),
-    );
+      }));
   };
 
   const onServiceChange = (e: BookingDetailsProps['selectedServices']) => {
-    setBookingState(pS =>
-      produce(pS, dS => {
+    setBookingState(pS => produce(pS, dS => {
         dS.selectedServices = e;
-      }),
-    );
+      }));
   };
 
   const onEmployeeChange = (e: BookingDetailsProps['selectedEmployee']) => {
-    setBookingState(pS =>
-      produce(pS, dS => {
+    setBookingState(pS => produce(pS, dS => {
         dS.selectedEmployee = e;
-      }),
-    );
+      }));
   };
 
   const onSelectTimeslot = (dateTime: string) => {
-    setBookingState(pS =>
-      produce(pS, dS => {
+    setBookingState(pS => produce(pS, dS => {
         dS.selectedDateTime = dateTime;
-      }),
-    );
+      }));
   };
 
   const getServices = () => {

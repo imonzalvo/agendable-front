@@ -38,9 +38,6 @@ export default function BusinessGetter({
         localStorage.setItem('businessHandle', pathnameHandle);
         getBusinessByHandle({ variables: { handle: pathnameHandle } });
       }
-    } else {
-      localStorage.removeItem('business');
-      localStorage.removeItem('businessHandle');
     }
   }, [pathname]);
 

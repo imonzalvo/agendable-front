@@ -1,46 +1,52 @@
 import React, { useState } from 'react';
 import { Spin, Row, Col } from 'antd';
 import { DayPickerSingleDateController } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
 import moment, { Moment } from 'moment';
+import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/es';
 
 import { Container } from './styles';
+import Timeslot from './Timeslot';
+import { getTimeslots } from './utils';
 
-import TimeSlot from './TimeSlot';
+interface DateTimePickerProps {
+  isLoading?: boolean;
+  availablePeriods: string[];
+  serviceDuration: number;
+  handleSelectDate: (date: string) => void;
+  handleDateChange: (date: Moment) => void;
+}
 
 moment.locale('es');
 const today = moment();
 const maxDate = moment().add(1, 'M');
 
-const DateTimePicker = () => {
+const DateTimePicker = ({
+  isLoading,
+  availablePeriods,
+  serviceDuration,
+  handleSelectDate,
+  handleDateChange,
+}: DateTimePickerProps) => {
   const [date, setDate] = useState(today);
   const [isFocused, setfocus] = useState(false);
-  const [isLoading, setLoading] = useState(false);
 
   const onDateChange = (newDate: Moment) => {
-    setLoading(true);
     setDate(newDate);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    handleDateChange(newDate);
   };
 
   const onFocusChange = () => {
     setfocus(prevFocus => !prevFocus);
   };
-
   const renderTimeSlots = () => {
-    const dummyTimeSlots = [
-      { id: 1, time: '4 PM', handleClick: () => {} },
-      { id: 2, time: '4:30 PM', handleClick: () => {}, disabled: true },
-      { id: 3, time: '5 PM', handleClick: () => {} },
-    ];
+    const timeslots = getTimeslots(availablePeriods, date.format('YYYY-MM-DD'), serviceDuration);
+
     return (
       <Row>
-        {dummyTimeSlots.map(timeSlot => (
-          <Col xs={12}>
-            <TimeSlot {...timeSlot} />
+        {timeslots.map(({ date, time }) => (
+          <Col key={date} xs={12}>
+            <Timeslot date={date} time={time} handleClick={handleSelectDate} />
           </Col>
         ))}
       </Row>

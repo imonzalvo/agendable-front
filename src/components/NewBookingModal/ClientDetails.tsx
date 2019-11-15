@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Input, Col, Row, Icon, Select, Typography, Card } from 'antd';
+import {
+ Form, Input, Col, Row, Icon, Select, Typography, Card,
+} from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { isValidNumber } from 'libphonenumber-js';
 
