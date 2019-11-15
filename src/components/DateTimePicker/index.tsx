@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Spin, Row, Col } from 'antd';
 import { DayPickerSingleDateController } from 'react-dates';
+<<<<<<< src/components/DateTimePicker/index.tsx
+import 'react-dates/lib/css/_datepicker.css';
+import moment, { Moment } from 'moment-timezone';
+=======
 import moment, { Moment } from 'moment';
 import 'react-dates/lib/css/_datepicker.css';
+>>>>>>> src/components/DateTimePicker/index.tsx
 import 'moment/locale/es';
 
 import { Container } from './styles';

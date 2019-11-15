@@ -3,7 +3,7 @@ import {
  Row, Col, Select, Typography, Card, Form, Empty,
 } from 'antd';
 import { SingleDatePicker } from 'react-dates';
-import moment, { Moment } from 'moment';
+import moment, { Moment } from 'moment-timezone';
 import produce from 'immer';
 import { QueryResult } from '@apollo/react-common';
 import { oc } from 'ts-optchain';
@@ -36,6 +36,8 @@ interface BookingDetailsProps {
   selectedServices: BookingState['selectedServices'];
   selectedEmployee: BookingState['selectedEmployee'];
   selectedDateTime: BookingState['selectedDateTime'];
+  duration: number;
+  defaultDate?: Date;
 }
 
 export default function BookingDetails({
@@ -45,6 +47,8 @@ export default function BookingDetails({
   selectedServices,
   selectedEmployee,
   selectedDateTime,
+  duration,
+  defaultDate,
 }: BookingDetailsProps) {
   const [calendarState, setCalendarState] = useState<{
     isLoading: boolean;
@@ -53,7 +57,7 @@ export default function BookingDetails({
   }>({
     isLoading: false,
     isFocused: false,
-    date: today,
+    date: defaultDate ? moment(defaultDate) : today,
   });
 
   const [getEmployeeAvailableTime, employeeAvailableTimeResponse] = useLazyQuery(
@@ -65,7 +69,7 @@ export default function BookingDetails({
       getEmployeeAvailableTime({
         variables: {
           id: selectedEmployee,
-          duration: 40,
+          duration,
           date: calendarState.date,
         },
       });
@@ -195,7 +199,11 @@ export default function BookingDetails({
       employeeAvailableTimeResponse.data.getEmployeeAvailableTime,
     );
 
-    const timeslots = getTimeslots(availablePeriods, calendarState.date.format('YYYY-MM-DD'), 40);
+    const timeslots = getTimeslots(
+      availablePeriods,
+      calendarState.date.format('YYYY-MM-DD'),
+      duration,
+    );
 
     if (timeslots.length > 0) {
       return (

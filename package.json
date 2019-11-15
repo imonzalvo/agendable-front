@@ -55,6 +55,7 @@
     "@types/humps": "^1.1.2",
     "@types/lodash.debounce": "^4.0.6",
     "@types/moment": "^2.13.0",
+    "@types/moment-timezone": "^0.5.12",
     "@types/react-big-calendar": "^0.22.3",
     "@types/react-dates": "^17.1.5",
     "@types/react-router": "^5.0.2",

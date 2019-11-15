@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const GetBookingsForBranch = gql`
   query GetBookingsForBranch($id: ID!) {
     getBranch(id: $id) {
-      bookings {
+      bookings(limit: 99) {
         items {
           end
           start
