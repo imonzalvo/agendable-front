@@ -9,7 +9,9 @@ interface TimeslotProps {
   isSelected?: boolean;
 }
 
-const Timeslot = ({ date, time, handleClick, isSelected, disabled = false }: TimeslotProps) => (
+const Timeslot = ({
+ date, time, handleClick, isSelected, disabled = false,
+}: TimeslotProps) => (
   <Button
     disabled={disabled}
     type={isSelected ? 'primary' : 'default'}

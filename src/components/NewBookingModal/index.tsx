@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Row, Col, Button, Card, Descriptions } from 'antd';
+import {
+ Modal, Row, Col, Button, Card, Descriptions,
+} from 'antd';
 import { FormProps } from 'antd/lib/form';
 import moment from 'moment';
 import 'react-dates/lib/css/_datepicker.css';
@@ -63,8 +65,7 @@ export default function NewBookingModal({
     if (services) {
       const servicesObj = keyBy(services, 'service.id');
       return bookingState.selectedServices.reduce(
-        (acc: number | undefined, serviceId: string | undefined) =>
-          serviceId ? acc + servicesObj[serviceId].service.price : 0,
+        (acc: number | undefined, serviceId: string | undefined) => (serviceId ? acc + servicesObj[serviceId].service.price : 0),
         0,
       );
     }
@@ -76,8 +77,7 @@ export default function NewBookingModal({
     if (services) {
       const servicesObj = keyBy(services, 'service.id');
       const totalDuration = bookingState.selectedServices.reduce(
-        (acc: number | undefined, serviceId: string | undefined) =>
-          serviceId ? acc + servicesObj[serviceId].service.duration : 0,
+        (acc: number | undefined, serviceId: string | undefined) => (serviceId ? acc + servicesObj[serviceId].service.duration : 0),
         0,
       );
       return moment(bookingState.selectedDateTime).add(totalDuration, 'minutes');
