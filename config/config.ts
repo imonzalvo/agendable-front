@@ -165,9 +165,9 @@ export default {
               component: './a/$businessHandle/book',
             },
             {
-              path: '/a/:businessHandle/confirm',
+              path: '/a/$businessHandle/book/confirm',
               exact: true,
-              component: './a/$businessHandle/confirm',
+              component: './a/$businessHandle/book/confirm',
             },
             {
               path: '/a/:businessHandle/book/select-branch',
@@ -236,7 +236,7 @@ export default {
             {
               path: '/confirm',
               exact: true,
-              component: './a/$businessHandle/confirm',
+              component: './a/$businessHandle/book/confirm',
             },
             {
               path: '/book/select-branch',
