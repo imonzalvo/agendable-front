@@ -92,6 +92,7 @@
     "numeral": "^2.0.6",
     "nzh": "^1.0.3",
     "omit.js": "^1.0.2",
+    "parse-domain": "^2.3.4",
     "path-to-regexp": "^3.0.0",
     "prop-types": "^15.7.2",
     "qs": "^6.7.0",

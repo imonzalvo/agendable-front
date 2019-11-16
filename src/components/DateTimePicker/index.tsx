@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import { Spin, Row, Col } from 'antd';
 import { DayPickerSingleDateController } from 'react-dates';
-<<<<<<< src/components/DateTimePicker/index.tsx
-import 'react-dates/lib/css/_datepicker.css';
 import moment, { Moment } from 'moment-timezone';
-=======
-import moment, { Moment } from 'moment';
 import 'react-dates/lib/css/_datepicker.css';
->>>>>>> src/components/DateTimePicker/index.tsx
 import 'moment/locale/es';
 
 import { Container } from './styles';
 import Timeslot from './Timeslot';
-import { getTimeslots } from './utils';
+import { getTimeslots } from '@/utils/getTimeslots';
 
 interface DateTimePickerProps {
   isLoading?: boolean;
-  availablePeriods: string[];
+  availablePeriods: { from: string; to: string }[];
   serviceDuration: number;
   handleSelectDate: (date: string) => void;
   handleDateChange: (date: Moment) => void;
@@ -49,9 +44,9 @@ const DateTimePicker = ({
 
     return (
       <Row>
-        {timeslots.map(({ date, time }) => (
-          <Col key={date} xs={12}>
-            <Timeslot date={date} time={time} handleClick={handleSelectDate} />
+        {timeslots.map(({ date: dateTime, time }) => (
+          <Col key={dateTime} xs={12}>
+            <Timeslot date={dateTime} time={time} handleClick={handleSelectDate} />
           </Col>
         ))}
       </Row>

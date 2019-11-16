@@ -12,6 +12,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 // import Rehydrated from './Rehydrated'; trying to create a custom one from https://github.com/awslabs/aws-mobile-appsync-sdk-js/issues/448
 import es from 'antd/es/locale-provider/es_ES';
+import useSubdomain from '@/hooks/useSubdomain';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
@@ -54,7 +55,11 @@ export const BookingContext = React.createContext({
   setSteps: (_value: number) => {},
 });
 
-const Layout: React.FC = ({ children }) => {
+interface LayoutProps extends RouterTypes {
+  children: any;
+}
+
+const Layout = ({ children, location }: LayoutProps) => {
   const [isAuthCheckLoading, setAuthCheckLoading] = useState(true);
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [bookData, setBookData] = useState({
@@ -64,6 +69,7 @@ const Layout: React.FC = ({ children }) => {
     date: null,
   });
   const [steps, setSteps] = useState(4);
+  const subdomain = useSubdomain();
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -123,7 +129,9 @@ const Layout: React.FC = ({ children }) => {
               setSteps,
             }}
           >
-            <BusinessGetter pathname={location.pathname}>{children}</BusinessGetter>
+            <BusinessGetter pathname={location.pathname} subdomain={subdomain}>
+              {children}
+            </BusinessGetter>
           </BookingContext.Provider>
         </AuthContext.Provider>
       </ConfigProvider>
