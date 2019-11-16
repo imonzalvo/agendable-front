@@ -15,15 +15,17 @@ import {
 
 export const useBusiness = () => {
   const businessJSON = localStorage.getItem('business');
-  return businessJSON ? JSON.parse(businessJSON) : null;
+  return businessJSON ? JSON.parse(businessJSON) : { businessName: '' };
 };
 
 export default function BusinessGetter({
   children,
   pathname,
+  subdomain,
 }: {
   children: any;
   pathname: string;
+  subdomain: string | null;
 }) {
   const [getBusinessByHandle, { loading, data, error }] = useLazyQuery<IGetBusinessByHandle>(
     GetBusinessByHandle,
@@ -32,14 +34,24 @@ export default function BusinessGetter({
   const pathnameHandle = parsePathnameHandle(pathname);
 
   useEffect(() => {
-    if (pathnameHandle) {
+    if (subdomain) {
+      if (localStorage.getItem('businessHandle') !== subdomain) {
+        localStorage.removeItem('business');
+        localStorage.setItem('businessHandle', subdomain);
+        getBusinessByHandle({ variables: { handle: subdomain } });
+      }
+    } else if (pathnameHandle) {
       if (localStorage.getItem('businessHandle') !== pathnameHandle) {
         localStorage.removeItem('business');
         localStorage.setItem('businessHandle', pathnameHandle);
         getBusinessByHandle({ variables: { handle: pathnameHandle } });
       }
     }
-  }, [pathname]);
+    if (!pathnameHandle && !subdomain) {
+      localStorage.removeItem('business');
+      localStorage.removeItem('businessHandle');
+    }
+  }, [pathnameHandle, subdomain]);
 
   useEffect(() => {
     if (data) {

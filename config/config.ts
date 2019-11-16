@@ -1,5 +1,6 @@
 import { IConfig, IPlugin } from 'umi-types';
 import slash from 'slash2';
+
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
 
 import webpackPlugin from './plugin.config';
@@ -28,11 +29,11 @@ const plugins: IPlugin[] = [
       },
       pwa: pwa
         ? {
-          workboxPluginMode: 'InjectManifest',
-          workboxOptions: {
-            importWorkboxFrom: 'local',
-          },
-        }
+            workboxPluginMode: 'InjectManifest',
+            workboxOptions: {
+              importWorkboxFrom: 'local',
+            },
+          }
         : false, // default close dll, because issue https://github.com/ant-design/ant-design-pro/issues/4665
       // dll features https://webpack.js.org/plugins/dll-plugin/
       // dll: {
@@ -126,6 +127,152 @@ export default {
   //     ],
   //   },
   // ],
+  routes: [
+    {
+      path: '/',
+      component: '../layouts',
+      routes: [
+        {
+          path: '/404',
+          exact: true,
+          component: './404',
+        },
+        {
+          path: '/a/:businessHandle',
+          exact: true,
+          component: './a/$businessHandle',
+        },
+        {
+          path: '/a/:businessHandle/admin',
+          exact: false,
+          component: './a/$businessHandle/admin/_layout.tsx',
+          routes: [
+            {
+              path: '/a/:businessHandle/admin',
+              exact: true,
+              component: './a/$businessHandle/admin',
+            },
+          ],
+        },
+        {
+          path: '/a/:businessHandle/book',
+          exact: false,
+          component: './a/$businessHandle/book/_layout.tsx',
+          routes: [
+            {
+              path: '/a/:businessHandle/book',
+              exact: true,
+              component: './a/$businessHandle/book',
+            },
+            {
+              path: '/a/:businessHandle/confirm',
+              exact: true,
+              component: './a/$businessHandle/confirm',
+            },
+            {
+              path: '/a/:businessHandle/book/select-branch',
+              exact: true,
+              component: './a/$businessHandle/book/select-branch',
+            },
+            {
+              path: '/a/:businessHandle/book/select-professional',
+              exact: true,
+              component: './a/$businessHandle/book/select-professional',
+            },
+            {
+              path: '/a/:businessHandle/book/select-date',
+              exact: true,
+              component: './a/$businessHandle/book/select-date',
+            },
+            {
+              path: '/a/:businessHandle/book/select-service',
+              exact: true,
+              component: './a/$businessHandle/book/select-service',
+            },
+          ],
+        },
+        {
+          path: '/exception/403',
+          exact: true,
+          component: './exception/403',
+        },
+        {
+          path: '/exception/404',
+          exact: true,
+          component: './exception/404',
+        },
+        {
+          path: '/exception/500',
+          exact: true,
+          component: './exception/500',
+        },
+        {
+          path: '/',
+          exact: true,
+          component: './',
+        },
+        {
+          path: '/admin',
+          exact: false,
+          component: './a/$businessHandle/admin/_layout.tsx',
+          routes: [
+            {
+              path: '/admin',
+              exact: true,
+              component: './a/$businessHandle/admin',
+            },
+          ],
+        },
+        {
+          path: '/book',
+          exact: false,
+          component: './a/$businessHandle/book/_layout.tsx',
+          routes: [
+            {
+              path: '/book',
+              exact: true,
+              component: './a/$businessHandle/book',
+            },
+            {
+              path: '/confirm',
+              exact: true,
+              component: './a/$businessHandle/confirm',
+            },
+            {
+              path: '/book/select-branch',
+              exact: true,
+              component: './a/$businessHandle/book/select-branch',
+            },
+            {
+              path: '/book/select-professional',
+              exact: true,
+              component: './a/$businessHandle/book/select-professional',
+            },
+            {
+              path: '/book/select-date',
+              exact: true,
+              component: './a/$businessHandle/book/select-date',
+            },
+            {
+              path: '/book/select-service',
+              exact: true,
+              component: './a/$businessHandle/book/select-service',
+            },
+          ],
+        },
+        {
+          path: '/testCard',
+          exact: true,
+          component: './testCard',
+        },
+        {
+          path: '/testDateTimePicker',
+          exact: true,
+          component: './testDateTimePicker',
+        },
+      ],
+    },
+  ],
   theme: {
     'primary-color': primaryColor,
   },

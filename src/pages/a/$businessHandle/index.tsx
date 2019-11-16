@@ -2,10 +2,13 @@ import React from 'react';
 import { Row, Col, Typography, Button } from 'antd';
 
 import BusinessLayout, { BusinessLayoutProps } from '@/layouts/BusinessLayout';
+import { useBusiness } from '@/components/BussinessGetter';
 
 // export interface BusinessHomeProps extends BusinessLayoutProps {}
 
-export default function BusinessHome(props: BusinessLayoutProps) {
+export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
+  const { businessName } = useBusiness();
+
   return (
     <BusinessLayout {...props}>
       <Row align="middle" justify="center">
@@ -19,7 +22,7 @@ export default function BusinessHome(props: BusinessLayoutProps) {
             textAlign: 'center',
           }}
         >
-          <Typography.Title>{props.match.params.businessHandle}</Typography.Title>
+          <Typography.Title>{businessName}</Typography.Title>
           <Typography.Paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Metus vulputate eu scelerisque felis
