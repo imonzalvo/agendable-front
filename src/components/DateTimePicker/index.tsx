@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Spin, Row, Col } from 'antd';
+import { Spin, Row, Col, Empty } from 'antd';
 import { DayPickerSingleDateController } from 'react-dates';
 import moment, { Moment } from 'moment-timezone';
 import 'react-dates/lib/css/_datepicker.css';
@@ -19,6 +19,7 @@ interface DateTimePickerProps {
 
 moment.locale('es');
 const today = moment();
+const yesterday = moment().subtract(1, 'd');
 const maxDate = moment().add(1, 'M');
 
 const DateTimePicker = ({
@@ -39,9 +40,17 @@ const DateTimePicker = ({
   const onFocusChange = () => {
     setfocus(prevFocus => !prevFocus);
   };
+
+  const renderEmpty = () => (
+    <Empty
+      style={{ marginTop: 8 }}
+      description={<span>No timeslots availables left, try selecting other day</span>}
+    ></Empty>
+  );
+
   const renderTimeSlots = () => {
     const timeslots = getTimeslots(availablePeriods, date.format('YYYY-MM-DD'), serviceDuration);
-
+    if (timeslots.length === 0) return renderEmpty();
     return (
       <Row>
         {timeslots.map(({ date: dateTime, time }) => (
@@ -60,7 +69,7 @@ const DateTimePicker = ({
         onFocusChange={onFocusChange}
         focused={isFocused}
         date={date}
-        isOutsideRange={d => !moment(d).isBetween(today, maxDate)}
+        isOutsideRange={d => !moment(d).isBetween(yesterday, maxDate)}
       />
       {isLoading ? <Spin style={{ marginTop: 8 }} /> : renderTimeSlots()}
     </Container>

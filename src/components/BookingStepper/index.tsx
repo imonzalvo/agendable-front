@@ -22,7 +22,7 @@ const BookingStepper = ({ active, children }: BookingStepperProps) => {
         alignItems: 'center',
       }}
     >
-      <Steps size="small" current={current}>
+      <Steps size="small" current={current} style={{ marginBottom: 16 }}>
         {steps === 4 && <Step title="Select branch" />}
         <Step title="Select service" />
         <Step title="Select professional" />

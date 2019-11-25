@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Typography, Button } from 'antd';
+import router from 'umi/router';
 
 import BusinessLayout, { BusinessLayoutProps } from '@/layouts/BusinessLayout';
 import { useBusiness } from '@/components/BussinessGetter';
@@ -28,7 +29,14 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
             incididunt ut labore et dolore magna aliqua. Metus vulputate eu scelerisque felis
             imperdiet.
           </Typography.Paragraph>
-          <Button type="primary">Agendarse</Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              router.push('book'); // TODO: This is not going to work locally
+            }}
+          >
+            Agendarse
+          </Button>
         </Col>
       </Row>
     </BusinessLayout>
