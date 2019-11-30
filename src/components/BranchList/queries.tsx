@@ -7,6 +7,7 @@ export const GetBranches = gql`
         items {
           id
           name
+          description
         }
       }
     }

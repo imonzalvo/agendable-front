@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Select, Typography, Card, Form, Empty } from 'antd';
+import {
+ Row, Col, Select, Typography, Card, Form, Empty,
+} from 'antd';
 import { SingleDatePicker } from 'react-dates';
-import moment, { Moment } from 'moment';
+import moment, { Moment } from 'moment-timezone';
 import produce from 'immer';
 import { QueryResult } from '@apollo/react-common';
 import { oc } from 'ts-optchain';
@@ -34,6 +36,8 @@ interface BookingDetailsProps {
   selectedServices: BookingState['selectedServices'];
   selectedEmployee: BookingState['selectedEmployee'];
   selectedDateTime: BookingState['selectedDateTime'];
+  duration: number;
+  defaultDate?: Date;
 }
 
 export default function BookingDetails({
@@ -43,6 +47,8 @@ export default function BookingDetails({
   selectedServices,
   selectedEmployee,
   selectedDateTime,
+  duration,
+  defaultDate,
 }: BookingDetailsProps) {
   const [calendarState, setCalendarState] = useState<{
     isLoading: boolean;
@@ -51,7 +57,7 @@ export default function BookingDetails({
   }>({
     isLoading: false,
     isFocused: false,
-    date: today,
+    date: defaultDate ? moment(defaultDate) : today,
   });
 
   const [getEmployeeAvailableTime, employeeAvailableTimeResponse] = useLazyQuery(
@@ -63,7 +69,7 @@ export default function BookingDetails({
       getEmployeeAvailableTime({
         variables: {
           id: selectedEmployee,
-          duration: 40,
+          duration,
           date: calendarState.date,
         },
       });
@@ -71,51 +77,39 @@ export default function BookingDetails({
   }, [calendarState.date, selectedServices, selectedEmployee]);
 
   const onDateChange = (newDate: Moment) => {
-    setCalendarState(pS =>
-      produce(pS, calendar => {
+    setCalendarState(pS => produce(pS, calendar => {
         calendar.date = newDate;
         calendar.isLoading = true;
-      }),
-    );
+      }));
     setTimeout(() => {
-      setCalendarState(pS =>
-        produce(pS, calendar => {
+      setCalendarState(pS => produce(pS, calendar => {
           calendar.isLoading = false;
-        }),
-      );
+        }));
     }, 1000);
   };
 
   const onFocusChange = () => {
-    setCalendarState(pS =>
-      produce(pS, calendar => {
+    setCalendarState(pS => produce(pS, calendar => {
         calendar.isFocused = !calendar.isFocused;
-      }),
-    );
+      }));
   };
 
   const onServiceChange = (e: BookingDetailsProps['selectedServices']) => {
-    setBookingState(pS =>
-      produce(pS, dS => {
+    setBookingState(pS => produce(pS, dS => {
         dS.selectedServices = e;
-      }),
-    );
+      }));
   };
 
   const onEmployeeChange = (e: BookingDetailsProps['selectedEmployee']) => {
-    setBookingState(pS =>
-      produce(pS, dS => {
+    setBookingState(pS => produce(pS, dS => {
         dS.selectedEmployee = e;
-      }),
-    );
+      }));
   };
 
   const onSelectTimeslot = (dateTime: string) => {
-    setBookingState(pS =>
-      produce(pS, dS => {
+    setBookingState(pS => produce(pS, dS => {
         dS.selectedDateTime = dateTime;
-      }),
-    );
+      }));
   };
 
   const getServices = () => {
@@ -205,7 +199,11 @@ export default function BookingDetails({
       employeeAvailableTimeResponse.data.getEmployeeAvailableTime,
     );
 
-    const timeslots = getTimeslots(availablePeriods, calendarState.date.format('YYYY-MM-DD'), 40);
+    const timeslots = getTimeslots(
+      availablePeriods,
+      calendarState.date.format('YYYY-MM-DD'),
+      duration,
+    );
 
     if (timeslots.length > 0) {
       return (

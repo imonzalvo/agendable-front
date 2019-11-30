@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Row, Col, Button, Card, Descriptions } from 'antd';
+import { Modal, Row, Col, Button, Card, Descriptions, message, Popconfirm } from 'antd';
 import { FormProps } from 'antd/lib/form';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import 'react-dates/lib/css/_datepicker.css';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
@@ -10,13 +10,14 @@ import { get, keyBy } from 'lodash';
 import BookingDetails from './BookingDetails';
 import ClientDetails from './ClientDetails';
 import { GetBranchServices, CreateBooking } from './queries';
+import { GetBookingsForBranch } from '@/components/AdminCalendar/queries';
 import { GlobalStyles } from './styles';
 import { GetBranchServices as GetBranchServicesType } from './__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 
 moment.locale('es');
 
-const now = new Date().toISOString();
+const now = moment().format();
 
 export interface BookingState {
   selectedServices: [string?];
@@ -34,12 +35,14 @@ export default function NewBookingModal({
   onCancel,
   employeesResponse,
   branchId,
+  modalParams,
 }: {
   visible: boolean;
   onOk: () => void;
   onCancel: () => void;
   employeesResponse: QueryResult<IGetBranchEmployees, Record<string, any>>;
   branchId: string;
+  modalParams?: { date?: Date };
 }) {
   const [bookingState, setBookingState] = useState<BookingState>({
     selectedServices: [],
@@ -50,7 +53,15 @@ export default function NewBookingModal({
     clientFamilyName: '',
     clientPhone: '',
   });
-  const [createBooking, bookingResponse] = useMutation(CreateBooking);
+  const [createBooking] = useMutation(CreateBooking, {
+    onCompleted: d => {
+      message.success('Successfully Created Booking');
+      onCancel();
+    },
+    onError: err => {
+      message.error(JSON.stringify(err));
+    },
+  });
 
   let formRef: FormProps['form'] | null = null;
 
@@ -63,26 +74,42 @@ export default function NewBookingModal({
     if (services) {
       const servicesObj = keyBy(services, 'service.id');
       return bookingState.selectedServices.reduce(
-        (acc: number | undefined, serviceId: string | undefined) =>
-          serviceId ? acc + servicesObj[serviceId].service.price : 0,
+        (acc: number | undefined, serviceId: string | undefined) => (serviceId ? acc + servicesObj[serviceId].service.price : 0),
         0,
       );
     }
     return 0;
   };
 
-  const getBookingEnd = () => {
+  const getTotalDuration = () => {
     const services = get(servicesResponse, 'data.getBranch.services.items');
     if (services) {
       const servicesObj = keyBy(services, 'service.id');
-      const totalDuration = bookingState.selectedServices.reduce(
-        (acc: number | undefined, serviceId: string | undefined) =>
-          serviceId ? acc + servicesObj[serviceId].service.duration : 0,
-        0,
+      return (
+        bookingState.selectedServices.reduce(
+          (acc: number | undefined, serviceId: string | undefined) =>
+            serviceId ? acc + servicesObj[serviceId].service.duration : 0,
+          0,
+        ) || 0
       );
-      return moment(bookingState.selectedDateTime).add(totalDuration, 'minutes');
     }
-    return moment(bookingState.selectedDateTime);
+    return 0;
+  };
+
+  const getBookingEnd = () =>
+    moment(bookingState.selectedDateTime).add(getTotalDuration(), 'minutes');
+
+  const confirmCancel = () => {
+    Modal.confirm({
+      title: 'Are you sure?',
+      content: 'You will lose all changes you made',
+      onOk() {
+        onCancel();
+      },
+      okButtonProps: { type: 'danger' },
+      okText: 'Yes, close',
+      cancelText: 'No, keep open',
+    });
   };
 
   return (
@@ -92,11 +119,13 @@ export default function NewBookingModal({
         title="New Appointment"
         visible={visible}
         onOk={onOk}
-        onCancel={onCancel}
+        onCancel={confirmCancel}
         width="100%"
         style={{ top: 0 }}
         bodyStyle={{ height: '100%' }}
         footer={null}
+        destroyOnClose
+        wrapClassName="create-booking-modal"
       >
         <Row gutter={32} style={{ height: '100%' }}>
           <Col span={16} style={{ height: '100%' }}>
@@ -107,6 +136,8 @@ export default function NewBookingModal({
               selectedServices={bookingState.selectedServices}
               selectedEmployee={bookingState.selectedEmployee}
               selectedDateTime={bookingState.selectedDateTime}
+              duration={getTotalDuration()}
+              defaultDate={get(modalParams, 'date')}
             />
           </Col>
           <Col span={8} style={{ height: '100%' }}>
@@ -134,7 +165,7 @@ export default function NewBookingModal({
             type="flex"
             style={{ padding: '0px 5px', height: '100%', alignItems: 'center' }}
           >
-            <Button size="large" type="ghost">
+            <Button size="large" type="ghost" onClick={confirmCancel}>
               Cancel
             </Button>
             <Descriptions layout="vertical" bordered size="small">
@@ -160,7 +191,7 @@ export default function NewBookingModal({
                         variables: {
                           createdAt: now,
                           start: bookingState.selectedDateTime,
-                          end: getBookingEnd().toISOString(),
+                          end: getBookingEnd().format(),
                           status: 'PENDING',
                           bookingBranchId: branchId,
                           bookingEmployeeId: bookingState.selectedEmployee,
@@ -169,6 +200,14 @@ export default function NewBookingModal({
                           clientFamilyName: values.clientFamilyName,
                           clientPhone: values.clientPhone ? `+598${values.clientPhone}` : undefined,
                         },
+                        refetchQueries: [
+                          {
+                            query: GetBookingsForBranch,
+                            variables: {
+                              id: branchId,
+                            },
+                          },
+                        ],
                       });
                     }
                   });

@@ -7,7 +7,7 @@ const { Meta } = Card;
 const { Title, Paragraph, Text } = Typography;
 
 interface ServiceDetail {
-  duration: string;
+  duration: number;
   price: number;
 }
 
@@ -17,7 +17,7 @@ interface CustomCardProps {
   image?: string;
   title: string;
   details: string;
-  handleClick: (id: string) => void;
+  handleClick: (id: string, duration?: number) => void;
   service?: ServiceDetail;
 }
 
@@ -37,7 +37,7 @@ const CustomCard = ({
       <Paragraph ellipsis={{ rows: 2, expandable: true }}>{details}</Paragraph>
       {!!service && (
         <ServiceDetail>
-          <Text>{`${service.duration} hr.`}</Text>
+          <Text>{`${service.duration} min.`}</Text>
           <Text strong>{`$${service.price}`}</Text>
         </ServiceDetail>
       )}
@@ -45,8 +45,10 @@ const CustomCard = ({
   );
 
   const handleServiceClick = () => {
-    handleClick(id);
-    setSelected(prevSelected => !prevSelected);
+    if (service) {
+      handleClick(id, service.duration);
+      setSelected(prevSelected => !prevSelected);
+    }
   };
 
   const renderAction = () => {
@@ -54,7 +56,13 @@ const CustomCard = ({
       const type = isSelected ? 'danger' : 'primary';
       const text = isSelected ? 'Remove' : 'Select';
       return (
-        <Button type={type} style={{ width: '90%', height: 40 }} onClick={handleServiceClick} block>
+        <Button
+          disabled={loading}
+          type={type}
+          style={{ width: '90%', height: 40 }}
+          onClick={handleServiceClick}
+          block
+        >
           {text}
         </Button>
       );
@@ -62,6 +70,7 @@ const CustomCard = ({
     return (
       <Button
         type="primary"
+        disabled={loading}
         style={{ width: '90%', height: 40 }}
         onClick={() => handleClick(id)}
         block
@@ -73,7 +82,7 @@ const CustomCard = ({
 
   return (
     <Card
-      style={{ width: 350, margin: 8 }}
+      style={{ width: 350, margin: '4px 0px' }}
       cover={image ? <Image alt="header" src={image} /> : null}
       actions={[renderAction()]}
       loading={loading}

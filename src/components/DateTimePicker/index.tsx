@@ -1,46 +1,61 @@
 import React, { useState } from 'react';
-import { Spin, Row, Col } from 'antd';
+import { Spin, Row, Col, Empty } from 'antd';
 import { DayPickerSingleDateController } from 'react-dates';
+import moment, { Moment } from 'moment-timezone';
 import 'react-dates/lib/css/_datepicker.css';
-import moment, { Moment } from 'moment';
 import 'moment/locale/es';
 
 import { Container } from './styles';
+import Timeslot from './Timeslot';
+import { getTimeslots } from '@/utils/getTimeslots';
 
-import TimeSlot from './TimeSlot';
+interface DateTimePickerProps {
+  isLoading?: boolean;
+  availablePeriods: { from: string; to: string }[];
+  serviceDuration: number;
+  handleSelectDate: (date: string) => void;
+  handleDateChange: (date: Moment) => void;
+}
 
 moment.locale('es');
 const today = moment();
+const yesterday = moment().subtract(1, 'd');
 const maxDate = moment().add(1, 'M');
 
-const DateTimePicker = () => {
+const DateTimePicker = ({
+  isLoading,
+  availablePeriods,
+  serviceDuration,
+  handleSelectDate,
+  handleDateChange,
+}: DateTimePickerProps) => {
   const [date, setDate] = useState(today);
   const [isFocused, setfocus] = useState(false);
-  const [isLoading, setLoading] = useState(false);
 
   const onDateChange = (newDate: Moment) => {
-    setLoading(true);
     setDate(newDate);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    handleDateChange(newDate);
   };
 
   const onFocusChange = () => {
     setfocus(prevFocus => !prevFocus);
   };
 
+  const renderEmpty = () => (
+    <Empty
+      style={{ marginTop: 8 }}
+      description={<span>No timeslots availables left, try selecting other day</span>}
+    ></Empty>
+  );
+
   const renderTimeSlots = () => {
-    const dummyTimeSlots = [
-      { id: 1, time: '4 PM', handleClick: () => {} },
-      { id: 2, time: '4:30 PM', handleClick: () => {}, disabled: true },
-      { id: 3, time: '5 PM', handleClick: () => {} },
-    ];
+    const timeslots = getTimeslots(availablePeriods, date.format('YYYY-MM-DD'), serviceDuration);
+    if (timeslots.length === 0) return renderEmpty();
     return (
       <Row>
-        {dummyTimeSlots.map(timeSlot => (
-          <Col xs={12}>
-            <TimeSlot {...timeSlot} />
+        {timeslots.map(({ date: dateTime, time }) => (
+          <Col key={dateTime} xs={12}>
+            <Timeslot date={dateTime} time={time} handleClick={handleSelectDate} />
           </Col>
         ))}
       </Row>
@@ -54,7 +69,7 @@ const DateTimePicker = () => {
         onFocusChange={onFocusChange}
         focused={isFocused}
         date={date}
-        isOutsideRange={d => !moment(d).isBetween(today, maxDate)}
+        isOutsideRange={d => !moment(d).isBetween(yesterday, maxDate)}
       />
       {isLoading ? <Spin style={{ marginTop: 8 }} /> : renderTimeSlots()}
     </Container>

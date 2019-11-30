@@ -1,117 +1,141 @@
-type AvailabilityItem @model @auth(rules: [{allow: public, operations: [read]}, {allow: private, provider: userPools}]) {
- id: ID!
- day: Day
- from: String!
- to: String!
- employee: Employee @connection(name: "EmployeeAvailability")
+type AvailabilityItem
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
+  id: ID!
+  day: Day
+  from: String!
+  to: String!
+  employee: Employee @connection(name: "EmployeeAvailability")
 }
-type BookingServices @model  @auth(rules: [{allow: public, operations: [read]}, {allow: private, provider: userPools}]) {
+type BookingServices
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
   id: ID!
   service: Service @connection(name: "ServiceBookings")
   booking: Booking @connection(name: "BookingServices")
 }
-type Booking @model @auth(rules: [{allow: public, operations: [read]}, {allow: private, provider: userPools}]) {
- id: ID!
- createdAt: AWSDateTime!
- start: AWSDateTime!
- end: AWSDateTime!
- status: BookingStatus!
- client: User @connection(name: "BookingUser")
- branch: Branch! @connection(name: "BranchBookings")
- services: [BookingServices!]! @connection(name: "BookingServices")
- employee: Employee! @connection(name: "BookingEmployee")
- clientEmail: AWSEmail
- clientPhone: AWSPhone
- clientName: String
- clientFamilyName: String
+type Booking
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
+  id: ID!
+  createdAt: AWSDateTime!
+  start: AWSDateTime!
+  end: AWSDateTime!
+  status: BookingStatus!
+  client: User @connection(name: "BookingUser")
+  branch: Branch! @connection(name: "BranchBookings")
+  services: [BookingServices!]! @connection(name: "BookingServices")
+  employee: Employee! @connection(name: "BookingEmployee")
+  clientEmail: AWSEmail
+  clientPhone: AWSPhone
+  clientName: String
+  clientFamilyName: String
 }
 enum BookingStatus {
- COMPLETED
- CONFIRMED
- PENDING
- CANCELLED
+  COMPLETED
+  CONFIRMED
+  PENDING
+  CANCELLED
 }
-type Employee @model @auth(rules: [{allow: public, operations: [read]}, {allow: private, provider: userPools}]) {
- id: ID!
- givenName: String!
- familyName: String!
- user: User @connection
- phone: String  @auth(rules: [{allow: owner}])
- services: [EmployeeServices!] @connection (name: "EmployeeServices")
- availability: [AvailabilityItem!]! @connection(name: "EmployeeAvailability")
- bookings: [Booking!]! @connection(name: "BookingEmployee")
- branches: Branch @connection(name: "EmployeesBranch")
+type Employee
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
+  id: ID!
+  givenName: String!
+  familyName: String!
+  user: User @connection
+  phone: String @auth(rules: [{ allow: owner }])
+  services: [EmployeeServices!] @connection(name: "EmployeeServices")
+  availability: [AvailabilityItem!]! @connection(name: "EmployeeAvailability")
+  bookings: [Booking!]! @connection(name: "BookingEmployee")
+  branches: Branch @connection(name: "EmployeesBranch")
 }
-type EmployeeServices @model  @auth(rules: [{allow: public, operations: [read]}, {allow: private, provider: userPools}]) {
+type EmployeeServices
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
   id: ID!
   service: Service @connection(name: "ServiceEmployees")
   employee: Employee @connection(name: "EmployeeServices")
 }
-type Service @model @auth(rules: [{allow: public, operations: [read]}, {allow: private, provider: userPools}]) {
- id: ID!
- name: String!
- price: Float!
- currency: String
- duration: Int!
- employees: [EmployeeServices!]! @connection(name: "ServiceEmployees")
- branch: [BranchServices!] @connection(name: "ServiceBranches")
- bookings: [BookingServices] @connection(name: "ServiceBookings")
- description: String
+type Service
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
+  id: ID!
+  name: String!
+  price: Float!
+  currency: String
+  duration: Int!
+  employees: [EmployeeServices!]! @connection(name: "ServiceEmployees")
+  branch: [BranchServices!] @connection(name: "ServiceBranches")
+  bookings: [BookingServices] @connection(name: "ServiceBookings")
+  description: String
 }
-type Branch @model @auth(rules: [{allow: public, operations: [read]}, {allow: private, provider: userPools}]) {
- id: ID!
- address: String!
- phone: AWSPhone!
- email: AWSEmail!
- name: String!
- description: String
- image: String
- bookings: [Booking!] @connection(name: "BranchBookings")
- services: [BranchServices!]! @connection(name: "BranchServices")
- business: Business! @connection(name: "BusinessBranch")
- employees: [Employee!]! @connection(name: "EmployeesBranch")
+type Branch
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
+  id: ID!
+  address: String!
+  phone: AWSPhone!
+  email: AWSEmail!
+  name: String!
+  description: String
+  image: String
+  bookings: [Booking!] @connection(name: "BranchBookings")
+  services: [BranchServices!]! @connection(name: "BranchServices")
+  business: Business! @connection(name: "BusinessBranch")
+  employees: [Employee!]! @connection(name: "EmployeesBranch")
 }
-type BranchServices @model  @auth(rules: [{allow: public, operations: [read, update]}, {allow: private, provider: userPools}]) {
+type BranchServices
+  @model
+  @auth(
+    rules: [{ allow: public, operations: [read, update] }, { allow: private, provider: userPools }]
+  ) {
   id: ID!
   branch: Branch @connection(name: "BranchServices")
   service: Service @connection(name: "ServiceBranches")
 }
-type Business @model @key(name: "ByHandle", fields: ["handle"], queryField: "businessByHandle") @auth(rules: [{allow: public, operations: [read, update]}, {allow: private, provider: userPools}]) {
- id: ID!
- name: String!
- email: AWSEmail!
- phone: AWSPhone!
- owners: User!
- handle: String!
- branches: [Branch!] @connection(name: "BusinessBranch")
+type Business
+  @model
+  @key(name: "ByHandle", fields: ["handle"], queryField: "businessByHandle")
+  @auth(
+    rules: [{ allow: public, operations: [read, update] }, { allow: private, provider: userPools }]
+  ) {
+  id: ID!
+  name: String!
+  email: AWSEmail!
+  phone: AWSPhone!
+  owners: User!
+  handle: String!
+  branches: [Branch!] @connection(name: "BusinessBranch")
 }
 
-type User @model @auth(rules: [{allow: owner}]) {
- id: ID!
- givenName: String!
- familyName: String!
- userName: String!
- email: AWSEmail
- phone: AWSPhone
- userType: UserType!
- bookings: [Booking!]! @connection(name: "BookingUser")
- business: Business
+type User @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  givenName: String!
+  familyName: String!
+  userName: String!
+  email: AWSEmail
+  phone: AWSPhone
+  userType: UserType!
+  bookings: [Booking!]! @connection(name: "BookingUser")
+  business: Business
 }
 enum UserType {
- ADMIN
- USER
- GUEST
+  ADMIN
+  USER
+  GUEST
 }
 enum Day {
- MONDAY
- TUESDAY
- WEDNESDAY
- THURSDAY
- FRIDAY
- SATURDAY
- SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
 }
 
 type Query {
-  getEmployeeAvailableTime(id: ID, date: String, duration: Int): AWSJSON @function(name: "AvailableTimeEmployee")
+  getEmployeeAvailableTime(id: ID, date: String, duration: Int): AWSJSON
+    @function(name: "AvailableTimeEmployee")
 }

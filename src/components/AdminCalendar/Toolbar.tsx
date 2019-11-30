@@ -3,11 +3,12 @@ import { Button } from 'antd';
 import { ToolbarProps } from 'react-big-calendar';
 
 interface CustomToolbarProps extends ToolbarProps {
-  onNewBooking: () => void;
+  onNewBooking: (date: Date) => void;
 }
 
 function CustomToolbar({
   localizer: { messages },
+  date,
   label,
   onNavigate,
   onNewBooking,
@@ -27,7 +28,7 @@ function CustomToolbar({
       </span>
 
       <span className="rbc-toolbar-label">{label}</span>
-      <Button type="primary" onClick={() => onNewBooking()}>
+      <Button type="primary" onClick={() => onNewBooking(date)}>
         Agendar
       </Button>
     </div>

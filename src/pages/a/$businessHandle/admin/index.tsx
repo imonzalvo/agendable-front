@@ -9,9 +9,16 @@ import { GetBranchEmployees } from '@/queries/adminPageQueries';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 import { useBusiness } from '@/components/BussinessGetter';
 
+export interface ModalState {
+  id: 'NEW_BOOKING' | null;
+  params?: {
+    date?: Date;
+  };
+}
+
 export default function Admin() {
   const { branches } = useBusiness();
-  const [whichModalOpen, setModalOpen] = useState<'NEW_BOOKING' | null>(null);
+  const [modal, setModal] = useState<ModalState>({ id: null });
   const employeesResponse = useQuery<IGetBranchEmployees>(GetBranchEmployees, {
     variables: { id: branches[0].id },
   });
@@ -19,16 +26,17 @@ export default function Admin() {
   return (
     <div>
       <AdminCalendar
-        setModalOpen={setModalOpen}
+        setModal={setModal}
         employeesResponse={employeesResponse}
         branchId={branches[0].id}
       />
 
       <NewBookingModal
-        visible={whichModalOpen === 'NEW_BOOKING'}
+        visible={modal.id === 'NEW_BOOKING'}
+        modalParams={modal.params}
         employeesResponse={employeesResponse}
-        onOk={() => setModalOpen(null)}
-        onCancel={() => setModalOpen(null)}
+        onOk={() => setModal({ id: null })}
+        onCancel={() => setModal({ id: null })}
         branchId={branches[0].id}
       />
     </div>

@@ -3,13 +3,15 @@ import { Alert } from 'antd';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { useQuery } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { get } from 'lodash';
 
 import PageLoading from '@/components/PageLoading';
 import { GetBookingsForBranch } from './queries';
+import Toolbar from './Toolbar';
+import { ModalState } from '@/pages/a/$businessHandle/admin';
 import {
   GetBookingsForBranch as IGetBookingsForBranch,
   GetBookingsForBranch_getBranch_bookings_items,
@@ -18,18 +20,17 @@ import {
   GetBranchEmployees as IGetBranchEmployees,
   GetBranchEmployees_getBranch_employees_items,
 } from '@/queries/__generated__/GetBranchEmployees';
-import Toolbar from './Toolbar';
 
 const localizer = momentLocalizer(moment);
 
 interface AdminCalendarProps {
-  setModalOpen: React.Dispatch<React.SetStateAction<'NEW_BOOKING' | null>>;
+  setModal: React.Dispatch<React.SetStateAction<ModalState>>;
   employeesResponse: QueryResult<IGetBranchEmployees, Record<string, any>>;
   branchId: string;
 }
 
 export default function AdminCalendar({
-  setModalOpen,
+  setModal,
   employeesResponse,
   branchId,
 }: AdminCalendarProps) {
@@ -97,7 +98,12 @@ export default function AdminCalendar({
       // min={new Date(0, 0, 0, 7, 0, 0)}
       // max={new Date(0, 0, 0, , 0, 0)}
       components={{
-        toolbar: props => <Toolbar {...props} onNewBooking={() => setModalOpen('NEW_BOOKING')} />,
+        toolbar: props => (
+          <Toolbar
+            {...props}
+            onNewBooking={(date: Date) => setModal({ id: 'NEW_BOOKING', params: { date } })}
+          />
+        ),
       }}
     />
   );
