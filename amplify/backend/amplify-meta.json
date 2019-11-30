@@ -36,11 +36,12 @@
 			"output": {
 				"AgendableDevelopUserPoolGroupRole": "arn:aws:iam::343146248340:role/us-west-2_T2FcSEm2H-AgendableDevelopUserPoolGroupRole"
 			},
-			"lastPushTimeStamp": "2019-11-12T22:06:43.535Z",
+			"lastPushTimeStamp": "2019-11-30T22:11:11.264Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-agendabledevelop-develop-201150-deployment/amplify-cfn-templates/auth/template.json",
 				"logicalId": "authuserPoolGroups"
-			}
+			},
+			"lastPushDirHash": "GsG97dnaj5AZt/H9yST5SPC5UXg="
 		},
 		"agendabledevelop5e1ec4f95e1ec4f9": {
 			"service": "Cognito",
@@ -55,11 +56,12 @@
 				"IdentityPoolName": "AgendableDevelopIdentityPool__develop",
 				"UserPoolName": "agendabledevelop5e1ec4f9_userpool_5e1ec4f9"
 			},
-			"lastPushTimeStamp": "2019-11-12T22:06:43.541Z",
+			"lastPushTimeStamp": "2019-11-30T22:11:11.270Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-agendabledevelop-develop-201150-deployment/amplify-cfn-templates/auth/agendabledevelop5e1ec4f95e1ec4f9-cloudformation-template.yml",
 				"logicalId": "authagendabledevelop5e1ec4f95e1ec4f9"
-			}
+			},
+			"lastPushDirHash": "hpYMNOryPpHDilUQ3v5f7zlbSrU="
 		}
 	},
 	"api": {
@@ -89,14 +91,14 @@
 				},
 				"GraphQLAPIIdOutput": "6i43hdlbqvhrdfjet6luh72q5e",
 				"GraphQLAPIEndpointOutput": "https://fes5hbrbvzdm3em3rfmtmqbiwa.appsync-api.us-west-2.amazonaws.com/graphql",
-				"GraphQLAPIKeyOutput": "da2-5fiikjxfujg2djhgiiwmd3u76m"
+				"GraphQLAPIKeyOutput": "da2-nu66d6d445bttgvruoaftdxnnm"
 			},
-			"lastPushTimeStamp": "2019-11-12T22:06:53.197Z",
+			"lastPushTimeStamp": "2019-11-30T22:11:19.663Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-agendabledevelop-develop-201150-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiAgendableDevelop"
 			},
-			"lastPushDirHash": "+rGsWU0oqDfMdB8Jv6d+rHsjrL8="
+			"lastPushDirHash": "ePZWKIwFS5TLaub+LAuinnxf0Ko="
 		}
 	},
 	"hosting": {
@@ -109,7 +111,7 @@
 				"Region": "us-west-2",
 				"HostingBucketName": "agendable-dev-hosting-develop"
 			},
-			"lastPushTimeStamp": "2019-11-12T22:06:43.556Z",
+			"lastPushTimeStamp": "2019-11-30T22:11:11.281Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-agendabledevelop-develop-201150-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
