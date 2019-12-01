@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'antd';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { useQuery } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
 import moment from 'moment-timezone';
 import 'moment/locale/es';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { get } from 'lodash';
 
 import PageLoading from '@/components/PageLoading';
 import { GetBookingsForBranch } from './queries';
 import Toolbar from './Toolbar';
+import ResourceHeader from './ResourceHeader';
 import { ModalState } from '@/pages/a/$businessHandle/admin';
 import {
   GetBookingsForBranch as IGetBookingsForBranch,
@@ -20,6 +20,8 @@ import {
   GetBranchEmployees as IGetBranchEmployees,
   GetBranchEmployees_getBranch_employees_items,
 } from '@/queries/__generated__/GetBranchEmployees';
+import BigCalendarStyles from './bigCalendarStyles';
+import useTimeout from '@/hooks/useTimeout';
 
 const localizer = momentLocalizer(moment);
 
@@ -34,6 +36,9 @@ export default function AdminCalendar({
   employeesResponse,
   branchId,
 }: AdminCalendarProps) {
+  const [shouldTransition, setShouldTransition] = useState(false);
+  const { callTimeout, clear } = useTimeout(() => setShouldTransition(false), 500);
+
   const { loading: bookingsLoading, data: bookingsData, error: bookingsError } = useQuery<
     IGetBookingsForBranch
   >(GetBookingsForBranch, {
@@ -85,26 +90,35 @@ export default function AdminCalendar({
   };
 
   return (
-    <Calendar
-      events={getEvents()}
-      localizer={localizer}
-      defaultView="day"
-      views={['day']}
-      step={30}
-      resources={getResourceMap()}
-      resourceIdAccessor="resourceId"
-      resourceTitleAccessor="resourceTitle"
-      // TODO: min and max should come from the min/max of the branch employee availabilty
-      // min={new Date(0, 0, 0, 7, 0, 0)}
-      // max={new Date(0, 0, 0, , 0, 0)}
-      components={{
-        toolbar: props => (
-          <Toolbar
-            {...props}
-            onNewBooking={(date: Date) => setModal({ id: 'NEW_BOOKING', params: { date } })}
-          />
-        ),
-      }}
-    />
+    <>
+      <BigCalendarStyles shouldTransition={shouldTransition} />
+      <Calendar
+        events={getEvents()}
+        localizer={localizer}
+        defaultView="day"
+        views={['day']}
+        step={30}
+        resources={getResourceMap()}
+        resourceIdAccessor="resourceId"
+        resourceTitleAccessor="resourceTitle"
+        // TODO: min and max should come from the min/max of the branch employee availabilty
+        // min={new Date(0, 0, 0, 7, 0, 0)}
+        // max={new Date(0, 0, 0, , 0, 0)}
+        components={{
+          toolbar: props => (
+            <Toolbar
+              {...props}
+              onNewBooking={(date: Date) => setModal({ id: 'NEW_BOOKING', params: { date } })}
+              onDateChange={() => {
+                clear();
+                setShouldTransition(true);
+                callTimeout();
+              }}
+            />
+          ),
+          resourceHeader: props => <ResourceHeader {...props} />,
+        }}
+      />
+    </>
   );
 }

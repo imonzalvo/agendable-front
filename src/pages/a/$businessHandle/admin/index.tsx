@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import 'moment/locale/es';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useQuery } from '@apollo/react-hooks';
 
 import AdminCalendar from '@/components/AdminCalendar';

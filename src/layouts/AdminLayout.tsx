@@ -24,7 +24,8 @@ export interface AdminLayoutProps extends ProLayoutProps {
 export type AdminLayoutContext = { [K in 'location']: AdminLayoutProps[K] } & {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
 };
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => menuList.map(item => {
+const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+  menuList.map(item => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return localItem;
   });
