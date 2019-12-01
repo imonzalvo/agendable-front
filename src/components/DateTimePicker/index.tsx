@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Spin, Row, Col, Empty } from 'antd';
 import { DayPickerSingleDateController } from 'react-dates';
 import moment, { Moment } from 'moment-timezone';
-import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/es';
 
 import { Container } from './styles';
