@@ -234,7 +234,7 @@ export default {
               component: './a/$businessHandle/book',
             },
             {
-              path: '/confirm',
+              path: '/book/confirm',
               exact: true,
               component: './a/$businessHandle/book/confirm',
             },
