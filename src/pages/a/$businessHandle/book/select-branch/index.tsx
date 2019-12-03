@@ -9,7 +9,6 @@ import { useBusiness } from '@/components/BussinessGetter';
 const SelectBranch = () => {
   const { bookData, setBookData } = useContext(BookingContext);
   const business = useBusiness();
-  console.log('business ', business);
 
   const selectBranch = (id: string) => {
     setBookData({ ...bookData, branch: id });

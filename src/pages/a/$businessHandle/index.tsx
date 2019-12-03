@@ -4,6 +4,7 @@ import router from 'umi/router';
 
 import BusinessLayout, { BusinessLayoutProps } from '@/layouts/BusinessLayout';
 import { useBusiness } from '@/components/BussinessGetter';
+import { getUrl } from '@/utils/utils';
 
 // export interface BusinessHomeProps extends BusinessLayoutProps {}
 
@@ -32,7 +33,7 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
           <Button
             type="primary"
             onClick={() => {
-              router.push('book'); // TODO: This is not going to work locally
+              router.push(getUrl('book'));
             }}
           >
             Agendarse
