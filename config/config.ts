@@ -22,11 +22,6 @@ const plugins: IPlugin[] = [
         default: 'en-US',
         baseNavigator: true,
       },
-      dynamicImport: {
-        loadingComponent: './components/PageLoading/index',
-        webpackChunkName: true,
-        level: 3,
-      },
       pwa: pwa
         ? {
           workboxPluginMode: 'InjectManifest',
