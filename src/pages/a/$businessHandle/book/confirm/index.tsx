@@ -10,6 +10,7 @@ import Stepper from '@/components/BookingStepper';
 import { BookingContext } from '@/layouts';
 import { CreateClientBooking } from '@/components/ConfirmBooking/queries';
 import { isValidNumber } from 'libphonenumber-js';
+import { getUrl } from '@/utils/utils';
 
 moment.locale('es');
 
@@ -41,8 +42,7 @@ const Confirm = ({ form }) => {
   const [createBooking] = useMutation(CreateClientBooking, {
     onCompleted: () => {
       message.success('Successfully Created Booking');
-      // router.push(`/a/${window.localStorage.getItem('businessHandle')}`);
-      router.push(`/`); // TODO: This is not going to work locally.
+      router.push(getUrl(''));
     },
     onError: err => {
       message.error(JSON.stringify(err)); //TODO handle error
