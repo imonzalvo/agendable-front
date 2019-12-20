@@ -13,22 +13,29 @@ import useEffectSkipMount from '@/hooks/useEffectSkipMount';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
-const weekDayNames = new Array(7);
-weekDayNames[0] = { short: 'D', long: 'Domingo' };
-weekDayNames[1] = { short: 'L', long: 'Lunes' };
-weekDayNames[2] = { short: 'M', long: 'Martes' };
-weekDayNames[3] = { short: 'X', long: 'Miércoles' };
-weekDayNames[4] = { short: 'J', long: 'Jueves' };
-weekDayNames[5] = { short: 'V', long: 'Viernes' };
-weekDayNames[6] = { short: 'S', long: 'Sábado' };
+// TODO: use moment or i18n for day name localization
+const weekDayNames = [
+  { short: 'D', long: 'Domingo' },
+  { short: 'L', long: 'Lunes' },
+  { short: 'M', long: 'Martes' },
+  { short: 'X', long: 'Miércoles' },
+  { short: 'J', long: 'Jueves' },
+  { short: 'V', long: 'Viernes' },
+  { short: 'S', long: 'Sábado' },
+];
 
 interface CustomToolbarProps extends ToolbarProps {
-  onNewBooking: (date: Date) => void;
-  onDateChange: (date: Date) => void;
+  onNewBooking: (selectedDate: Date) => void;
+  onDateChange: (selectedDate: Date) => void;
 }
 
-function CustomToolbar({ date, onNavigate, onNewBooking, onDateChange }: CustomToolbarProps) {
-  const [weekdays] = useState(generateWeekdays(date));
+function CustomToolbar({
+  date: selectedDate,
+  onNavigate,
+  onNewBooking,
+  onDateChange,
+}: CustomToolbarProps) {
+  const [weekdays] = useState(generateWeekdays(selectedDate));
   const [sliderIndex, setSliderIndex] = useState(0);
   const { screenIsAtLeast } = useResponsive({
     xs: 0,
@@ -37,13 +44,15 @@ function CustomToolbar({ date, onNavigate, onNewBooking, onDateChange }: CustomT
   });
 
   useEffectSkipMount(() => {
-    onDateChange(date);
-    setSliderIndex(
-      moment(date)
-        .startOf('week')
-        .diff(moment(weekdays[0]), 'weeks'),
-    );
-  }, [date]);
+    onDateChange(selectedDate);
+    const weeksDifferenceFromSelectedDate = moment(selectedDate)
+      .startOf('week')
+      .diff(moment(weekdays[0]), 'weeks');
+    // if new selected selectedDate is in a different weekday, set new slider index to the difference of curr selectedDate with the curr week
+    if (weeksDifferenceFromSelectedDate) {
+      setSliderIndex(weeksDifferenceFromSelectedDate);
+    }
+  }, [selectedDate]);
 
   const slideRenderer = ({ index, key }: { index: number; key: number }) => {
     const weekdaysArr =
@@ -61,7 +70,7 @@ function CustomToolbar({ date, onNavigate, onNewBooking, onDateChange }: CustomT
 
     return (
       <Radio.Group
-        value={date.valueOf()}
+        value={selectedDate.valueOf()}
         onChange={v => {
           onNavigate('DATE', new Date(v.target.value));
         }}
@@ -77,7 +86,7 @@ function CustomToolbar({ date, onNavigate, onNewBooking, onDateChange }: CustomT
             value={weekDay.valueOf()}
             key={weekDay.valueOf()}
             isToday={moment(weekDay).isSame(moment(), 'day')}
-            isChecked={weekDay.valueOf() === date.valueOf()}
+            isChecked={weekDay.valueOf() === selectedDate.valueOf()}
           >
             <div style={{ lineHeight: 'initial' }}>{weekDay.getDate()}</div>
             <div style={{ lineHeight: 'initial' }}>
@@ -116,7 +125,7 @@ function CustomToolbar({ date, onNavigate, onNewBooking, onDateChange }: CustomT
                 Today
               </Button>
               <DatePicker
-                value={moment(date)}
+                value={moment(selectedDate)}
                 size="large"
                 onChange={newDate => {
                   if (newDate) {
@@ -128,7 +137,7 @@ function CustomToolbar({ date, onNavigate, onNewBooking, onDateChange }: CustomT
               />
               <Button
                 type="primary"
-                onClick={() => onNewBooking(date)}
+                onClick={() => onNewBooking(selectedDate)}
                 style={{ marginLeft: screenIsAtLeast('md') ? 'auto' : 10 }}
                 size="large"
                 icon="plus"

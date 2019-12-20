@@ -1,7 +1,11 @@
 import React from 'react';
 import Sticky from 'react-sticky-el';
 
-export default function ResourceHeader({ label }: { label: string }) {
+interface ResourceHeaderProps {
+  label: React.ReactNode;
+}
+
+export default function ResourceHeader({ label }: ResourceHeaderProps) {
   return (
     <Sticky
       boundaryElement=".rbc-calendar"

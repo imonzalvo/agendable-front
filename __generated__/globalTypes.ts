@@ -13,6 +13,16 @@ export enum BookingStatus {
   PENDING = 'PENDING',
 }
 
+export enum Day {
+  FRIDAY = 'FRIDAY',
+  MONDAY = 'MONDAY',
+  SATURDAY = 'SATURDAY',
+  SUNDAY = 'SUNDAY',
+  THURSDAY = 'THURSDAY',
+  TUESDAY = 'TUESDAY',
+  WEDNESDAY = 'WEDNESDAY',
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

@@ -1,7 +1,12 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { Radio } from 'antd';
 
-export const DayContainer = styled(Radio.Button)`
+interface DayContainerProps {
+  isChecked?: boolean;
+  isToday?: boolean;
+}
+
+export const DayContainer = styled(Radio.Button)<DayContainerProps>`
   height: 40px !important;
   flex: 1;
   display: flex !important;

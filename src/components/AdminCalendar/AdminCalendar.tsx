@@ -5,25 +5,30 @@ import { useQuery } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
 import moment from 'moment-timezone';
 import 'moment/locale/es';
-import { get } from 'lodash';
+import { compact } from 'lodash';
 
 import PageLoading from '@/components/PageLoading';
 import { GetBookingsForBranch } from './queries';
+import TimeSlotWrapper from './TimeSlotWrapper';
 import Toolbar from './Toolbar';
 import ResourceHeader from './ResourceHeader';
 import { ModalState } from '@/pages/a/$businessHandle/admin';
-import {
-  GetBookingsForBranch as IGetBookingsForBranch,
-  GetBookingsForBranch_getBranch_bookings_items,
-} from './__generated__/GetBookingsForBranch';
-import {
-  GetBranchEmployees as IGetBranchEmployees,
-  GetBranchEmployees_getBranch_employees_items,
-} from '@/queries/__generated__/GetBranchEmployees';
+import { GetBookingsForBranch as IGetBookingsForBranch } from './__generated__/GetBookingsForBranch';
+import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 import BigCalendarStyles from './bigCalendarStyles';
 import useTimeout from '@/hooks/useTimeout';
 
 const localizer = momentLocalizer(moment);
+
+const isoWeekdays = {
+  1: 'MONDAY',
+  2: 'TUESDAY',
+  3: 'WEDNESDAY',
+  4: 'THURSDAY',
+  5: 'FRIDAY',
+  6: 'SATURDAY',
+  7: 'SUNDAY',
+};
 
 interface AdminCalendarProps {
   setModal: React.Dispatch<React.SetStateAction<ModalState>>;
@@ -62,31 +67,56 @@ export default function AdminCalendar({
   }
 
   const getEvents = () => {
-    const bookings: [GetBookingsForBranch_getBranch_bookings_items] = get(
-      bookingsData,
-      'getBranch.bookings.items',
-    );
-    return bookings.map(booking => ({
-      id: booking.id,
-      title: ` ${booking.clientName} ${booking.clientFamilyName}`,
-      start: new Date(booking.start),
-      end: new Date(booking.end),
-      resourceId: booking.employee.id,
-    }));
+    const bookings = bookingsData?.getBranch?.bookings?.items;
+    if (bookings) {
+      return compact(bookings).map(booking => ({
+        id: booking.id,
+        title: ` ${booking.clientName} ${booking.clientFamilyName}`,
+        start: new Date(booking.start),
+        end: new Date(booking.end),
+        resourceId: booking.employee.id,
+      }));
+    }
+    return [];
   };
 
   const getResourceMap = () => {
-    const employees: [GetBranchEmployees_getBranch_employees_items] | undefined = get(
-      employeesResponse,
-      'data.getBranch.employees.items',
-    );
+    const employees = employeesResponse?.data?.getBranch?.employees?.items;
     if (employees) {
-      return employees.map(employee => ({
+      return compact(employees).map(employee => ({
         resourceId: employee.id,
         resourceTitle: `${employee.givenName} ${employee.familyName}`,
       }));
     }
     return [];
+  };
+
+  /**
+   * Check if resource is available on given timeslot
+   */
+  const isAvailable = (dateTime: Date, resourceId: string) => {
+    const employees = employeesResponse?.data?.getBranch?.employees?.items;
+
+    if (employees) {
+      const employee = employees.find(e => e && e.id === resourceId);
+      const availabilityItems = employee?.availability?.items;
+      if (availabilityItems) {
+        const dateTimeMom = moment(dateTime);
+        const weekday = isoWeekdays[dateTimeMom.isoWeekday()]; // Get the weekday string constant for dateTime (ie. 1: MONDAY)
+        const employeeAvOnWeekday = availabilityItems.find(
+          avItem => avItem && avItem.day === weekday,
+        );
+        if (employeeAvOnWeekday) {
+          // create from and to moments that have the same dayOfYear as given dateTime but with the time of the employeeAvailabiltyItem
+          const from = moment
+            .utc(employeeAvOnWeekday.from, 'H:mm')
+            .dayOfYear(dateTimeMom.dayOfYear());
+          const to = moment.utc(employeeAvOnWeekday.to, 'H:mm').dayOfYear(dateTimeMom.dayOfYear());
+          return dateTimeMom.isBetween(from, to);
+        }
+      }
+    }
+    return false;
   };
 
   return (
@@ -104,6 +134,7 @@ export default function AdminCalendar({
         // TODO: min and max should come from the min/max of the branch employee availabilty
         // min={new Date(0, 0, 0, 7, 0, 0)}
         // max={new Date(0, 0, 0, , 0, 0)}
+        // @ts-ignore
         components={{
           toolbar: props => (
             <Toolbar
@@ -116,7 +147,15 @@ export default function AdminCalendar({
               }}
             />
           ),
-          resourceHeader: props => <ResourceHeader {...props} />,
+          resourceHeader: ({ label }: { label: React.ReactNode }) => (
+            <ResourceHeader label={label} />
+          ),
+          // @ts-ignore
+          timeSlotWrapper: ({ children, resource, value }: { children: React.ReactNode }) => (
+            <TimeSlotWrapper resource={resource} value={value} isAvailable={isAvailable}>
+              {children}
+            </TimeSlotWrapper>
+          ),
         }}
       />
     </>
