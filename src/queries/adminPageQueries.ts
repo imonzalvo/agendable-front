@@ -15,6 +15,13 @@ export const GetBranchEmployees = gql`
               }
             }
           }
+          availability {
+            items {
+              day
+              from
+              to
+            }
+          }
         }
       }
     }

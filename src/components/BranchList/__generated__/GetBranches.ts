@@ -10,6 +10,7 @@ export interface GetBranches_getBusiness_branches_items {
   __typename: 'Branch';
   id: string;
   name: string;
+  description: string | null;
 }
 
 export interface GetBranches_getBusiness_branches {

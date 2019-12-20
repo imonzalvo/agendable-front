@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
-export default createGlobalStyle`
+export interface GlobalStyleProps {
+  shouldTransition?: boolean;
+}
+
+export default createGlobalStyle<GlobalStyleProps>`
 .rbc-btn {
   color: inherit;
   font: inherit;
@@ -69,6 +73,10 @@ button.rbc-input::-moz-focus-inner {
   background: #e6e6e6;
 }
 
+.available-slot-bg {
+  background: #fff !important
+}
+
 .rbc-header {
   overflow: hidden;
   flex: 1 0 0%;
@@ -104,7 +112,7 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .rbc-today {
-  background-color: #eaf6ff;
+  /* background-color: #eaf6ff; */
 }
 /* 
 .rbc-toolbar {
@@ -461,6 +469,8 @@ button.rbc-input::-moz-focus-inner {
   align-items: flex-start;
   overflow: hidden;
   position: absolute;
+  cursor: pointer;
+  z-index: 2
 }
 .rbc-day-slot .rbc-event-label {
   flex: none;
@@ -475,9 +485,13 @@ button.rbc-input::-moz-focus-inner {
   height: 100%;
   min-height: 1em;
 }
+
 .rbc-day-slot .rbc-time-slot {
-  border-top: 1px solid #f7f7f7;
-}
+  border-top:1px solid #dee1e3;
+  background:linear-gradient(45deg,#eef0f2 46%,rgba(16,25,40,0.2) 49%,rgba(16,25,40,0.2) 51%,#eef0f2 55%);
+  background-size:9.75px 9.75px;
+  z-index:1;
+ }
 
 .rbc-time-view-resources .rbc-time-gutter,
 .rbc-time-view-resources .rbc-time-header-gutter {
@@ -654,5 +668,13 @@ button.rbc-input::-moz-focus-inner {
   height: 1px;
   background-color: #74ad31;
   pointer-events: none;
+}
+
+.hovered {
+  background: #eafff8 !important;
+  padding: 0 5px;
+  font-weight: 600;
+  color: #5ed8b0;
+  transition: padding ease-in-out 0.2s
 }
 `;
