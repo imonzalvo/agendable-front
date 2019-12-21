@@ -9,7 +9,8 @@ interface ServiceListProps {
   selectService: (id: string, duration: number) => void;
 }
 
-const renderSkeleton = () => ['1', '2', '3'].map(item => (
+const renderSkeleton = () =>
+  ['1', '2', '3'].map(item => (
     <Card key={item} id={item} title="" details="" handleClick={() => {}} loading />
   ));
 
@@ -20,9 +21,7 @@ const ServiceList = ({ branchId, selectService }: ServiceListProps) => {
   const services = response.data.getBranch
     ? response.data.getBranch.services.items.map(item => item.service)
     : [];
-  return services.map(({
- id, name, description, price, duration,
-}) => (
+  return services.map(({ id, name, description, price, duration }) => (
     <Card
       key={id}
       id={id}

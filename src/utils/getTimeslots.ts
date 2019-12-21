@@ -6,7 +6,7 @@ const getPeriodTimeslots = (
   start: Moment,
   duration: number,
   to: Moment,
-): ({ date: string; time: string })[] => {
+): { date: string; time: string }[] => {
   if (to.isBefore(moment(start).add(duration, 'm'))) {
     return [];
   }
@@ -22,7 +22,7 @@ export const getTimeslots = (
   availables: { from: string; to: string }[],
   dateSelected: string,
   duration: number,
-): ({ date: string; time: string })[] => {
+): { date: string; time: string }[] => {
   const now = moment();
   const timeslots = availables.map(available => {
     const from = moment.utc(`${dateSelected} ${available.from}`).local();

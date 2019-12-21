@@ -45,7 +45,7 @@ const Confirm = ({ form }) => {
       router.push(getUrl(''));
     },
     onError: err => {
-      message.error(JSON.stringify(err)); //TODO handle error
+      message.error(JSON.stringify(err)); // TODO handle error
     },
   });
 
@@ -66,7 +66,7 @@ const Confirm = ({ form }) => {
         createBooking({
           variables: {
             createdAt: moment().format(),
-            start: start,
+            start,
             end: getBookingEnd().format(),
             status: 'PENDING',
             bookingBranchId: branch,
@@ -97,13 +97,13 @@ const Confirm = ({ form }) => {
         <Form.Item label="Nombre">
           {getFieldDecorator('givenName', {
             rules: [{ required: true, message: 'Please input your first name!', whitespace: true }],
-            initialValue: !!user ? user.givenName : '',
+            initialValue: user ? user.givenName : '',
           })(<Input />)}
         </Form.Item>
         <Form.Item label="Apellido">
           {getFieldDecorator('familyName', {
             rules: [{ required: true, message: 'Please input your first name!', whitespace: true }],
-            initialValue: !!user ? user.familyName : '',
+            initialValue: user ? user.familyName : '',
           })(<Input />)}
         </Form.Item>
         <Form.Item label="E-mail">
@@ -118,7 +118,7 @@ const Confirm = ({ form }) => {
                 message: 'Please input your E-mail!',
               },
             ],
-            initialValue: !!user ? user.email : '',
+            initialValue: user ? user.email : '',
           })(
             <Input
               prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -143,7 +143,7 @@ const Confirm = ({ form }) => {
                 },
               },
             ],
-            initialValue: !!user ? user.phone : '',
+            initialValue: user ? user.phone : '',
           })(
             <Input
               addonBefore={prefixSelector}
