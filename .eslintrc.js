@@ -1,9 +1,10 @@
 const { strictEslint } = require('@umijs/fabric');
 
 module.exports = {
-  extends: ['prettier'],
   ...strictEslint,
+  extends: ['prettier', 'prettier/react'],
   rules: {
+    'prettier/prettier': 'error',
     'eslint-comments/disable-enable-pair': 0,
     'eslint-comments/no-unlimited-disable': 0,
     '@typescript-eslint/camelcase': 0,
@@ -20,4 +21,9 @@ module.exports = {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: true,
     page: true,
   },
+  plugins: ['prettier', 'eslint-plugin-prettier'],
+  parserOptions: {
+    sourceType: 'module',
+  },
+  parser: '@typescript-eslint/parser',
 };

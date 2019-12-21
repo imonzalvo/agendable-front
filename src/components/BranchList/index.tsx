@@ -9,7 +9,8 @@ interface BranchListProps {
   selectBranch: (id: string) => void;
 }
 
-const renderSkeleton = () => ['1', '2', '3'].map(item => (
+const renderSkeleton = () =>
+  ['1', '2', '3'].map(item => (
     <Card key={item} id={item} title="" details="" handleClick={() => {}} loading />
   ));
 

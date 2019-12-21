@@ -1,4 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-underscore-dangle */
 /* globals workbox */
@@ -55,12 +54,10 @@ addEventListener('message', event => {
   const message = event.data;
   if (replyPort && message && message.type === 'skip-waiting') {
     event.waitUntil(
-      self
-        .skipWaiting()
-        .then(
-          () => replyPort.postMessage({ error: null }),
-          error => replyPort.postMessage({ error }),
-        ),
+      self.skipWaiting().then(
+        () => replyPort.postMessage({ error: null }),
+        error => replyPort.postMessage({ error }),
+      ),
     );
   }
 });
