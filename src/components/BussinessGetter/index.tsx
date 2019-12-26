@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { Alert } from 'antd';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { get } from 'lodash';
@@ -13,10 +13,14 @@ import {
   GetBusinessByHandle_businessByHandle_items_branches_items,
 } from './__generated__/GetBusinessByHandle';
 
-export const useBusiness = () => {
-  const businessJSON = localStorage.getItem('business');
-  return businessJSON ? JSON.parse(businessJSON) : { businessName: '' };
-};
+export const BusinessContext = createContext({
+  business: {
+    businessName: '',
+    loading: true,
+    businessId: '',
+    branches: [],
+  },
+});
 
 export default function BusinessGetter({
   children,
@@ -27,54 +31,79 @@ export default function BusinessGetter({
   pathname: string;
   subdomain: string | null;
 }) {
-  const [getBusinessByHandle, { loading, data, error }] = useLazyQuery<IGetBusinessByHandle>(
+  const initialBusiness = localStorage.getItem('business');
+  const initialState = initialBusiness
+    ? JSON.parse(initialBusiness)
+    : { businessName: '', loading: true };
+  const [business, setBusiness] = useState(initialState);
+  const [getBusinessByHandle, { data, error }] = useLazyQuery<IGetBusinessByHandle>(
     GetBusinessByHandle,
   );
 
   const pathnameHandle = parsePathnameHandle(pathname);
 
   useEffect(() => {
-    if (subdomain) {
-      if (localStorage.getItem('businessHandle') !== subdomain) {
+    const businessHandle = subdomain || pathnameHandle;
+    if (businessHandle) {
+      if (localStorage.getItem('businessHandle') !== businessHandle) {
         localStorage.removeItem('business');
-        localStorage.setItem('businessHandle', subdomain);
-        getBusinessByHandle({ variables: { handle: subdomain } });
+        localStorage.setItem('businessHandle', businessHandle);
+        getBusinessByHandle({ variables: { handle: businessHandle } });
+      } else {
+        setBusiness({
+          ...business,
+          loading: false,
+        });
       }
-    } else if (pathnameHandle) {
-      if (localStorage.getItem('businessHandle') !== pathnameHandle) {
-        localStorage.removeItem('business');
-        localStorage.setItem('businessHandle', pathnameHandle);
-        getBusinessByHandle({ variables: { handle: pathnameHandle } });
-      }
-    }
-    if (!pathnameHandle && !subdomain) {
+    } else {
       localStorage.removeItem('business');
       localStorage.removeItem('businessHandle');
     }
   }, [pathnameHandle, subdomain]);
 
+  // TODO: Refactor this method using optional chaining.
   useEffect(() => {
     if (data) {
-      const business: GetBusinessByHandle_businessByHandle_items = get(
+      const businessData: GetBusinessByHandle_businessByHandle_items = get(
         data,
         'businessByHandle.items[0]',
       );
-      if (business) {
+      if (businessData) {
         const branches: [GetBusinessByHandle_businessByHandle_items_branches_items] = get(
-          business,
+          businessData,
           'branches.items',
         );
         if (branches) {
           localStorage.setItem(
             'business',
-            JSON.stringify({ businessId: business.id, businessName: business.name, branches }),
+            JSON.stringify({
+              businessId: businessData.id,
+              businessName: businessData.name,
+              branches,
+            }),
           );
+          setBusiness({
+            businessId: businessData.id,
+            businessName: businessData.name,
+            branches,
+            loading: false,
+          });
+        } else {
+          setBusiness({
+            businessName: '',
+            loading: false,
+          });
         }
+      } else {
+        setBusiness({
+          businessName: '',
+          loading: false,
+        });
       }
     }
   }, [data]);
 
-  if (loading) {
+  if (business.loading) {
     return <PageLoading />;
   }
 
@@ -82,9 +111,9 @@ export default function BusinessGetter({
     return <Alert message="There was an error" description={JSON.stringify(error)} type="error" />;
   }
 
-  if (pathnameHandle && !(get(data, 'businessByHandle.items[0]') || useBusiness())) {
+  if (pathnameHandle && !(get(data, 'businessByHandle.items[0]') || business)) {
     return <PageNotFound />;
   }
 
-  return children;
+  return <BusinessContext.Provider value={{ business }}>{children}</BusinessContext.Provider>;
 }

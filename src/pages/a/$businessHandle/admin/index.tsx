@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import 'moment/locale/es';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -6,7 +6,7 @@ import AdminCalendar from '@/components/AdminCalendar';
 import NewBookingModal from '@/components/NewBookingModal';
 import { GetBranchEmployees } from '@/queries/adminPageQueries';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
-import { useBusiness } from '@/components/BussinessGetter';
+import { BusinessContext } from '@/components/BussinessGetter';
 
 export interface ModalState {
   id: 'NEW_BOOKING' | null;
@@ -16,7 +16,9 @@ export interface ModalState {
 }
 
 export default function Admin() {
-  const { branches } = useBusiness();
+  const {
+    business: { branches },
+  } = useContext(BusinessContext);
   const [modal, setModal] = useState<ModalState>({ id: null });
   const employeesResponse = useQuery<IGetBranchEmployees>(GetBranchEmployees, {
     variables: { id: branches[0].id },

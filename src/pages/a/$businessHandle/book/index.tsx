@@ -2,12 +2,12 @@ import { useContext } from 'react';
 import router from 'umi/router';
 
 import { BookingContext } from '@/layouts';
-import { useBusiness } from '@/components/BussinessGetter';
+import { BusinessContext } from '@/components/BussinessGetter';
 import { getUrl } from '@/utils/utils';
 
 export default function Book() {
   const { bookData, setBookData, setSteps } = useContext(BookingContext);
-  const business = useBusiness();
+  const { business } = useContext(BusinessContext);
   const branches = business ? business.branches : null;
 
   if (branches) {

@@ -4,11 +4,11 @@ import router from 'umi/router';
 import Stepper from '@/components/BookingStepper';
 import BranchList from '@/components/BranchList';
 import { BookingContext } from '@/layouts';
-import { useBusiness } from '@/components/BussinessGetter';
+import { BusinessContext } from '@/components/BussinessGetter';
 
 const SelectBranch = () => {
   const { bookData, setBookData } = useContext(BookingContext);
-  const business = useBusiness();
+  const { business } = useContext(BusinessContext);
 
   const selectBranch = (id: string) => {
     setBookData({ ...bookData, branch: id });
