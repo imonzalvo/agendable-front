@@ -1,15 +1,19 @@
-import React from 'react';
-import { Row, Col, Typography, Button } from 'antd';
+import React, { useContext } from 'react';
+import {
+ Row, Col, Typography, Button,
+} from 'antd';
 import router from 'umi/router';
 
 import BusinessLayout, { BusinessLayoutProps } from '@/layouts/BusinessLayout';
-import { useBusiness } from '@/components/BussinessGetter';
+import { BusinessContext } from '@/components/BussinessGetter';
 import { getUrl } from '@/utils/utils';
 
 // export interface BusinessHomeProps extends BusinessLayoutProps {}
 
 export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
-  const { businessName } = useBusiness();
+  const {
+    business: { businessName },
+  } = useContext(BusinessContext);
 
   return (
     <BusinessLayout {...props}>

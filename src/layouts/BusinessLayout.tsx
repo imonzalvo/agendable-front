@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, Typography } from 'antd';
 import ProLayout, { BasicLayoutProps } from '@ant-design/pro-layout';
 
 import icon from '@/assets/agendable-icon.svg';
 import { Login, SignUp } from '@/components/AuthFlow';
-import { useBusiness } from '@/components/BussinessGetter';
+import { BusinessContext } from '@/components/BussinessGetter';
 import Error404 from '@/pages/404';
 
 export interface BusinessLayoutProps extends BasicLayoutProps {
@@ -13,7 +13,9 @@ export interface BusinessLayoutProps extends BasicLayoutProps {
 
 export default function BusinessLayout({ children }: BusinessLayoutProps) {
   const [whichAuthModalVisible, setAuthModalVisible] = useState<'LOGIN' | 'SIGNUP' | null>(null);
-  const { businessName } = useBusiness();
+  const {
+    business: { businessName },
+  } = useContext(BusinessContext);
 
   if (!businessName) return <Error404 />;
 
