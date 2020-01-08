@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-import {
- Row, Col, Typography, Button,
-} from 'antd';
+import { Row, Col, Typography, Button } from 'antd';
 import router from 'umi/router';
+import { formatMessage } from 'umi-plugin-locale';
 
 import BusinessLayout, { BusinessLayoutProps } from '@/layouts/BusinessLayout';
 import { BusinessContext } from '@/components/BussinessGetter';
@@ -40,7 +39,7 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
               router.push(getUrl('book'));
             }}
           >
-            Agendarse
+            {formatMessage({ id: 'button.booking' })}
           </Button>
         </Col>
       </Row>

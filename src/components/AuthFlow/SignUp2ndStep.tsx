@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { Auth } from 'aws-amplify';
+import { formatMessage } from 'umi-plugin-locale';
 
 import { FormButtonsContainer } from './styles';
 
@@ -57,7 +58,7 @@ function SignUp2ndStepForm({
 
   const compareToFirstPassword = (rule: any, value: string, callback: (arg0?: any) => {}) => {
     if (value && value !== form.getFieldValue('password')) {
-      callback("The two passwords don't match");
+      callback(formatMessage({ id: 'message.passwordNotMatch' }));
     } else {
       callback();
     }
@@ -75,26 +76,47 @@ function SignUp2ndStepForm({
   return (
     <Form onSubmit={handleSubmit}>
       {/* GIVEN NAME */}
-      <Form.Item label="First Name">
+      <Form.Item label={formatMessage({ id: 'form.name' })}>
         {getFieldDecorator('givenName', {
-          rules: [{ required: true, message: 'Please input your first name!', whitespace: true }],
+          rules: [
+            {
+              required: true,
+              message: formatMessage(
+                { id: 'message.inputMissing' },
+                { input: formatMessage({ id: 'form.name' }).toLowerCase() },
+              ),
+              whitespace: true,
+            },
+          ],
         })(<Input />)}
       </Form.Item>
 
       {/* FAMILY NAME */}
-      <Form.Item label="Last Name">
+      <Form.Item label={formatMessage({ id: 'form.lastName' })}>
         {getFieldDecorator('familyName', {
-          rules: [{ required: true, message: 'Please input your last name!', whitespace: true }],
+          rules: [
+            {
+              required: true,
+              message: formatMessage(
+                { id: 'message.inputMissing' },
+                { input: formatMessage({ id: 'form.lastName' }).toLowerCase() },
+              ),
+              whitespace: true,
+            },
+          ],
         })(<Input />)}
       </Form.Item>
 
       {/* PASSWORD */}
-      <Form.Item label="Password" hasFeedback>
+      <Form.Item label={formatMessage({ id: 'form.password' })} hasFeedback>
         {getFieldDecorator('password', {
           rules: [
             {
               required: true,
-              message: 'Please input your password!',
+              message: formatMessage(
+                { id: 'message.inputMissing' },
+                { input: formatMessage({ id: 'form.password' }).toLowerCase() },
+              ),
             },
             {
               validator: validateToNextPassword,
@@ -104,12 +126,12 @@ function SignUp2ndStepForm({
       </Form.Item>
 
       {/* CONFIRM PASSWORD */}
-      <Form.Item label="Confirm Password" hasFeedback>
+      <Form.Item label={formatMessage({ id: 'form.confirmPassword' })} hasFeedback>
         {getFieldDecorator('confirm', {
           rules: [
             {
               required: true,
-              message: 'Please confirm your password!',
+              message: formatMessage({ id: 'message.confirmPassword' }),
             },
             {
               validator: compareToFirstPassword,
@@ -126,13 +148,13 @@ function SignUp2ndStepForm({
               setCurrentStep(0);
             }}
           >
-            Back
+            {formatMessage({ id: 'button.back' })}
           </Button>
         </Form.Item>
         {/* SUBMIT */}
         <Form.Item>
           <Button type="primary" htmlType="submit" style={{ marginLeft: 10 }} loading={isLoading}>
-            Register
+            {formatMessage({ id: 'button.signUp' })}
           </Button>
         </Form.Item>
       </FormButtonsContainer>

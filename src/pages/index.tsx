@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { setLocale, getLocale } from 'umi/locale';
 
 import useSubdomain from '@/hooks/useSubdomain';
 import themeColorClient from '@/components/SettingDrawer/themeColorClient';
@@ -8,13 +9,21 @@ import BusinessIndex from '@/pages/a/$businessHandle';
 
 const { Title } = Typography;
 
+const locale = getLocale();
+
+if (!locale || locale === 'es-ES') {
+  setLocale('es-ES');
+} else {
+  setLocale('en-US');
+}
+
 export default () => {
   const isValidSubdomain = useSubdomain();
   return isValidSubdomain ? (
     <BusinessIndex />
   ) : (
     <PageHeaderWrapper>
-      <Title>Bienvenido a Agendable!</Title>
+      <Title>Agendable</Title>
       <Button
         size="large"
         type="primary"
