@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Steps } from 'antd';
 import { BookingContext } from '@/layouts';
+import { formatMessage } from 'umi-plugin-locale';
 
 const { Step } = Steps;
 
@@ -23,11 +24,11 @@ const BookingStepper = ({ active, children }: BookingStepperProps) => {
       }}
     >
       <Steps size="small" current={current} style={{ marginBottom: 16 }}>
-        {steps === 4 && <Step title="Select branch" />}
-        <Step title="Select service" />
-        <Step title="Select professional" />
-        <Step title="Select Date" />
-        <Step title="Confirmation" />
+        {steps === 4 && <Step title={formatMessage({ id: 'booking.selectBranch' })} />}
+        <Step title={formatMessage({ id: 'booking.selectService' })} />
+        <Step title={formatMessage({ id: 'booking.selectProfessional' })} />
+        <Step title={formatMessage({ id: 'booking.selectTime' })} />
+        <Step title={formatMessage({ id: 'booking.confirmation' })} />
       </Steps>
       {children}
     </div>

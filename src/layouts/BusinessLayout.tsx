@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Button, Modal, Typography } from 'antd';
 import ProLayout, { BasicLayoutProps } from '@ant-design/pro-layout';
+import { formatMessage } from 'umi-plugin-locale';
 
 import icon from '@/assets/agendable-icon.svg';
 import { Login, SignUp } from '@/components/AuthFlow';
@@ -36,13 +37,13 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
         rightContentRender={() => (
           <>
             <Button onClick={() => setAuthModalVisible('LOGIN')} style={{ alignSelf: 'center' }}>
-              Login
+              {formatMessage({ id: 'navBar.signIn' })}
             </Button>
             <Button
               onClick={() => setAuthModalVisible('SIGNUP')}
               style={{ marginLeft: 10, alignSelf: 'center' }}
             >
-              Sign Up
+              {formatMessage({ id: 'navBar.signUp' })}
             </Button>
           </>
         )}
@@ -58,7 +59,7 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
         {children}
       </ProLayout>
       <Modal
-        title="Login"
+        title={formatMessage({ id: 'navBar.signIn' })}
         visible={whichAuthModalVisible === 'LOGIN'}
         footer={null}
         onCancel={() => setAuthModalVisible(null)}
@@ -66,7 +67,7 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
         <Login />
       </Modal>
       <Modal
-        title="Sign Up"
+        title={formatMessage({ id: 'navBar.signUp' })}
         visible={whichAuthModalVisible === 'SIGNUP'}
         footer={null}
         onCancel={() => setAuthModalVisible(null)}

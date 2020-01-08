@@ -5,12 +5,14 @@ import { useMutation } from '@apollo/react-hooks';
 import humps from 'humps';
 import moment from 'moment-timezone';
 import { Auth } from 'aws-amplify';
+import { formatMessage } from 'umi-plugin-locale';
 
 import Stepper from '@/components/BookingStepper';
 import { BookingContext } from '@/layouts';
 import { CreateClientBooking } from '@/components/ConfirmBooking/queries';
 import { isValidNumber } from 'libphonenumber-js';
 import { getUrl } from '@/utils/utils';
+import { EmailInput } from '@/utils/formInput';
 
 moment.locale('es');
 
@@ -94,39 +96,38 @@ const Confirm = ({ form }) => {
   return (
     <Stepper active={4}>
       <Form onSubmit={handleSubmit}>
-        <Form.Item label="Nombre">
+        <Form.Item label={formatMessage({ id: 'form.name' })}>
           {getFieldDecorator('givenName', {
-            rules: [{ required: true, message: 'Please input your first name!', whitespace: true }],
+            rules: [
+              {
+                required: true,
+                message: formatMessage(
+                  { id: 'message.inputMissing' },
+                  { input: formatMessage({ id: 'form.name' }).toLowerCase() },
+                ),
+                whitespace: true,
+              },
+            ],
             initialValue: user ? user.givenName : '',
           })(<Input />)}
         </Form.Item>
-        <Form.Item label="Apellido">
+        <Form.Item label={formatMessage({ id: 'form.lastName' })}>
           {getFieldDecorator('familyName', {
-            rules: [{ required: true, message: 'Please input your first name!', whitespace: true }],
+            rules: [
+              {
+                required: true,
+                message: formatMessage(
+                  { id: 'message.inputMissing' },
+                  { input: formatMessage({ id: 'form.lastName' }).toLowerCase() },
+                ),
+                whitespace: true,
+              },
+            ],
             initialValue: user ? user.familyName : '',
           })(<Input />)}
         </Form.Item>
-        <Form.Item label="E-mail">
-          {getFieldDecorator('email', {
-            rules: [
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ],
-            initialValue: user ? user.email : '',
-          })(
-            <Input
-              prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Email"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item label="Phone Number">
+        <EmailInput initialValue={user ? user.email : ''} getFieldDecorator={getFieldDecorator} />
+        <Form.Item label={formatMessage({ id: 'form.phone' })}>
           {getFieldDecorator('phone', {
             rules: [
               {
@@ -136,7 +137,14 @@ const Confirm = ({ form }) => {
                     if (!value || isValidNumber(`+${form.getFieldValue('prefix')}${value}`)) {
                       callback();
                     }
-                    throw new Error('Invalid Phone Number');
+                    throw new Error(
+                      formatMessage(
+                        {
+                          id: 'message.inputError',
+                        },
+                        { input: formatMessage({ id: 'form.phone' }) },
+                      ),
+                    );
                   } catch (err) {
                     callback(err);
                   }
@@ -156,7 +164,7 @@ const Confirm = ({ form }) => {
         </Form.Item>
 
         <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
-          Confirm Booking
+          {formatMessage({ id: 'button.booking' })}
         </Button>
       </Form>
     </Stepper>

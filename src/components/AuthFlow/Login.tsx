@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { Auth } from 'aws-amplify';
+import { formatMessage } from 'umi-plugin-locale';
 
 import { AuthContext } from '@/layouts';
 import { SingleFormButtonContainer } from './styles';
+import { EmailInput } from '@/utils/formInput';
 
 interface LoginProps extends FormComponentProps {
   stateEmail: string;
@@ -20,10 +22,10 @@ function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    validateFields((error, { username, password }) => {
+    validateFields((error, { email, password }) => {
       if (!error) {
         setLoading(true);
-        Auth.signIn({ username, password })
+        Auth.signIn({ username: email, password })
           .then(() => {
             message.success('Successfully Signed In!');
             setAuthenticated(true);
@@ -41,16 +43,7 @@ function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
 
   return (
     <Form onSubmit={handleSubmit} className="login-form">
-      <Form.Item>
-        {getFieldDecorator('username', {
-          rules: [{ required: true, message: 'Please input your username!' }],
-        })(
-          <Input
-            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-            placeholder="Username"
-          />,
-        )}
-      </Form.Item>
+      <EmailInput getFieldDecorator={getFieldDecorator} initialValue={''} label={false} />
       <Form.Item>
         {getFieldDecorator('password', {
           rules: [{ required: true, message: 'Please input your Password!' }],
@@ -71,7 +64,7 @@ function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
           Forgot password
         </a> */}
         <Button type="primary" htmlType="submit" className="login-form-button" loading={isLoading}>
-          Login
+          {formatMessage({ id: 'navBar.signIn' })}
         </Button>
       </SingleFormButtonContainer>
     </Form>

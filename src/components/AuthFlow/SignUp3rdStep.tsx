@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { Auth } from 'aws-amplify';
+import { formatMessage } from 'umi-plugin-locale';
 
 import { AuthContext } from '@/layouts';
 import { FormButtonsContainer } from './styles';
@@ -38,7 +39,7 @@ function SignUp3rdStep({ form, username }: ISignUpFormProps): JSX.Element {
   const handleResendCode = () => {
     setLoading('RESEND');
     Auth.resendSignUp(username)
-      .then(() => message.success('Code sent!'))
+      .then(() => message.success(formatMessage({ id: 'message.codeSent' })))
       .catch(err => {
         // TODO: send error to sentry
         // TODO: Format error msg
@@ -52,10 +53,17 @@ function SignUp3rdStep({ form, username }: ISignUpFormProps): JSX.Element {
   return (
     <Form onSubmit={handleConfirm}>
       {/* CONFIRMATION CODE */}
-      <Form.Item label="Confirmation Code">
+      <Form.Item label={formatMessage({ id: 'form.confirmationCode' })}>
         {getFieldDecorator('confirmationCode', {
           rules: [
-            { required: true, message: 'Please input confirmation code!', whitespace: false },
+            {
+              required: true,
+              message: formatMessage(
+                { id: 'message.inputMissing' },
+                { input: formatMessage({ id: 'form.confirmationCode' }).toLowerCase() },
+              ),
+              whitespace: false,
+            },
           ],
         })(<Input />)}
       </Form.Item>
@@ -63,13 +71,13 @@ function SignUp3rdStep({ form, username }: ISignUpFormProps): JSX.Element {
         {/* RESEND CODE */}
         <Form.Item>
           <Button type="default" onClick={handleResendCode} loading={isLoading === 'RESEND'}>
-            Resend Code
+            {formatMessage({ id: 'button.resendCode' })}
           </Button>
         </Form.Item>
         {/* SUBMIT */}
         <Form.Item style={{ marginLeft: 10 }}>
           <Button type="primary" htmlType="submit" loading={isLoading === 'CONFIRM'}>
-            Confirm
+            {formatMessage({ id: 'button.confirm' })}
           </Button>
         </Form.Item>
       </FormButtonsContainer>

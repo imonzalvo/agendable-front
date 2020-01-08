@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Button, Typography } from 'antd';
+import { formatMessage } from 'umi-plugin-locale';
 
 import { Image, ServiceDetail } from './styles';
 
@@ -54,7 +55,7 @@ const CustomCard = ({
   const renderAction = () => {
     if (service) {
       const type = isSelected ? 'danger' : 'primary';
-      const text = isSelected ? 'Remove' : 'Select';
+      const text = formatMessage({ id: isSelected ? 'Remove' : 'button.select' });
       return (
         <Button
           disabled={loading}
@@ -75,7 +76,7 @@ const CustomCard = ({
         onClick={() => handleClick(id)}
         block
       >
-        Select
+        {formatMessage({ id: 'button.select' })}
       </Button>
     );
   };

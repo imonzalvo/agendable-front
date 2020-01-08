@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Form, Input, Select, Button, Icon } from 'antd';
+import { Form, Input, Select, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
+import { formatMessage } from 'umi-plugin-locale';
 
 import { checkUsername } from '../../utils/lambdaFunctions';
 import { SingleFormButtonContainer } from './styles';
+import { EmailInput } from '@/utils/formInput';
 
 const { Option } = Select;
 
@@ -80,28 +82,7 @@ function SignUp1stStep({
 
   const renderEmailOrPhone = () => {
     if (useEmail) {
-      return (
-        <Form.Item label="E-mail">
-          {getFieldDecorator('email', {
-            rules: [
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ],
-            initialValue: stateEmail,
-          })(
-            <Input
-              prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Email"
-            />,
-          )}
-        </Form.Item>
-      );
+      return <EmailInput getFieldDecorator={getFieldDecorator} initialValue={stateEmail} />;
     }
     return (
       <Form.Item label="Phone Number">
@@ -136,7 +117,7 @@ function SignUp1stStep({
       {/* SUBMIT */}
       <SingleFormButtonContainer>
         <Button type="primary" htmlType="submit" loading={isLoading}>
-          Next
+          {formatMessage({ id: 'button.next' })}
         </Button>
       </SingleFormButtonContainer>
     </Form>
