@@ -13,14 +13,6 @@ export const AuthFlowStyles = createGlobalStyle`
   }
 `;
 
-export default createGlobalStyle`
-  @media (max-width:480px) {
-  .ant-steps-horizontal.ant-steps-label-horizontal {
-    display: flex
-  }
-}
-`;
-
 export const SingleFormButtonContainer = styled(Form.Item)`
   display: flex !important;
   justify-content: flex-end !important;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Steps } from 'antd';
 
-import GlobalStyles from './styles';
 import SignUp1stStep from './SignUp1stStep';
 import SignUp2ndStep from './SignUp2ndStep';
 import SignUp3rdStep from './SignUp3rdStep';
@@ -42,8 +41,7 @@ function SignUp(): JSX.Element {
 
   return (
     <>
-      <GlobalStyles />
-      <Steps current={currentStep}>
+      <Steps current={currentStep} style={{ display: 'flex' }}>
         {[0, 1, 2].map(item => (
           <Steps.Step key={item} />
         ))}

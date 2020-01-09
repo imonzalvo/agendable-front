@@ -47,6 +47,8 @@ function SignUp2ndStepForm({
           // TODO: Format error msg
           .catch(err => message.error(JSON.stringify(err)))
           .finally(() => setLoading(false));
+      } else {
+        setLoading(false);
       }
     });
   };
@@ -117,6 +119,10 @@ function SignUp2ndStepForm({
                 { id: 'message.inputMissing' },
                 { input: formatMessage({ id: 'form.password' }).toLowerCase() },
               ),
+            },
+            {
+              min: 6,
+              message: formatMessage({ id: 'message.passwordLength' }),
             },
             {
               validator: validateToNextPassword,
