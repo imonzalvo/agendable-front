@@ -13,7 +13,8 @@ export default function Book() {
   if (branches) {
     let path;
     if (branches.length === 1) {
-      setBookData({ ...bookData, branch: branches[0].id });
+      const { id, address } = branches[0];
+      setBookData({ ...bookData, branch: { id, address } });
       setSteps(3);
       path = getUrl('book/select-service');
     } else {

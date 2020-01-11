@@ -1,24 +1,29 @@
 import React, { useContext } from 'react';
 import router from 'umi/router';
 
-import Stepper from '@/components/BookingStepper';
 import BranchList from '@/components/BranchList';
 import { BookingContext } from '@/layouts';
 import { BusinessContext } from '@/components/BussinessGetter';
+import BookingLayout from '@/layouts/BookingLayout';
+
+interface BranchProps {
+  id: string;
+  address: string;
+}
 
 const SelectBranch = () => {
   const { bookData, setBookData } = useContext(BookingContext);
   const { business } = useContext(BusinessContext);
 
-  const selectBranch = (id: string) => {
-    setBookData({ ...bookData, branch: id });
+  const selectBranch = ({ id, address }: BranchProps) => {
+    setBookData({ ...bookData, branch: { id, address } });
     router.push('select-service');
   };
 
   return (
-    <Stepper active={0}>
+    <BookingLayout>
       <BranchList businessId={business.businessId} selectBranch={selectBranch} />
-    </Stepper>
+    </BookingLayout>
   );
 };
 

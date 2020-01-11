@@ -37,22 +37,35 @@ export const AuthContext = React.createContext({
 });
 
 interface BookDataProps {
-  branch?: string | null;
-  service: { id: string | undefined; duration: number | undefined };
-  professional: string | null;
+  branch?: null | {
+    id: string;
+    address: string;
+  };
+  service: {
+    id: string | undefined;
+    duration: number | undefined;
+    price: number | undefined;
+    name: string | undefined;
+  };
+  professional: null | {
+    id: string;
+    name: string;
+  };
   date: string | null;
 }
 
 export const BookingContext = React.createContext({
   bookData: {
     branch: null,
-    service: { id: undefined, duration: undefined },
+    service: { id: undefined, duration: undefined, price: undefined, name: undefined },
     professional: null,
     date: null,
   },
   setBookData: (_data: BookDataProps) => {},
   steps: 0,
   setSteps: (_value: number) => {},
+  currentStep: 0,
+  setCurrentStep: (_value: number) => {},
 });
 
 interface LayoutProps extends RouterTypes {
@@ -64,11 +77,12 @@ const Layout = ({ children, location }: LayoutProps) => {
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [bookData, setBookData] = useState({
     branch: null,
-    service: { id: undefined, duration: undefined },
+    service: { id: undefined, duration: undefined, price: undefined, name: undefined },
     professional: null,
     date: null,
   });
   const [steps, setSteps] = useState(4);
+  const [currentStep, setCurrentStep] = useState(0);
   const subdomain = useSubdomain();
 
   useEffect(() => {
@@ -127,6 +141,8 @@ const Layout = ({ children, location }: LayoutProps) => {
               setBookData,
               steps,
               setSteps,
+              currentStep,
+              setCurrentStep,
             }}
           >
             <BusinessGetter pathname={location.pathname} subdomain={subdomain}>

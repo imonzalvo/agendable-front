@@ -4,9 +4,14 @@ import { useQuery } from '@apollo/react-hooks';
 import Card from '@/components/Card';
 import { GetProfessionals } from './queries';
 
+interface ProfessionalProps {
+  id: string;
+  givenName: string;
+}
+
 interface ProfessionalListProps {
   serviceId: string;
-  selectProfessional: (id: string) => void;
+  selectProfessional: ({ id, givenName }: ProfessionalProps) => void;
 }
 
 const renderSkeleton = () =>
@@ -21,13 +26,14 @@ const ProfessionalList = ({ serviceId, selectProfessional }: ProfessionalListPro
   const professionals = response.data.getService
     ? response.data.getService.employees.items.map(item => item.employee)
     : [];
-  return professionals.map(({ id, givenName, familyName }) => (
+  return professionals.map(professional => (
     <Card
-      key={id}
-      id={id}
-      title={`${givenName} ${familyName}`}
+      key={professional.id}
+      id={professional.id}
+      title={`${professional.givenName} ${professional.familyName}`}
       details=""
       handleClick={selectProfessional}
+      entity={professional}
     />
   ));
 };

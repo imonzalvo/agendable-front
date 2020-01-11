@@ -1,24 +1,30 @@
 import React, { useContext } from 'react';
 import router from 'umi/router';
 
-import Stepper from '@/components/BookingStepper';
 import ServiceList from '@/components/ServiceList';
 import { BookingContext } from '@/layouts';
+import BookingLayout from '@/layouts/BookingLayout';
+
+interface ServiceProps {
+  id: string;
+  duration: number;
+  price: number;
+  name: string;
+}
 
 export default function SelectService() {
   const { bookData, setBookData } = useContext(BookingContext);
-  const branchId = bookData.branch;
 
-  const selectService = (id: string, duration: number) => {
-    setBookData({ ...bookData, service: { id, duration } });
+  const selectService = ({ id, duration, price, name }: ServiceProps) => {
+    setBookData({ ...bookData, service: { id, duration, price, name } });
     router.push('select-professional');
   };
 
-  if (branchId) {
+  if (bookData.branch?.id) {
     return (
-      <Stepper active={1}>
-        <ServiceList branchId={branchId} selectService={selectService} />
-      </Stepper>
+      <BookingLayout>
+        <ServiceList branchId={bookData.branch.id} selectService={selectService} />
+      </BookingLayout>
     );
   }
   router.go(-1);
