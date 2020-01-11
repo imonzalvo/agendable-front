@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Button, Radio, Icon, DatePicker } from 'antd';
+import { Button, Radio, Icon, DatePicker, Input } from 'antd';
 import { ToolbarProps } from 'react-big-calendar';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
-import Sticky from 'react-sticky-el';
 import moment from 'moment-timezone';
 import { useResponsive } from 'react-hooks-responsive';
+import { isMobile } from 'react-device-detect';
 
 import GlobalToolbarStyles, { DayContainer } from './toolbarStyles';
 import { generateWeekdays } from '@/utils/generateWeekdays';
@@ -37,6 +37,9 @@ function CustomToolbar({
 }: CustomToolbarProps) {
   const [weekdays] = useState(generateWeekdays(selectedDate));
   const [sliderIndex, setSliderIndex] = useState(0);
+  const [nativeDatePickerValue, setNativeDatePickerValue] = useState(
+    moment(selectedDate).format('YYYY-MM-DD'),
+  );
   const { screenIsAtLeast } = useResponsive({
     xs: 0,
     sm: 415,
@@ -101,16 +104,12 @@ function CustomToolbar({
   return (
     <>
       <GlobalToolbarStyles />
-      <Sticky
-        boundaryElement=".rbc-calendar"
-        stickyStyle={{ zIndex: 20 }}
-        style={{ position: 'relative', zIndex: 20 }}
-      >
+      <div style={{ position: 'fixed', zIndex: 20, top: 64, left: 20, right: 20 }}>
         <div className="rbc-toolbar">
           <div
             style={{
               zIndex: 15,
-              padding: '10px 0',
+              padding: '16px 0',
               backgroundColor: 'rgb(240, 242, 245)',
               width: '100%',
             }}
@@ -124,17 +123,33 @@ function CustomToolbar({
               >
                 Today
               </Button>
-              <DatePicker
-                value={moment(selectedDate)}
-                size="large"
-                onChange={newDate => {
-                  if (newDate) {
-                    onNavigate('DATE', newDate.toDate());
-                  }
-                }}
-                format="L"
-                allowClear={false}
-              />
+              {isMobile ? (
+                <Input
+                  type="date"
+                  size="large"
+                  value={moment(selectedDate).format('YYYY-MM-DD')}
+                  onChange={e => {
+                    if (e?.target?.value) {
+                      setNativeDatePickerValue(e.target.value);
+                    }
+                  }}
+                  onBlur={() => {
+                    onNavigate('DATE', moment(nativeDatePickerValue, 'YYYY-MM-DD').toDate());
+                  }}
+                />
+              ) : (
+                <DatePicker
+                  value={moment(selectedDate)}
+                  size="large"
+                  onChange={newDate => {
+                    if (newDate) {
+                      onNavigate('DATE', newDate.toDate());
+                    }
+                  }}
+                  format="L"
+                  allowClear={false}
+                />
+              )}
               <Button
                 type="primary"
                 onClick={() => onNewBooking(selectedDate)}
@@ -186,7 +201,7 @@ function CustomToolbar({
             </div>
           </div>
         </div>
-      </Sticky>
+      </div>
     </>
   );
 }

@@ -7,18 +7,14 @@ interface ResourceHeaderProps {
 
 export default function ResourceHeader({ label }: ResourceHeaderProps) {
   return (
-    <Sticky
-      boundaryElement=".rbc-calendar"
-      stickyStyle={{
+    <div
+      style={{
         zIndex: 20,
-        marginTop: 120,
-        backgroundColor: '#f0f2f5',
         borderBottom: '1px solid #ddd',
+        backgroundColor: '#f0f2f5',
       }}
-      style={{ position: 'relative', zIndex: 20 }}
-      topOffset={-120}
     >
       {label}
-    </Sticky>
+    </div>
   );
 }

@@ -211,12 +211,16 @@ button.rbc-input::-moz-focus-inner {
   box-shadow: none;
   margin: 0;
   padding: 2px 5px;
-  background-color: #3174ad;
-  border-radius: 5px;
-  color: #fff;
+  background-color: #d6f4ea;
+  border-radius: 4px;
+  color: #55aa8e;
   cursor: pointer;
   width: 100%;
   text-align: left;
+  transition: all 200ms ease-in-out;
+}
+.rbc-event:hover {
+  background-color: #eafff8;
 }
 .rbc-slot-selecting .rbc-event {
   cursor: inherit;
@@ -330,6 +334,7 @@ button.rbc-input::-moz-focus-inner {
   flex-direction: row;
   flex: 1 0 0;
   overflow: hidden;
+  background-color: #f0f2f5;
 }
 
 .rbc-day-bg {
@@ -424,16 +429,23 @@ button.rbc-input::-moz-focus-inner {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  position: sticky;
 }
 .rbc-time-column .rbc-timeslot-group {
   flex: 1;
 }
 
 .rbc-timeslot-group {
-  border-bottom: 1px solid #ddd;
   min-height: 40px;
   display: flex;
   flex-flow: column nowrap;
+}
+
+.rbc-timeslot-group:after {
+  content: "";
+  border-bottom: 1px solid rgb(242,242,242);
+  position: relative;
+  z-index: 2;
 }
 
 .rbc-time-gutter,
@@ -461,7 +473,8 @@ button.rbc-input::-moz-focus-inner {
   right: 0;
 }
 .rbc-day-slot .rbc-event {
-  border: 1px solid #265985;
+  border-top:1px solid #fff;
+  border-bottom: 1px solid white;
   display: flex;
   max-height: 100%;
   min-height: 20px;
@@ -484,22 +497,21 @@ button.rbc-input::-moz-focus-inner {
   line-height: 1;
   height: 100%;
   min-height: 1em;
+  font-weight: 600;
 }
 
 .rbc-day-slot .rbc-time-slot {
-  border-top:1px solid #dee1e3;
-  background:linear-gradient(45deg,#eef0f2 46%,rgba(16,25,40,0.2) 49%,rgba(16,25,40,0.2) 51%,#eef0f2 55%);
+  border-top: 1px dashed rgb(244,244,244);
+  background: linear-gradient(45deg,#f9f9f9 46%,rgba(0, 0, 0, 0.1) 46%,rgba(0, 0, 0, 0.1) 49%,#f9f9f9 55%);
   background-size:9.75px 9.75px;
   z-index:1;
  }
 
 .rbc-time-view-resources .rbc-time-gutter,
 .rbc-time-view-resources .rbc-time-header-gutter {
-  position: sticky;
   left: 0;
   background-color: white;
-  border-right: 1px solid #ddd;
-  z-index: 10;
+  z-index: 8;
   margin-right: -1px;
 }
 
@@ -558,10 +570,9 @@ button.rbc-input::-moz-focus-inner {
 }
 
 @keyframes fade-in-out {
-  0%   { transform: scale(1); }
-  25%  { transform: scale(1.03); }
-  75%  { transform: scale(1.03); }
-  100% { transform: scale(1); }
+  0%   { opacity: 1}
+  50%  { opacity:  0.2}
+  100% { opacity: 1}
 }
 
 .rbc-time-view {
@@ -600,6 +611,12 @@ button.rbc-input::-moz-focus-inner {
   display: flex;
   flex: 0 0 auto;
   flex-direction: row;
+  position: fixed;
+  z-index: 20;
+  left: 21px;
+  right: 20px;
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }
 .rbc-time-header.rbc-overflowing {
   border-right: 1px solid #ddd;
@@ -643,6 +660,7 @@ button.rbc-input::-moz-focus-inner {
   border-top: 2px solid #ddd;
   overflow-y: auto;
   position: relative;
+  padding-top: 60px;
 }
 .rbc-time-content > .rbc-time-gutter {
   flex: none;
@@ -676,5 +694,10 @@ button.rbc-input::-moz-focus-inner {
   font-weight: 600;
   color: #5ed8b0;
   transition: padding ease-in-out 0.2s
+}
+
+.ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content {
+  overflow-x: initial;
+  max-width: 100%;
 }
 `;

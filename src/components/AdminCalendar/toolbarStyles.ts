@@ -18,7 +18,7 @@ export const DayContainer = styled(Radio.Button)<DayContainerProps>`
   text-align: center;
   font-size: 12px;
   font-weight: ${p => (p.isChecked ? 600 : 'unset')};
-  background-color: ${p => (p.isToday ? '#eafff8 !important' : 'unset')};
+  background-color: ${p => (p.isToday ? '#eafff8 !important' : '#fff')};
 `;
 
 export default createGlobalStyle`
