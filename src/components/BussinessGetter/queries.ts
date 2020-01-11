@@ -9,6 +9,7 @@ export const GetBusinessByHandle = gql`
         branches {
           items {
             id
+            address
           }
         }
       }

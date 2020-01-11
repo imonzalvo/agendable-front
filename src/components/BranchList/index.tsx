@@ -4,9 +4,13 @@ import { useQuery } from '@apollo/react-hooks';
 import Card from '@/components/Card';
 import { GetBranches } from './queries';
 
+interface BranchProps {
+  id: string;
+  address: string;
+}
 interface BranchListProps {
   businessId: string;
-  selectBranch: (id: string) => void;
+  selectBranch: ({ id, address }: BranchProps) => void;
 }
 
 const renderSkeleton = () =>
@@ -19,8 +23,15 @@ const BranchList = ({ businessId, selectBranch }: BranchListProps) => {
   if (response.loading) return renderSkeleton();
   if (response.error) return <div>Error</div>;
   const branches = response.data.getBusiness ? response.data.getBusiness.branches.items : [];
-  return branches.map(({ id, name, description }) => (
-    <Card key={id} id={id} title={name} details={description} handleClick={selectBranch} />
+  return branches.map(branch => (
+    <Card
+      key={branch.id}
+      id={branch.id}
+      title={name}
+      details={branch.description}
+      handleClick={selectBranch}
+      entity={branch}
+    />
   ));
 };
 

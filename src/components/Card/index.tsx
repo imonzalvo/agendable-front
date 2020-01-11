@@ -10,6 +10,7 @@ const { Title, Paragraph, Text } = Typography;
 interface ServiceDetail {
   duration: number;
   price: number;
+  name: string;
 }
 
 interface CustomCardProps {
@@ -18,8 +19,9 @@ interface CustomCardProps {
   image?: string;
   title: string;
   details: string;
-  handleClick: (id: string, duration?: number) => void;
+  handleClick: (entity: any) => void;
   service?: ServiceDetail;
+  entity: any;
 }
 
 const CustomCard = ({
@@ -30,6 +32,7 @@ const CustomCard = ({
   details,
   handleClick,
   service,
+  entity,
 }: CustomCardProps) => {
   const [isSelected, setSelected] = useState(false);
 
@@ -47,7 +50,7 @@ const CustomCard = ({
 
   const handleServiceClick = () => {
     if (service) {
-      handleClick(id, service.duration);
+      handleClick(service);
       setSelected(prevSelected => !prevSelected);
     }
   };
@@ -73,7 +76,7 @@ const CustomCard = ({
         type="primary"
         disabled={loading}
         style={{ width: '90%', height: 40 }}
-        onClick={() => handleClick(id)}
+        onClick={() => handleClick(entity)}
         block
       >
         {formatMessage({ id: 'button.select' })}

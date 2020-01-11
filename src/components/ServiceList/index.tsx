@@ -4,9 +4,16 @@ import { useQuery } from '@apollo/react-hooks';
 import Card from '@/components/Card';
 import { GetServices } from './queries';
 
+interface ServiceProps {
+  id: string;
+  duration: number;
+  price: number;
+  name: string;
+}
+
 interface ServiceListProps {
   branchId: string;
-  selectService: (id: string, duration: number) => void;
+  selectService: ({ id, duration, price, name }: ServiceProps) => void;
 }
 
 const renderSkeleton = () =>
@@ -28,7 +35,7 @@ const ServiceList = ({ branchId, selectService }: ServiceListProps) => {
       title={name}
       details={description}
       handleClick={selectService}
-      service={{ price, duration }}
+      service={{ price, duration, name, id }}
     />
   ));
 };

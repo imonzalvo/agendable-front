@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Form, Button, Input, Select, Icon, message } from 'antd';
+import { Form, Button, Input, Select, Icon, message, Card } from 'antd';
 import router from 'umi/router';
 import { useMutation } from '@apollo/react-hooks';
 import humps from 'humps';
@@ -7,12 +7,12 @@ import moment from 'moment-timezone';
 import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
 
-import Stepper from '@/components/BookingStepper';
 import { BookingContext } from '@/layouts';
 import { CreateClientBooking } from '@/components/ConfirmBooking/queries';
 import { isValidNumber } from 'libphonenumber-js';
 import { getUrl } from '@/utils/utils';
 import { EmailInput } from '@/utils/formInput';
+import BookingLayout from '@/layouts/BookingLayout';
 
 moment.locale('es');
 
@@ -71,8 +71,8 @@ const Confirm = ({ form }) => {
             start,
             end: getBookingEnd().format(),
             status: 'PENDING',
-            bookingBranchId: branch,
-            bookingEmployeeId: professional,
+            bookingBranchId: branch.id,
+            bookingEmployeeId: professional.id,
             clientEmail: values.email ? values.email : undefined,
             clientName: values.givenName,
             clientFamilyName: values.familyName,
@@ -94,80 +94,82 @@ const Confirm = ({ form }) => {
     </Select>,
   );
   return (
-    <Stepper active={4}>
-      <Form onSubmit={handleSubmit}>
-        <Form.Item label={formatMessage({ id: 'form.name' })}>
-          {getFieldDecorator('givenName', {
-            rules: [
-              {
-                required: true,
-                message: formatMessage(
-                  { id: 'message.inputMissing' },
-                  { input: formatMessage({ id: 'form.name' }).toLowerCase() },
-                ),
-                whitespace: true,
-              },
-            ],
-            initialValue: user ? user.givenName : '',
-          })(<Input />)}
-        </Form.Item>
-        <Form.Item label={formatMessage({ id: 'form.lastName' })}>
-          {getFieldDecorator('familyName', {
-            rules: [
-              {
-                required: true,
-                message: formatMessage(
-                  { id: 'message.inputMissing' },
-                  { input: formatMessage({ id: 'form.lastName' }).toLowerCase() },
-                ),
-                whitespace: true,
-              },
-            ],
-            initialValue: user ? user.familyName : '',
-          })(<Input />)}
-        </Form.Item>
-        <EmailInput initialValue={user ? user.email : ''} getFieldDecorator={getFieldDecorator} />
-        <Form.Item label={formatMessage({ id: 'form.phone' })}>
-          {getFieldDecorator('phone', {
-            rules: [
-              {
-                required: false,
-                validator: (rule, value, callback) => {
-                  try {
-                    if (!value || isValidNumber(`+${form.getFieldValue('prefix')}${value}`)) {
-                      callback();
-                    }
-                    throw new Error(
-                      formatMessage(
-                        {
-                          id: 'message.inputError',
-                        },
-                        { input: formatMessage({ id: 'form.phone' }) },
-                      ),
-                    );
-                  } catch (err) {
-                    callback(err);
-                  }
+    <BookingLayout>
+      <Card style={{ marginTop: 4 }}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Item label={formatMessage({ id: 'form.name' })}>
+            {getFieldDecorator('givenName', {
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage(
+                    { id: 'message.inputMissing' },
+                    { input: formatMessage({ id: 'form.name' }).toLowerCase() },
+                  ),
+                  whitespace: true,
                 },
-              },
-            ],
-            initialValue: user ? user.phone : '',
-          })(
-            <Input
-              addonBefore={prefixSelector}
-              prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Phone number"
-              style={{ width: '100%' }}
-              size="large"
-            />,
-          )}
-        </Form.Item>
+              ],
+              initialValue: user ? user.givenName : '',
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label={formatMessage({ id: 'form.lastName' })}>
+            {getFieldDecorator('familyName', {
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage(
+                    { id: 'message.inputMissing' },
+                    { input: formatMessage({ id: 'form.lastName' }).toLowerCase() },
+                  ),
+                  whitespace: true,
+                },
+              ],
+              initialValue: user ? user.familyName : '',
+            })(<Input />)}
+          </Form.Item>
+          <EmailInput initialValue={user ? user.email : ''} getFieldDecorator={getFieldDecorator} />
+          <Form.Item label={formatMessage({ id: 'form.phone' })}>
+            {getFieldDecorator('phone', {
+              rules: [
+                {
+                  required: false,
+                  validator: (rule, value, callback) => {
+                    try {
+                      if (!value || isValidNumber(`+${form.getFieldValue('prefix')}${value}`)) {
+                        callback();
+                      }
+                      throw new Error(
+                        formatMessage(
+                          {
+                            id: 'message.inputError',
+                          },
+                          { input: formatMessage({ id: 'form.phone' }) },
+                        ),
+                      );
+                    } catch (err) {
+                      callback(err);
+                    }
+                  },
+                },
+              ],
+              initialValue: user ? user.phone : '',
+            })(
+              <Input
+                addonBefore={prefixSelector}
+                prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Phone number"
+                style={{ width: '100%' }}
+                size="large"
+              />,
+            )}
+          </Form.Item>
 
-        <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
-          {formatMessage({ id: 'button.booking' })}
-        </Button>
-      </Form>
-    </Stepper>
+          <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+            {formatMessage({ id: 'button.booking' })}
+          </Button>
+        </Form>
+      </Card>
+    </BookingLayout>
   );
 };
 
