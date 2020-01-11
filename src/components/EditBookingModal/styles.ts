@@ -4,8 +4,15 @@ export const GlobalStyles = createGlobalStyle`
   .create-booking-modal .ant-modal {
     padding-bottom: 0;
   }
+
+  /* @media screen and (max-width: 520px) {
+    .create-booking-modal > * > .ant-modal-body {
+      padding: 0;
+    }
+  } */
+  
   .create-booking-modal .ant-modal .ant-modal-content {
-    min-height: 100vh;
-    padding-bottom: 150px;
+    height: 100vh;
+    overflow: hidden;
   }
 `;

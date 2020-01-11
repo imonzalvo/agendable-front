@@ -120,7 +120,7 @@ export default function AdminCalendar({
   };
 
   return (
-    <>
+    <div style={{ marginTop: 110 }}>
       <BigCalendarStyles shouldTransition={shouldTransition} />
       <Calendar
         events={getEvents()}
@@ -139,7 +139,17 @@ export default function AdminCalendar({
           toolbar: props => (
             <Toolbar
               {...props}
-              onNewBooking={(date: Date) => setModal({ id: 'NEW_BOOKING', params: { date } })}
+              onNewBooking={(date: Date) =>
+                setModal({
+                  id: 'NEW_BOOKING',
+                  params: {
+                    date: moment(date)
+                      .startOf('day')
+                      .hour(moment().hour())
+                      .toDate(),
+                  },
+                })
+              }
               onDateChange={() => {
                 clear();
                 setShouldTransition(true);
@@ -152,12 +162,22 @@ export default function AdminCalendar({
           ),
           // @ts-ignore
           timeSlotWrapper: ({ children, resource, value }: { children: React.ReactNode }) => (
-            <TimeSlotWrapper resource={resource} value={value} isAvailable={isAvailable}>
+            <TimeSlotWrapper
+              resource={resource}
+              value={value}
+              isAvailable={isAvailable}
+              setModal={setModal}
+            >
               {children}
             </TimeSlotWrapper>
           ),
         }}
+        onSelectEvent={event =>
+          setModal({ id: 'NEW_BOOKING', params: { date: event.start, bookingId: event.id } })
+        }
+        selectable
+        onSelecting={() => false}
       />
-    </>
+    </div>
   );
 }

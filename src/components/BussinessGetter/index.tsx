@@ -18,7 +18,7 @@ export const BusinessContext = createContext({
     businessName: '',
     loading: true,
     businessId: '',
-    branches: [],
+    branches: [{ id: '' }],
   },
 });
 

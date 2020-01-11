@@ -25,8 +25,7 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
   );
 
   return (
-    <Card style={{ height: '75%', overflow: 'auto' }}>
-      <Typography.Title>Client Details</Typography.Title>
+    <Card style={{ height: '75%' }} title="Client Details" type="inner">
       <Form>
         <Row gutter={32}>
           <Col span={12}>

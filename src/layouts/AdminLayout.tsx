@@ -1,19 +1,19 @@
-import React, { useContext } from 'react';
-import ProLayout, {
-  MenuDataItem,
-  BasicLayoutProps as ProLayoutProps,
-  Settings,
-} from '@ant-design/pro-layout';
-import { Button } from 'antd';
+import React, { useContext, useState } from 'react';
+// import ProLayout, {
+//   MenuDataItem,
+//   BasicLayoutProps as ProLayoutProps,
+//   Settings,
+// } from '@ant-design/pro-layout';
+import { Button, Layout, Icon, Menu } from 'antd';
 import { Auth } from 'aws-amplify';
-import Link from 'umi/link';
-import { formatMessage } from 'umi-plugin-react/locale';
 import { match } from 'react-router-dom';
 
 import { isAntDesignPro } from '@/utils/utils';
 import AuthLayout from '@/layouts/AuthLayout';
 import { AuthContext } from '@/layouts';
 import { BusinessContext } from '@/components/BussinessGetter';
+
+const { Content, Header, Sider } = Layout;
 
 export interface AdminLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -24,7 +24,8 @@ export interface AdminLayoutProps extends ProLayoutProps {
 export type AdminLayoutContext = { [K in 'location']: AdminLayoutProps[K] } & {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
 };
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => menuList.map(item => {
+const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+  menuList.map(item => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return localItem;
   });
@@ -50,6 +51,7 @@ const footerRender: AdminLayoutProps['footerRender'] = (_, defaultDom) => {
 const AdminLayout = (props: AdminLayoutProps) => {
   const { setAuthenticated } = useContext(AuthContext);
   const { business } = useContext(BusinessContext);
+  const [isCollapsed, setCollapsed] = useState(true);
   const { children, settings } = props;
 
   const handleSignOut = () => {
@@ -59,38 +61,52 @@ const AdminLayout = (props: AdminLayoutProps) => {
   };
 
   return (
-    <>
-      <ProLayout
-        title={`${business ? business.businessName : ''} ADMIN`}
-        logo={null}
-        menuItemRender={(menuItemProps, defaultDom) => {
-          if (menuItemProps.isUrl) {
-            return defaultDom;
-          }
-          return <Link to={menuItemProps.path}>{defaultDom}</Link>;
+    <Layout>
+      {/* <Sider
+        collapsible
+        trigger={null}
+        collapsed={isCollapsed}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          zIndex: 100,
         }}
-        breadcrumbRender={(routers = []) => [
-          { path: '/', breadcrumbName: formatMessage({ id: 'menu.home', defaultMessage: 'Home' }) },
-          ...routers,
-        ]}
-        itemRender={(route, _params, routes, paths) => {
-          const first = routes.indexOf(route) === 0;
-          return first ? (
-            <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
-          ) : (
-            <span>{route.breadcrumbName}</span>
-          );
-        }}
-        footerRender={footerRender}
-        menuDataRender={menuDataRender}
-        formatMessage={formatMessage}
-        rightContentRender={() => <Button onClick={handleSignOut}>Sign Out</Button>}
-        {...props}
-        {...settings}
       >
-        {children}
-      </ProLayout>
-    </>
+        <div className="logo" />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu.Item key="1">
+            <Icon type="user" />
+            <span>nav 1</span>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Icon type="video-camera" />
+            <span>nav 2</span>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <Icon type="upload" />
+            <span>nav 3</span>
+          </Menu.Item>
+        </Menu>
+      </Sider> */}
+      <Layout>
+        <Header style={{ position: 'fixed', zIndex: 100, width: '100%' }}>
+          <Icon
+            // className="trigger"
+            type={isCollapsed ? 'menu-unfold' : 'menu-fold'}
+            onClick={() => setCollapsed(!isCollapsed)}
+            style={{
+              fontSize: 18,
+              cursor: 'pointer',
+              transition: 'color 0.3s',
+              color: '#fff',
+            }}
+          />
+        </Header>
+        <Content style={{ paddingTop: 64, paddingLeft: 0, margin: 20 }}>{children}</Content>
+      </Layout>
+    </Layout>
   );
 };
 

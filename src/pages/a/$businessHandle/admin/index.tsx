@@ -4,14 +4,18 @@ import { useQuery } from '@apollo/react-hooks';
 
 import AdminCalendar from '@/components/AdminCalendar';
 import NewBookingModal from '@/components/NewBookingModal';
+import EditBookingModal from '@/components/EditBookingModal';
 import { GetBranchEmployees } from '@/queries/adminPageQueries';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 import { BusinessContext } from '@/components/BussinessGetter';
+import GlobalStyles from './styles';
 
 export interface ModalState {
-  id: 'NEW_BOOKING' | null;
+  id: 'NEW_BOOKING' | 'EDIT_BOOKING' | null;
   params?: {
-    date?: Date;
+    date?: Date | string;
+    bookingId?: string;
+    employeeId?: string;
   };
 }
 
@@ -26,20 +30,32 @@ export default function Admin() {
 
   return (
     <div>
+      <GlobalStyles isModalOpen={!!modal.id} />
       <AdminCalendar
         setModal={setModal}
         employeesResponse={employeesResponse}
         branchId={branches[0].id}
       />
 
-      <NewBookingModal
-        visible={modal.id === 'NEW_BOOKING'}
+      {modal.id === 'NEW_BOOKING' && (
+        <NewBookingModal
+          visible={modal.id === 'NEW_BOOKING'}
+          modalParams={modal.params}
+          employeesResponse={employeesResponse}
+          onOk={() => setModal({ id: null, params: {} })}
+          onCancel={() => setModal({ id: null, params: {} })}
+          branchId={branches[0].id}
+        />
+      )}
+
+      {/* <EditBookingModal
+        visible={modal.id === 'EDIT_BOOKING'}
         modalParams={modal.params}
         employeesResponse={employeesResponse}
-        onOk={() => setModal({ id: null })}
-        onCancel={() => setModal({ id: null })}
+        onOk={() => setModal({ id: null, params: {} })}
+        onCancel={() => setModal({ id: null, params: {} })}
         branchId={branches[0].id}
-      />
+      /> */}
     </div>
   );
 }
