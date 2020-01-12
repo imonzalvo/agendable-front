@@ -43,8 +43,7 @@ const Confirm = ({ form }) => {
   const { bookData } = useContext(BookingContext);
   const [createBooking] = useMutation(CreateClientBooking, {
     onCompleted: () => {
-      message.success('Successfully Created Booking');
-      router.push(getUrl(''));
+      router.push(getUrl('book/success'));
     },
     onError: err => {
       message.error(JSON.stringify(err)); // TODO handle error
