@@ -70,13 +70,19 @@ export default function AdminCalendar({
   const getEvents = () => {
     const bookings = bookingsData?.getBranch?.bookings?.items;
     if (bookings) {
-      return compact(bookings).map(booking => ({
-        id: booking.id,
-        title: ` ${booking.clientName} ${booking.clientFamilyName}`,
-        start: new Date(booking.start),
-        end: new Date(booking.end),
-        resourceId: booking.employee.id,
-      }));
+      return compact(bookings).map(
+        ({ id, clientName, clientFamilyName, start, end, employee, clientEmail }) => ({
+          id,
+          title: ` ${clientName} ${clientFamilyName}`,
+          start: new Date(start),
+          end: new Date(end),
+          resourceId: employee.id,
+          clientName,
+          clientFamilyName,
+          clientEmail,
+          employee,
+        }),
+      );
     }
     return [];
   };
@@ -90,16 +96,6 @@ export default function AdminCalendar({
       }));
     }
     return [];
-  };
-
-  const findBooking = (eventId: string) => {
-    const bookings = bookingsData?.getBranch?.bookings?.items;
-    return bookings?.find(booking => booking?.id === eventId);
-  };
-
-  const findEmployee = (employeeId: string) => {
-    const employees = employeesResponse?.data?.getBranch?.employees?.items;
-    return employees?.find(employee => employee?.id === employeeId);
   };
 
   /**
@@ -182,17 +178,11 @@ export default function AdminCalendar({
               {children}
             </TimeSlotWrapper>
           ),
-          eventWrapper: p => (
-            <EventWrapper
-              {...p}
-              booking={findBooking(p.event.id)}
-              employee={findEmployee(p.event.resourceId)}
-            />
-          ),
+          eventWrapper: (p: any) => <EventWrapper {...p} />,
         }}
-        onSelectEvent={event =>
-          setModal({ id: 'NEW_BOOKING', params: { date: event.start, bookingId: event.id } })
-        }
+        // onSelectEvent={event =>
+        //   setModal({ id: 'NEW_BOOKING', params: { date: event.start, bookingId: event.id } })
+        // }
         selectable
         onSelecting={() => false}
       />

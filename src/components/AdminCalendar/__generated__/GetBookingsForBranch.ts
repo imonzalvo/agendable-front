@@ -9,6 +9,8 @@
 export interface GetBookingsForBranch_getBranch_bookings_items_employee {
   __typename: 'Employee';
   id: string;
+  givenName: string;
+  familyName: string;
 }
 
 export interface GetBookingsForBranch_getBranch_bookings_items {

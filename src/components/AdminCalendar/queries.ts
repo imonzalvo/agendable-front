@@ -13,6 +13,8 @@ export const GetBookingsForBranch = gql`
           clientFamilyName
           employee {
             id
+            givenName
+            familyName
           }
         }
       }

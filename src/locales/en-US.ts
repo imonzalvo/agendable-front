@@ -3,6 +3,7 @@ import navBar from './en-US/navBar';
 import booking from './en-US/booking';
 import messages from './en-US/messages';
 import form from './en-US/form';
+import actions from './en-US/actions';
 
 export default {
   'navBar.lang': 'Languages',
@@ -15,4 +16,5 @@ export default {
   ...booking,
   ...messages,
   ...form,
+  ...actions,
 };

@@ -127,6 +127,7 @@
     "react-spring": "^8.0.27",
     "react-sticky": "^6.0.3",
     "react-sticky-el": "^1.1.0",
+    "react-swipeable": "^5.5.0",
     "react-swipeable-views": "^0.13.3",
     "react-swipeable-views-utils": "^0.13.3",
     "react-unsplash-wrapper": "^1.1.3",
