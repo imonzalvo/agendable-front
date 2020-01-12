@@ -8,7 +8,7 @@ import { ServiceContainer, ServiceDetails } from './styles';
 
 interface ServiceDetailProps {
   name: string;
-  duration: string;
+  duration?: string;
   price: number;
   professional?: string;
 }
@@ -21,7 +21,7 @@ const ServiceDetail = ({ name, duration, price, professional }: ServiceDetailPro
     <ServiceDetails>
       <Text>{name}</Text>
       <Text type="secondary">
-        {moment.duration(duration, 'm').format('h[h] m[min]', { trim: 'both' })}
+        {!!duration && moment.duration(duration, 'm').format('h[h] m[min]', { trim: 'both' })}
         {professional && ` ${formatMessage({ id: 'booking.with' })} ${professional}`}
       </Text>
     </ServiceDetails>
