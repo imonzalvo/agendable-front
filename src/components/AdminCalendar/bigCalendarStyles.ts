@@ -226,9 +226,6 @@ button.rbc-input::-moz-focus-inner {
   cursor: inherit;
   pointer-events: none;
 }
-.rbc-event.rbc-selected {
-  background-color: #265985;
-}
 .rbc-event:focus {
   outline: 5px auto #3b99fc;
 }

@@ -1,14 +1,15 @@
-import React from 'react';
-import { Popover, Card, Avatar, Typography } from 'antd';
+import React, { useState } from 'react';
+import { Popover, Card, Avatar, Typography, Drawer, Icon, Button } from 'antd';
 import { EventWrapperProps } from 'react-big-calendar';
 import moment from 'moment-timezone';
 import { formatMessage } from 'umi-plugin-locale';
 import momentDurationFormatSetup from 'moment-duration-format';
+import { isMobile } from 'react-device-detect';
+import { Swipeable } from 'react-swipeable';
 
 import ServiceDetail from '@/components/BookingInfo/ServiceDetail';
 import EventWrapperGlobalStyles, { Section, Price } from './eventWrapperStyles';
 import getColor from '@/utils/getColor';
-import { GetBookingsForBranch_getBranch_bookings_items as Booking } from './__generated__/GetBookingsForBranch';
 import { GetBranchEmployees_getBranch_employees_items as Employee } from '@/queries/__generated__/GetBranchEmployees';
 
 const { Meta } = Card;
@@ -22,18 +23,26 @@ export type CustomEventWrapperProps = React.PropsWithChildren<
     start: Date;
     end: Date;
     resourceId: string;
+    clientName: string;
+    clientFamilyName: string;
+    clientEmail: string;
+    employee: Employee;
   }>
-> & {
-  booking: Booking | null | undefined;
-  employee: Employee | null | undefined;
-};
+>;
 
-export default function CustomEventWrapper({
-  children,
-  event,
-  booking,
-  employee,
-}: CustomEventWrapperProps) {
+export default function CustomEventWrapper({ children, event }: CustomEventWrapperProps) {
+  const [isDetailDrawerOpen, setDetailDrawerOpen] = useState(false);
+
+  const onOpenEdit = () => {
+    // TODO: Edit
+    alert('EDITAR');
+  };
+
+  const onDelete = () => {
+    // TODO: Delete
+    alert('BORRAR');
+  };
+
   const renderDate = () => (
     <Section>
       <div style={{ flexDirection: 'column' }}>
@@ -77,67 +86,108 @@ export default function CustomEventWrapper({
       <ServiceDetail
         name="Service 3"
         price={40}
-        professional={`${employee?.givenName} ${employee?.familyName}`}
+        professional={`${event.employee.givenName} ${event.employee.familyName}`}
       />
     </Section>
   );
 
-  if (booking && employee) {
+  const renderDetails = () => {
+    return (
+      <Card
+        style={{
+          height: 'min-content',
+          width: isMobile ? '100%' : 340,
+        }}
+        bordered={false}
+        // TODO: Link actions
+        actions={
+          isMobile
+            ? [
+                <div style={{ color: '#ff4d4f' }} onClick={onDelete}>
+                  <Icon type="delete" key="delete" /> {formatMessage({ id: 'actions.delete' })}
+                </div>,
+              ]
+            : undefined
+        }
+        extra={
+          isMobile && (
+            <Button type="link" onClick={onOpenEdit}>
+              <Icon type="edit" key="edit" /> {formatMessage({ id: 'actions.edit' })}
+            </Button>
+          )
+        }
+        size="small"
+      >
+        <Meta
+          avatar={
+            <Avatar
+              style={{ width: 40, height: 40, backgroundColor: getColor(event.title) }}
+              size="large"
+            >
+              {event.clientName.substring(0, 1).toUpperCase()}
+            </Avatar>
+          }
+          title={event.title}
+          description={event.clientEmail}
+          style={{ padding: '12px 0' }}
+        />
+
+        {renderDate()}
+        {renderService()}
+        {renderTotal()}
+      </Card>
+    );
+  };
+
+  const child = React.Children.only(children) as React.ReactElement<any>;
+
+  if (isMobile) {
     return (
       <>
-        <EventWrapperGlobalStyles />
-        <Popover
-          mouseLeaveDelay={0}
-          placement="right"
-          overlayClassName="event-popover"
-          content={
-            <Card
-              style={{
-                height: 'min-content',
-                width: 340,
-              }}
-              bordered={false}
-              // TODO: Research if it's good to have actions in popover
-              // actions={[
-              //   <div>
-              //     <Icon type="edit" key="edit" /> Edit
-              //   </div>,
-              //   <div>
-              //     <Icon type="delete" key="delete" /> Delete
-              //   </div>,
-              // ]}
-            >
-              <Meta
-                avatar={
-                  <Avatar
-                    style={{ width: 40, height: 40, backgroundColor: getColor(event.title) }}
-                    size="large"
-                  >
-                    {event.title
-                      .trim()
-                      .substring(0, 1)
-                      .toUpperCase()}
-                  </Avatar>
-                }
-                title={event.title}
-                description={booking.clientEmail}
-                style={{ padding: '12px 0' }}
-              />
+        {React.cloneElement(child, {
+          onClick: () => {
+            setDetailDrawerOpen(true);
+          },
+        })}
 
-              {renderDate()}
-              {renderService()}
-              {renderTotal()}
-            </Card>
-          }
+        <Drawer
+          placement="bottom"
+          closable={false}
+          onClose={() => {
+            setDetailDrawerOpen(false);
+          }}
+          visible={isDetailDrawerOpen}
+          destroyOnClose
+          height="auto"
+          bodyStyle={{ padding: 0 }}
         >
-          {children}
-        </Popover>
+          <Swipeable
+            onSwiped={({ deltaY }) => {
+              if (deltaY < -10) {
+                setDetailDrawerOpen(false);
+              }
+            }}
+          >
+            {renderDetails()}
+          </Swipeable>
+        </Drawer>
       </>
     );
   }
+
   return (
-    <Popover content={formatMessage({ id: 'message.error.fetching.bookingDetails' })}>
-      {children}
-    </Popover>
+    <>
+      <EventWrapperGlobalStyles />
+      <Popover
+        mouseLeaveDelay={0}
+        placement="right"
+        overlayClassName="event-popover"
+        content={renderDetails()}
+      >
+        {React.cloneElement(child, {
+          onClick: onOpenEdit,
+        })}
+      </Popover>
+    </>
   );
 }
