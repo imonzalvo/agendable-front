@@ -151,6 +151,11 @@ export default {
           ],
         },
         {
+          path: '/a/:businessHandle/book/success',
+          exact: true,
+          component: './a/$businessHandle/book/success',
+        },
+        {
           path: '/a/:businessHandle/book',
           exact: false,
           component: './a/$businessHandle/book/_layout.tsx',

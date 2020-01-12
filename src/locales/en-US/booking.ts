@@ -7,5 +7,6 @@ export default {
   'booking.noServiceSelected': 'No services selected yet',
   'booking.at': 'at',
   'booking.with': 'with',
+  'booking.success': 'Appointment confirmed',
   'booking.total': 'Total',
 };

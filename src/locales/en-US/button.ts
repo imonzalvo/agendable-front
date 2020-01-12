@@ -6,4 +6,5 @@ export default {
     'button.signUp': 'Register',
     'button.resendCode': 'Resend Code',
     'button.confirm': 'Confirm',
+    'button.return': 'Go home',
 };
