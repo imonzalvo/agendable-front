@@ -12,6 +12,7 @@ import { GetBookingsForBranch } from './queries';
 import TimeSlotWrapper from './TimeSlotWrapper';
 import Toolbar from './Toolbar';
 import ResourceHeader from './ResourceHeader';
+import EventWrapper from './EventWrapper';
 import { ModalState } from '@/pages/a/$businessHandle/admin';
 import { GetBookingsForBranch as IGetBookingsForBranch } from './__generated__/GetBookingsForBranch';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
@@ -89,6 +90,16 @@ export default function AdminCalendar({
       }));
     }
     return [];
+  };
+
+  const findBooking = (eventId: string) => {
+    const bookings = bookingsData?.getBranch?.bookings?.items;
+    return bookings?.find(booking => booking?.id === eventId);
+  };
+
+  const findEmployee = (employeeId: string) => {
+    const employees = employeesResponse?.data?.getBranch?.employees?.items;
+    return employees?.find(employee => employee?.id === employeeId);
   };
 
   /**
@@ -170,6 +181,13 @@ export default function AdminCalendar({
             >
               {children}
             </TimeSlotWrapper>
+          ),
+          eventWrapper: p => (
+            <EventWrapper
+              {...p}
+              booking={findBooking(p.event.id)}
+              employee={findEmployee(p.event.resourceId)}
+            />
           ),
         }}
         onSelectEvent={event =>

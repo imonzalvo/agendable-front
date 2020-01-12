@@ -9,6 +9,7 @@
 export interface GetBusinessByHandle_businessByHandle_items_branches_items {
   __typename: 'Branch';
   id: string;
+  address: string;
 }
 
 export interface GetBusinessByHandle_businessByHandle_items_branches {

@@ -17,6 +17,7 @@ export interface GetBookingsForBranch_getBranch_bookings_items {
   start: any;
   id: string;
   clientName: string | null;
+  clientEmail: any | null;
   clientFamilyName: string | null;
   employee: GetBookingsForBranch_getBranch_bookings_items_employee;
 }

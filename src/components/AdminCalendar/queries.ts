@@ -9,6 +9,7 @@ export const GetBookingsForBranch = gql`
           start
           id
           clientName
+          clientEmail
           clientFamilyName
           employee {
             id
