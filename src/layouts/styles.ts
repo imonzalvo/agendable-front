@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const BookingContainer = styled.div`
     display: flex;
@@ -18,6 +18,18 @@ export const CardContainer = styled.div`
         margin-right: 0px;
     }
 `;
+
+// TODO: Remove this global styles when the layout get replaced.
+export const GlobalStyles = createGlobalStyle`
+  .ant-drawer-left.ant-drawer-open {
+    display: none;
+  }
+  .ant-pro-global-header-trigger {
+      display: none;
+  }
+`;
+
+
 
 
 
