@@ -7,6 +7,7 @@ import icon from '@/assets/agendable-icon.svg';
 import { Login, SignUp } from '@/components/AuthFlow';
 import { BusinessContext } from '@/components/BussinessGetter';
 import Error404 from '@/pages/404';
+import { GlobalStyles } from './styles';
 
 export interface BusinessLayoutProps extends BasicLayoutProps {
   children: any;
@@ -22,18 +23,13 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
 
   return (
     <>
+      <GlobalStyles />
+      {/* TODO: Replace this layout */}
       <ProLayout
         title={businessName}
         logo={null}
         navTheme="light"
         layout="topmenu"
-        // menuDataRender={() => [
-        //   {
-        //     name: 'safsd',
-        //     path: '/',
-        //   },
-        // ]}
-        // menuRender={() => <div>hey</div>}
         rightContentRender={() => (
           <>
             <Button onClick={() => setAuthModalVisible('LOGIN')} style={{ alignSelf: 'center' }}>
