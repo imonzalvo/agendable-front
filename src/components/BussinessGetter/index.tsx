@@ -45,7 +45,10 @@ export default function BusinessGetter({
   useEffect(() => {
     const businessHandle = subdomain || pathnameHandle;
     if (businessHandle) {
-      if (localStorage.getItem('businessHandle') !== businessHandle) {
+      if (
+        localStorage.getItem('businessHandle') !== businessHandle ||
+        !localStorage.getItem('business')
+      ) {
         localStorage.removeItem('business');
         localStorage.setItem('businessHandle', businessHandle);
         getBusinessByHandle({ variables: { handle: businessHandle } });
