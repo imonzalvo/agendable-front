@@ -66,7 +66,6 @@ export default function BusinessGetter({
 
   // TODO: Refactor this method using optional chaining.
   useEffect(() => {
-    console.log('data ', data);
     if (data) {
       const businessData: GetBusinessByHandle_businessByHandle_items = get(
         data,

@@ -1,4 +1,5 @@
 import moment, { Moment } from 'moment-timezone';
+import { flatten } from 'lodash';
 
 const TIME_SLOT = 15;
 
@@ -35,5 +36,5 @@ export const getTimeslots = (
     return [];
   });
   // Timeslots: [[], [], []];
-  return timeslots.flat();
+  return flatten(timeslots);
 };
