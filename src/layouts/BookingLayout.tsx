@@ -4,10 +4,11 @@ import { useResponsive } from 'react-hooks-responsive';
 import Stepper from '@/components/BookingStepper';
 import BookingInfo from '@/components/BookingInfo';
 import { BookingContext } from '.';
-import { BookingContainer, CardContainer } from './styles';
+import { BookingContainer, CardContainer, NavigationContainer } from './styles';
+import BookingNavigation from '@/components/BookingNavigation';
 
 const BookingLayout = ({ children }) => {
-  const { currentStep, setCurrentStep } = useContext(BookingContext);
+  const { currentStep, setCurrentStep, steps } = useContext(BookingContext);
 
   useEffect(() => {
     const step = getCurrentStep();
@@ -21,9 +22,26 @@ const BookingLayout = ({ children }) => {
     lg: 768,
   });
 
+  const getPreviousUrl = (): string | null => {
+    switch (currentStep) {
+      case 0:
+        return null;
+      case 1:
+        return steps === 5 ? 'select-branch' : null;
+      case 2:
+        return 'select-service';
+      case 3:
+        return 'select-professional';
+      case 4:
+        return 'select-date';
+      default:
+        return null;
+    }
+  };
+
   const getCurrentStep = (): number => {
-    const pathname = location.pathname.split('/').pop();
-    switch (pathname) {
+    const currentStep = location.pathname.split('/').pop();
+    switch (currentStep) {
       case 'select-branch':
         return 0;
       case 'select-service':
@@ -40,12 +58,16 @@ const BookingLayout = ({ children }) => {
   };
 
   return (
-    <Stepper active={currentStep}>
+    <>
+      <NavigationContainer>
+        <BookingNavigation previousStep={getPreviousUrl()} />
+        <Stepper active={currentStep} />
+      </NavigationContainer>
       <BookingContainer>
         <CardContainer>{children}</CardContainer>
         {(screenIsAtLeast('lg') || currentStep === 4) && <BookingInfo />}
       </BookingContainer>
-    </Stepper>
+    </>
   );
 };
 
