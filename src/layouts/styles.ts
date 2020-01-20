@@ -1,5 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
+export const NavigationContainer = styled.div`
+    margin-bottom: 48px;
+`;
+
 export const BookingContainer = styled.div`
     display: flex;
     justify-content: center;
