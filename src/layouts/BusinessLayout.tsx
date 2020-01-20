@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Auth } from 'aws-amplify';
 import { Button, Modal, Typography } from 'antd';
 import ProLayout, { BasicLayoutProps } from '@ant-design/pro-layout';
 import { formatMessage } from 'umi-plugin-locale';
@@ -8,6 +9,7 @@ import { Login, SignUp } from '@/components/AuthFlow';
 import { BusinessContext } from '@/components/BussinessGetter';
 import Error404 from '@/pages/404';
 import { GlobalStyles } from './styles';
+import { AuthContext } from '.';
 
 export interface BusinessLayoutProps extends BasicLayoutProps {
   children: any;
@@ -15,9 +17,36 @@ export interface BusinessLayoutProps extends BasicLayoutProps {
 
 export default function BusinessLayout({ children }: BusinessLayoutProps) {
   const [whichAuthModalVisible, setAuthModalVisible] = useState<'LOGIN' | 'SIGNUP' | null>(null);
+  const { isAuthenticated, setAuthenticated } = useContext(AuthContext);
+
   const {
     business: { businessName },
   } = useContext(BusinessContext);
+
+  const logout = () => {
+    Auth.signOut();
+    setAuthenticated(false);
+    setAuthModalVisible(null);
+  };
+
+  const renderRightContent = () => {
+    if (isAuthenticated) {
+      return <Button onClick={logout}>{formatMessage({ id: 'navBar.signOut' })}</Button>;
+    }
+    return (
+      <>
+        <Button onClick={() => setAuthModalVisible('LOGIN')} style={{ alignSelf: 'center' }}>
+          {formatMessage({ id: 'navBar.signIn' })}
+        </Button>
+        <Button
+          onClick={() => setAuthModalVisible('SIGNUP')}
+          style={{ marginLeft: 10, alignSelf: 'center' }}
+        >
+          {formatMessage({ id: 'navBar.signUp' })}
+        </Button>
+      </>
+    );
+  };
 
   if (!businessName) return <Error404 />;
 
@@ -30,19 +59,7 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
         logo={null}
         navTheme="light"
         layout="topmenu"
-        rightContentRender={() => (
-          <>
-            <Button onClick={() => setAuthModalVisible('LOGIN')} style={{ alignSelf: 'center' }}>
-              {formatMessage({ id: 'navBar.signIn' })}
-            </Button>
-            <Button
-              onClick={() => setAuthModalVisible('SIGNUP')}
-              style={{ marginLeft: 10, alignSelf: 'center' }}
-            >
-              {formatMessage({ id: 'navBar.signUp' })}
-            </Button>
-          </>
-        )}
+        rightContentRender={renderRightContent}
         footerRender={() => (
           <div style={{ width: '100%', textAlign: 'center', marginBottom: 20 }}>
             <img src={icon} style={{ height: 48, width: 48 }} alt="Agendable" />
@@ -56,7 +73,7 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
       </ProLayout>
       <Modal
         title={formatMessage({ id: 'navBar.signIn' })}
-        visible={whichAuthModalVisible === 'LOGIN'}
+        visible={whichAuthModalVisible === 'LOGIN' && !isAuthenticated}
         footer={null}
         onCancel={() => setAuthModalVisible(null)}
       >
@@ -64,7 +81,7 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
       </Modal>
       <Modal
         title={formatMessage({ id: 'navBar.signUp' })}
-        visible={whichAuthModalVisible === 'SIGNUP'}
+        visible={whichAuthModalVisible === 'SIGNUP' && !isAuthenticated}
         footer={null}
         onCancel={() => setAuthModalVisible(null)}
       >

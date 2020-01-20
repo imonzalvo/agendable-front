@@ -33,7 +33,7 @@ function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
           // TODO: send error to sentry
           // TODO: Format error msg
           .catch(err => {
-            message.error(JSON.stringify(err));
+            message.error(err.message);
             setAuthenticated(false);
           })
           .finally(() => setLoading(false));
