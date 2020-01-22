@@ -1,6 +1,108 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
+export const createBookingWithServices = `mutation CreateBookingWithServices(
+  $input: CreateBookingWithServicesInput!
+  $servicesId: [ID]
+) {
+  createBookingWithServices(input: $input, servicesId: $servicesId) {
+    id
+    createdAt
+    start
+    end
+    status
+    client {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+      bookings {
+        nextToken
+      }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
+    }
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      bookings {
+        nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+    }
+  }
+}
+`;
 export const createAvailabilityItem = `mutation CreateAvailabilityItem($input: CreateAvailabilityItemInput!) {
   createAvailabilityItem(input: $input) {
     id
