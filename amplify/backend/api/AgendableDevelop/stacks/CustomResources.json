@@ -30,7 +30,247 @@
 		"EmptyResource": {
 			"Type": "Custom::EmptyResource",
 			"Condition": "AlwaysFalse"
-		}
+		},
+		"CreateBookingAuxFunction": {
+            "Type": "AWS::AppSync::FunctionConfiguration",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "AppSyncApiId"
+				},
+				"Name": "CreateBookingAuxFunction",
+				"DataSourceName": "BookingTable",
+				"FunctionVersion": "2018-05-29",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Mutation",
+                                        "createBookingAuxFunction",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Mutation",
+                                        "createBookingAuxFunction",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+		},
+		"BookingServicesLambdaDataSource": {
+			"Type": "AWS::AppSync::DataSource",
+			"Properties": {
+			  "ApiId": {
+				"Ref": "AppSyncApiId"
+			  },
+			  "Name": "BookingServicesFn",
+			  "Type": "AWS_LAMBDA",
+			  "ServiceRoleArn": {
+				"Fn::GetAtt": ["BookingServicesLambdaDataSourceRole", "Arn"]
+			  },
+			  "LambdaConfig": {
+				"LambdaFunctionArn": {
+				  "Fn::Sub": [
+					"arn:aws:lambda:us-west-2:343146248340:function:CreateBookingServices",
+					{ "env": { "Ref": "env" } }
+				  ]
+				}
+			  }
+			}
+		  },
+		  "BookingServicesLambdaDataSourceRole": {
+			"Type": "AWS::IAM::Role",
+			"Properties": {
+			  "RoleName": "BookingServicesLambdaDataSourceRole",
+			  "AssumeRolePolicyDocument": {
+				"Version": "2012-10-17",
+				"Statement": [
+				  {
+					"Effect": "Allow",
+					"Principal": {
+					  "Service": "appsync.amazonaws.com"
+					},
+					"Action": "sts:AssumeRole"
+				  }
+				]
+			  },
+			  "Policies": [
+				{
+				  "PolicyName": "InvokeLambdaFunction",
+				  "PolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+					  {
+						"Effect": "Allow",
+						"Action": ["lambda:invokeFunction"],
+						"Resource": [
+						  {
+							"Fn::Sub": [
+								"arn:aws:lambda:us-west-2:343146248340:function:CreateBookingServices",
+							  { "env": { "Ref": "env" } }
+							]
+						  }
+						]
+					  },
+					  {
+						"Effect": "Allow",
+						"Action": [
+							"dynamodb:DeleteItem",
+							"dynamodb:GetItem",
+							"dynamodb:PutItem",
+							"dynamodb:Scan",
+							"dynamodb:UpdateItem",
+							"dynamodb:BatchWriteItem"
+						],
+						"Resource": "arn:aws:dynamodb:us-west-2:343146248340:table/BookingServices-6i43hdlbqvhrdfjet6luh72q5e-develop"
+					}
+					]
+				  }
+				}
+			  ]
+			}
+		  },
+		  "BookingServices": {
+			"Type": "AWS::AppSync::FunctionConfiguration",
+			"Properties": {
+			  "ApiId": {
+				"Ref": "AppSyncApiId"
+			  },
+			  "Name": "BookingServices1",
+			  "DataSourceName": {
+				"Fn::GetAtt": ["BookingServicesLambdaDataSource", "Name"]
+			  },
+			  "FunctionVersion": "2018-05-29",
+			  "RequestMappingTemplateS3Location": {
+				"Fn::Sub": [
+				  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Mutation.createBookingServicesAux.req.vtl",
+				  {
+					"S3DeploymentBucket": {
+					  "Ref": "S3DeploymentBucket"
+					},
+					"S3DeploymentRootKey": {
+					  "Ref": "S3DeploymentRootKey"
+					}
+				  }
+				]
+			  },
+			  "ResponseMappingTemplateS3Location": {
+				"Fn::Sub": [
+				  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Mutation.createBookingServicesAux.res.vtl",
+				  {
+					"S3DeploymentBucket": {
+					  "Ref": "S3DeploymentBucket"
+					},
+					"S3DeploymentRootKey": {
+					  "Ref": "S3DeploymentRootKey"
+					}
+				  }
+				]
+			  }
+			}
+		  },
+		"CreateBookingWithServicesResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "AppSyncApiId"
+				},
+				"Kind": "PIPELINE",
+				"PipelineConfig": {
+				  "Functions": [
+					{
+					  "Fn::GetAtt": ["CreateBookingAuxFunction", "FunctionId"]
+					},
+					{
+						"Fn::GetAtt": ["BookingServices", "FunctionId"]
+					  }
+				  ]
+				},
+                "FieldName": "createBookingWithServices",
+                "TypeName": "Mutation",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Mutation",
+                                        "createBookingWithServices",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Mutation",
+                                        "createBookingWithServices",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
 	},
 	"Conditions": {
 		"HasEnvironmentParameter": {

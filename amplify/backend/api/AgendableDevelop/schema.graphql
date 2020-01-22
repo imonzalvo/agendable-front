@@ -139,3 +139,25 @@ type Query {
   getEmployeeAvailableTime(id: ID, date: String, duration: Int): AWSJSON
     @function(name: "AvailableTimeEmployee")
 }
+
+input CreateBookingWithServicesInput {
+	id: ID
+	createdAt: AWSDateTime!
+	start: AWSDateTime!
+	end: AWSDateTime!
+	status: BookingStatus!
+	clientEmail: AWSEmail
+	clientPhone: AWSPhone
+	clientName: String
+	clientFamilyName: String
+	bookingClientId: ID
+	bookingBranchId: ID!
+	bookingEmployeeId: ID!
+}
+
+type Mutation {
+  createBookingWithServices(
+    input: CreateBookingWithServicesInput!
+    servicesId: [ID]
+  ): Booking
+}
