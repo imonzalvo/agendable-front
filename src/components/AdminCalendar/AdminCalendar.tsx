@@ -71,7 +71,17 @@ export default function AdminCalendar({
     const bookings = bookingsData?.getBranch?.bookings?.items;
     if (bookings) {
       return compact(bookings).map(
-        ({ id, clientName, clientFamilyName, start, end, employee, clientEmail }) => ({
+        ({
+          id,
+          clientName,
+          clientFamilyName,
+          start,
+          end,
+          employee,
+          clientEmail,
+          clientPhone,
+          services,
+        }) => ({
           id,
           title: ` ${clientName} ${clientFamilyName}`,
           start: new Date(start),
@@ -80,7 +90,9 @@ export default function AdminCalendar({
           clientName,
           clientFamilyName,
           clientEmail,
+          clientPhone,
           employee,
+          services,
         }),
       );
     }
@@ -178,7 +190,7 @@ export default function AdminCalendar({
               {children}
             </TimeSlotWrapper>
           ),
-          eventWrapper: (p: any) => <EventWrapper {...p} />,
+          eventWrapper: (p: any) => <EventWrapper {...p} setModal={setModal} />,
         }}
         // onSelectEvent={event =>
         //   setModal({ id: 'NEW_BOOKING', params: { date: event.start, bookingId: event.id } })

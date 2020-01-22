@@ -1,61 +1,66 @@
 import React, { useState } from 'react';
-import { Modal, Row, Col, Button, Card, Descriptions, message } from 'antd';
+import { Modal, Row, Col, Button, Card, Typography, message } from 'antd';
 import { FormProps } from 'antd/lib/form';
 import moment from 'moment-timezone';
 import 'react-dates/lib/css/_datepicker.css';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
-import { get, keyBy } from 'lodash';
+import { Moment } from 'moment';
+import momentDurationFormatSetup from 'moment-duration-format';
+import { useResponsive } from 'react-hooks-responsive';
 
-import { GetBranchServices, GetBooking, EditBooking } from './queries';
+// import { GetBranchServices, EditBooking } from './queries';
+import { GetBranchServices } from '@/queries/adminPageQueries';
 import ClientDetails from '@/components/ClientDetails';
 import BookingDetails from '@/components/BookingDetails';
-import { GetBookingsForBranch } from '@/components/AdminCalendar/queries';
 import { GlobalStyles } from './styles';
-import { GetBranchServices as GetBranchServicesType } from '@/components/NewBookingModal/__generated__/GetBranchServices';
+import { defaultScreenSizes } from '@/utils/utils';
+import {
+  validateBookings,
+  getTotalPrice,
+  getTotalDuration,
+  confirmCancel,
+} from '@/utils/bookingModalShared';
+import { GetBookingsForBranch } from '@/components/AdminCalendar/queries';
+import { ModalState, BookingState } from '@/pages/a/$businessHandle/admin';
+import { GetBranchServices as GetBranchServicesType } from '.@/queries/__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 
 moment.locale('es');
+momentDurationFormatSetup(moment);
 
-const now = moment().format();
-
-export interface BookingState {
-  selectedServices: [string?];
-  selectedEmployee?: string;
-  selectedDateTime?: string;
-  clientEmail: string;
-  clientName: string;
-  clientFamilyName: string;
-  clientPhone: string;
+export interface EditBookingModalProps {
+  visible: boolean;
+  onOk: () => void;
+  onCancel: () => void;
+  employeesResponse: QueryResult<IGetBranchEmployees, Record<string, any>>;
+  branchId: string;
+  modalParams: ModalState['params'];
 }
 
-export default function NewBookingModal({
+export default function EditBookingModal({
   visible,
   onOk,
   onCancel,
   employeesResponse,
   branchId,
   modalParams,
-}: {
-  visible: boolean;
-  onOk: () => void;
-  onCancel: () => void;
-  employeesResponse: QueryResult<IGetBranchEmployees, Record<string, any>>;
-  branchId: string;
-  modalParams?: { date?: Date };
-}) {
-  const [bookingState, setBookingState] = useState<BookingState>({
-    selectedServices: [],
-    selectedEmployee: undefined,
-    selectedDateTime: undefined,
-    clientEmail: '',
-    clientName: '',
-    clientFamilyName: '',
-    clientPhone: '',
-  });
-  // const [editBooking] = useMutation(EditBooking, {
+}: EditBookingModalProps) {
+  const defaultBookingState = {
+    selectedServices: modalParams?.services || [],
+    selectedEmployee: modalParams?.employeeId,
+    selectedStartTime: moment(modalParams?.selectedStartTime).format(),
+    selectedDuration: modalParams?.selectedDuration,
+    errors: [],
+  };
+
+  const [bookings, setBookings] = useState<BookingState[]>([{ ...defaultBookingState }]);
+  const [bookingDate, setBookingDate] = useState<Moment>(moment(modalParams?.date));
+  const [shouldValidate, setShouldValidate] = useState(false);
+
+  // const [editBooking, { loading: loadingEditBooking }] = useMutation(EditBooking, {
   //   onCompleted: d => {
-  //     message.success('Successfully Created Booking');
+  //     message.success('Successfully Edited Booking');
   //     onCancel();
   //   },
   //   onError: err => {
@@ -69,92 +74,56 @@ export default function NewBookingModal({
     variables: { id: branchId },
   });
 
-  const getTotal = () => {
-    const services = get(servicesResponse, 'data.getBranch.services.items');
-    if (services) {
-      const servicesObj = keyBy(services, 'service.id');
-      return bookingState.selectedServices.reduce(
-        (acc: number | undefined, serviceId: string | undefined) =>
-          serviceId ? acc + servicesObj[serviceId].service.price : 0,
-        0,
-      );
-    }
-    return 0;
-  };
-
-  const getTotalDuration = () => {
-    const services = get(servicesResponse, 'data.getBranch.services.items');
-    if (services) {
-      const servicesObj = keyBy(services, 'service.id');
-      return (
-        bookingState.selectedServices.reduce(
-          (acc: number | undefined, serviceId: string | undefined) =>
-            serviceId ? acc + servicesObj[serviceId].service.duration : 0,
-          0,
-        ) || 0
-      );
-    }
-    return 0;
-  };
-
-  const getBookingEnd = () =>
-    moment(bookingState.selectedDateTime).add(getTotalDuration(), 'minutes');
-
-  const confirmCancel = () => {
-    Modal.confirm({
-      title: 'Are you sure?',
-      content: 'You will lose all changes you made',
-      onOk() {
-        onCancel();
-      },
-      okButtonProps: { type: 'danger' },
-      okText: 'Yes, close',
-      cancelText: 'No, keep open',
-    });
-  };
+  const { screenIsAtMost } = useResponsive(defaultScreenSizes);
 
   return (
     <>
       <GlobalStyles />
       <Modal
-        title="New Appointment"
+        title="Edit Appointment"
         visible={visible}
         onOk={onOk}
-        onCancel={confirmCancel}
+        onCancel={() => confirmCancel(onCancel)}
         width="100%"
         style={{ top: 0 }}
-        bodyStyle={{ height: '100%' }}
+        bodyStyle={{ height: '100%', padding: screenIsAtMost('md') ? 0 : '' }}
         footer={null}
         destroyOnClose
         wrapClassName="create-booking-modal"
       >
         <Row gutter={32} style={{ height: '100%' }}>
-          <Col span={16} style={{ height: '100%' }}>
+          <Col xs={{ span: 24 }} lg={{ span: 16 }}>
             <BookingDetails
-              setBookingState={setBookingState}
+              bookings={bookings}
+              setBookings={setBookings}
+              defaultBookingState={defaultBookingState}
+              bookingDate={bookingDate}
+              setBookingDate={setBookingDate}
               servicesResponse={servicesResponse}
               employeesResponse={employeesResponse}
-              selectedServices={bookingState.selectedServices}
-              selectedEmployee={bookingState.selectedEmployee}
-              selectedDateTime={bookingState.selectedDateTime}
-              duration={getTotalDuration()}
-              defaultDate={get(modalParams, 'date')}
+              validateBookings={() => validateBookings(setBookings)}
+              shouldValidate={shouldValidate}
             />
           </Col>
-          <Col span={8} style={{ height: '100%' }}>
+          <Col xs={{ span: 24 }} lg={{ span: 8 }}>
             <ClientDetails
               ref={ref => {
                 formRef = (ref as unknown) as FormProps['form'];
               }}
+              clientEmail={modalParams.clientEmail}
+              clientName={modalParams.clientName}
+              clientFamilyName={modalParams.clientFamilyName}
+              clientPhone={modalParams.clientPhone}
             />
           </Col>
         </Row>
         <Card
           style={{
-            position: 'absolute',
+            position: 'fixed',
             bottom: 0,
             right: 0,
             left: 0,
+            zIndex: 10,
           }}
           bodyStyle={{
             height: '100%',
@@ -166,57 +135,68 @@ export default function NewBookingModal({
             type="flex"
             style={{ padding: '0px 5px', height: '100%', alignItems: 'center' }}
           >
-            <Button size="large" type="ghost" onClick={confirmCancel}>
-              Cancel
+            <Button size="large" type="danger" ghost>
+              Delete
             </Button>
-            <Descriptions layout="vertical" bordered size="small">
-              <Descriptions.Item label="Scheduled Time">
-                {bookingState.selectedDateTime
-                  ? `${moment(bookingState.selectedDateTime).format(
-                      'HH:mm',
-                    )} to ${getBookingEnd().format('HH:mm')}`
-                  : 'Select Timeslot'}
-              </Descriptions.Item>
-              <Descriptions.Item label="Total">${getTotal()}</Descriptions.Item>
-            </Descriptions>
-            <Button
-              size="large"
-              type="primary"
-              style={{ marginLeft: 16 }}
-              // onClick={() => {
-              //   if (formRef) {
-              //     formRef.validateFields((errors, values) => {
-              //       if (!errors) {
-              //         // setBookingState(pS => ({ ...pS, ...values }));
-              //         editBooking({
-              //           variables: {
-              //             createdAt: now,
-              //             start: bookingState.selectedDateTime,
-              //             end: getBookingEnd().format(),
-              //             status: 'PENDING',
-              //             bookingBranchId: branchId,
-              //             bookingEmployeeId: bookingState.selectedEmployee,
-              //             clientEmail: values.clientEmail ? values.clientEmail : undefined,
-              //             clientName: values.clientName,
-              //             clientFamilyName: values.clientFamilyName,
-              //             clientPhone: values.clientPhone ? `+598${values.clientPhone}` : undefined,
-              //           },
-              //           refetchQueries: [
-              //             {
-              //               query: GetBookingsForBranch,
-              //               variables: {
-              //                 id: branchId,
-              //               },
-              //             },
-              //           ],
-              //         });
-              //       }
-              //     });
-              //   }
-              // }}
-            >
-              Create
-            </Button>
+
+            <Col style={{ textAlign: 'center' }}>
+              <Button
+                size="large"
+                type="ghost"
+                onClick={() => confirmCancel(onCancel)}
+                style={{ marginRight: 24 }}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="large"
+                type="primary"
+                // loading={loadingCreateBooking}
+                // onClick={() => {
+                //   setShouldValidate(true);
+                //   if (formRef) {
+                //     formRef.validateFields((errors, values) => {
+                //       if (!errors) {
+                //         if (!validateBookings()) {
+                //           bookings.forEach(booking => {
+                //             createBooking({
+                //               variables: {
+                //                 createdAt: now,
+                //                 start: booking.selectedStartTime,
+                //                 end: moment(booking.selectedStartTime)
+                //                   .add(booking.selectedDuration, 's')
+                //                   .format(),
+                //                 status: 'PENDING',
+                //                 bookingBranchId: branchId,
+                //                 bookingEmployeeId: booking.selectedEmployee,
+                //                 clientEmail: values.clientEmail ? values.clientEmail : undefined,
+                //                 clientName: values.clientName,
+                //                 clientFamilyName: values.clientFamilyName,
+                //                 clientPhone: values.clientPhone
+                //                   ? `+598${values.clientPhone}`
+                //                   : undefined,
+                //                 servicesId: booking.selectedServices,
+                //               },
+                //               refetchQueries: [
+                //                 {
+                //                   query: GetBookingsForBranch,
+                //                   variables: {
+                //                     id: branchId,
+                //                   },
+                //                 },
+                //               ],
+                //             });
+                //           });
+                //         }
+                //       }
+                //     });
+                //   }
+                // }}
+              >
+                Edit |{' '}
+                {`$${getTotalPrice(servicesResponse, bookings)} (${getTotalDuration(bookings)})`}
+              </Button>
+            </Col>
           </Row>
         </Card>
       </Modal>

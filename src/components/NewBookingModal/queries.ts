@@ -1,31 +1,7 @@
 import gql from 'graphql-tag';
 
-export const GetBranchServices = gql`
-  query GetBranchServices($id: ID!) {
-    getBranch(id: $id) {
-      services {
-        items {
-          service {
-            id
-            name
-            duration
-            currency
-            price
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const GetEmployeeAvailableTime = gql`
-  query GetEmployeeAvailableTime($id: ID!, $duration: Int!, $date: String!) {
-    getEmployeeAvailableTime(id: $id, duration: $duration, date: $date)
-  }
-`;
-
 export const CreateBooking = gql`
-  mutation CreateBooking(
+  mutation CreateBookingWithServices(
     $createdAt: AWSDateTime!
     $start: AWSDateTime!
     $end: AWSDateTime!
@@ -36,9 +12,10 @@ export const CreateBooking = gql`
     $clientFamilyName: String
     $clientName: String
     $clientPhone: AWSPhone
+    $servicesId: [ID]
   ) {
     __typename
-    createBooking(
+    createBookingWithServices(
       input: {
         createdAt: $createdAt
         start: $start
@@ -51,12 +28,18 @@ export const CreateBooking = gql`
         clientName: $clientName
         clientPhone: $clientPhone
       }
+      servicesId: $servicesId
     ) {
       id
       start
       end
       employee {
         id
+      }
+      services {
+        items {
+          id
+        }
       }
     }
   }

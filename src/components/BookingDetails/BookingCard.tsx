@@ -8,7 +8,7 @@ import { QueryResult } from '@apollo/react-common';
 import { useResponsive } from 'react-hooks-responsive';
 
 import { GetBranchServices as GetBranchServicesType } from '../NewBookingModal/__generated__/GetBranchServices';
-import { BookingState } from '@/components/NewBookingModal';
+import { BookingState } from '@/pages/a/$businessHandle/admin/index.tsx';
 import generateTimesAtIntervals from '@/utils/generateTimesAtIntervals';
 import useEffectSkipMount from '@/hooks/useEffectSkipMount';
 

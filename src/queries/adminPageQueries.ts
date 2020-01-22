@@ -27,3 +27,21 @@ export const GetBranchEmployees = gql`
     }
   }
 `;
+
+export const GetBranchServices = gql`
+  query GetBranchServices($id: ID!) {
+    getBranch(id: $id) {
+      services {
+        items {
+          service {
+            id
+            name
+            duration
+            currency
+            price
+          }
+        }
+      }
+    }
+  }
+`;

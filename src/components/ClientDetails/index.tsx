@@ -1,19 +1,24 @@
 import React from 'react';
-import { Form, Input, Col, Row, Icon, Select, Typography, Card } from 'antd';
+import { Form, Input, Col, Row, Icon, Select, Card } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { isValidNumber } from 'libphonenumber-js';
 
-// import { FormButtonsContainer } from './styles';
 const { Option } = Select;
 
-// export interface ClientDetailsFormProps extends FormComponentProps {
-//   clientEmail: string;
-//   clientName: string;
-//   clientFamilyName: string;
-//   clientPhone: string;
-// }
+export interface ClientDetailsFormProps extends FormComponentProps {
+  clientEmail?: string;
+  clientName?: string;
+  clientFamilyName?: string;
+  clientPhone?: string;
+}
 
-function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
+function ClientDetailsForm({
+  form,
+  clientEmail,
+  clientName,
+  clientFamilyName,
+  clientPhone,
+}: ClientDetailsFormProps): JSX.Element {
   const { getFieldDecorator } = form;
 
   const prefixSelector = getFieldDecorator('prefix', {
@@ -35,6 +40,7 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
                 rules: [
                   { required: true, message: 'Please input your first name!', whitespace: true },
                 ],
+                initialValue: clientName,
               })(<Input placeholder="First Name" size="large" />)}
             </Form.Item>
           </Col>
@@ -46,6 +52,7 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
                 rules: [
                   { required: true, message: 'Please input your last name!', whitespace: true },
                 ],
+                initialValue: clientFamilyName,
               })(<Input placeholder="Last Name" size="large" />)}
             </Form.Item>
           </Col>
@@ -54,7 +61,7 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
               {getFieldDecorator('clientPhone', {
                 rules: [
                   {
-                    validator: (rule, value, callback) => {
+                    validator: (_rule, value, callback) => {
                       try {
                         if (!value || isValidNumber(`+${form.getFieldValue('prefix')}${value}`)) {
                           callback();
@@ -66,6 +73,7 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
                     },
                   },
                 ],
+                initialValue: clientPhone,
               })(
                 <Input
                   addonBefore={prefixSelector}
@@ -86,6 +94,7 @@ function ClientDetailsForm({ form }: FormComponentProps): JSX.Element {
                     message: 'The input is not valid E-mail!',
                   },
                 ],
+                initialValue: clientEmail,
               })(
                 <Input
                   prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
