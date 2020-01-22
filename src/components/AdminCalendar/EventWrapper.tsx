@@ -10,7 +10,9 @@ import { Swipeable } from 'react-swipeable';
 import ServiceDetail from '@/components/BookingInfo/ServiceDetail';
 import EventWrapperGlobalStyles, { Section, Price } from './eventWrapperStyles';
 import getColor from '@/utils/getColor';
+import { GetBookingsForBranch_getBranch_bookings_items_services as Services } from '@/components/AdminCalendar/__generated__/GetBookingsForBranch';
 import { GetBranchEmployees_getBranch_employees_items as Employee } from '@/queries/__generated__/GetBranchEmployees';
+import { ModalState } from '@/pages/a/$businessHandle/admin';
 
 const { Meta } = Card;
 const { Title, Text } = Typography;
@@ -26,16 +28,32 @@ export type CustomEventWrapperProps = React.PropsWithChildren<
     clientName: string;
     clientFamilyName: string;
     clientEmail: string;
+    clientPhone: string;
     employee: Employee;
+    services?: Services;
   }>
->;
+> & { setModal: React.Dispatch<React.SetStateAction<ModalState>> };
 
-export default function CustomEventWrapper({ children, event }: CustomEventWrapperProps) {
+export default function CustomEventWrapper({ children, event, setModal }: CustomEventWrapperProps) {
   const [isDetailDrawerOpen, setDetailDrawerOpen] = useState(false);
 
   const onOpenEdit = () => {
-    // TODO: Edit
-    alert('EDITAR');
+    setModal({
+      id: 'EDIT_BOOKING',
+      params: {
+        date: event.start,
+        bookingId: event.id,
+        employeeId: event.resourceId,
+        selectedServices: [],
+        selectedStartTime: event.start,
+        selectedDuration: moment(event.end).diff(moment(event.start), 's'),
+        services: event?.services?.items?.map(item => item?.service?.id || '') || [],
+        clientEmail: event.clientEmail,
+        clientName: event.clientName,
+        clientFamilyName: event.clientFamilyName,
+        clientPhone: event.clientPhone,
+      },
+    });
   };
 
   const onDelete = () => {

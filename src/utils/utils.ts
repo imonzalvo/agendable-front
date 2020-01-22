@@ -27,4 +27,11 @@ const isAntDesignProOrDev = (): boolean => {
   return isAntDesignPro();
 };
 
-export { isAntDesignProOrDev, isAntDesignPro, isUrl, getUrl };
+const defaultScreenSizes = {
+  xs: 0,
+  sm: 480,
+  md: 576,
+  lg: 768,
+};
+
+export { isAntDesignProOrDev, isAntDesignPro, isUrl, getUrl, defaultScreenSizes };

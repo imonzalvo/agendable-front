@@ -3,7 +3,7 @@ import moment, { Moment } from 'moment';
 import { useQuery } from '@apollo/react-hooks';
 
 import DateTimePicker from '@/components/DateTimePicker';
-import { GetEmployeeAvailableTime } from './queries';
+import { GetEmployeeAvailableTime } from '@/graphql/sharedQueries';
 
 interface SelectDateProps {
   professionalId: string;

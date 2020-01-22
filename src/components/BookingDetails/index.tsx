@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select, Card, DatePicker, Input, Timeline, Icon } from 'antd';
+import { Select, Card, DatePicker, Input } from 'antd';
 import moment, { Moment } from 'moment-timezone';
 import produce from 'immer';
 import { QueryResult } from '@apollo/react-common';
@@ -8,7 +8,7 @@ import { isMobile } from 'react-device-detect';
 
 import { GetBranchServices as GetBranchServicesType } from '../NewBookingModal/__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
-import { BookingState } from '@/components/NewBookingModal';
+import { BookingState } from '@/pages/a/$businessHandle/admin/index.tsx';
 import BookingCard from '@/components/BookingDetails/BookingCard';
 
 moment.locale('es');
@@ -24,6 +24,7 @@ interface BookingDetailsProps {
   employeesResponse: QueryResult<IGetBranchEmployees, Record<string, any>>;
   validateBookings: () => boolean;
   shouldValidate: boolean;
+  isEdit?: boolean;
 }
 
 export default function BookingDetails({
@@ -36,6 +37,7 @@ export default function BookingDetails({
   employeesResponse,
   validateBookings,
   shouldValidate,
+  isEdit,
 }: BookingDetailsProps) {
   const [nativeDatePickerValue, setNativeDatePickerValue] = useState(
     moment(bookingDate).format('YYYY-MM-DD'),
@@ -137,32 +139,25 @@ export default function BookingDetails({
           dropdownClassName="heading-datepicker-dropdown"
         />
       )}
-      <Timeline
-        pending
-        pendingDot={<Icon type="plus-circle" theme="twoTone" twoToneColor="#e8e8e8" />}
-      >
-        <Timeline.Item>
-          {bookings.map((booking, i) => (
-            <BookingCard
-              date={bookingDate}
-              servicesResponse={servicesResponse}
-              errors={booking.errors}
-              validateBookings={validateBookings}
-              shouldValidate={shouldValidate}
-              renderEmployees={getEmployees}
-              renderServices={getServices}
-              selectedStartTime={booking.selectedStartTime}
-              selectedServices={booking.selectedServices}
-              selectedEmployee={booking.selectedEmployee}
-              selectedDuration={booking.selectedDuration}
-              onSelectStartTime={(e: string) => onSelectStartTime(e, i)}
-              onServiceChange={(e: string[]) => onServiceChange(e, i)}
-              onEmployeeChange={(e?: string) => onEmployeeChange(e, i)}
-              onSelectDuration={(e: number) => onSelectDuration(e, i)}
-            />
-          ))}
-        </Timeline.Item>
-      </Timeline>
+      {bookings.map((booking, i) => (
+        <BookingCard
+          date={bookingDate}
+          servicesResponse={servicesResponse}
+          errors={booking.errors}
+          validateBookings={validateBookings}
+          shouldValidate={shouldValidate}
+          renderEmployees={getEmployees}
+          renderServices={getServices}
+          selectedStartTime={booking.selectedStartTime}
+          selectedServices={booking.selectedServices}
+          selectedEmployee={booking.selectedEmployee}
+          selectedDuration={booking.selectedDuration}
+          onSelectStartTime={(e: string) => onSelectStartTime(e, i)}
+          onServiceChange={(e: string[]) => onServiceChange(e, i)}
+          onEmployeeChange={(e?: string) => onEmployeeChange(e, i)}
+          onSelectDuration={(e: number) => onSelectDuration(e, i)}
+        />
+      ))}
     </Card>
   );
 }

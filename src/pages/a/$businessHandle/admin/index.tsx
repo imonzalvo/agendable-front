@@ -16,7 +16,25 @@ export interface ModalState {
     date?: Date | string;
     bookingId?: string;
     employeeId?: string;
+    selectedServices?: string[];
+    selectedStartTime?: string | Date;
+    selectedDuration?: number;
+    services?: string[];
+    clientEmail?: string;
+    clientName?: string;
+    clientFamilyName?: string;
+    clientPhone?: string;
   };
+}
+
+export interface BookingState {
+  selectedServices: string[];
+  selectedEmployee?: string;
+  selectedStartTime?: string | Date;
+  selectedDuration?: number;
+  errors: {
+    [key: string]: string;
+  }[];
 }
 
 export default function Admin() {
@@ -48,14 +66,16 @@ export default function Admin() {
         />
       )}
 
-      {/* <EditBookingModal
-        visible={modal.id === 'EDIT_BOOKING'}
-        modalParams={modal.params}
-        employeesResponse={employeesResponse}
-        onOk={() => setModal({ id: null, params: {} })}
-        onCancel={() => setModal({ id: null, params: {} })}
-        branchId={branches[0].id}
-      /> */}
+      {modal.id === 'EDIT_BOOKING' && (
+        <EditBookingModal
+          visible={modal.id === 'EDIT_BOOKING'}
+          modalParams={modal.params}
+          employeesResponse={employeesResponse}
+          onOk={() => setModal({ id: null, params: {} })}
+          onCancel={() => setModal({ id: null, params: {} })}
+          branchId={branches[0].id}
+        />
+      )}
     </div>
   );
 }
