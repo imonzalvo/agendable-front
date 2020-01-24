@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment, { Moment } from 'moment';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import DateTimePicker from '@/components/DateTimePicker';
 import { GetEmployeeAvailableTime } from '@/graphql/sharedQueries';

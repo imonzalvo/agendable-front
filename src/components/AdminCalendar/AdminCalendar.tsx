@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Alert } from 'antd';
+import React, { useState, useMemo } from 'react';
+import { Alert, Spin } from 'antd';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { QueryResult } from '@apollo/react-common';
 import moment from 'moment-timezone';
 import 'moment/locale/es';
 import { compact } from 'lodash';
+import { startOfWeek, formatISO, endOfWeek } from 'date-fns';
 
 import PageLoading from '@/components/PageLoading';
 import { GetBookingsForBranch } from './queries';
@@ -37,6 +38,51 @@ interface AdminCalendarProps {
   branchId: string;
 }
 
+const getEvents = (bookingsData?: IGetBookingsForBranch) => {
+  const bookings = bookingsData?.getBranch?.bookings?.items;
+  if (bookings) {
+    return compact(bookings).map(
+      ({
+        id,
+        clientName,
+        clientFamilyName,
+        start,
+        end,
+        employee,
+        clientEmail,
+        clientPhone,
+        services,
+      }) => ({
+        id,
+        title: ` ${clientName} ${clientFamilyName}`,
+        start: new Date(start),
+        end: new Date(end),
+        resourceId: employee.id,
+        clientName,
+        clientFamilyName,
+        clientEmail,
+        clientPhone,
+        employee,
+        services,
+      }),
+    );
+  }
+  return [];
+};
+
+const getResourceMap = (
+  employeesResponse?: QueryResult<IGetBranchEmployees, Record<string, any>>,
+) => {
+  const employees = employeesResponse?.data?.getBranch?.employees?.items;
+  if (employees) {
+    return compact(employees).map(employee => ({
+      resourceId: employee.id,
+      resourceTitle: `${employee.givenName} ${employee.familyName}`,
+    }));
+  }
+  return [];
+};
+
 export default function AdminCalendar({
   setModal,
   employeesResponse,
@@ -45,13 +91,23 @@ export default function AdminCalendar({
   const [shouldTransition, setShouldTransition] = useState(false);
   const { callTimeout, clear } = useTimeout(() => setShouldTransition(false), 500);
 
-  const { loading: bookingsLoading, data: bookingsData, error: bookingsError } = useQuery<
-    IGetBookingsForBranch
-  >(GetBookingsForBranch, {
-    variables: { id: branchId },
+  const {
+    loading: bookingsLoading,
+    data: bookingsData,
+    error: bookingsError,
+    refetch: refetchBookings,
+  } = useQuery<IGetBookingsForBranch>(GetBookingsForBranch, {
+    variables: {
+      id: branchId,
+      start: formatISO(startOfWeek(new Date(), { weekStartsOn: 1 })),
+      end: formatISO(endOfWeek(new Date(), { weekStartsOn: 1 })),
+    },
   });
 
-  if (bookingsLoading || employeesResponse.loading) {
+  const memoizedEvents = useMemo(() => getEvents(bookingsData), [bookingsData]);
+  const memoizedResourceMap = useMemo(() => getResourceMap(employeesResponse), [employeesResponse]);
+
+  if (employeesResponse.loading) {
     return <PageLoading />;
   }
 
@@ -66,49 +122,6 @@ export default function AdminCalendar({
       />
     );
   }
-
-  const getEvents = () => {
-    const bookings = bookingsData?.getBranch?.bookings?.items;
-    if (bookings) {
-      return compact(bookings).map(
-        ({
-          id,
-          clientName,
-          clientFamilyName,
-          start,
-          end,
-          employee,
-          clientEmail,
-          clientPhone,
-          services,
-        }) => ({
-          id,
-          title: ` ${clientName} ${clientFamilyName}`,
-          start: new Date(start),
-          end: new Date(end),
-          resourceId: employee.id,
-          clientName,
-          clientFamilyName,
-          clientEmail,
-          clientPhone,
-          employee,
-          services,
-        }),
-      );
-    }
-    return [];
-  };
-
-  const getResourceMap = () => {
-    const employees = employeesResponse?.data?.getBranch?.employees?.items;
-    if (employees) {
-      return compact(employees).map(employee => ({
-        resourceId: employee.id,
-        resourceTitle: `${employee.givenName} ${employee.familyName}`,
-      }));
-    }
-    return [];
-  };
 
   /**
    * Check if resource is available on given timeslot
@@ -141,63 +154,67 @@ export default function AdminCalendar({
   return (
     <div style={{ marginTop: 110 }}>
       <BigCalendarStyles shouldTransition={shouldTransition} />
-      <Calendar
-        events={getEvents()}
-        localizer={localizer}
-        defaultView="day"
-        views={['day']}
-        step={30}
-        resources={getResourceMap()}
-        resourceIdAccessor="resourceId"
-        resourceTitleAccessor="resourceTitle"
-        // TODO: min and max should come from the min/max of the branch employee availabilty
-        // min={new Date(0, 0, 0, 7, 0, 0)}
-        // max={new Date(0, 0, 0, , 0, 0)}
-        // @ts-ignore
-        components={{
-          toolbar: props => (
-            <Toolbar
-              {...props}
-              onNewBooking={(date: Date) =>
-                setModal({
-                  id: 'NEW_BOOKING',
-                  params: {
-                    date: moment(date)
-                      .startOf('day')
-                      .hour(moment().hour())
-                      .toDate(),
-                  },
-                })
-              }
-              onDateChange={() => {
-                clear();
-                setShouldTransition(true);
-                callTimeout();
-              }}
-            />
-          ),
-          resourceHeader: ({ label }: { label: React.ReactNode }) => (
-            <ResourceHeader label={label} />
-          ),
+      <Spin spinning={bookingsLoading}>
+        <Calendar
+          events={memoizedEvents}
+          localizer={localizer}
+          defaultView="day"
+          views={['day']}
+          step={30}
+          resources={memoizedResourceMap}
+          resourceIdAccessor="resourceId"
+          resourceTitleAccessor="resourceTitle"
+          // TODO: min and max should come from the min/max of the branch employee availabilty
+          // min={new Date(0, 0, 0, 7, 0, 0)}
+          // max={new Date(0, 0, 0, , 0, 0)}
           // @ts-ignore
-          timeSlotWrapper: ({ children, resource, value }: { children: React.ReactNode }) => (
-            <TimeSlotWrapper
-              resource={resource}
-              value={value}
-              isAvailable={isAvailable}
-              setModal={setModal}
-            >
-              {children}
-            </TimeSlotWrapper>
-          ),
-          eventWrapper: (p: any) => <EventWrapper {...p} setModal={setModal} />,
-        }}
-        // onSelectEvent={event =>
-        //   setModal({ id: 'NEW_BOOKING', params: { date: event.start, bookingId: event.id } })
-        // }
-        selectable
-        onSelecting={() => false}
-      />
+          components={{
+            toolbar: props => (
+              <Toolbar
+                {...props}
+                onNewBooking={(date: Date) =>
+                  setModal({
+                    id: 'NEW_BOOKING',
+                    params: {
+                      date: moment(date)
+                        .startOf('day')
+                        .hour(moment().hour())
+                        .toDate(),
+                    },
+                  })
+                }
+              />
+            ),
+            resourceHeader: ({ label }: { label: React.ReactNode }) => (
+              <ResourceHeader label={label} />
+            ),
+            // @ts-ignore
+            timeSlotWrapper: ({ children, resource, value }: { children: React.ReactNode }) => (
+              <TimeSlotWrapper
+                resource={resource}
+                value={value}
+                isAvailable={isAvailable}
+                setModal={setModal}
+              >
+                {children}
+              </TimeSlotWrapper>
+            ),
+            eventWrapper: (p: any) => <EventWrapper {...p} setModal={setModal} />,
+          }}
+          selectable
+          onSelecting={() => false}
+          onNavigate={d => {
+            refetchBookings({
+              id: branchId,
+              start: formatISO(startOfWeek(d, { weekStartsOn: 1 })),
+              end: formatISO(endOfWeek(d, { weekStartsOn: 1 })),
+            });
+            clear();
+            setShouldTransition(true);
+            callTimeout();
+          }}
+        />
+      </Spin>
     </div>
   );
 }

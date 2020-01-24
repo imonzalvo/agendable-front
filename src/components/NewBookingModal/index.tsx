@@ -3,7 +3,7 @@ import { Modal, Row, Col, Button, Card, message } from 'antd';
 import { FormProps } from 'antd/lib/form';
 import moment from 'moment-timezone';
 import 'react-dates/lib/css/_datepicker.css';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import { QueryResult } from '@apollo/react-common';
 import { Moment } from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';

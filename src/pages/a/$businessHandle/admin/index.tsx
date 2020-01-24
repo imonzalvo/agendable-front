@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import 'moment/locale/es';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import AdminCalendar from '@/components/AdminCalendar';
 import NewBookingModal from '@/components/NewBookingModal';
