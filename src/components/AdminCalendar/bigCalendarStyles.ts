@@ -217,7 +217,6 @@ button.rbc-input::-moz-focus-inner {
   cursor: pointer;
   width: 100%;
   text-align: left;
-  transition: all 200ms ease-in-out;
 }
 .rbc-event:hover {
   background-color: #eafff8;
@@ -579,7 +578,7 @@ button.rbc-input::-moz-focus-inner {
   width: 100%;
   border: 1px solid #ddd;
   min-height: 0;
-  animation: ${p => p.shouldTransition && 'fade-in-out 0.25s 1'}
+  animation: ${p => p.shouldTransition && 'fade-in-out 0.5s 1'}
 
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Alert } from 'antd';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import { get } from 'lodash';
 
 import PageLoading from '@/components/PageLoading';

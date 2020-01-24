@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Form, Button, Input, Select, Icon, message, Card } from 'antd';
 import router from 'umi/router';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import humps from 'humps';
 import moment from 'moment-timezone';
 import { Auth } from 'aws-amplify';

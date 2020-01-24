@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { getApolloContext } from '@apollo/react-hooks';
+import { getApolloContext } from '@apollo/client';
 import AWSAppSyncClient from 'aws-appsync';
 
 const Rehydrated = ({ children }) => {

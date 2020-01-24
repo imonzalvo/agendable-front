@@ -26,15 +26,9 @@ const weekDayNames = [
 
 interface CustomToolbarProps extends ToolbarProps {
   onNewBooking: (selectedDate: Date) => void;
-  onDateChange: (selectedDate: Date) => void;
 }
 
-function CustomToolbar({
-  date: selectedDate,
-  onNavigate,
-  onNewBooking,
-  onDateChange,
-}: CustomToolbarProps) {
+function CustomToolbar({ date: selectedDate, onNavigate, onNewBooking }: CustomToolbarProps) {
   const [weekdays] = useState(generateWeekdays(selectedDate));
   const [sliderIndex, setSliderIndex] = useState(0);
   const [nativeDatePickerValue, setNativeDatePickerValue] = useState(
@@ -47,7 +41,6 @@ function CustomToolbar({
   });
 
   useEffectSkipMount(() => {
-    onDateChange(selectedDate);
     const weeksDifferenceFromSelectedDate = moment(selectedDate)
       .startOf('week')
       .diff(moment(weekdays[0]), 'weeks');
@@ -73,7 +66,9 @@ function CustomToolbar({
 
     return (
       <Radio.Group
-        value={selectedDate.valueOf()}
+        value={moment(selectedDate)
+          .startOf('d')
+          .format()}
         onChange={v => {
           onNavigate('DATE', new Date(v.target.value));
         }}
@@ -86,10 +81,12 @@ function CustomToolbar({
       >
         {weekdaysArr.map(weekDay => (
           <DayContainer
-            value={weekDay.valueOf()}
+            value={moment(weekDay)
+              .startOf('d')
+              .format()}
             key={weekDay.valueOf()}
             isToday={moment(weekDay).isSame(moment(), 'day')}
-            isChecked={weekDay.valueOf() === selectedDate.valueOf()}
+            isChecked={moment(weekDay).isSame(selectedDate, 'day')}
           >
             <div style={{ lineHeight: 'initial' }}>{weekDay.getDate()}</div>
             <div style={{ lineHeight: 'initial' }}>

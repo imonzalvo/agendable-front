@@ -2,13 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { createAppSyncLink, AUTH_TYPE } from 'aws-appsync';
 import AWS from 'aws-sdk';
 import Amplify, { Auth } from 'aws-amplify';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import RouterTypes from 'umi/routerTypes';
 // import { Rehydrated } from 'aws-appsync-react'; aws does not supports apollo 3.0
 import { ConfigProvider } from 'antd';
-import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 
 // import Rehydrated from './Rehydrated'; trying to create a custom one from https://github.com/awslabs/aws-mobile-appsync-sdk-js/issues/448
 import es from 'antd/es/locale-provider/es_ES';
@@ -97,7 +94,7 @@ const Layout = ({ children, location }: LayoutProps) => {
       });
   }, []);
 
-  const httpLink = createHttpLink({
+  const httpLink = new HttpLink({
     uri: awsconfig.aws_appsync_graphqlEndpoint,
   });
 
