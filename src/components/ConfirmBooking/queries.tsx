@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-export const CreateClientBooking = gql`
-  mutation CreateBooking(
+export const CreateBooking = gql`
+  mutation CreateBookingWithServices(
     $createdAt: AWSDateTime!
     $start: AWSDateTime!
     $end: AWSDateTime!
@@ -12,9 +12,10 @@ export const CreateClientBooking = gql`
     $clientFamilyName: String
     $clientName: String
     $clientPhone: AWSPhone
+    $servicesId: [ID]
   ) {
     __typename
-    createBooking(
+    createBookingWithServices(
       input: {
         createdAt: $createdAt
         start: $start
@@ -27,12 +28,18 @@ export const CreateClientBooking = gql`
         clientName: $clientName
         clientPhone: $clientPhone
       }
+      servicesId: $servicesId
     ) {
       id
       start
       end
       employee {
         id
+      }
+      services {
+        items {
+          id
+        }
       }
     }
   }

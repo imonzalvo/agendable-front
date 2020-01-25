@@ -1,73 +1,36 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useResponsive } from 'react-hooks-responsive';
 
-import Stepper from '@/components/BookingStepper';
 import BookingInfo from '@/components/BookingInfo';
-import { BookingContext } from '.';
-import { BookingContainer, CardContainer, NavigationContainer } from './styles';
-import BookingNavigation from '@/components/BookingNavigation';
+import { BookingContainer, CardContainer } from './styles';
+import BookingHeader from '@/components/BookingHeader';
+import { getCurrentStep } from '@/utils/utils';
+import { BusinessContext } from '@/components/BussinessGetter';
+import Error404 from '@/pages/404';
 
 const BookingLayout = ({ children }) => {
-  const { currentStep, setCurrentStep, steps } = useContext(BookingContext);
-
-  useEffect(() => {
-    const step = getCurrentStep();
-    setCurrentStep(step);
-  }, [location]);
-
   const { screenIsAtLeast } = useResponsive({
     xs: 0,
     sm: 480,
     md: 576,
     lg: 768,
   });
+  const {
+    business: { businessName },
+  } = useContext(BusinessContext);
 
-  const getPreviousUrl = (): string | null => {
-    switch (currentStep) {
-      case 0:
-        return null;
-      case 1:
-        return steps === 5 ? 'select-branch' : null;
-      case 2:
-        return 'select-service';
-      case 3:
-        return 'select-professional';
-      case 4:
-        return 'select-date';
-      default:
-        return null;
-    }
-  };
+  if (!businessName) return <Error404 />;
 
-  const getCurrentStep = (): number => {
-    const currentStep = location.pathname.split('/').pop();
-    switch (currentStep) {
-      case 'select-branch':
-        return 0;
-      case 'select-service':
-        return 1;
-      case 'select-professional':
-        return 2;
-      case 'select-date':
-        return 3;
-      case 'confirm':
-        return 4;
-      default:
-        return 0;
-    }
-  };
+  const currentStep = getCurrentStep();
 
   return (
-    <>
-      <NavigationContainer>
-        <BookingNavigation previousStep={getPreviousUrl()} />
-        <Stepper active={currentStep} />
-      </NavigationContainer>
+    <div style={{ padding: 24 }}>
+      <BookingHeader />
       <BookingContainer>
         <CardContainer>{children}</CardContainer>
         {(screenIsAtLeast('lg') || currentStep === 4) && <BookingInfo />}
       </BookingContainer>
-    </>
+    </div>
   );
 };
 

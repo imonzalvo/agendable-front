@@ -6,4 +6,5 @@ export default {
   'message.passwordLength': 'Password must contains 6 or more characteres',
   'message.codeSent': 'Code Sent!',
   'message.error.fetching.bookingDetails': 'Error getting booking details',
+  'message.gratitude': 'Thanks for making an appointment with us!',
 };

@@ -4,7 +4,6 @@ import router from 'umi/router';
 import BranchList from '@/components/BranchList';
 import { BookingContext } from '@/layouts';
 import { BusinessContext } from '@/components/BussinessGetter';
-import BookingLayout from '@/layouts/BookingLayout';
 
 interface BranchProps {
   id: string;
@@ -20,11 +19,7 @@ const SelectBranch = () => {
     router.push('select-service');
   };
 
-  return (
-    <BookingLayout>
-      <BranchList businessId={business.businessId} selectBranch={selectBranch} />
-    </BookingLayout>
-  );
+  return <BranchList businessId={business.businessId} selectBranch={selectBranch} />;
 };
 
 export default SelectBranch;

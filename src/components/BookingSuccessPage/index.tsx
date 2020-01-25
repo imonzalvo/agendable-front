@@ -1,6 +1,5 @@
 import React from 'react';
 import router from 'umi/router';
-import { Button } from 'antd';
 import { Checkmark } from 'react-checkmark';
 import { useResponsive } from 'react-hooks-responsive';
 import { formatMessage } from 'umi-plugin-locale';
@@ -15,16 +14,13 @@ const BookingSuccessPage = () => {
     md: 510,
   });
 
-  setTimeout(() => router.push(getUrl('')), 1900);
+  setTimeout(() => router.push(getUrl('book/summary')), 1900);
   const size = screenIsAtLeast('sm') ? 'xxLarge' : 'large';
 
   return (
     <Background>
       <Checkmark size={size} />
       <Title>{formatMessage({ id: 'booking.success' })}</Title>
-      <Button onClick={() => router.push(getUrl(''))}>
-        {formatMessage({ id: 'button.return' })}
-      </Button>
     </Background>
   );
 };

@@ -39,30 +39,30 @@ interface BookDataProps {
     address: string;
   };
   service: {
-    id: string | undefined;
-    duration: number | undefined;
-    price: number | undefined;
-    name: string | undefined;
+    id: string;
+    duration: number;
+    price: number;
+    name: string;
   };
   professional: null | {
     id: string;
-    name: string;
+    givenName: string;
   };
   date: string | null;
+  id: string | null;
 }
 
 export const BookingContext = React.createContext({
   bookData: {
-    branch: null,
-    service: { id: undefined, duration: undefined, price: undefined, name: undefined },
-    professional: null,
-    date: null,
+    branch: { id: '', address: '' },
+    service: { id: '', duration: 0, price: 0, name: '' },
+    professional: { id: '', givenName: '' },
+    date: '',
+    id: '',
   },
   setBookData: (_data: BookDataProps) => {},
   steps: 0,
   setSteps: (_value: number) => {},
-  currentStep: 0,
-  setCurrentStep: (_value: number) => {},
 });
 
 interface LayoutProps extends RouterTypes {
@@ -77,9 +77,9 @@ const Layout = ({ children, location }: LayoutProps) => {
     service: { id: undefined, duration: undefined, price: undefined, name: undefined },
     professional: null,
     date: null,
+    id: null,
   });
   const [steps, setSteps] = useState(4);
-  const [currentStep, setCurrentStep] = useState(0);
   const subdomain = useSubdomain();
 
   useEffect(() => {
@@ -138,8 +138,6 @@ const Layout = ({ children, location }: LayoutProps) => {
               setBookData,
               steps,
               setSteps,
-              currentStep,
-              setCurrentStep,
             }}
           >
             <BusinessGetter pathname={location.pathname} subdomain={subdomain}>

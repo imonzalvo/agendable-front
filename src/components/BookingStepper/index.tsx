@@ -1,20 +1,22 @@
 import React, { useContext } from 'react';
 import { Steps } from 'antd';
-import { BookingContext } from '@/layouts';
 import { formatMessage } from 'umi-plugin-locale';
+
+import { BookingContext } from '@/layouts';
+import { getCurrentStep } from '@/utils/utils';
 
 const { Step } = Steps;
 
-interface BookingStepperProps {
-  active: number;
-}
-
-const BookingStepper = ({ active }: BookingStepperProps) => {
+const BookingStepper = () => {
   const { steps } = useContext(BookingContext);
+
+  const currentStep = getCurrentStep();
+
   // If there's just one branch (three steps), the current step to display is one less.
-  const current = steps === 3 ? active - 1 : active;
+  const activeStep = steps === 3 ? currentStep - 1 : currentStep;
+
   return (
-    <Steps size="small" current={current} style={{ cursor: 'default' }}>
+    <Steps size="small" current={activeStep} style={{ cursor: 'default' }}>
       {steps === 4 && <Step title={formatMessage({ id: 'booking.selectBranch' })} />}
       <Step title={formatMessage({ id: 'booking.selectService' })} />
       <Step title={formatMessage({ id: 'booking.selectProfessional' })} />
