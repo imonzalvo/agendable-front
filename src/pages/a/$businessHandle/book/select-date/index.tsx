@@ -3,7 +3,6 @@ import router from 'umi/router';
 
 import SelectDateComponent from '@/components/SelectDate';
 import { BookingContext } from '@/layouts';
-import BookingLayout from '@/layouts/BookingLayout';
 
 const SelectDate = () => {
   const { bookData, setBookData } = useContext(BookingContext);
@@ -18,13 +17,11 @@ const SelectDate = () => {
 
   if (professional?.id && serviceDuration) {
     return (
-      <BookingLayout>
-        <SelectDateComponent
-          professionalId={professional.id}
-          serviceDuration={serviceDuration}
-          handleSelectDate={selectDate}
-        />
-      </BookingLayout>
+      <SelectDateComponent
+        professionalId={professional.id}
+        serviceDuration={serviceDuration}
+        handleSelectDate={selectDate}
+      />
     );
   }
   router.go(-3);

@@ -3,7 +3,6 @@ import router from 'umi/router';
 
 import ServiceList from '@/components/ServiceList';
 import { BookingContext } from '@/layouts';
-import BookingLayout from '@/layouts/BookingLayout';
 
 interface ServiceProps {
   id: string;
@@ -21,11 +20,7 @@ export default function SelectService() {
   };
 
   if (bookData.branch?.id) {
-    return (
-      <BookingLayout>
-        <ServiceList branchId={bookData.branch.id} selectService={selectService} />
-      </BookingLayout>
-    );
+    return <ServiceList branchId={bookData.branch.id} selectService={selectService} />;
   }
   router.go(-1);
   return null;

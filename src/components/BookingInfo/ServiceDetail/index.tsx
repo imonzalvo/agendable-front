@@ -8,7 +8,7 @@ import { ServiceContainer, ServiceDetails } from './styles';
 
 interface ServiceDetailProps {
   name: string;
-  duration?: string;
+  duration?: number;
   price: number;
   professional?: string;
 }

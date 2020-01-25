@@ -1,1 +1,1 @@
-export { default } from '@/layouts/BusinessLayout';
+export { default } from '@/layouts/BookingLayout';

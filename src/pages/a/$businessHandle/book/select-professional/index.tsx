@@ -3,7 +3,6 @@ import router from 'umi/router';
 
 import ProfessionalList from '@/components/ProfessionalList';
 import { BookingContext } from '@/layouts';
-import BookingLayout from '@/layouts/BookingLayout';
 
 interface ProfessionalProps {
   id: string;
@@ -20,11 +19,7 @@ const SelectProfessional = () => {
   };
 
   if (serviceId) {
-    return (
-      <BookingLayout>
-        <ProfessionalList serviceId={serviceId} selectProfessional={selectProfessional} />
-      </BookingLayout>
-    );
+    return <ProfessionalList serviceId={serviceId} selectProfessional={selectProfessional} />;
   }
   router.go(-2);
   return null;

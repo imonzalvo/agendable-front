@@ -7,13 +7,16 @@ import { BookingContext } from '@/layouts';
 import { Section, Price } from './styles';
 import ServiceDetail from './ServiceDetail';
 import { BusinessContext } from '../BussinessGetter';
+import { getCurrentStep } from '@/utils/utils';
 
 const { Meta } = Card;
 const { Title, Text } = Typography;
 
 const BookingInfo = () => {
-  const { bookData, currentStep } = useContext(BookingContext);
+  const { bookData } = useContext(BookingContext);
   const { business } = useContext(BusinessContext);
+
+  const currentStep = getCurrentStep();
 
   const renderDate = () => (
     <Section>

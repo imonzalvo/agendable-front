@@ -11,6 +11,24 @@ const getUrl = (path: string) => {
   return `/${path}`;
 };
 
+const getCurrentStep = (): number => {
+  const currentUrl = location.pathname.split('/').pop();
+  switch (currentUrl) {
+    case 'select-branch':
+      return 0;
+    case 'select-service':
+      return 1;
+    case 'select-professional':
+      return 2;
+    case 'select-date':
+      return 3;
+    case 'confirm':
+      return 4;
+    default:
+      return 0;
+  }
+};
+
 const isAntDesignPro = (): boolean => {
   if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
     return true;
@@ -34,4 +52,4 @@ const defaultScreenSizes = {
   lg: 768,
 };
 
-export { isAntDesignProOrDev, isAntDesignPro, isUrl, getUrl, defaultScreenSizes };
+export { isAntDesignProOrDev, isAntDesignPro, isUrl, getUrl, defaultScreenSizes, getCurrentStep };

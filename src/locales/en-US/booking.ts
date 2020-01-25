@@ -9,4 +9,6 @@ export default {
   'booking.with': 'with',
   'booking.success': 'Appointment confirmed',
   'booking.total': 'Total',
+  'booking.reference': 'Reference code:',
+  'booking.confirmed': 'Confirmed',
 };
