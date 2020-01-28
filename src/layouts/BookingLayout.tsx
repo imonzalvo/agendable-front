@@ -24,13 +24,13 @@ const BookingLayout = ({ children }) => {
   const currentStep = getCurrentStep();
 
   return (
-    <div style={{ padding: 24 }}>
+    <>
       <BookingHeader />
       <BookingContainer>
         <CardContainer>{children}</CardContainer>
         {(screenIsAtLeast('lg') || currentStep === 4) && <BookingInfo />}
       </BookingContainer>
-    </div>
+    </>
   );
 };
 

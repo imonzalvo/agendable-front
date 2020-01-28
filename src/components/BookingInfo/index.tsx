@@ -59,6 +59,8 @@ const BookingInfo = () => {
         margin: '4px 0px 24px 0px',
         width: 340,
         borderRadius: '8px 8px 8px 40px',
+        boxShadow:
+          '6px 0 16px -8px rgba(0, 0, 0, 0.08), 9px 0 28px 0 rgba(0, 0, 0, 0.05), 12px 0 48px 16px rgba(0, 0, 0, 0.03)',
       }}
     >
       <Meta
