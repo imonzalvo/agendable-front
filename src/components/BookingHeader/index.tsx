@@ -4,6 +4,7 @@ import BookingNavigation from '../BookingNavigation';
 import BookingStepper from '../BookingStepper';
 import { BookingContext } from '@/layouts';
 import { getCurrentStep } from '@/utils/utils';
+import { Header } from './styles';
 
 const BookingHeader = () => {
   const { steps } = useContext(BookingContext);
@@ -27,10 +28,10 @@ const BookingHeader = () => {
   };
 
   return (
-    <div style={{ marginBottom: 48 }}>
+    <Header>
       <BookingNavigation previousStep={getPreviousUrl()} />
       <BookingStepper />
-    </div>
+    </Header>
   );
 };
 

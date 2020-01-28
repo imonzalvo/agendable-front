@@ -1,8 +1,8 @@
 export default {
-  'booking.selectBranch': 'Select Branch',
-  'booking.selectService': 'Select Service',
-  'booking.selectProfessional': 'Select Professional',
-  'booking.selectTime': 'Select Time',
+  'booking.selectBranch': 'Branch',
+  'booking.selectService': 'Service',
+  'booking.selectProfessional': 'Professional',
+  'booking.selectTime': 'Time',
   'booking.confirmation': 'Confirm',
   'booking.noServiceSelected': 'No services selected yet',
   'booking.at': 'at',

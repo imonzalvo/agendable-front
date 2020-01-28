@@ -6,6 +6,8 @@ export const NavigationContainer = styled.div`
 
 export const BookingContainer = styled.div`
     display: flex;
+    position: relative;
+    top: -40px;
     justify-content: center;
     width: 100%;
     @media (max-width: 768px) {
