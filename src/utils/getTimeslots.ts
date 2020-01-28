@@ -14,7 +14,7 @@ const getPeriodTimeslots = (
   const newStart = moment(start);
   newStart.add(TIME_SLOT, 'm');
   return [
-    { date: start.format(), time: start.format('h:mm A') },
+    { date: start.format(), time: start.format('HH:mm') },
     ...getPeriodTimeslots(newStart, duration, to),
   ];
 };
