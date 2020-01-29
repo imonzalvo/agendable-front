@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { createAppSyncLink, AUTH_TYPE } from 'aws-appsync';
+import { AUTH_TYPE } from 'aws-appsync';
 import { createAuthLink } from 'aws-appsync-auth-link';
 import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 import AWS from 'aws-sdk';
@@ -7,14 +7,14 @@ import Amplify, { Auth } from 'aws-amplify';
 import {
   ApolloProvider,
   ApolloClient,
-  HttpLink,
   InMemoryCache,
   ApolloLink,
   createHttpLink,
 } from '@apollo/client';
 import RouterTypes from 'umi/routerTypes';
-// import { Rehydrated } from 'aws-appsync-react'; aws does not supports apollo 3.0
 import { ConfigProvider } from 'antd';
+import bugsnag from '@bugsnag/js';
+import bugsnagReact from '@bugsnag/plugin-react';
 
 // import Rehydrated from './Rehydrated'; trying to create a custom one from https://github.com/awslabs/aws-mobile-appsync-sdk-js/issues/448
 import es from 'antd/es/locale-provider/es_ES';
@@ -33,6 +33,15 @@ AWS.config.update({
 });
 
 Amplify.configure(awsconfig);
+
+const bugsnagClient = bugsnag({
+  apiKey: 'e2139c5caec0def8b147ed96825c201e',
+  notifyReleaseStages: ['production', 'staging'],
+  appVersion: '0.0.1',
+});
+
+bugsnagClient.use(bugsnagReact, React);
+const ErrorBoundary = bugsnagClient.getPlugin('react');
 
 const renderSpin = () => <PageLoading />;
 
@@ -103,38 +112,6 @@ const Layout = ({ children, location }: LayoutProps) => {
       });
   }, []);
 
-  // const httpLink = new HttpLink({
-  //   uri: awsconfig.aws_appsync_graphqlEndpoint,
-  // });
-
-  // const awsLinkCognito = createAppSyncLink({
-  //   url: awsconfig.aws_appsync_graphqlEndpoint,
-  //   region: awsconfig.aws_appsync_region,
-  // auth: {
-  //   type: awsconfig.aws_appsync_authenticationType,
-  //   credentials: () => Auth.currentCredentials(),
-  //   jwtToken: async () => (await Auth.currentSession()).getAccessToken().getJwtToken(),
-  // },
-  //   complexObjectsCredentials: () => Auth.currentCredentials(),
-  // });
-
-  // const awsLinkGuest = createAppSyncLink({
-  //   url: awsconfig.aws_appsync_graphqlEndpoint,
-  //   region: awsconfig.aws_appsync_region,
-  // auth: { type: AUTH_TYPE.API_KEY, apiKey: awsconfig.aws_appsync_apiKey },
-  // complexObjectsCredentials: () => Auth.currentCredentials(),
-  // });
-
-  // const cognitoClient = new ApolloClient({
-  //   link: awsLinkCognito.concat(httpLink),
-  //   cache: new InMemoryCache(),
-  // });
-
-  // const guestClient = new ApolloClient({
-  //   link: awsLinkGuest.concat(httpLink),
-  //   cache: new InMemoryCache(),
-  // });
-
   const url = awsconfig.aws_appsync_graphqlEndpoint;
   const region = awsconfig.aws_appsync_region;
   const cognitoAuth = {
@@ -164,29 +141,31 @@ const Layout = ({ children, location }: LayoutProps) => {
     cache: new InMemoryCache(),
   });
 
-  if (!client) return renderSpin();
-
   return (
-    <ApolloProvider client={client}>
-      {/* <Rehydrated> */}
-      <ConfigProvider locale={es}>
-        <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>
-          <BookingContext.Provider
-            value={{
-              bookData,
-              setBookData,
-              steps,
-              setSteps,
-            }}
-          >
-            <BusinessGetter pathname={location.pathname} subdomain={subdomain}>
-              {children}
-            </BusinessGetter>
-          </BookingContext.Provider>
-        </AuthContext.Provider>
-      </ConfigProvider>
-      {/* </Rehydrated> */}
-    </ApolloProvider>
+    <ErrorBoundary>
+      {!client ? (
+        renderSpin()
+      ) : (
+        <ApolloProvider client={client}>
+          <ConfigProvider locale={es}>
+            <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>
+              <BookingContext.Provider
+                value={{
+                  bookData,
+                  setBookData,
+                  steps,
+                  setSteps,
+                }}
+              >
+                <BusinessGetter pathname={location.pathname} subdomain={subdomain}>
+                  {children}
+                </BusinessGetter>
+              </BookingContext.Provider>
+            </AuthContext.Provider>
+          </ConfigProvider>
+        </ApolloProvider>
+      )}
+    </ErrorBoundary>
   );
 };
 
