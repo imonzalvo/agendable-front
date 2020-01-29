@@ -2,7 +2,7 @@ import produce from 'immer';
 import { keyBy } from 'lodash';
 import moment from 'moment-timezone';
 import { Modal } from 'antd';
-import { QueryResult } from '@apollo/react-common';
+import { QueryResult } from '@apollo/client';
 
 import { BookingState } from '@/pages/a/$businessHandle/admin';
 

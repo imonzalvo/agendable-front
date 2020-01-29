@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Select, Card, DatePicker, Input } from 'antd';
 import moment, { Moment } from 'moment-timezone';
 import produce from 'immer';
-import { QueryResult } from '@apollo/react-common';
+import { QueryResult } from '@apollo/client';
 import { compact } from 'lodash';
 import { isMobile } from 'react-device-detect';
 
@@ -43,10 +43,10 @@ export default function BookingDetails({
     moment(bookingDate).format('YYYY-MM-DD'),
   );
 
-  const onServiceChange = (e: BookingState['selectedServices'], i: number) => {
+  const onServiceChange = (e: string, i: number) => {
     setBookings(pS =>
       produce(pS, dS => {
-        dS[i].selectedServices = e;
+        dS[i].selectedServices[0] = e;
       }),
     );
   };

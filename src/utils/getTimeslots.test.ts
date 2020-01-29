@@ -13,7 +13,7 @@ describe('getTimeslots tests', (): void => {
     expect(getTimeslots(availablePeriods, '2019-11-16', 30)).toEqual([
       {
         date: '2019-11-16T00:00:00-03:00',
-        time: '12:00 AM',
+        time: '00:00',
       },
     ]);
   });

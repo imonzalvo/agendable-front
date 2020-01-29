@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { BookingFragment } from '@/graphql/fragments';
 
 export const CreateBooking = gql`
   mutation CreateBookingWithServices(
@@ -30,17 +31,8 @@ export const CreateBooking = gql`
       }
       servicesId: $servicesId
     ) {
-      id
-      start
-      end
-      employee {
-        id
-      }
-      services {
-        items {
-          id
-        }
-      }
+      ...BookingData
     }
   }
+  ${BookingFragment}
 `;

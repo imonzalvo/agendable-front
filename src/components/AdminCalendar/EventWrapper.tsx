@@ -47,7 +47,7 @@ export default function CustomEventWrapper({ children, event, setModal }: Custom
         selectedServices: [],
         selectedStartTime: event.start,
         selectedDuration: moment(event.end).diff(moment(event.start), 's'),
-        services: event?.services?.items?.map(item => item?.service?.id || '') || [],
+        services: event?.services || [],
         clientEmail: event.clientEmail,
         clientName: event.clientName,
         clientFamilyName: event.clientFamilyName,

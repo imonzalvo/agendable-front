@@ -81,7 +81,7 @@ export type CreateBookingInput = {
   start: string;
   end: string;
   status: BookingStatus;
-  clientEmail?: string | null;
+  clientEmail: string;
   clientPhone?: string | null;
   clientName?: string | null;
   clientFamilyName?: string | null;
@@ -177,6 +177,7 @@ export type CreateBranchInput = {
   name: string;
   description?: string | null;
   image?: string | null;
+  editors?: string | null;
   branchBusinessId: string;
 };
 
@@ -188,6 +189,7 @@ export type UpdateBranchInput = {
   name?: string | null;
   description?: string | null;
   image?: string | null;
+  editors?: string | null;
   branchBusinessId?: string | null;
 };
 
@@ -377,6 +379,8 @@ export type ModelFloatFilterInput = {
   lt?: number | null;
   ge?: number | null;
   gt?: number | null;
+  contains?: number | null;
+  notContains?: number | null;
   between?: Array<number | null> | null;
 };
 
@@ -387,6 +391,8 @@ export type ModelIntFilterInput = {
   lt?: number | null;
   ge?: number | null;
   gt?: number | null;
+  contains?: number | null;
+  notContains?: number | null;
   between?: Array<number | null> | null;
 };
 
@@ -398,6 +404,7 @@ export type ModelBranchFilterInput = {
   name?: ModelStringFilterInput | null;
   description?: ModelStringFilterInput | null;
   image?: ModelStringFilterInput | null;
+  editors?: ModelStringFilterInput | null;
   and?: Array<ModelBranchFilterInput | null> | null;
   or?: Array<ModelBranchFilterInput | null> | null;
   not?: ModelBranchFilterInput | null;
@@ -512,6 +519,7 @@ export type CreateBookingWithServicesMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     };
     branch: {
@@ -523,6 +531,7 @@ export type CreateBookingWithServicesMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -596,6 +605,7 @@ export type CreateAvailabilityItemMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
   } | null;
@@ -650,6 +660,7 @@ export type UpdateAvailabilityItemMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
   } | null;
@@ -704,6 +715,7 @@ export type DeleteAvailabilityItemMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
   } | null;
@@ -759,6 +771,7 @@ export type CreateBookingServicesMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       };
     } | null;
     service: {
@@ -835,6 +848,7 @@ export type UpdateBookingServicesMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       };
     } | null;
     service: {
@@ -911,6 +925,7 @@ export type DeleteBookingServicesMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       };
     } | null;
     service: {
@@ -1022,6 +1037,7 @@ export type CreateBookingMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     };
     branch: {
@@ -1033,6 +1049,7 @@ export type CreateBookingMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -1142,6 +1159,7 @@ export type UpdateBookingMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     };
     branch: {
@@ -1153,6 +1171,7 @@ export type UpdateBookingMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -1262,6 +1281,7 @@ export type DeleteBookingMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     };
     branch: {
@@ -1273,6 +1293,7 @@ export type DeleteBookingMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -1375,6 +1396,7 @@ export type CreateEmployeeMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -1477,6 +1499,7 @@ export type UpdateEmployeeMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -1579,6 +1602,7 @@ export type DeleteEmployeeMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -1649,6 +1673,7 @@ export type CreateEmployeeServicesMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
     service: {
@@ -1721,6 +1746,7 @@ export type UpdateEmployeeServicesMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
     service: {
@@ -1793,6 +1819,7 @@ export type DeleteEmployeeServicesMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
     service: {
@@ -1953,6 +1980,7 @@ export type CreateBranchMutation = {
     name: string;
     description: string | null;
     image: string | null;
+    editors: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
       items: Array<{
@@ -2028,6 +2056,7 @@ export type UpdateBranchMutation = {
     name: string;
     description: string | null;
     image: string | null;
+    editors: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
       items: Array<{
@@ -2103,6 +2132,7 @@ export type DeleteBranchMutation = {
     name: string;
     description: string | null;
     image: string | null;
+    editors: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
       items: Array<{
@@ -2202,6 +2232,7 @@ export type CreateBranchServicesMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -2264,6 +2295,7 @@ export type DeleteBranchServicesMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -2334,6 +2366,7 @@ export type CreateBusinessMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null> | null;
       nextToken: string | null;
     } | null;
@@ -2386,6 +2419,7 @@ export type DeleteBusinessMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null> | null;
       nextToken: string | null;
     } | null;
@@ -2601,6 +2635,7 @@ export type UpdateBranchServicesMutation = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -2671,6 +2706,7 @@ export type UpdateBusinessMutation = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null> | null;
       nextToken: string | null;
     } | null;
@@ -2829,6 +2865,7 @@ export type GetAvailabilityItemQuery = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
   } | null;
@@ -2911,6 +2948,7 @@ export type GetBookingServicesQuery = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       };
     } | null;
     service: {
@@ -3060,6 +3098,7 @@ export type GetBookingQuery = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     };
     branch: {
@@ -3071,6 +3110,7 @@ export type GetBookingQuery = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -3146,6 +3186,7 @@ export type ListBookingsQuery = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       };
     } | null> | null;
     nextToken: string | null;
@@ -3230,6 +3271,7 @@ export type GetEmployeeQuery = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -3301,6 +3343,7 @@ export type ListEmployeesQuery = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null> | null;
     nextToken: string | null;
@@ -3353,6 +3396,7 @@ export type GetEmployeeServicesQuery = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
     service: {
@@ -3500,6 +3544,7 @@ export type GetBranchQuery = {
     name: string;
     description: string | null;
     image: string | null;
+    editors: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
       items: Array<{
@@ -3579,6 +3624,7 @@ export type ListBranchsQuery = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -3642,6 +3688,7 @@ export type GetBranchServicesQuery = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -3696,6 +3743,7 @@ export type ListBranchServicessQuery = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null> | null;
     nextToken: string | null;
@@ -3784,6 +3832,7 @@ export type GetBusinessQuery = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null> | null;
       nextToken: string | null;
     } | null;
@@ -3838,6 +3887,172 @@ export type QGetEmployeeAvailableTimeQuery = {
   getEmployeeAvailableTime: string | null;
 };
 
+export type CREATE_BOOKING_WITH_SERVICESMutationVariables = {
+  createdAt: string;
+  start: string;
+  end: string;
+  status: BookingStatus;
+  bookingBranchId: string;
+  bookingEmployeeId: string;
+  clientEmail?: string | null;
+  clientFamilyName?: string | null;
+  clientName?: string | null;
+  clientPhone?: string | null;
+  servicesId?: Array<string | null> | null;
+};
+
+export type CREATE_BOOKING_WITH_SERVICESMutation = {
+  createBookingWithServices: {
+    __typename: 'Booking';
+    id: string;
+    start: string;
+    end: string;
+    clientName: string | null;
+    clientEmail: string | null;
+    clientFamilyName: string | null;
+    clientPhone: string | null;
+    employee: {
+      __typename: 'Employee';
+      id: string;
+      givenName: string;
+      familyName: string;
+    };
+    services: {
+      __typename: 'ModelBookingServicesConnection';
+      items: Array<{
+        __typename: 'BookingServices';
+        id: string;
+        service: {
+          __typename: 'Service';
+          id: string;
+        } | null;
+      } | null> | null;
+    } | null;
+    branch: {
+      __typename: 'Branch';
+      id: string;
+    };
+  } | null;
+};
+
+export type OnCreateBookingWithServicesSubscription = {
+  onCreateBookingWithServices: {
+    __typename: 'Booking';
+    id: string;
+    createdAt: string;
+    start: string;
+    end: string;
+    status: BookingStatus;
+    client: {
+      __typename: 'User';
+      id: string;
+      givenName: string;
+      familyName: string;
+      userName: string;
+      email: string | null;
+      phone: string | null;
+      userType: UserType;
+      business: {
+        __typename: 'Business';
+        id: string;
+        name: string;
+        email: string;
+        phone: string;
+        handle: string;
+      } | null;
+      bookings: {
+        __typename: 'ModelBookingConnection';
+        nextToken: string | null;
+      } | null;
+      owner: string | null;
+    } | null;
+    clientEmail: string | null;
+    clientPhone: string | null;
+    clientName: string | null;
+    clientFamilyName: string | null;
+    services: {
+      __typename: 'ModelBookingServicesConnection';
+      items: Array<{
+        __typename: 'BookingServices';
+        id: string;
+      } | null> | null;
+      nextToken: string | null;
+    } | null;
+    employee: {
+      __typename: 'Employee';
+      id: string;
+      givenName: string;
+      familyName: string;
+      user: {
+        __typename: 'User';
+        id: string;
+        givenName: string;
+        familyName: string;
+        userName: string;
+        email: string | null;
+        phone: string | null;
+        userType: UserType;
+        owner: string | null;
+      } | null;
+      phone: string | null;
+      availability: {
+        __typename: 'ModelAvailabilityItemConnection';
+        nextToken: string | null;
+      } | null;
+      bookings: {
+        __typename: 'ModelBookingConnection';
+        nextToken: string | null;
+      } | null;
+      services: {
+        __typename: 'ModelEmployeeServicesConnection';
+        nextToken: string | null;
+      } | null;
+      branches: {
+        __typename: 'Branch';
+        id: string;
+        address: string;
+        phone: string;
+        email: string;
+        name: string;
+        description: string | null;
+        image: string | null;
+        editors: string | null;
+      } | null;
+    };
+    branch: {
+      __typename: 'Branch';
+      id: string;
+      address: string;
+      phone: string;
+      email: string;
+      name: string;
+      description: string | null;
+      image: string | null;
+      editors: string | null;
+      bookings: {
+        __typename: 'ModelBookingConnection';
+        nextToken: string | null;
+      } | null;
+      employees: {
+        __typename: 'ModelEmployeeConnection';
+        nextToken: string | null;
+      } | null;
+      services: {
+        __typename: 'ModelBranchServicesConnection';
+        nextToken: string | null;
+      } | null;
+      business: {
+        __typename: 'Business';
+        id: string;
+        name: string;
+        email: string;
+        phone: string;
+        handle: string;
+      };
+    };
+  } | null;
+};
+
 export type OnCreateAvailabilityItemSubscription = {
   onCreateAvailabilityItem: {
     __typename: 'AvailabilityItem';
@@ -3883,6 +4098,7 @@ export type OnCreateAvailabilityItemSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
   } | null;
@@ -3933,6 +4149,7 @@ export type OnUpdateAvailabilityItemSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
   } | null;
@@ -3983,6 +4200,7 @@ export type OnDeleteAvailabilityItemSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
   } | null;
@@ -4034,6 +4252,7 @@ export type OnCreateBookingServicesSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       };
     } | null;
     service: {
@@ -4106,6 +4325,7 @@ export type OnUpdateBookingServicesSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       };
     } | null;
     service: {
@@ -4178,6 +4398,7 @@ export type OnDeleteBookingServicesSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       };
     } | null;
     service: {
@@ -4285,6 +4506,7 @@ export type OnCreateBookingSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     };
     branch: {
@@ -4296,6 +4518,7 @@ export type OnCreateBookingSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -4401,6 +4624,7 @@ export type OnUpdateBookingSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     };
     branch: {
@@ -4412,6 +4636,7 @@ export type OnUpdateBookingSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -4517,6 +4742,7 @@ export type OnDeleteBookingSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     };
     branch: {
@@ -4528,6 +4754,7 @@ export type OnDeleteBookingSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -4626,6 +4853,7 @@ export type OnCreateEmployeeSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -4724,6 +4952,7 @@ export type OnUpdateEmployeeSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -4822,6 +5051,7 @@ export type OnDeleteEmployeeSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -4888,6 +5118,7 @@ export type OnCreateEmployeeServicesSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
     service: {
@@ -4956,6 +5187,7 @@ export type OnUpdateEmployeeServicesSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
     service: {
@@ -5024,6 +5256,7 @@ export type OnDeleteEmployeeServicesSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null;
     } | null;
     service: {
@@ -5168,6 +5401,7 @@ export type OnCreateBranchSubscription = {
     name: string;
     description: string | null;
     image: string | null;
+    editors: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
       items: Array<{
@@ -5239,6 +5473,7 @@ export type OnUpdateBranchSubscription = {
     name: string;
     description: string | null;
     image: string | null;
+    editors: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
       items: Array<{
@@ -5310,6 +5545,7 @@ export type OnDeleteBranchSubscription = {
     name: string;
     description: string | null;
     image: string | null;
+    editors: string | null;
     bookings: {
       __typename: 'ModelBookingConnection';
       items: Array<{
@@ -5405,6 +5641,7 @@ export type OnCreateBranchServicesSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -5463,6 +5700,7 @@ export type OnDeleteBranchServicesSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -5529,6 +5767,7 @@ export type OnCreateBusinessSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null> | null;
       nextToken: string | null;
     } | null;
@@ -5577,6 +5816,7 @@ export type OnDeleteBusinessSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null> | null;
       nextToken: string | null;
     } | null;
@@ -5788,6 +6028,7 @@ export type OnUpdateBranchServicesSubscription = {
       name: string;
       description: string | null;
       image: string | null;
+      editors: string | null;
       bookings: {
         __typename: 'ModelBookingConnection';
         nextToken: string | null;
@@ -5854,8 +6095,41 @@ export type OnUpdateBusinessSubscription = {
         name: string;
         description: string | null;
         image: string | null;
+        editors: string | null;
       } | null> | null;
       nextToken: string | null;
     } | null;
   } | null;
+};
+
+export type BookingDataFragment = {
+  __typename: 'Booking';
+  id: string;
+  start: string;
+  end: string;
+  clientName: string | null;
+  clientEmail: string | null;
+  clientFamilyName: string | null;
+  clientPhone: string | null;
+  employee: {
+    __typename: string;
+    id: string;
+    givenName: string;
+    familyName: string;
+  };
+  services: {
+    __typename: string;
+    items: Array<{
+      __typename: string;
+      id: string;
+      service: {
+        __typename: string;
+        id: string;
+      } | null;
+    } | null> | null;
+  } | null;
+  branch: {
+    __typename: string;
+    id: string;
+  };
 };
