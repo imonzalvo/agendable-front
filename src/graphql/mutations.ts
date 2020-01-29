@@ -73,6 +73,7 @@ export const createBookingWithServices = `mutation CreateBookingWithServices(
         name
         description
         image
+        editors
       }
     }
     branch {
@@ -83,6 +84,7 @@ export const createBookingWithServices = `mutation CreateBookingWithServices(
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -141,6 +143,7 @@ export const createAvailabilityItem = `mutation CreateAvailabilityItem($input: C
         name
         description
         image
+        editors
       }
     }
   }
@@ -184,6 +187,7 @@ export const updateAvailabilityItem = `mutation UpdateAvailabilityItem($input: U
         name
         description
         image
+        editors
       }
     }
   }
@@ -227,6 +231,7 @@ export const deleteAvailabilityItem = `mutation DeleteAvailabilityItem($input: D
         name
         description
         image
+        editors
       }
     }
   }
@@ -272,6 +277,7 @@ export const createBookingServices = `mutation CreateBookingServices($input: Cre
         name
         description
         image
+        editors
       }
     }
     service {
@@ -334,6 +340,7 @@ export const updateBookingServices = `mutation UpdateBookingServices($input: Upd
         name
         description
         image
+        editors
       }
     }
     service {
@@ -396,6 +403,7 @@ export const deleteBookingServices = `mutation DeleteBookingServices($input: Del
         name
         description
         image
+        editors
       }
     }
     service {
@@ -487,6 +495,7 @@ export const createBooking = `mutation CreateBooking($input: CreateBookingInput!
         name
         description
         image
+        editors
       }
     }
     branch {
@@ -497,6 +506,7 @@ export const createBooking = `mutation CreateBooking($input: CreateBookingInput!
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -586,6 +596,7 @@ export const updateBooking = `mutation UpdateBooking($input: UpdateBookingInput!
         name
         description
         image
+        editors
       }
     }
     branch {
@@ -596,6 +607,7 @@ export const updateBooking = `mutation UpdateBooking($input: UpdateBookingInput!
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -685,6 +697,7 @@ export const deleteBooking = `mutation DeleteBooking($input: DeleteBookingInput!
         name
         description
         image
+        editors
       }
     }
     branch {
@@ -695,6 +708,7 @@ export const deleteBooking = `mutation DeleteBooking($input: DeleteBookingInput!
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -778,6 +792,7 @@ export const createEmployee = `mutation CreateEmployee($input: CreateEmployeeInp
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -861,6 +876,7 @@ export const updateEmployee = `mutation UpdateEmployee($input: UpdateEmployeeInp
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -944,6 +960,7 @@ export const deleteEmployee = `mutation DeleteEmployee($input: DeleteEmployeeInp
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -999,6 +1016,7 @@ export const createEmployeeServices = `mutation CreateEmployeeServices($input: C
         name
         description
         image
+        editors
       }
     }
     service {
@@ -1056,6 +1074,7 @@ export const updateEmployeeServices = `mutation UpdateEmployeeServices($input: U
         name
         description
         image
+        editors
       }
     }
     service {
@@ -1113,6 +1132,7 @@ export const deleteEmployeeServices = `mutation DeleteEmployeeServices($input: D
         name
         description
         image
+        editors
       }
     }
     service {
@@ -1231,6 +1251,7 @@ export const createBranch = `mutation CreateBranch($input: CreateBranchInput!) {
     name
     description
     image
+    editors
     bookings {
       items {
         id
@@ -1292,6 +1313,7 @@ export const updateBranch = `mutation UpdateBranch($input: UpdateBranchInput!) {
     name
     description
     image
+    editors
     bookings {
       items {
         id
@@ -1353,6 +1375,7 @@ export const deleteBranch = `mutation DeleteBranch($input: DeleteBranchInput!) {
     name
     description
     image
+    editors
     bookings {
       items {
         id
@@ -1433,6 +1456,7 @@ export const createBranchServices = `mutation CreateBranchServices($input: Creat
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -1481,6 +1505,7 @@ export const deleteBranchServices = `mutation DeleteBranchServices($input: Delet
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -1537,6 +1562,7 @@ export const createBusiness = `mutation CreateBusiness($input: CreateBusinessInp
         name
         description
         image
+        editors
       }
       nextToken
     }
@@ -1579,6 +1605,7 @@ export const deleteBusiness = `mutation DeleteBusiness($input: DeleteBusinessInp
         name
         description
         image
+        editors
       }
       nextToken
     }
@@ -1754,6 +1781,7 @@ export const updateBranchServices = `mutation UpdateBranchServices($input: Updat
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -1810,6 +1838,7 @@ export const updateBusiness = `mutation UpdateBusiness($input: UpdateBusinessInp
         name
         description
         image
+        editors
       }
       nextToken
     }

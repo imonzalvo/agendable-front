@@ -1,15 +1,22 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Alert, Spin } from 'antd';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-import { useQuery } from '@apollo/client';
-import { QueryResult } from '@apollo/react-common';
+import { useQuery, useSubscription, useApolloClient, QueryResult } from '@apollo/client';
 import moment from 'moment-timezone';
 import 'moment/locale/es';
 import { compact } from 'lodash';
 import { startOfWeek, formatISO, endOfWeek } from 'date-fns';
+import produce from 'immer';
 
 import PageLoading from '@/components/PageLoading';
-import { GetBookingsForBranch } from './queries';
+import {
+  GetBookingsForBranch,
+  ON_UPDATE_BOOKING,
+  ON_DELETE_BOOKING,
+  ON_CREATE_BOOKING_WITH_SERVICES,
+  ON_DELETE_BOOKING_SERVICES,
+  ON_CREATE_BOOKING_SERVICES,
+} from './queries';
 import TimeSlotWrapper from './TimeSlotWrapper';
 import Toolbar from './Toolbar';
 import ResourceHeader from './ResourceHeader';
@@ -41,31 +48,19 @@ interface AdminCalendarProps {
 const getEvents = (bookingsData?: IGetBookingsForBranch) => {
   const bookings = bookingsData?.getBranch?.bookings?.items;
   if (bookings) {
-    return compact(bookings).map(
-      ({
-        id,
-        clientName,
-        clientFamilyName,
-        start,
-        end,
-        employee,
-        clientEmail,
-        clientPhone,
-        services,
-      }) => ({
-        id,
-        title: ` ${clientName} ${clientFamilyName}`,
-        start: new Date(start),
-        end: new Date(end),
-        resourceId: employee.id,
-        clientName,
-        clientFamilyName,
-        clientEmail,
-        clientPhone,
-        employee,
-        services,
-      }),
-    );
+    return compact(bookings).map(booking => ({
+      id: booking.id,
+      title: ` ${booking.clientName} ${booking.clientFamilyName}`,
+      start: new Date(booking.start),
+      end: new Date(booking.end),
+      resourceId: booking.employee.id,
+      clientName: booking.clientName,
+      clientFamilyName: booking.clientFamilyName,
+      clientEmail: booking.clientEmail,
+      clientPhone: booking.clientPhone,
+      employee: booking.employee,
+      services: booking.services,
+    }));
   }
   return [];
 };
@@ -89,7 +84,9 @@ export default function AdminCalendar({
   branchId,
 }: AdminCalendarProps) {
   const [shouldTransition, setShouldTransition] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const { callTimeout, clear } = useTimeout(() => setShouldTransition(false), 500);
+  const client = useApolloClient();
 
   const {
     loading: bookingsLoading,
@@ -99,10 +96,142 @@ export default function AdminCalendar({
   } = useQuery<IGetBookingsForBranch>(GetBookingsForBranch, {
     variables: {
       id: branchId,
-      start: formatISO(startOfWeek(new Date(), { weekStartsOn: 1 })),
-      end: formatISO(endOfWeek(new Date(), { weekStartsOn: 1 })),
+      start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
+      end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
     },
   });
+
+  useSubscription(ON_UPDATE_BOOKING, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      if (
+        subscriptionData.data.onUpdateBooking.branch.id === branchId &&
+        bookingsData?.getBranch?.bookings?.items
+      ) {
+        client.writeQuery({
+          query: GetBookingsForBranch,
+          variables: {
+            id: branchId,
+            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
+            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+          },
+          data: produce(bookingsData, dS => {
+            const bItems = dS?.getBranch?.bookings?.items;
+            if (bItems) {
+              const i = bItems.findIndex(b => b?.id === subscriptionData.data.onUpdateBooking.id);
+              bItems[i] = subscriptionData.data.onUpdateBooking;
+            }
+          }),
+        });
+      }
+    },
+  });
+
+  useSubscription(ON_CREATE_BOOKING_WITH_SERVICES, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      if (
+        subscriptionData.data.onCreateBookingWithServices.branch.id === branchId &&
+        bookingsData?.getBranch?.bookings?.items
+      ) {
+        client.writeQuery({
+          query: GetBookingsForBranch,
+          variables: {
+            id: branchId,
+            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
+            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+          },
+          data: produce(bookingsData, dS => {
+            dS?.getBranch?.bookings?.items?.push(subscriptionData.data.onCreateBookingWithServices);
+          }),
+        });
+      }
+    },
+  });
+
+  useSubscription(ON_DELETE_BOOKING, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      const bookingIndex = bookingsData?.getBranch?.bookings?.items?.findIndex(
+        b => b?.id === subscriptionData.data.onDeleteBooking.id,
+      );
+      if (bookingIndex) {
+        client.writeQuery({
+          query: GetBookingsForBranch,
+          variables: {
+            id: branchId,
+            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
+            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+          },
+          data: produce(bookingsData, dS => {
+            dS?.getBranch?.bookings?.items?.splice(bookingIndex, 1);
+          }),
+        });
+      }
+    },
+  });
+
+  useSubscription(ON_DELETE_BOOKING_SERVICES, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      if (
+        subscriptionData.data.onDeleteBookingServices.booking.branch.id === branchId &&
+        bookingsData?.getBranch?.bookings?.items
+      ) {
+        client.writeQuery({
+          query: GetBookingsForBranch,
+          variables: {
+            id: branchId,
+            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
+            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+          },
+          data: produce(bookingsData, dS => {
+            const bItems = dS?.getBranch?.bookings?.items;
+            if (bItems) {
+              const i = bItems.findIndex(
+                b => b?.id === subscriptionData.data.onDeleteBookingServices.booking.id,
+              );
+              bItems[i] = subscriptionData.data.onDeleteBookingServices.booking;
+            }
+          }),
+        });
+      }
+    },
+  });
+
+  useSubscription(ON_CREATE_BOOKING_SERVICES, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      if (
+        subscriptionData.data.onCreateBookingServices.booking.branch.id === branchId &&
+        bookingsData?.getBranch?.bookings?.items
+      ) {
+        client.writeQuery({
+          query: GetBookingsForBranch,
+          variables: {
+            id: branchId,
+            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
+            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+          },
+          data: produce(bookingsData, dS => {
+            const bItems = dS?.getBranch?.bookings?.items;
+            if (bItems) {
+              const i = bItems.findIndex(
+                b => b?.id === subscriptionData.data.onCreateBookingServices.booking.id,
+              );
+              bItems[i] = subscriptionData.data.onCreateBookingServices.booking;
+            }
+          }),
+        });
+      }
+    },
+  });
+
+  useEffect(() => {
+    refetchBookings({
+      id: branchId,
+      start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
+      end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+    });
+    clear();
+    setShouldTransition(true);
+    callTimeout();
+  }, [selectedDate]);
 
   const memoizedEvents = useMemo(() => getEvents(bookingsData), [bookingsData]);
   const memoizedResourceMap = useMemo(() => getResourceMap(employeesResponse), [employeesResponse]);
@@ -204,14 +333,7 @@ export default function AdminCalendar({
           selectable
           onSelecting={() => false}
           onNavigate={d => {
-            refetchBookings({
-              id: branchId,
-              start: formatISO(startOfWeek(d, { weekStartsOn: 1 })),
-              end: formatISO(endOfWeek(d, { weekStartsOn: 1 })),
-            });
-            clear();
-            setShouldTransition(true);
-            callTimeout();
+            setSelectedDate(d);
           }}
         />
       </Spin>

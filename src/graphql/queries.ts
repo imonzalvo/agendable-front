@@ -120,6 +120,7 @@ export const getAvailabilityItem = `query GetAvailabilityItem($id: ID!) {
         name
         description
         image
+        editors
       }
     }
   }
@@ -187,6 +188,7 @@ export const getBookingServices = `query GetBookingServices($id: ID!) {
         name
         description
         image
+        editors
       }
     }
     service {
@@ -310,6 +312,7 @@ export const getBooking = `query GetBooking($id: ID!) {
         name
         description
         image
+        editors
       }
     }
     branch {
@@ -320,6 +323,7 @@ export const getBooking = `query GetBooking($id: ID!) {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -383,6 +387,7 @@ export const listBookings = `query ListBookings(
         name
         description
         image
+        editors
       }
     }
     nextToken
@@ -452,6 +457,7 @@ export const getEmployee = `query GetEmployee($id: ID!) {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -510,6 +516,7 @@ export const listEmployees = `query ListEmployees(
         name
         description
         image
+        editors
       }
     }
     nextToken
@@ -551,6 +558,7 @@ export const getEmployeeServices = `query GetEmployeeServices($id: ID!) {
         name
         description
         image
+        editors
       }
     }
     service {
@@ -665,6 +673,7 @@ export const getBranch = `query GetBranch($id: ID!) {
     name
     description
     image
+    editors
     bookings {
       items {
         id
@@ -731,6 +740,7 @@ export const listBranchs = `query ListBranchs(
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -780,6 +790,7 @@ export const getBranchServices = `query GetBranchServices($id: ID!) {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -824,6 +835,7 @@ export const listBranchServicess = `query ListBranchServicess(
         name
         description
         image
+        editors
       }
     }
     nextToken
@@ -896,6 +908,7 @@ export const getBusiness = `query GetBusiness($id: ID!) {
         name
         description
         image
+        editors
       }
       nextToken
     }

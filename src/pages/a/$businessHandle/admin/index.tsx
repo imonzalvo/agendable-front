@@ -7,6 +7,7 @@ import NewBookingModal from '@/components/NewBookingModal';
 import EditBookingModal from '@/components/EditBookingModal';
 import { GetBranchEmployees } from '@/queries/adminPageQueries';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
+import { BookingData_services as IBookingServices } from '@/graphql/__generated__/BookingData';
 import { BusinessContext } from '@/components/BussinessGetter';
 import GlobalStyles from './styles';
 
@@ -19,7 +20,7 @@ export interface ModalState {
     selectedServices?: string[];
     selectedStartTime?: string | Date;
     selectedDuration?: number;
-    services?: string[];
+    services?: IBookingServices;
     clientEmail?: string;
     clientName?: string;
     clientFamilyName?: string;
@@ -28,6 +29,7 @@ export interface ModalState {
 }
 
 export interface BookingState {
+  id?: string;
   selectedServices: string[];
   selectedEmployee?: string;
   selectedStartTime?: string | Date;

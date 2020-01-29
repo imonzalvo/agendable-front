@@ -20,6 +20,7 @@ export interface GetBookingsForBranch_getBranch_bookings_items_services_items_se
 
 export interface GetBookingsForBranch_getBranch_bookings_items_services_items {
   __typename: 'BookingServices';
+  id: string;
   service: GetBookingsForBranch_getBranch_bookings_items_services_items_service | null;
 }
 
@@ -28,17 +29,23 @@ export interface GetBookingsForBranch_getBranch_bookings_items_services {
   items: (GetBookingsForBranch_getBranch_bookings_items_services_items | null)[] | null;
 }
 
+export interface GetBookingsForBranch_getBranch_bookings_items_branch {
+  __typename: 'Branch';
+  id: string;
+}
+
 export interface GetBookingsForBranch_getBranch_bookings_items {
   __typename: 'Booking';
-  end: any;
-  start: any;
   id: string;
+  start: any;
+  end: any;
   clientName: string | null;
   clientEmail: any | null;
   clientFamilyName: string | null;
   clientPhone: any | null;
   employee: GetBookingsForBranch_getBranch_bookings_items_employee;
   services: GetBookingsForBranch_getBranch_bookings_items_services | null;
+  branch: GetBookingsForBranch_getBranch_bookings_items_branch;
 }
 
 export interface GetBookingsForBranch_getBranch_bookings {
@@ -57,4 +64,6 @@ export interface GetBookingsForBranch {
 
 export interface GetBookingsForBranchVariables {
   id: string;
+  start: string;
+  end: string;
 }

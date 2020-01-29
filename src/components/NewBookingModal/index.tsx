@@ -3,13 +3,12 @@ import { Modal, Row, Col, Button, Card, message } from 'antd';
 import { FormProps } from 'antd/lib/form';
 import moment from 'moment-timezone';
 import 'react-dates/lib/css/_datepicker.css';
-import { useQuery, useMutation } from '@apollo/client';
-import { QueryResult } from '@apollo/react-common';
+import { useQuery, useMutation, QueryResult } from '@apollo/client';
 import { Moment } from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { useResponsive } from 'react-hooks-responsive';
 
-import { CreateBooking } from './queries';
+import { CREATE_BOOKING } from '@/graphql/sharedQueries';
 import { GetBranchServices } from '@/queries/adminPageQueries';
 import ClientDetails from '@/components/ClientDetails';
 import BookingDetails from '@/components/BookingDetails';
@@ -23,7 +22,7 @@ import {
 } from '@/utils/bookingModalShared';
 import { GetBookingsForBranch } from '@/components/AdminCalendar/queries';
 import { ModalState, BookingState } from '@/pages/a/$businessHandle/admin';
-import { GetBranchServices as GetBranchServicesType } from '.@/queries/__generated__/GetBranchServices';
+import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 
 moment.locale('es');
@@ -62,7 +61,7 @@ export default function NewBookingModal({
   );
   const [shouldValidate, setShouldValidate] = useState(false);
 
-  const [createBooking, { loading: loadingCreateBooking }] = useMutation(CreateBooking, {
+  const [createBooking, { loading: loadingCreateBooking }] = useMutation(CREATE_BOOKING, {
     onCompleted: d => {
       message.success('Successfully Created Booking');
       onCancel();

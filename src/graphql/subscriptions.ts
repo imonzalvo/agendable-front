@@ -1,6 +1,107 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
+export const onCreateBookingWithServices = `subscription OnCreateBookingWithServices {
+  onCreateBookingWithServices {
+    id
+    createdAt
+    start
+    end
+    status
+    client {
+      id
+      givenName
+      familyName
+      userName
+      email
+      phone
+      userType
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+      bookings {
+        nextToken
+      }
+      owner
+    }
+    clientEmail
+    clientPhone
+    clientName
+    clientFamilyName
+    services {
+      items {
+        id
+      }
+      nextToken
+    }
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+        editors
+      }
+    }
+    branch {
+      id
+      address
+      phone
+      email
+      name
+      description
+      image
+      editors
+      bookings {
+        nextToken
+      }
+      employees {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      business {
+        id
+        name
+        email
+        phone
+        handle
+      }
+    }
+  }
+}
+`;
 export const onCreateAvailabilityItem = `subscription OnCreateAvailabilityItem {
   onCreateAvailabilityItem {
     id
@@ -39,6 +140,7 @@ export const onCreateAvailabilityItem = `subscription OnCreateAvailabilityItem {
         name
         description
         image
+        editors
       }
     }
   }
@@ -82,6 +184,7 @@ export const onUpdateAvailabilityItem = `subscription OnUpdateAvailabilityItem {
         name
         description
         image
+        editors
       }
     }
   }
@@ -125,6 +228,7 @@ export const onDeleteAvailabilityItem = `subscription OnDeleteAvailabilityItem {
         name
         description
         image
+        editors
       }
     }
   }
@@ -170,6 +274,7 @@ export const onCreateBookingServices = `subscription OnCreateBookingServices {
         name
         description
         image
+        editors
       }
     }
     service {
@@ -232,6 +337,7 @@ export const onUpdateBookingServices = `subscription OnUpdateBookingServices {
         name
         description
         image
+        editors
       }
     }
     service {
@@ -294,6 +400,7 @@ export const onDeleteBookingServices = `subscription OnDeleteBookingServices {
         name
         description
         image
+        editors
       }
     }
     service {
@@ -385,6 +492,7 @@ export const onCreateBooking = `subscription OnCreateBooking {
         name
         description
         image
+        editors
       }
     }
     branch {
@@ -395,6 +503,7 @@ export const onCreateBooking = `subscription OnCreateBooking {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -484,6 +593,7 @@ export const onUpdateBooking = `subscription OnUpdateBooking {
         name
         description
         image
+        editors
       }
     }
     branch {
@@ -494,6 +604,7 @@ export const onUpdateBooking = `subscription OnUpdateBooking {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -583,6 +694,7 @@ export const onDeleteBooking = `subscription OnDeleteBooking {
         name
         description
         image
+        editors
       }
     }
     branch {
@@ -593,6 +705,7 @@ export const onDeleteBooking = `subscription OnDeleteBooking {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -676,6 +789,7 @@ export const onCreateEmployee = `subscription OnCreateEmployee {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -759,6 +873,7 @@ export const onUpdateEmployee = `subscription OnUpdateEmployee {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -842,6 +957,7 @@ export const onDeleteEmployee = `subscription OnDeleteEmployee {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -897,6 +1013,7 @@ export const onCreateEmployeeServices = `subscription OnCreateEmployeeServices {
         name
         description
         image
+        editors
       }
     }
     service {
@@ -954,6 +1071,7 @@ export const onUpdateEmployeeServices = `subscription OnUpdateEmployeeServices {
         name
         description
         image
+        editors
       }
     }
     service {
@@ -1011,6 +1129,7 @@ export const onDeleteEmployeeServices = `subscription OnDeleteEmployeeServices {
         name
         description
         image
+        editors
       }
     }
     service {
@@ -1129,6 +1248,7 @@ export const onCreateBranch = `subscription OnCreateBranch {
     name
     description
     image
+    editors
     bookings {
       items {
         id
@@ -1190,6 +1310,7 @@ export const onUpdateBranch = `subscription OnUpdateBranch {
     name
     description
     image
+    editors
     bookings {
       items {
         id
@@ -1251,6 +1372,7 @@ export const onDeleteBranch = `subscription OnDeleteBranch {
     name
     description
     image
+    editors
     bookings {
       items {
         id
@@ -1331,6 +1453,7 @@ export const onCreateBranchServices = `subscription OnCreateBranchServices {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -1379,6 +1502,7 @@ export const onDeleteBranchServices = `subscription OnDeleteBranchServices {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -1435,6 +1559,7 @@ export const onCreateBusiness = `subscription OnCreateBusiness {
         name
         description
         image
+        editors
       }
       nextToken
     }
@@ -1477,6 +1602,7 @@ export const onDeleteBusiness = `subscription OnDeleteBusiness {
         name
         description
         image
+        editors
       }
       nextToken
     }
@@ -1652,6 +1778,7 @@ export const onUpdateBranchServices = `subscription OnUpdateBranchServices {
       name
       description
       image
+      editors
       bookings {
         nextToken
       }
@@ -1708,6 +1835,7 @@ export const onUpdateBusiness = `subscription OnUpdateBusiness {
         name
         description
         image
+        editors
       }
       nextToken
     }

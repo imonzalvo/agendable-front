@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Col, Row, Icon, Select, Card } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { isValidNumber } from 'libphonenumber-js';
+import { parsePhoneNumberFromString, isValidNumber } from 'libphonenumber-js';
 
 const { Option } = Select;
 
@@ -73,7 +73,9 @@ function ClientDetailsForm({
                     },
                   },
                 ],
-                initialValue: clientPhone,
+                initialValue: clientPhone
+                  ? parsePhoneNumberFromString(clientPhone)?.nationalNumber
+                  : undefined,
               })(
                 <Input
                   addonBefore={prefixSelector}
@@ -110,7 +112,7 @@ function ClientDetailsForm({
   );
 }
 
-const WrapperClientDetailsForm = Form.create<FormComponentProps>({
+const WrapperClientDetailsForm = Form.create<ClientDetailsFormProps>({
   name: 'clientDetails',
 })(ClientDetailsForm);
 

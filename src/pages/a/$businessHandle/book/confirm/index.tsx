@@ -8,7 +8,7 @@ import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
 
 import { BookingContext } from '@/layouts';
-import { CreateBooking } from '@/components/ConfirmBooking/queries';
+import { CREATE_BOOKING } from '@/graphql/sharedQueries';
 import { isValidNumber } from 'libphonenumber-js';
 import { getUrl } from '@/utils/utils';
 import { EmailInput } from '@/utils/formInput';
@@ -40,7 +40,7 @@ interface UserInterface {
 const Confirm = ({ form }) => {
   const [user, setUser] = useState<UserInterface | null>(null);
   const { bookData, setBookData } = useContext(BookingContext);
-  const [createBooking] = useMutation(CreateBooking, {
+  const [createBooking] = useMutation(CREATE_BOOKING, {
     onCompleted: value => {
       setBookData({ ...bookData, id: value.createBookingWithServices.id });
       router.push(getUrl('book/success'));
@@ -76,7 +76,7 @@ const Confirm = ({ form }) => {
             clientName: values.givenName,
             clientFamilyName: values.familyName,
             clientPhone: values.phone ? `+598${values.phone}` : undefined,
-            serviceId: [service.id],
+            servicesId: [service.id],
           },
         });
       }

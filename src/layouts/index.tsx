@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { createAppSyncLink, AUTH_TYPE } from 'aws-appsync';
+import { createAuthLink } from 'aws-appsync-auth-link';
+import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 import AWS from 'aws-sdk';
 import Amplify, { Auth } from 'aws-amplify';
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import {
+  ApolloProvider,
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  ApolloLink,
+  createHttpLink,
+} from '@apollo/client';
 import RouterTypes from 'umi/routerTypes';
 // import { Rehydrated } from 'aws-appsync-react'; aws does not supports apollo 3.0
 import { ConfigProvider } from 'antd';
@@ -94,41 +103,71 @@ const Layout = ({ children, location }: LayoutProps) => {
       });
   }, []);
 
-  const httpLink = new HttpLink({
-    uri: awsconfig.aws_appsync_graphqlEndpoint,
-  });
+  // const httpLink = new HttpLink({
+  //   uri: awsconfig.aws_appsync_graphqlEndpoint,
+  // });
 
-  const awsLinkCognito = createAppSyncLink({
-    url: awsconfig.aws_appsync_graphqlEndpoint,
-    region: awsconfig.aws_appsync_region,
-    auth: {
-      type: awsconfig.aws_appsync_authenticationType,
-      credentials: () => Auth.currentCredentials(),
-      jwtToken: async () => (await Auth.currentSession()).getAccessToken().getJwtToken(),
-    },
-    complexObjectsCredentials: () => Auth.currentCredentials(),
-  });
+  // const awsLinkCognito = createAppSyncLink({
+  //   url: awsconfig.aws_appsync_graphqlEndpoint,
+  //   region: awsconfig.aws_appsync_region,
+  // auth: {
+  //   type: awsconfig.aws_appsync_authenticationType,
+  //   credentials: () => Auth.currentCredentials(),
+  //   jwtToken: async () => (await Auth.currentSession()).getAccessToken().getJwtToken(),
+  // },
+  //   complexObjectsCredentials: () => Auth.currentCredentials(),
+  // });
 
-  const awsLinkGuest = createAppSyncLink({
-    url: awsconfig.aws_appsync_graphqlEndpoint,
-    region: awsconfig.aws_appsync_region,
+  // const awsLinkGuest = createAppSyncLink({
+  //   url: awsconfig.aws_appsync_graphqlEndpoint,
+  //   region: awsconfig.aws_appsync_region,
+  // auth: { type: AUTH_TYPE.API_KEY, apiKey: awsconfig.aws_appsync_apiKey },
+  // complexObjectsCredentials: () => Auth.currentCredentials(),
+  // });
+
+  // const cognitoClient = new ApolloClient({
+  //   link: awsLinkCognito.concat(httpLink),
+  //   cache: new InMemoryCache(),
+  // });
+
+  // const guestClient = new ApolloClient({
+  //   link: awsLinkGuest.concat(httpLink),
+  //   cache: new InMemoryCache(),
+  // });
+
+  const url = awsconfig.aws_appsync_graphqlEndpoint;
+  const region = awsconfig.aws_appsync_region;
+  const cognitoAuth = {
+    type: awsconfig.aws_appsync_authenticationType,
+    credentials: () => Auth.currentCredentials(),
+    jwtToken: async () => (await Auth.currentSession()).getAccessToken().getJwtToken(),
+  };
+
+  const guestAuth = {
     auth: { type: AUTH_TYPE.API_KEY, apiKey: awsconfig.aws_appsync_apiKey },
     complexObjectsCredentials: () => Auth.currentCredentials(),
-  });
+  };
 
-  const cognitoClient = new ApolloClient({
-    link: awsLinkCognito.concat(httpLink),
+  const httpLink = createHttpLink({ uri: url });
+
+  const link = ApolloLink.from([
+    createAuthLink({
+      url,
+      region,
+      auth: isAuthenticated ? cognitoAuth : guestAuth.auth,
+    }),
+    createSubscriptionHandshakeLink(url, httpLink),
+  ]);
+
+  const client = new ApolloClient({
+    link,
     cache: new InMemoryCache(),
   });
 
-  const guestClient = new ApolloClient({
-    link: awsLinkGuest.concat(httpLink),
-    cache: new InMemoryCache(),
-  });
+  if (!client) return renderSpin();
 
-  if (!cognitoClient || !guestClient) return renderSpin();
   return (
-    <ApolloProvider client={isAuthenticated ? cognitoClient : guestClient}>
+    <ApolloProvider client={client}>
       {/* <Rehydrated> */}
       <ConfigProvider locale={es}>
         <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>

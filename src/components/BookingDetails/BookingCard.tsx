@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import moment from 'moment-timezone';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { keyBy } from 'lodash';
-import { QueryResult } from '@apollo/react-common';
+import { QueryResult } from '@apollo/client';
 import { useResponsive } from 'react-hooks-responsive';
 
 import { GetBranchServices as GetBranchServicesType } from '../NewBookingModal/__generated__/GetBranchServices';
@@ -181,10 +181,9 @@ export default function BookingCard({
             help={errors.find(err => err.selectedServices)?.selectedServices}
           >
             <Select
-              mode="multiple"
               style={{ width: '100%' }}
               size="large"
-              value={selectedServices}
+              value={selectedServices[0]}
               onChange={onServiceChange}
               showSearch
             >
