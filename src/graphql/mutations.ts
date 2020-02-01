@@ -59,6 +59,9 @@ export const createBookingWithServices = `mutation CreateBookingWithServices(
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -129,6 +132,9 @@ export const createAvailabilityItem = `mutation CreateAvailabilityItem($input: C
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -173,6 +179,9 @@ export const updateAvailabilityItem = `mutation UpdateAvailabilityItem($input: U
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -215,6 +224,147 @@ export const deleteAvailabilityItem = `mutation DeleteAvailabilityItem($input: D
       }
       phone
       availability {
+        nextToken
+      }
+      vacations {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+        editors
+      }
+    }
+  }
+}
+`;
+export const createVacationsItem = `mutation CreateVacationsItem($input: CreateVacationsItemInput!) {
+  createVacationsItem(input: $input) {
+    id
+    from
+    to
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      vacations {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+        editors
+      }
+    }
+  }
+}
+`;
+export const updateVacationsItem = `mutation UpdateVacationsItem($input: UpdateVacationsItemInput!) {
+  updateVacationsItem(input: $input) {
+    id
+    from
+    to
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      vacations {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+        editors
+      }
+    }
+  }
+}
+`;
+export const deleteVacationsItem = `mutation DeleteVacationsItem($input: DeleteVacationsItemInput!) {
+  deleteVacationsItem(input: $input) {
+    id
+    from
+    to
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      vacations {
         nextToken
       }
       bookings {
@@ -481,6 +631,9 @@ export const createBooking = `mutation CreateBooking($input: CreateBookingInput!
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -580,6 +733,9 @@ export const updateBooking = `mutation UpdateBooking($input: UpdateBookingInput!
       }
       phone
       availability {
+        nextToken
+      }
+      vacations {
         nextToken
       }
       bookings {
@@ -683,6 +839,9 @@ export const deleteBooking = `mutation DeleteBooking($input: DeleteBookingInput!
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -759,6 +918,14 @@ export const createEmployee = `mutation CreateEmployee($input: CreateEmployeeInp
       items {
         id
         day
+        from
+        to
+      }
+      nextToken
+    }
+    vacations {
+      items {
+        id
         from
         to
       }
@@ -848,6 +1015,14 @@ export const updateEmployee = `mutation UpdateEmployee($input: UpdateEmployeeInp
       }
       nextToken
     }
+    vacations {
+      items {
+        id
+        from
+        to
+      }
+      nextToken
+    }
     bookings {
       items {
         id
@@ -932,6 +1107,14 @@ export const deleteEmployee = `mutation DeleteEmployee($input: DeleteEmployeeInp
       }
       nextToken
     }
+    vacations {
+      items {
+        id
+        from
+        to
+      }
+      nextToken
+    }
     bookings {
       items {
         id
@@ -1002,6 +1185,9 @@ export const createEmployeeServices = `mutation CreateEmployeeServices($input: C
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -1060,6 +1246,9 @@ export const updateEmployeeServices = `mutation UpdateEmployeeServices($input: U
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -1116,6 +1305,9 @@ export const deleteEmployeeServices = `mutation DeleteEmployeeServices($input: D
       }
       phone
       availability {
+        nextToken
+      }
+      vacations {
         nextToken
       }
       bookings {
