@@ -56,6 +56,9 @@ export const onCreateBookingWithServices = `subscription OnCreateBookingWithServ
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -126,6 +129,9 @@ export const onCreateAvailabilityItem = `subscription OnCreateAvailabilityItem {
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -170,6 +176,9 @@ export const onUpdateAvailabilityItem = `subscription OnUpdateAvailabilityItem {
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -212,6 +221,147 @@ export const onDeleteAvailabilityItem = `subscription OnDeleteAvailabilityItem {
       }
       phone
       availability {
+        nextToken
+      }
+      vacations {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+        editors
+      }
+    }
+  }
+}
+`;
+export const onCreateVacationsItem = `subscription OnCreateVacationsItem {
+  onCreateVacationsItem {
+    id
+    from
+    to
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      vacations {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+        editors
+      }
+    }
+  }
+}
+`;
+export const onUpdateVacationsItem = `subscription OnUpdateVacationsItem {
+  onUpdateVacationsItem {
+    id
+    from
+    to
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      vacations {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+        editors
+      }
+    }
+  }
+}
+`;
+export const onDeleteVacationsItem = `subscription OnDeleteVacationsItem {
+  onDeleteVacationsItem {
+    id
+    from
+    to
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      vacations {
         nextToken
       }
       bookings {
@@ -478,6 +628,9 @@ export const onCreateBooking = `subscription OnCreateBooking {
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -577,6 +730,9 @@ export const onUpdateBooking = `subscription OnUpdateBooking {
       }
       phone
       availability {
+        nextToken
+      }
+      vacations {
         nextToken
       }
       bookings {
@@ -680,6 +836,9 @@ export const onDeleteBooking = `subscription OnDeleteBooking {
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -756,6 +915,14 @@ export const onCreateEmployee = `subscription OnCreateEmployee {
       items {
         id
         day
+        from
+        to
+      }
+      nextToken
+    }
+    vacations {
+      items {
+        id
         from
         to
       }
@@ -845,6 +1012,14 @@ export const onUpdateEmployee = `subscription OnUpdateEmployee {
       }
       nextToken
     }
+    vacations {
+      items {
+        id
+        from
+        to
+      }
+      nextToken
+    }
     bookings {
       items {
         id
@@ -929,6 +1104,14 @@ export const onDeleteEmployee = `subscription OnDeleteEmployee {
       }
       nextToken
     }
+    vacations {
+      items {
+        id
+        from
+        to
+      }
+      nextToken
+    }
     bookings {
       items {
         id
@@ -999,6 +1182,9 @@ export const onCreateEmployeeServices = `subscription OnCreateEmployeeServices {
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -1057,6 +1243,9 @@ export const onUpdateEmployeeServices = `subscription OnUpdateEmployeeServices {
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -1113,6 +1302,9 @@ export const onDeleteEmployeeServices = `subscription OnDeleteEmployeeServices {
       }
       phone
       availability {
+        nextToken
+      }
+      vacations {
         nextToken
       }
       bookings {

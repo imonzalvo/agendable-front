@@ -7,6 +7,16 @@ type AvailabilityItem
   to: String!
   employee: Employee @connection(name: "EmployeeAvailability")
 }
+
+type VacationsItem
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
+  id: ID!
+  from: AWSDateTime!
+  to: AWSDateTime!
+  employee: Employee @connection(name: "EmployeeVacations")
+}
+
 type BookingServices
   @model
   @auth(rules: [{ allow: public, operations: [read] }, { allow: private, provider: userPools }]) {
@@ -47,6 +57,7 @@ type Employee
   phone: String @auth(rules: [{ allow: owner }])
   services: [EmployeeServices!] @connection(name: "EmployeeServices")
   availability: [AvailabilityItem!]! @connection(name: "EmployeeAvailability")
+  vacations: [VacationsItem!]! @connection(name: "EmployeeVacations")
   bookings: [Booking!]! @connection(name: "BookingEmployee")
   branches: Branch @connection(name: "EmployeesBranch")
 }
@@ -84,6 +95,7 @@ type Branch
   services: [BranchServices!]! @connection(name: "BranchServices")
   business: Business! @connection(name: "BusinessBranch")
   employees: [Employee!]! @connection(name: "EmployeesBranch")
+  editors: String
 }
 type BranchServices
   @model
@@ -160,4 +172,8 @@ type Mutation {
     input: CreateBookingWithServicesInput!
     servicesId: [ID]
   ): Booking
+}
+
+type Subscription {
+    onCreateBookingWithServices: Booking @aws_subscribe(mutations: ["createBooking", "createBookingWithServices"])
 }

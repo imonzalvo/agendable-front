@@ -106,6 +106,9 @@ export const getAvailabilityItem = `query GetAvailabilityItem($id: ID!) {
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -135,6 +138,73 @@ export const listAvailabilityItems = `query ListAvailabilityItems(
     items {
       id
       day
+      from
+      to
+      employee {
+        id
+        givenName
+        familyName
+        phone
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getVacationsItem = `query GetVacationsItem($id: ID!) {
+  getVacationsItem(id: $id) {
+    id
+    from
+    to
+    employee {
+      id
+      givenName
+      familyName
+      user {
+        id
+        givenName
+        familyName
+        userName
+        email
+        phone
+        userType
+        owner
+      }
+      phone
+      availability {
+        nextToken
+      }
+      vacations {
+        nextToken
+      }
+      bookings {
+        nextToken
+      }
+      services {
+        nextToken
+      }
+      branches {
+        id
+        address
+        phone
+        email
+        name
+        description
+        image
+        editors
+      }
+    }
+  }
+}
+`;
+export const listVacationsItems = `query ListVacationsItems(
+  $filter: ModelVacationsItemFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listVacationsItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
       from
       to
       employee {
@@ -298,6 +368,9 @@ export const getBooking = `query GetBooking($id: ID!) {
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -429,6 +502,14 @@ export const getEmployee = `query GetEmployee($id: ID!) {
       }
       nextToken
     }
+    vacations {
+      items {
+        id
+        from
+        to
+      }
+      nextToken
+    }
     bookings {
       items {
         id
@@ -502,6 +583,9 @@ export const listEmployees = `query ListEmployees(
       availability {
         nextToken
       }
+      vacations {
+        nextToken
+      }
       bookings {
         nextToken
       }
@@ -542,6 +626,9 @@ export const getEmployeeServices = `query GetEmployeeServices($id: ID!) {
       }
       phone
       availability {
+        nextToken
+      }
+      vacations {
         nextToken
       }
       bookings {
