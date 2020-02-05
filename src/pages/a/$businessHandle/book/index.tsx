@@ -15,7 +15,7 @@ export default function Book() {
     if (branches.length === 1) {
       const { id, address } = branches[0];
       setBookData({ ...bookData, branch: { id, address } });
-      setSteps(3);
+      setSteps(4);
       path = getUrl('book/select-service');
     } else {
       path = getUrl('book/select-branch');

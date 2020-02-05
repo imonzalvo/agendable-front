@@ -11,4 +11,5 @@ export default {
   'booking.total': 'Total',
   'booking.reference': 'Reference code:',
   'booking.confirmed': 'Confirmed',
+  'booking.selectDateFirst': 'Select a date to get available times',
 };

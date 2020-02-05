@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import router from 'umi/router';
 import { Checkmark } from 'react-checkmark';
 import { useResponsive } from 'react-hooks-responsive';
 import { formatMessage } from 'umi-plugin-locale';
+import { animateScroll as scroll } from 'react-scroll';
 
 import { Background, Title } from './styles';
 import { getUrl } from '@/utils/utils';
 
 const BookingSuccessPage = () => {
+  useEffect(() => {
+    scroll.scrollTo(0);
+  }, []);
+
   const { screenIsAtLeast } = useResponsive({
     xs: 0,
     sm: 415,

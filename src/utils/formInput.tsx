@@ -26,6 +26,7 @@ export const EmailInput = ({ getFieldDecorator, initialValue, label = true }: Em
       <Input
         prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
         placeholder="Email"
+        type="email"
       />,
     )}
   </Form.Item>

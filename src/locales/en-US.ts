@@ -4,6 +4,7 @@ import booking from './en-US/booking';
 import messages from './en-US/messages';
 import form from './en-US/form';
 import actions from './en-US/actions';
+import dates from './en-US/dates';
 
 export default {
   'navBar.lang': 'Languages',
@@ -17,4 +18,5 @@ export default {
   ...messages,
   ...form,
   ...actions,
+  ...dates,
 };
