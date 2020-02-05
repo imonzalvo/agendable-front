@@ -5,6 +5,7 @@ import { Modal } from 'antd';
 import { QueryResult } from '@apollo/client';
 
 import { BookingState } from '@/pages/a/$businessHandle/admin';
+import { formatMessage } from 'umi-plugin-locale';
 
 export const validateBookings = (
   setBookings: (value: React.SetStateAction<BookingState[]>) => void,
@@ -19,7 +20,7 @@ export const validateBookings = (
           if (!booking[key] || (Array.isArray(booking[key]) && booking[key].length === 0)) {
             hasErrors = true;
 
-            dS[i].errors.push({ [key]: 'Field is required' });
+            dS[i].errors.push({ [key]: formatMessage({ id: 'message.fieldRequired' }) });
           }
         });
       });
@@ -60,13 +61,13 @@ export const getTotalDuration = (bookings: BookingState[]) =>
 
 export const confirmCancel = (onCancel: () => void) => {
   Modal.confirm({
-    title: 'Are you sure?',
-    content: 'You will lose all changes you made',
+    title: formatMessage({ id: 'message.areYouSure' }),
+    content: formatMessage({ id: 'message.loseChanges' }),
     onOk() {
       onCancel();
     },
     okButtonProps: { type: 'danger' },
-    okText: 'Yes, close',
-    cancelText: 'No, keep open',
+    okText: formatMessage({ id: 'message.close' }),
+    cancelText: formatMessage({ id: 'message.keepOpen' }),
   });
 };

@@ -1,10 +1,16 @@
 export default {
   'message.inputMissing': 'Please input your {input}!',
   'message.inputError': 'Incorrect {input}!',
+  'message.fieldRequired': 'Field is required!',
   'message.passwordNotMatch': 'Password does not match',
   'message.confirmPassword': 'Please confirm password!',
   'message.passwordLength': 'Password must contains 6 or more characteres',
   'message.codeSent': 'Code Sent!',
   'message.error.fetching.bookingDetails': 'Error getting booking details',
   'message.gratitude': 'Thanks for making an appointment with us!',
+  'message.areYouSure': 'Are you sure?',
+  'message.loseChanges': 'You will lose all changes you made',
+  'message.close': 'Yes, close',
+  'message.keepOpen': 'No, keep open',
+  'message.actionIrreversible': 'This action is irreversible',
 };

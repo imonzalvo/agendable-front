@@ -7,4 +7,11 @@ export default {
     'button.resendCode': 'Resend Code',
     'button.confirm': 'Confirm',
     'button.return': 'Go home',
+    'button.createBooking': 'Create',
+    'button.today': 'Today',
+    'button.new': 'New',
+    'button.delete': 'Delete',
+    'button.edit': 'Edit',
+    'button.confirmDelete': 'Yes, DELETE',
+    'button.cancel': 'Cancel',
 };

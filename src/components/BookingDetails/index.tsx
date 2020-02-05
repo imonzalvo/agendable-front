@@ -5,6 +5,7 @@ import produce from 'immer';
 import { QueryResult } from '@apollo/client';
 import { compact } from 'lodash';
 import { isMobile } from 'react-device-detect';
+import { formatMessage } from 'umi-plugin-locale';
 
 import { GetBranchServices as GetBranchServicesType } from '../NewBookingModal/__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
@@ -106,7 +107,7 @@ export default function BookingDetails({
     <Card
       style={{ height: '75%', marginBottom: 30 }}
       bodyStyle={{ height: '100%' }}
-      title="Booking Details"
+      title={formatMessage({ id: 'modal.bookingDetails' })}
       type="inner"
     >
       {isMobile ? (

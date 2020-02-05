@@ -6,23 +6,13 @@ import { virtualize } from 'react-swipeable-views-utils';
 import moment from 'moment-timezone';
 import { useResponsive } from 'react-hooks-responsive';
 import { isMobile } from 'react-device-detect';
+import { formatMessage, getLocale } from 'umi-plugin-locale';
 
 import GlobalToolbarStyles, { DayContainer } from './toolbarStyles';
 import { generateWeekdays } from '@/utils/generateWeekdays';
 import useEffectSkipMount from '@/hooks/useEffectSkipMount';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
-
-// TODO: use moment or i18n for day name localization
-const weekDayNames = [
-  { short: 'D', long: 'Domingo' },
-  { short: 'L', long: 'Lunes' },
-  { short: 'M', long: 'Martes' },
-  { short: 'X', long: 'Miércoles' },
-  { short: 'J', long: 'Jueves' },
-  { short: 'V', long: 'Viernes' },
-  { short: 'S', long: 'Sábado' },
-];
 
 interface CustomToolbarProps extends ToolbarProps {
   onNewBooking: (selectedDate: Date) => void;
@@ -49,6 +39,12 @@ function CustomToolbar({ date: selectedDate, onNavigate, onNewBooking }: CustomT
       setSliderIndex(weeksDifferenceFromSelectedDate);
     }
   }, [selectedDate]);
+
+  const locale = getLocale().startsWith('es') ? 'es' : 'en';
+  moment.locale(locale);
+
+  const weekDayNames = moment.weekdays();
+  const weekDayNamesShort = moment.weekdaysShort();
 
   const slideRenderer = ({ index, key }: { index: number; key: number }) => {
     const weekdaysArr =
@@ -91,6 +87,9 @@ function CustomToolbar({ date: selectedDate, onNavigate, onNewBooking }: CustomT
             <div style={{ lineHeight: 'initial' }}>{weekDay.getDate()}</div>
             <div style={{ lineHeight: 'initial' }}>
               {weekDayNames[weekDay.getDay()][screenIsAtLeast('md') ? 'long' : 'short']}
+              {screenIsAtLeast('md')
+                ? weekDayNames[weekDay.getDay()]
+                : weekDayNamesShort[weekDay.getDay()]}
             </div>
           </DayContainer>
         ))}
@@ -118,7 +117,7 @@ function CustomToolbar({ date: selectedDate, onNavigate, onNewBooking }: CustomT
                 size="large"
                 icon="history"
               >
-                Today
+                {formatMessage({ id: 'button.today' })}
               </Button>
               {isMobile ? (
                 <Input
@@ -154,7 +153,7 @@ function CustomToolbar({ date: selectedDate, onNavigate, onNewBooking }: CustomT
                 size="large"
                 icon="plus"
               >
-                {screenIsAtLeast('sm') && 'Agendar'}
+                {screenIsAtLeast('sm') && formatMessage({ id: 'button.new' })}
               </Button>
             </div>
             <div

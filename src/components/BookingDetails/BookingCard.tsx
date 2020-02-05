@@ -11,6 +11,7 @@ import { GetBranchServices as GetBranchServicesType } from '../NewBookingModal/_
 import { BookingState } from '@/pages/a/$businessHandle/admin/index.tsx';
 import generateTimesAtIntervals from '@/utils/generateTimesAtIntervals';
 import useEffectSkipMount from '@/hooks/useEffectSkipMount';
+import { formatMessage } from 'umi-plugin-locale';
 
 const { Option } = Select;
 momentDurationFormatSetup(moment);
@@ -157,7 +158,7 @@ export default function BookingCard({
       <Row type={screenIsAtLeast('sm') ? 'flex' : undefined}>
         <Col {...firstColProps}>
           <Form.Item
-            label="Start Time"
+            label={formatMessage({ id: 'form.startTime' })}
             validateStatus={errors.find(err => err.selectedStartTime) && 'error'}
             help={errors.find(err => err.selectedStartTime)?.selectedStartTime}
           >
@@ -176,7 +177,7 @@ export default function BookingCard({
         </Col>
         <Col {...secondColProps}>
           <Form.Item
-            label="Service"
+            label={formatMessage({ id: 'form.service' })}
             validateStatus={errors.find(err => err.selectedServices) && 'error'}
             help={errors.find(err => err.selectedServices)?.selectedServices}
           >
@@ -195,7 +196,7 @@ export default function BookingCard({
       <Row type={screenIsAtLeast('sm') ? 'flex' : undefined}>
         <Col {...firstColProps}>
           <Form.Item
-            label="Duration"
+            label={formatMessage({ id: 'form.duration' })}
             validateStatus={errors.find(err => err.selectedDuration) && 'error'}
             help={errors.find(err => err.selectedDuration)?.selectedDuration}
           >
@@ -211,7 +212,7 @@ export default function BookingCard({
         </Col>
         <Col {...secondColProps}>
           <Form.Item
-            label="Staff"
+            label={formatMessage({ id: 'form.staff' })}
             validateStatus={errors.find(err => err.selectedEmployee) && 'error'}
             help={errors.find(err => err.selectedEmployee)?.selectedEmployee}
           >

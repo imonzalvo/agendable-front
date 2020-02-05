@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { setLocale, getLocale } from 'umi/locale';
+import { setLocale, getLocale } from 'umi-plugin-locale';
 
 import useSubdomain from '@/hooks/useSubdomain';
 import themeColorClient from '@/components/SettingDrawer/themeColorClient';

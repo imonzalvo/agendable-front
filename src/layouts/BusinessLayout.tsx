@@ -10,6 +10,7 @@ import { BusinessContext } from '@/components/BussinessGetter';
 import Error404 from '@/pages/404';
 import { GlobalStyles } from './styles';
 import { AuthContext } from '.';
+import SelectLang from '@/components/SelectLang';
 
 export interface BusinessLayoutProps extends BasicLayoutProps {
   children: any;
@@ -31,10 +32,16 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
 
   const renderRightContent = () => {
     if (isAuthenticated) {
-      return <Button onClick={logout}>{formatMessage({ id: 'navBar.signOut' })}</Button>;
+      return (
+        <>
+          <SelectLang />
+          <Button onClick={logout}>{formatMessage({ id: 'navBar.signOut' })}</Button>
+        </>
+      );
     }
     return (
       <>
+        <SelectLang />
         <Button onClick={() => setAuthModalVisible('LOGIN')} style={{ alignSelf: 'center' }}>
           {formatMessage({ id: 'navBar.signIn' })}
         </Button>

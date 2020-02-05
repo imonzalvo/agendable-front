@@ -12,11 +12,13 @@ function AuthFlow() {
     <>
       <AuthFlowStyles />
       <CustomCard
-        title={formatMessage({ id: isLogin ? 'navBar.signUp' : 'navBar.signIn' })}
+        title={formatMessage({ id: isLogin ? 'navBar.signIn' : 'navBar.signUp' })}
         bordered
         actions={[
           <div>
-            {isLogin ? 'Need an account?' : 'Already have an account?'}
+            {isLogin
+              ? formatMessage({ id: 'navBar.needAccount' })
+              : formatMessage({ id: 'navBar.alreadyHaveAccount' })}
             <Button type="link" onClick={() => setLogin(pS => !pS)}>
               {formatMessage({ id: isLogin ? 'navBar.signUp' : 'navBar.signIn' })}
             </Button>
