@@ -12,6 +12,7 @@ import { isAntDesignPro } from '@/utils/utils';
 import AuthLayout from '@/layouts/AuthLayout';
 import { AuthContext } from '@/layouts';
 import { BusinessContext } from '@/components/BussinessGetter';
+import SelectLang from '@/components/SelectLang';
 
 const { Content, Header, Sider } = Layout;
 
@@ -92,7 +93,7 @@ const AdminLayout = (props: AdminLayoutProps) => {
       </Sider> */}
       <Layout>
         <Header style={{ position: 'fixed', zIndex: 100, width: '100%' }}>
-          <Icon
+          {/* <Icon
             // className="trigger"
             type={isCollapsed ? 'menu-unfold' : 'menu-fold'}
             onClick={() => setCollapsed(!isCollapsed)}
@@ -102,7 +103,8 @@ const AdminLayout = (props: AdminLayoutProps) => {
               transition: 'color 0.3s',
               color: '#fff',
             }}
-          />
+          /> */}
+          <SelectLang isAdmin />
         </Header>
         <Content style={{ paddingTop: 64, paddingLeft: 0, margin: 20 }}>{children}</Content>
       </Layout>

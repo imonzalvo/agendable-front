@@ -7,6 +7,7 @@ import { useQuery, useMutation, QueryResult } from '@apollo/client';
 import { Moment } from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { useResponsive } from 'react-hooks-responsive';
+import { formatMessage } from 'umi-plugin-locale';
 
 import { CREATE_BOOKING } from '@/graphql/sharedQueries';
 import { GetBranchServices } from '@/queries/adminPageQueries';
@@ -63,7 +64,7 @@ export default function NewBookingModal({
 
   const [createBooking, { loading: loadingCreateBooking }] = useMutation(CREATE_BOOKING, {
     onCompleted: d => {
-      message.success('Successfully Created Booking');
+      message.success(formatMessage({ id: 'booking.success' }));
       onCancel();
     },
     onError: err => {
@@ -83,7 +84,7 @@ export default function NewBookingModal({
     <>
       <GlobalStyles />
       <Modal
-        title="Create Appointments"
+        title={formatMessage({ id: 'modal.createAppointment' })}
         visible={visible}
         onOk={onOk}
         onCancel={() => confirmCancel(onCancel)}
@@ -188,8 +189,8 @@ export default function NewBookingModal({
                   }
                 }}
               >
-                Create |{' '}
-                {`$${getTotalPrice(servicesResponse, bookings)} (${getTotalDuration(bookings)})`}
+                {`${formatMessage({ id: 'button.createBooking' })} | 
+                ${getTotalPrice(servicesResponse, bookings)} (${getTotalDuration(bookings)})`}
               </Button>
             </Col>
           </Row>

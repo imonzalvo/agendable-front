@@ -7,4 +7,11 @@ export default {
     'button.resendCode': 'Reenviar Código',
     'button.confirm': 'Confirmar',
     'button.return': 'Volver al inicio',
+    'button.createBooking': 'Crear',
+    'button.today': 'Hoy',
+    'button.new': 'Crear',
+    'button.delete': 'Borrar',
+    'button.edit': 'Editar',
+    'button.confirmDelete': 'Si, BORRAR',
+    'button.cancel': 'Cancelar',
 };

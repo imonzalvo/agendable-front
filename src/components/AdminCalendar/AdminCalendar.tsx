@@ -3,7 +3,7 @@ import { Alert, Spin } from 'antd';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { useQuery, useSubscription, useApolloClient, QueryResult } from '@apollo/client';
 import moment from 'moment-timezone';
-import 'moment/locale/es';
+import { getLocale } from 'umi-plugin-locale';
 import { compact } from 'lodash';
 import { startOfWeek, format, endOfWeek } from 'date-fns';
 import produce from 'immer';
@@ -26,6 +26,12 @@ import { GetBookingsForBranch as IGetBookingsForBranch } from './__generated__/G
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 import BigCalendarStyles from './bigCalendarStyles';
 import useTimeout from '@/hooks/useTimeout';
+
+if (getLocale().startsWith('es')) {
+  moment.locale('es');
+} else {
+  moment.locale('en');
+}
 
 const localizer = momentLocalizer(moment);
 

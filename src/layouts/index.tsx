@@ -15,9 +15,11 @@ import RouterTypes from 'umi/routerTypes';
 import { ConfigProvider } from 'antd';
 import bugsnag from '@bugsnag/js';
 import bugsnagReact from '@bugsnag/plugin-react';
+import { getLocale } from 'umi-plugin-locale';
 
 // import Rehydrated from './Rehydrated'; trying to create a custom one from https://github.com/awslabs/aws-mobile-appsync-sdk-js/issues/448
 import es from 'antd/es/locale-provider/es_ES';
+import en from 'antd/es/locale-provider/en_US';
 import useSubdomain from '@/hooks/useSubdomain';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
@@ -141,13 +143,15 @@ const Layout = ({ children, location }: LayoutProps) => {
     cache: new InMemoryCache(),
   });
 
+  const locale = getLocale() === 'es-ES' ? es : en;
+
   return (
     <ErrorBoundary>
       {!client ? (
         renderSpin()
       ) : (
         <ApolloProvider client={client}>
-          <ConfigProvider locale={es}>
+          <ConfigProvider locale={locale}>
             <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>
               <BookingContext.Provider
                 value={{

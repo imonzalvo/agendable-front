@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Col, Row, Icon, Select, Card } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { parsePhoneNumberFromString, isValidNumber } from 'libphonenumber-js';
+import { formatMessage } from 'umi-plugin-locale';
 
 const { Option } = Select;
 
@@ -30,34 +31,46 @@ function ClientDetailsForm({
   );
 
   return (
-    <Card style={{ height: '75%' }} title="Client Details" type="inner">
+    <Card
+      style={{ height: '75%' }}
+      title={formatMessage({ id: 'modal.clientDetails' })}
+      type="inner"
+    >
       <Form>
         <Row gutter={32}>
           <Col span={12}>
             {/* GIVEN NAME */}
-            <Form.Item label="First Name">
+            <Form.Item label={formatMessage({ id: 'form.name' })}>
               {getFieldDecorator('clientName', {
                 rules: [
-                  { required: true, message: 'Please input your first name!', whitespace: true },
+                  {
+                    required: true,
+                    message: formatMessage({ id: 'message.fieldRequired' }),
+                    whitespace: true,
+                  },
                 ],
                 initialValue: clientName,
-              })(<Input placeholder="First Name" size="large" />)}
+              })(<Input placeholder={formatMessage({ id: 'form.name' })} size="large" />)}
             </Form.Item>
           </Col>
 
           <Col span={12}>
             {/* FAMILY NAME */}
-            <Form.Item label="Last Name">
+            <Form.Item label={formatMessage({ id: 'form.lastName' })}>
               {getFieldDecorator('clientFamilyName', {
                 rules: [
-                  { required: true, message: 'Please input your last name!', whitespace: true },
+                  {
+                    required: true,
+                    message: formatMessage({ id: 'message.fieldRequired' }),
+                    whitespace: true,
+                  },
                 ],
                 initialValue: clientFamilyName,
-              })(<Input placeholder="Last Name" size="large" />)}
+              })(<Input placeholder={formatMessage({ id: 'form.lastName' })} size="large" />)}
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item label="Phone Number">
+            <Form.Item label={formatMessage({ id: 'form.phone' })}>
               {getFieldDecorator('clientPhone', {
                 rules: [
                   {
@@ -66,7 +79,14 @@ function ClientDetailsForm({
                         if (!value || isValidNumber(`+${form.getFieldValue('prefix')}${value}`)) {
                           callback();
                         }
-                        throw new Error('Invalid Phone Number');
+                        throw new Error(
+                          formatMessage(
+                            {
+                              id: 'message.inputError',
+                            },
+                            { input: formatMessage({ id: 'form.phone' }) },
+                          ),
+                        );
                       } catch (err) {
                         callback(err);
                       }
@@ -80,7 +100,7 @@ function ClientDetailsForm({
                 <Input
                   addonBefore={prefixSelector}
                   prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="Phone number"
+                  placeholder={formatMessage({ id: 'form.phone' })}
                   style={{ width: '100%' }}
                   size="large"
                 />,
@@ -88,12 +108,17 @@ function ClientDetailsForm({
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item label="E-mail">
+            <Form.Item label="Email">
               {getFieldDecorator('clientEmail', {
                 rules: [
                   {
                     type: 'email',
-                    message: 'The input is not valid E-mail!',
+                    message: formatMessage(
+                      {
+                        id: 'message.inputError',
+                      },
+                      { input: 'Email' },
+                    ),
                   },
                 ],
                 initialValue: clientEmail,

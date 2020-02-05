@@ -7,6 +7,7 @@ import { useQuery, useMutation, QueryResult } from '@apollo/client';
 import { Moment } from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { useResponsive } from 'react-hooks-responsive';
+import { formatMessage } from 'umi-plugin-locale';
 import { diff } from 'deep-diff';
 
 import {
@@ -104,7 +105,7 @@ export default function EditBookingModal({
     <>
       <GlobalStyles />
       <Modal
-        title="Edit Appointment"
+        title={formatMessage({ id: 'modal.editAppointment' })}
         visible={visible}
         onOk={onOk}
         onCancel={() => confirmCancel(onCancel)}
@@ -173,8 +174,8 @@ export default function EditBookingModal({
                 ghost
                 onClick={() => {
                   Modal.confirm({
-                    title: 'Are you sure?',
-                    content: 'This action is irreversible',
+                    title: formatMessage({ id: 'message.areYouSure' }),
+                    content: formatMessage({ id: 'message.actionIrreversible' }),
                     onOk() {
                       const deleteBookingData = async () => {
                         if (modalParams.services?.items?.[0]?.id) {
@@ -196,12 +197,12 @@ export default function EditBookingModal({
                     okButtonProps: {
                       type: 'danger',
                     },
-                    okText: 'Yes, DELETE',
-                    cancelText: 'Cancel',
+                    okText: formatMessage({ id: 'button.confirmDelete' }),
+                    cancelText: formatMessage({ id: 'button.cancel' }),
                   });
                 }}
               >
-                Delete
+                {formatMessage({ id: 'button.delete' })}
               </Button>
 
               <Col style={{ textAlign: 'center' }}>
@@ -211,7 +212,7 @@ export default function EditBookingModal({
                   onClick={() => confirmCancel(onCancel)}
                   style={{ marginRight: 24 }}
                 >
-                  Cancel
+                  {formatMessage({ id: 'button.cancel' })}
                 </Button>
                 <Button
                   size="large"
@@ -283,8 +284,8 @@ export default function EditBookingModal({
                     }
                   }}
                 >
-                  Edit |{' '}
-                  {`$${getTotalPrice(servicesResponse, bookings)} (${getTotalDuration(bookings)})`}
+                  {`${formatMessage({ id: 'button.edit' })} |
+                  ${getTotalPrice(servicesResponse, bookings)} (${getTotalDuration(bookings)})`}
                 </Button>
               </Col>
             </Row>
