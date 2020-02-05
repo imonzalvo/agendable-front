@@ -11,4 +11,5 @@ export default {
   'booking.total': 'Total',
   'booking.reference': 'Código de referencia:',
   'booking.confirmed': 'Confirmado',
+  'booking.selectDateFirst': 'Selecciona una fecha para ver las horas disponibles',
 };

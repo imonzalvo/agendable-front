@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Card, Button, Typography } from 'antd';
+import { Card as CardAntd, Button, Typography } from 'antd';
 import { formatMessage } from 'umi-plugin-locale';
+import { useSpring, animated, config } from 'react-spring';
 
-import { Image, ServiceDetail } from './styles';
+import { Image, ServiceDetail, Card } from './styles';
 
-const { Meta } = Card;
+const { Meta } = CardAntd;
 const { Title, Paragraph, Text } = Typography;
+
+const AnimatedCard = animated(Card);
 
 interface ServiceDetail {
   duration: number;
@@ -35,6 +38,11 @@ const CustomCard = ({
   entity,
 }: CustomCardProps) => {
   const [isSelected, setSelected] = useState(false);
+  const spring = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: { ...config.gentle, tension: 500 },
+  });
 
   const renderDescription = () => (
     <>
@@ -85,19 +93,14 @@ const CustomCard = ({
   };
 
   return (
-    <Card
-      style={{
-        width: 350,
-        margin: '4px 0px',
-        boxShadow:
-          '6px 0 16px -8px rgba(0, 0, 0, 0.08), 9px 0 28px 0 rgba(0, 0, 0, 0.05), 12px 0 48px 16px rgba(0, 0, 0, 0.03)',
-      }}
+    <AnimatedCard
       cover={image ? <Image alt="header" src={image} /> : null}
       actions={[renderAction()]}
       loading={loading}
+      style={spring}
     >
       <Meta title={<Title level={4}>{title}</Title>} description={renderDescription()} />
-    </Card>
+    </AnimatedCard>
   );
 };
 

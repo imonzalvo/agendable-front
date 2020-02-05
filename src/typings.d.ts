@@ -1,5 +1,6 @@
 declare module 'slash2';
 declare module 'antd-theme-webpack-plugin';
+declare module 'rc-steps';
 
 declare module '*.css';
 declare module '*.less';

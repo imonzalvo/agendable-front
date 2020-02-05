@@ -5,7 +5,7 @@ import { useQuery, useSubscription, useApolloClient, QueryResult } from '@apollo
 import moment from 'moment-timezone';
 import 'moment/locale/es';
 import { compact } from 'lodash';
-import { startOfWeek, formatISO, endOfWeek } from 'date-fns';
+import { startOfWeek, format, endOfWeek } from 'date-fns';
 import produce from 'immer';
 
 import PageLoading from '@/components/PageLoading';
@@ -96,8 +96,8 @@ export default function AdminCalendar({
   } = useQuery<IGetBookingsForBranch>(GetBookingsForBranch, {
     variables: {
       id: branchId,
-      start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
-      end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+      start: format(startOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
+      end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
     },
   });
 
@@ -111,8 +111,11 @@ export default function AdminCalendar({
           query: GetBookingsForBranch,
           variables: {
             id: branchId,
-            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
-            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+            start: format(
+              startOfWeek(selectedDate, { weekStartsOn: 1 }),
+              'YYYY-MM-DD[T]HH:mm:ssZZ',
+            ),
+            end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
           },
           data: produce(bookingsData, dS => {
             const bItems = dS?.getBranch?.bookings?.items;
@@ -136,8 +139,11 @@ export default function AdminCalendar({
           query: GetBookingsForBranch,
           variables: {
             id: branchId,
-            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
-            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+            start: format(
+              startOfWeek(selectedDate, { weekStartsOn: 1 }),
+              'YYYY-MM-DD[T]HH:mm:ssZZ',
+            ),
+            end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
           },
           data: produce(bookingsData, dS => {
             dS?.getBranch?.bookings?.items?.push(subscriptionData.data.onCreateBookingWithServices);
@@ -157,8 +163,11 @@ export default function AdminCalendar({
           query: GetBookingsForBranch,
           variables: {
             id: branchId,
-            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
-            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+            start: format(
+              startOfWeek(selectedDate, { weekStartsOn: 1 }),
+              'YYYY-MM-DD[T]HH:mm:ssZZ',
+            ),
+            end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
           },
           data: produce(bookingsData, dS => {
             dS?.getBranch?.bookings?.items?.splice(bookingIndex, 1);
@@ -178,8 +187,11 @@ export default function AdminCalendar({
           query: GetBookingsForBranch,
           variables: {
             id: branchId,
-            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
-            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+            start: format(
+              startOfWeek(selectedDate, { weekStartsOn: 1 }),
+              'YYYY-MM-DD[T]HH:mm:ssZZ',
+            ),
+            end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
           },
           data: produce(bookingsData, dS => {
             const bItems = dS?.getBranch?.bookings?.items;
@@ -205,8 +217,11 @@ export default function AdminCalendar({
           query: GetBookingsForBranch,
           variables: {
             id: branchId,
-            start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
-            end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+            start: format(
+              startOfWeek(selectedDate, { weekStartsOn: 1 }),
+              'YYYY-MM-DD[T]HH:mm:ssZZ',
+            ),
+            end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
           },
           data: produce(bookingsData, dS => {
             const bItems = dS?.getBranch?.bookings?.items;
@@ -225,8 +240,8 @@ export default function AdminCalendar({
   useEffect(() => {
     refetchBookings({
       id: branchId,
-      start: formatISO(startOfWeek(selectedDate, { weekStartsOn: 1 })),
-      end: formatISO(endOfWeek(selectedDate, { weekStartsOn: 1 })),
+      start: format(startOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
+      end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
     });
     clear();
     setShouldTransition(true);

@@ -97,7 +97,7 @@ const Layout = ({ children, location }: LayoutProps) => {
     date: null,
     id: null,
   });
-  const [steps, setSteps] = useState(4);
+  const [steps, setSteps] = useState(5);
   const subdomain = useSubdomain();
 
   useEffect(() => {

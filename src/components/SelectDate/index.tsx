@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 import { useQuery } from '@apollo/client';
 
@@ -18,6 +18,11 @@ const SelectDate = ({ professionalId, serviceDuration, handleSelectDate }: Selec
   const response = useQuery(GetEmployeeAvailableTime, {
     variables: { id: professionalId, duration: serviceDuration, date },
   });
+  useEffect(() => {
+    response.refetch({
+      variables: { id: professionalId, duration: serviceDuration, date },
+    });
+  }, [date]);
   if (response.error) return <div>Error</div>;
   const jsonResponse = response.data ? response.data.getEmployeeAvailableTime : '[]';
   const availablePeriods = JSON.parse(jsonResponse);

@@ -1,0 +1,24 @@
+@import 'variables';
+
+.@{stepsPrefixClass}-label-vertical {
+  .@{stepsPrefixClass}-item {
+    &-content {
+      display: block;
+      text-align: center;
+      margin-top: 8px;
+    }
+    &-icon {
+      display: inline-block;
+      margin: 0 auto;
+    }
+    &-title {
+      padding-right: 0;
+      &:after {
+        display: none;
+      }
+    }
+    &-description {
+      text-align: left;
+    }
+  }
+}

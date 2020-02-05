@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Form, Button, Input, Select, Icon, message, Card } from 'antd';
 import router from 'umi/router';
 import { useMutation } from '@apollo/client';
@@ -6,6 +6,7 @@ import humps from 'humps';
 import moment from 'moment-timezone';
 import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
+import { animateScroll as scroll } from 'react-scroll';
 
 import { BookingContext } from '@/layouts';
 import { CREATE_BOOKING } from '@/graphql/sharedQueries';
@@ -40,7 +41,7 @@ interface UserInterface {
 const Confirm = ({ form }) => {
   const [user, setUser] = useState<UserInterface | null>(null);
   const { bookData, setBookData } = useContext(BookingContext);
-  const [createBooking] = useMutation(CREATE_BOOKING, {
+  const [createBooking, { loading }] = useMutation(CREATE_BOOKING, {
     onCompleted: value => {
       setBookData({ ...bookData, id: value.createBookingWithServices.id });
       router.push(getUrl('book/success'));
@@ -49,6 +50,9 @@ const Confirm = ({ form }) => {
       message.error(JSON.stringify(err)); // TODO handle error
     },
   });
+  useEffect(() => {
+    scroll.scrollTo(0);
+  }, []);
 
   Auth.currentAuthenticatedUser()
     .then(({ attributes }: AttrInterface) => {
@@ -94,7 +98,7 @@ const Confirm = ({ form }) => {
     </Select>,
   );
   return (
-    <Card style={{ marginTop: 4 }}>
+    <Card style={{ marginTop: 4, marginBottom: 32 }}>
       <Form onSubmit={handleSubmit}>
         <Form.Item label={formatMessage({ id: 'form.name' })}>
           {getFieldDecorator('givenName', {
@@ -163,7 +167,7 @@ const Confirm = ({ form }) => {
           )}
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+        <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={loading}>
           {formatMessage({ id: 'button.booking' })}
         </Button>
       </Form>

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Affix } from 'antd';
 import { useResponsive } from 'react-hooks-responsive';
 
 import BookingInfo from '@/components/BookingInfo';
@@ -25,7 +26,9 @@ const BookingLayout = ({ children }) => {
 
   return (
     <>
-      <BookingHeader />
+      <Affix offsetTop={0}>
+        <BookingHeader />
+      </Affix>
       <BookingContainer>
         <CardContainer>{children}</CardContainer>
         {(screenIsAtLeast('lg') || currentStep === 4) && <BookingInfo />}
