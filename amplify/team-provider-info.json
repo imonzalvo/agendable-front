@@ -8,7 +8,8 @@
             "DeploymentBucketName": "amplify-agendabledevelop-develop-201150-deployment",
             "UnauthRoleName": "amplify-agendabledevelop-develop-201150-unauthRole",
             "StackName": "amplify-agendabledevelop-develop-201150",
-            "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/amplify-agendabledevelop-develop-201150/5117bf40-fe8f-11e9-aa53-0aa7561f3002"
+            "StackId": "arn:aws:cloudformation:us-west-2:343146248340:stack/amplify-agendabledevelop-develop-201150/5117bf40-fe8f-11e9-aa53-0aa7561f3002",
+            "AmplifyAppId": "dip2py71c01oq"
         },
         "categories": {
             "auth": {

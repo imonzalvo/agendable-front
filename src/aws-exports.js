@@ -10,7 +10,7 @@ const awsmobile = {
     "aws_appsync_graphqlEndpoint": "https://fes5hbrbvzdm3em3rfmtmqbiwa.appsync-api.us-west-2.amazonaws.com/graphql",
     "aws_appsync_region": "us-west-2",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_appsync_apiKey": "da2-nu66d6d445bttgvruoaftdxnnm",
+    "aws_appsync_apiKey": "da2-j4phi35vsnhapjyffffmpaubq4",
     "aws_content_delivery_bucket": "agendable-dev-hosting-develop",
     "aws_content_delivery_bucket_region": "us-west-2",
     "aws_content_delivery_url": "http://agendable-dev-hosting-develop.s3-website-us-west-2.amazonaws.com"
