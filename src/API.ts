@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
 export type CreateBookingWithServicesInput = {
@@ -409,8 +410,6 @@ export type ModelFloatFilterInput = {
   lt?: number | null,
   ge?: number | null,
   gt?: number | null,
-  contains?: number | null,
-  notContains?: number | null,
   between?: Array< number | null > | null,
 };
 
@@ -421,8 +420,6 @@ export type ModelIntFilterInput = {
   lt?: number | null,
   ge?: number | null,
   gt?: number | null,
-  contains?: number | null,
-  notContains?: number | null,
   between?: Array< number | null > | null,
 };
 
@@ -4262,6 +4259,64 @@ export type BusinessByHandleQuery = {
   } | null,
 };
 
+export type QGetEmployeeAvailableTimeQueryVariables = {
+  id: string,
+  duration: number,
+  date: string,
+};
+
+export type QGetEmployeeAvailableTimeQuery = {
+  getEmployeeAvailableTime: string | null,
+};
+
+export type CREATE_BOOKING_WITH_SERVICESMutationVariables = {
+  createdAt: string,
+  start: string,
+  end: string,
+  status: BookingStatus,
+  bookingBranchId: string,
+  bookingEmployeeId: string,
+  clientEmail?: string | null,
+  clientFamilyName?: string | null,
+  clientName?: string | null,
+  clientPhone?: string | null,
+  servicesId?: Array< string | null > | null,
+};
+
+export type CREATE_BOOKING_WITH_SERVICESMutation = {
+  createBookingWithServices:  {
+    __typename: "Booking",
+    id: string,
+    start: string,
+    end: string,
+    clientName: string | null,
+    clientEmail: string | null,
+    clientFamilyName: string | null,
+    clientPhone: string | null,
+    employee:  {
+      __typename: "Employee",
+      id: string,
+      givenName: string,
+      familyName: string,
+    },
+    services:  {
+      __typename: "ModelBookingServicesConnection",
+      items:  Array< {
+        __typename: "BookingServices",
+        id: string,
+        service:  {
+          __typename: "Service",
+          id: string,
+        } | null,
+      } | null > | null,
+    } | null,
+    branch:  {
+      __typename: "Branch",
+      id: string,
+    },
+  } | null,
+};
+
 export type OnCreateBookingWithServicesSubscription = {
   onCreateBookingWithServices:  {
     __typename: "Booking",
@@ -4382,182 +4437,6 @@ export type OnCreateBookingWithServicesSubscription = {
       },
     },
   } | null,
-};
-
-export type QGetEmployeeAvailableTimeQueryVariables = {
-  id: string;
-  duration: number;
-  date: string;
-};
-
-export type QGetEmployeeAvailableTimeQuery = {
-  getEmployeeAvailableTime: string | null;
-};
-
-export type CREATE_BOOKING_WITH_SERVICESMutationVariables = {
-  createdAt: string;
-  start: string;
-  end: string;
-  status: BookingStatus;
-  bookingBranchId: string;
-  bookingEmployeeId: string;
-  clientEmail?: string | null;
-  clientFamilyName?: string | null;
-  clientName?: string | null;
-  clientPhone?: string | null;
-  servicesId?: Array<string | null> | null;
-};
-
-export type CREATE_BOOKING_WITH_SERVICESMutation = {
-  createBookingWithServices: {
-    __typename: 'Booking';
-    id: string;
-    start: string;
-    end: string;
-    clientName: string | null;
-    clientEmail: string | null;
-    clientFamilyName: string | null;
-    clientPhone: string | null;
-    employee: {
-      __typename: 'Employee';
-      id: string;
-      givenName: string;
-      familyName: string;
-    };
-    services: {
-      __typename: 'ModelBookingServicesConnection';
-      items: Array<{
-        __typename: 'BookingServices';
-        id: string;
-        service: {
-          __typename: 'Service';
-          id: string;
-        } | null;
-      } | null> | null;
-    } | null;
-    branch: {
-      __typename: 'Branch';
-      id: string;
-    };
-  } | null;
-};
-
-export type OnCreateBookingWithServicesSubscription = {
-  onCreateBookingWithServices: {
-    __typename: 'Booking';
-    id: string;
-    createdAt: string;
-    start: string;
-    end: string;
-    status: BookingStatus;
-    client: {
-      __typename: 'User';
-      id: string;
-      givenName: string;
-      familyName: string;
-      userName: string;
-      email: string | null;
-      phone: string | null;
-      userType: UserType;
-      business: {
-        __typename: 'Business';
-        id: string;
-        name: string;
-        email: string;
-        phone: string;
-        handle: string;
-      } | null;
-      bookings: {
-        __typename: 'ModelBookingConnection';
-        nextToken: string | null;
-      } | null;
-      owner: string | null;
-    } | null;
-    clientEmail: string | null;
-    clientPhone: string | null;
-    clientName: string | null;
-    clientFamilyName: string | null;
-    services: {
-      __typename: 'ModelBookingServicesConnection';
-      items: Array<{
-        __typename: 'BookingServices';
-        id: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    employee: {
-      __typename: 'Employee';
-      id: string;
-      givenName: string;
-      familyName: string;
-      user: {
-        __typename: 'User';
-        id: string;
-        givenName: string;
-        familyName: string;
-        userName: string;
-        email: string | null;
-        phone: string | null;
-        userType: UserType;
-        owner: string | null;
-      } | null;
-      phone: string | null;
-      availability: {
-        __typename: 'ModelAvailabilityItemConnection';
-        nextToken: string | null;
-      } | null;
-      bookings: {
-        __typename: 'ModelBookingConnection';
-        nextToken: string | null;
-      } | null;
-      services: {
-        __typename: 'ModelEmployeeServicesConnection';
-        nextToken: string | null;
-      } | null;
-      branches: {
-        __typename: 'Branch';
-        id: string;
-        address: string;
-        phone: string;
-        email: string;
-        name: string;
-        description: string | null;
-        image: string | null;
-        editors: string | null;
-      } | null;
-    };
-    branch: {
-      __typename: 'Branch';
-      id: string;
-      address: string;
-      phone: string;
-      email: string;
-      name: string;
-      description: string | null;
-      image: string | null;
-      editors: string | null;
-      bookings: {
-        __typename: 'ModelBookingConnection';
-        nextToken: string | null;
-      } | null;
-      employees: {
-        __typename: 'ModelEmployeeConnection';
-        nextToken: string | null;
-      } | null;
-      services: {
-        __typename: 'ModelBranchServicesConnection';
-        nextToken: string | null;
-      } | null;
-      business: {
-        __typename: 'Business';
-        id: string;
-        name: string;
-        email: string;
-        phone: string;
-        handle: string;
-      };
-    };
-  } | null;
 };
 
 export type OnCreateAvailabilityItemSubscription = {
@@ -6838,33 +6717,33 @@ export type OnUpdateBusinessSubscription = {
 };
 
 export type BookingDataFragment = {
-  __typename: 'Booking';
-  id: string;
-  start: string;
-  end: string;
-  clientName: string | null;
-  clientEmail: string | null;
-  clientFamilyName: string | null;
-  clientPhone: string | null;
-  employee: {
-    __typename: string;
-    id: string;
-    givenName: string;
-    familyName: string;
-  };
-  services: {
-    __typename: string;
-    items: Array<{
-      __typename: string;
-      id: string;
-      service: {
-        __typename: string;
-        id: string;
-      } | null;
-    } | null> | null;
-  } | null;
-  branch: {
-    __typename: string;
-    id: string;
-  };
+  __typename: "Booking",
+  id: string,
+  start: string,
+  end: string,
+  clientName: string | null,
+  clientEmail: string | null,
+  clientFamilyName: string | null,
+  clientPhone: string | null,
+  employee:  {
+    __typename: string,
+    id: string,
+    givenName: string,
+    familyName: string,
+  },
+  services:  {
+    __typename: string,
+    items:  Array< {
+      __typename: string,
+      id: string,
+      service:  {
+        __typename: string,
+        id: string,
+      } | null,
+    } | null > | null,
+  } | null,
+  branch:  {
+    __typename: string,
+    id: string,
+  },
 };
