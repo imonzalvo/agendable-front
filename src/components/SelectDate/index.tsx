@@ -24,8 +24,7 @@ const SelectDate = ({ professionalId, serviceDuration, handleSelectDate }: Selec
     });
   }, [date]);
   if (response.error) return <div>Error</div>;
-  const jsonResponse = response.data ? response.data.getEmployeeAvailableTime : '[]';
-  const availablePeriods = JSON.parse(jsonResponse);
+  const availablePeriods = response.data ? response.data.getEmployeeAvailableTime : [];
   return (
     <DateTimePicker
       availablePeriods={availablePeriods}

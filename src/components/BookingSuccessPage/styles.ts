@@ -15,10 +15,10 @@ export const Background = styled.div`
 
 export const Title = styled(AntdTitle)`
   color: white !important;
-  width: 240px; 
+  width: 240px;
   text-align: center;
   @media (max-width: 415px) {
     font-size: 24px !important;
     width: 190px;
   }
-`
+`;

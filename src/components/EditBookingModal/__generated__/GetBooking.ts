@@ -1,40 +1,30 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
-import { BookingStatus } from './../../../../__generated__/globalTypes';
+import { BookingStatus } from "./../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: GetBooking
 // ====================================================
 
-export interface GetBooking_getBooking_services_items_service {
-  __typename: 'Service';
-  id: string;
-}
-
-export interface GetBooking_getBooking_services_items {
-  __typename: 'BookingServices';
-  service: GetBooking_getBooking_services_items_service | null;
-  id: string;
-}
-
 export interface GetBooking_getBooking_services {
-  __typename: 'ModelBookingServicesConnection';
-  items: (GetBooking_getBooking_services_items | null)[] | null;
+  __typename: "Service";
+  id: string;
 }
 
 export interface GetBooking_getBooking {
-  __typename: 'Booking';
-  clientEmail: any | null;
+  __typename: "Booking";
+  clientEmail: string | null;
   clientFamilyName: string | null;
   clientName: string | null;
-  clientPhone: any | null;
-  end: any;
+  clientPhone: string | null;
+  end: string;
   id: string;
-  start: any;
+  start: string;
   status: BookingStatus;
-  services: GetBooking_getBooking_services | null;
+  services: GetBooking_getBooking_services[];
 }
 
 export interface GetBooking {

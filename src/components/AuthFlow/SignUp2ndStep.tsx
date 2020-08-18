@@ -3,7 +3,9 @@ import { Form, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
+import { useMutation } from '@apollo/client';
 
+import { SIGN_UP } from './queries';
 import { FormButtonsContainer } from './styles';
 
 interface SignUpFormProps extends FormComponentProps {
@@ -20,35 +22,30 @@ function SignUp2ndStepForm({
   setCurrentStep,
 }: SignUpFormProps): JSX.Element {
   const [confirmDirty, toggleConfirmDirty] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  // const [isLoading, setLoading] = useState(false);
+
+  const [signUpMutate, { data, loading: isLoading }] = useMutation(SIGN_UP, {
+    onCompleted: () => {
+      setCurrentStep(2);
+    },
+    onError: err => message.error(JSON.stringify(err)),
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     form.validateFields((error, { givenName, familyName, password }) => {
-      setLoading(true);
       if (!error) {
-        Auth.signUp({
-          username,
-          password,
-          attributes: {
-            family_name: familyName,
-            given_name: givenName,
+        signUpMutate({
+          variables: {
             email,
-            // TODO: remove address param
-            address: 'undefined',
-            name: 'undefined',
-            // phone_number: phoneNumber,
+            password,
+            name: `${givenName} ${familyName}`,
+            givenName,
+            familyName,
+            userName: username,
+            userType: 'ADMIN',
           },
-        })
-          .then(() => {
-            setCurrentStep(2);
-          })
-          // TODO: send error to sentry
-          // TODO: Format error msg
-          .catch(err => message.error(JSON.stringify(err)))
-          .finally(() => setLoading(false));
-      } else {
-        setLoading(false);
+        });
       }
     });
   };

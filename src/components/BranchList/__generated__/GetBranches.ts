@@ -1,26 +1,22 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
 // GraphQL query operation: GetBranches
 // ====================================================
 
-export interface GetBranches_getBusiness_branches_items {
-  __typename: 'Branch';
+export interface GetBranches_getBusiness_branches {
+  __typename: "Branch";
   id: string;
   name: string;
-  description: string | null;
-}
-
-export interface GetBranches_getBusiness_branches {
-  __typename: 'ModelBranchConnection';
-  items: (GetBranches_getBusiness_branches_items | null)[] | null;
+  description: string;
 }
 
 export interface GetBranches_getBusiness {
-  __typename: 'Business';
-  branches: GetBranches_getBusiness_branches | null;
+  __typename: "Business";
+  branches: GetBranches_getBusiness_branches[];
 }
 
 export interface GetBranches {

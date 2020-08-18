@@ -14,4 +14,3 @@ export default {
   'message.keepOpen': 'No',
   'message.actionIrreversible': 'Esta acción es irreversible',
 };
-

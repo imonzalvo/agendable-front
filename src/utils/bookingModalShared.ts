@@ -3,9 +3,10 @@ import { keyBy } from 'lodash';
 import moment from 'moment-timezone';
 import { Modal } from 'antd';
 import { QueryResult } from '@apollo/client';
+import { formatMessage } from 'umi-plugin-locale';
 
 import { BookingState } from '@/pages/a/$businessHandle/admin';
-import { formatMessage } from 'umi-plugin-locale';
+import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
 
 export const validateBookings = (
   setBookings: (value: React.SetStateAction<BookingState[]>) => void,
@@ -30,20 +31,20 @@ export const validateBookings = (
 };
 
 export const getTotalPrice = (
-  servicesResponse: QueryResult<any, Record<string, any>>,
+  servicesResponse: QueryResult<GetBranchServicesType, Record<string, any>>,
   bookings: BookingState[],
 ) => {
-  const services = servicesResponse?.data?.getBranch?.services?.items;
+  const services = servicesResponse?.data?.getBranch?.services;
   if (services) {
-    const servicesObj = keyBy(services, 'service.id');
+    const servicesObj = keyBy(services, 'id');
     if (servicesObj) {
       return bookings.reduce(
         (sum, booking) =>
           (sum += booking.selectedServices.reduce(
-            (acc: number | undefined, serviceId: string | undefined) =>
-              serviceId ? acc + servicesObj[serviceId].service.price : 0,
+            (acc: number, serviceId: string | undefined) =>
+              serviceId ? acc + servicesObj[serviceId].price : 0,
             0,
-          ) as number),
+          )),
         0,
       );
     }

@@ -3,10 +3,12 @@ import { Form, Icon, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
+import { useMutation } from '@apollo/client';
 
 import { AuthContext } from '@/layouts';
 import { SingleFormButtonContainer } from './styles';
 import { EmailInput } from '@/utils/formInput';
+import { LOGIN } from './queries';
 
 interface LoginProps extends FormComponentProps {
   stateEmail: string;
@@ -18,25 +20,28 @@ interface LoginProps extends FormComponentProps {
 
 function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
   const { setAuthenticated } = useContext(AuthContext);
-  const [isLoading, setLoading] = useState(false);
+  const [loginMutation, { data, loading: isLoading }] = useMutation(LOGIN, {
+    onCompleted: data => {
+      message.success('Successfully Signed In!');
+      localStorage.setItem('token', data.login.token);
+      setAuthenticated(true);
+    },
+    onError: () => {
+      message.error(err.message);
+      setAuthenticated(false);
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     validateFields((error, { email, password }) => {
       if (!error) {
-        setLoading(true);
-        Auth.signIn({ username: email, password })
-          .then(() => {
-            message.success('Successfully Signed In!');
-            setAuthenticated(true);
-          })
-          // TODO: send error to sentry
-          // TODO: Format error msg
-          .catch(err => {
-            message.error(err.message);
-            setAuthenticated(false);
-          })
-          .finally(() => setLoading(false));
+        loginMutation({
+          variables: {
+            email,
+            password,
+          },
+        });
       }
     });
   };

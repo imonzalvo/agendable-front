@@ -43,7 +43,7 @@ const Confirm = ({ form }) => {
   const { bookData, setBookData } = useContext(BookingContext);
   const [createBooking, { loading }] = useMutation(CREATE_BOOKING, {
     onCompleted: value => {
-      setBookData({ ...bookData, id: value.createBookingWithServices.id });
+      setBookData({ ...bookData, id: value.createBooking.id });
       router.push(getUrl('book/success'));
     },
     onError: err => {
@@ -70,12 +70,11 @@ const Confirm = ({ form }) => {
       if (!err) {
         createBooking({
           variables: {
-            createdAt: moment().format(),
             start,
             end: getBookingEnd().format(),
             status: 'PENDING',
-            bookingBranchId: branch.id,
-            bookingEmployeeId: professional.id,
+            branchId: branch.id,
+            employeeId: professional.id,
             clientEmail: values.email ? values.email : undefined,
             clientName: values.givenName,
             clientFamilyName: values.familyName,

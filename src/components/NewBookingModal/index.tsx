@@ -157,21 +157,20 @@ export default function NewBookingModal({
                           bookings.forEach(booking => {
                             createBooking({
                               variables: {
-                                createdAt: now,
                                 start: booking.selectedStartTime,
                                 end: moment(booking.selectedStartTime)
                                   .add(booking.selectedDuration, 's')
                                   .format(),
                                 status: 'PENDING',
-                                bookingBranchId: branchId,
-                                bookingEmployeeId: booking.selectedEmployee,
+                                branchId,
+                                servicesId: booking.selectedServices,
+                                employeeId: booking.selectedEmployee,
                                 clientEmail: values.clientEmail ? values.clientEmail : undefined,
-                                clientName: values.clientName,
-                                clientFamilyName: values.clientFamilyName,
                                 clientPhone: values.clientPhone
                                   ? `+598${values.clientPhone}`
                                   : undefined,
-                                servicesId: booking.selectedServices,
+                                clientName: values.clientName,
+                                clientFamilyName: values.clientFamilyName,
                               },
                               refetchQueries: [
                                 {

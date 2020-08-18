@@ -5,9 +5,7 @@ import { AuthContext } from '.';
 import SignUp from '@/components/AuthFlow';
 
 export default function AuthLayout({ children }: { children: any }) {
-  const { isAuthenticated, isAuthCheckLoading } = useContext(AuthContext);
-
-  if (isAuthCheckLoading) return <Spin size="large" />;
+  const { isAuthenticated } = useContext(AuthContext);
 
   return isAuthenticated ? <>{children}</> : <SignUp />;
 }

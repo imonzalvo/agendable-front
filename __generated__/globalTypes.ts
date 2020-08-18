@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -7,20 +8,20 @@
 //==============================================================
 
 export enum BookingStatus {
-  CANCELLED = 'CANCELLED',
-  COMPLETED = 'COMPLETED',
-  CONFIRMED = 'CONFIRMED',
-  PENDING = 'PENDING',
+  CANCELLED = "CANCELLED",
+  COMPLETED = "COMPLETED",
+  CONFIRMED = "CONFIRMED",
+  PENDING = "PENDING",
 }
 
 export enum Day {
-  FRIDAY = 'FRIDAY',
-  MONDAY = 'MONDAY',
-  SATURDAY = 'SATURDAY',
-  SUNDAY = 'SUNDAY',
-  THURSDAY = 'THURSDAY',
-  TUESDAY = 'TUESDAY',
-  WEDNESDAY = 'WEDNESDAY',
+  FRIDAY = "FRIDAY",
+  MONDAY = "MONDAY",
+  SATURDAY = "SATURDAY",
+  SUNDAY = "SUNDAY",
+  THURSDAY = "THURSDAY",
+  TUESDAY = "TUESDAY",
+  WEDNESDAY = "WEDNESDAY",
 }
 
 //==============================================================

@@ -1,57 +1,38 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
-import { Day } from './../../../__generated__/globalTypes';
+import { Day } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: GetBranchEmployees
 // ====================================================
 
-export interface GetBranchEmployees_getBranch_employees_items_services_items_service {
-  __typename: 'Service';
+export interface GetBranchEmployees_getBranch_employees_services {
+  __typename: "Service";
   id: string;
 }
 
-export interface GetBranchEmployees_getBranch_employees_items_services_items {
-  __typename: 'EmployeeServices';
-  service: GetBranchEmployees_getBranch_employees_items_services_items_service | null;
-}
-
-export interface GetBranchEmployees_getBranch_employees_items_services {
-  __typename: 'ModelEmployeeServicesConnection';
-  items: (GetBranchEmployees_getBranch_employees_items_services_items | null)[] | null;
-}
-
-export interface GetBranchEmployees_getBranch_employees_items_availability_items {
-  __typename: 'AvailabilityItem';
-  day: Day | null;
+export interface GetBranchEmployees_getBranch_employees_availability {
+  __typename: "AvailabilityItem";
+  day: Day;
   from: string;
   to: string;
 }
 
-export interface GetBranchEmployees_getBranch_employees_items_availability {
-  __typename: 'ModelAvailabilityItemConnection';
-  items: (GetBranchEmployees_getBranch_employees_items_availability_items | null)[] | null;
-}
-
-export interface GetBranchEmployees_getBranch_employees_items {
-  __typename: 'Employee';
+export interface GetBranchEmployees_getBranch_employees {
+  __typename: "Employee";
   id: string;
   familyName: string;
   givenName: string;
-  services: GetBranchEmployees_getBranch_employees_items_services | null;
-  availability: GetBranchEmployees_getBranch_employees_items_availability | null;
-}
-
-export interface GetBranchEmployees_getBranch_employees {
-  __typename: 'ModelEmployeeConnection';
-  items: (GetBranchEmployees_getBranch_employees_items | null)[] | null;
+  services: GetBranchEmployees_getBranch_employees_services[];
+  availability: GetBranchEmployees_getBranch_employees_availability[];
 }
 
 export interface GetBranchEmployees_getBranch {
-  __typename: 'Branch';
-  employees: GetBranchEmployees_getBranch_employees | null;
+  __typename: "Branch";
+  employees: GetBranchEmployees_getBranch_employees[];
 }
 
 export interface GetBranchEmployees {

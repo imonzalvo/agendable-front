@@ -8,14 +8,8 @@ import { Moment } from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { useResponsive } from 'react-hooks-responsive';
 import { formatMessage } from 'umi-plugin-locale';
-import { diff } from 'deep-diff';
 
-import {
-  EditBooking,
-  DELETE_BOOKING_SERVICES,
-  CREATE_BOOKING_SERVICES,
-  DELETE_BOOKING,
-} from './queries';
+import { UPDATE_BOOKING, DELETE_BOOKING } from './queries';
 import { GetBranchServices } from '@/queries/adminPageQueries';
 import ClientDetails from '@/components/ClientDetails';
 import BookingDetails from '@/components/BookingDetails';
@@ -27,6 +21,7 @@ import {
   getTotalDuration,
   confirmCancel,
 } from '@/utils/bookingModalShared';
+import { GetBookingsForBranch } from '@/components/AdminCalendar/queries';
 import { ModalState, BookingState } from '@/pages/a/$businessHandle/admin';
 import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
@@ -51,9 +46,10 @@ export default function EditBookingModal({
   branchId,
   modalParams,
 }: EditBookingModalProps) {
+  console.log(modalParams, modalParams)
   const defaultBookingState = {
     id: modalParams?.bookingId,
-    selectedServices: modalParams?.services?.items?.map(item => item?.service?.id || '') || [],
+    selectedServices: modalParams?.services.map(service => service.id),
     selectedEmployee: modalParams?.employeeId,
     selectedStartTime: moment(modalParams?.selectedStartTime).format(),
     selectedDuration: modalParams?.selectedDuration,
@@ -64,7 +60,7 @@ export default function EditBookingModal({
   const [bookingDate, setBookingDate] = useState<Moment>(moment(modalParams?.date));
   const [shouldValidate, setShouldValidate] = useState(false);
 
-  const [editBooking, { loading: loadingEditBooking }] = useMutation(EditBooking, {
+  const [editBooking, { loading: loadingEditBooking }] = useMutation(UPDATE_BOOKING, {
     onCompleted: d => {
       message.success('Successfully Edited Booking');
       onCancel();
@@ -73,19 +69,6 @@ export default function EditBookingModal({
       message.error(JSON.stringify(err));
     },
   });
-
-  const [deleteBookingService, { loading: loadingDeleteBookingService }] = useMutation(
-    DELETE_BOOKING_SERVICES,
-    {
-      onCompleted: r => {
-        console.log('result', r);
-      },
-    },
-  );
-
-  const [createBookingServices, { loading: loadingCreateBookingService }] = useMutation(
-    CREATE_BOOKING_SERVICES,
-  );
 
   const [deleteBooking, { loading: loadingDeleteBooking }] = useMutation(DELETE_BOOKING);
 
@@ -116,14 +99,7 @@ export default function EditBookingModal({
         destroyOnClose
         wrapClassName="create-booking-modal"
       >
-        <Spin
-          spinning={
-            loadingDeleteBookingService ||
-            loadingCreateBookingService ||
-            loadingDeleteBooking ||
-            loadingEditBooking
-          }
-        >
+        <Spin spinning={loadingDeleteBooking || loadingEditBooking}>
           <Row gutter={32} style={{ height: '100%' }}>
             <Col xs={{ span: 24 }} lg={{ span: 16 }}>
               <BookingDetails
@@ -178,17 +154,18 @@ export default function EditBookingModal({
                     content: formatMessage({ id: 'message.actionIrreversible' }),
                     onOk() {
                       const deleteBookingData = async () => {
-                        if (modalParams.services?.items?.[0]?.id) {
-                          await deleteBookingService({
-                            variables: {
-                              id: modalParams.services.items[0].id,
-                            },
-                          });
-                        }
                         await deleteBooking({
                           variables: {
                             id: modalParams.bookingId,
                           },
+                          refetchQueries: [
+                            {
+                              query: GetBookingsForBranch,
+                              variables: {
+                                id: branchId,
+                              },
+                            },
+                          ],
                         });
                         onCancel();
                       };
@@ -227,48 +204,32 @@ export default function EditBookingModal({
                               try {
                                 await editBooking({
                                   variables: {
-                                    id: booking.id,
                                     start: booking.selectedStartTime,
                                     end: moment(booking.selectedStartTime)
                                       .add(booking.selectedDuration, 's')
                                       .format(),
                                     status: 'PENDING',
-                                    bookingBranchId: branchId,
-                                    bookingEmployeeId: booking.selectedEmployee,
+                                    branchId,
+                                    servicesId: booking.selectedServices,
+                                    employeeId: booking.selectedEmployee,
                                     clientEmail: values.clientEmail
                                       ? values.clientEmail
                                       : undefined,
+                                    clientPhone: values.clientPhone
+                                      ? `+598${values.clientPhone}`
+                                      : undefined,
                                     clientName: values.clientName,
                                     clientFamilyName: values.clientFamilyName,
-                                    clientPhone: values.clientPhone
-                                      ? `+${values.prefix}${values.clientPhone}`
-                                      : undefined,
                                   },
+                                  refetchQueries: [
+                                    {
+                                      query: GetBookingsForBranch,
+                                      variables: {
+                                        id: branchId,
+                                      },
+                                    },
+                                  ],
                                 });
-                                if (
-                                  diff(
-                                    booking.selectedServices,
-                                    modalParams.services?.items?.map(
-                                      item => item?.service?.id || '',
-                                    ),
-                                  )
-                                ) {
-                                  if (modalParams.services.items.length) {
-                                    await deleteBookingService({
-                                      variables: {
-                                        id: modalParams.services.items[0].id,
-                                      },
-                                    });
-                                  }
-                                  if (booking.selectedServices.length) {
-                                    await createBookingServices({
-                                      variables: {
-                                        bookingId: booking.id,
-                                        serviceId: booking.selectedServices[0],
-                                      },
-                                    });
-                                  }
-                                }
                               } catch (err) {
                                 message.error(
                                   `There was an error when updating booking services. Contact support with this error: ${JSON.stringify(

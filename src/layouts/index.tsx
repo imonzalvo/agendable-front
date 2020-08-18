@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { AUTH_TYPE } from 'aws-appsync';
-import { createAuthLink } from 'aws-appsync-auth-link';
-import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
-import AWS from 'aws-sdk';
-import Amplify, { Auth } from 'aws-amplify';
-import {
-  ApolloProvider,
-  ApolloClient,
-  InMemoryCache,
-  ApolloLink,
-  createHttpLink,
-} from '@apollo/client';
+import React, { useState } from 'react';
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import RouterTypes from 'umi/routerTypes';
 import { ConfigProvider } from 'antd';
 import bugsnag from '@bugsnag/js';
@@ -24,17 +14,8 @@ import useSubdomain from '@/hooks/useSubdomain';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
-import awsconfig from '@/aws-exports';
 import PageLoading from '@/components/PageLoading';
 import BusinessGetter from '../components/BussinessGetter';
-
-AWS.config.update({
-  accessKeyId: 'AKIAU7ZI4HCKNTFQZHXN',
-  secretAccessKey: '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',
-  region: 'us-west-2',
-});
-
-Amplify.configure(awsconfig);
 
 const bugsnagClient = bugsnag({
   apiKey: 'e2139c5caec0def8b147ed96825c201e',
@@ -49,7 +30,6 @@ const renderSpin = () => <PageLoading />;
 
 export const AuthContext = React.createContext({
   isAuthenticated: false,
-  isAuthCheckLoading: true,
   setAuthenticated: (_value: boolean) => {},
 });
 
@@ -90,8 +70,7 @@ interface LayoutProps extends RouterTypes {
 }
 
 const Layout = ({ children, location }: LayoutProps) => {
-  const [isAuthCheckLoading, setAuthCheckLoading] = useState(true);
-  const [isAuthenticated, setAuthenticated] = useState(false);
+  const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem('token'));
   const [bookData, setBookData] = useState({
     branch: null,
     service: { id: undefined, duration: undefined, price: undefined, name: undefined },
@@ -102,44 +81,24 @@ const Layout = ({ children, location }: LayoutProps) => {
   const [steps, setSteps] = useState(5);
   const subdomain = useSubdomain();
 
-  useEffect(() => {
-    Auth.currentAuthenticatedUser()
-      .then(() => {
-        setAuthenticated(true);
-        setAuthCheckLoading(false);
-      })
-      .catch(() => {
-        setAuthenticated(false);
-        setAuthCheckLoading(false);
-      });
-  }, []);
-
-  const url = awsconfig.aws_appsync_graphqlEndpoint;
-  const region = awsconfig.aws_appsync_region;
-  const cognitoAuth = {
-    type: awsconfig.aws_appsync_authenticationType,
-    credentials: () => Auth.currentCredentials(),
-    jwtToken: async () => (await Auth.currentSession()).getAccessToken().getJwtToken(),
-  };
-
-  const guestAuth = {
-    auth: { type: AUTH_TYPE.API_KEY, apiKey: awsconfig.aws_appsync_apiKey },
-    complexObjectsCredentials: () => Auth.currentCredentials(),
-  };
+  const url = 'http://ec2-54-245-28-77.us-west-2.compute.amazonaws.com:8080';
 
   const httpLink = createHttpLink({ uri: url });
 
-  const link = ApolloLink.from([
-    createAuthLink({
-      url,
-      region,
-      auth: isAuthenticated ? cognitoAuth : guestAuth.auth,
-    }),
-    createSubscriptionHandshakeLink(url, httpLink),
-  ]);
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = localStorage.getItem('token');
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        Authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
 
   const client = new ApolloClient({
-    link,
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   });
 
@@ -152,7 +111,7 @@ const Layout = ({ children, location }: LayoutProps) => {
       ) : (
         <ApolloProvider client={client}>
           <ConfigProvider locale={locale}>
-            <AuthContext.Provider value={{ isAuthenticated, setAuthenticated, isAuthCheckLoading }}>
+            <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
               <BookingContext.Provider
                 value={{
                   bookData,

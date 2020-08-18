@@ -2,34 +2,31 @@ import gql from 'graphql-tag';
 import { BookingFragment } from '@/graphql/fragments';
 
 export const CreateBooking = gql`
-  mutation CreateBookingWithServices(
-    $createdAt: AWSDateTime!
-    $start: AWSDateTime!
-    $end: AWSDateTime!
-    $status: BookingStatus!
-    $bookingBranchId: ID!
-    $bookingEmployeeId: ID!
-    $clientEmail: AWSEmail
-    $clientFamilyName: String
+  mutation CreateBooking(
+    $start: String
+    $end: String
+    $status: String
+    $clientId: String
+    $branchId: String!
+    $servicesId: [String!]!
+    $employeeId: String!
+    $clientEmail: String
+    $clientPhone: String
     $clientName: String
-    $clientPhone: AWSPhone
-    $servicesId: [ID]
+    $clientFamilyName: String
   ) {
-    __typename
-    createBookingWithServices(
-      input: {
-        createdAt: $createdAt
-        start: $start
-        end: $end
-        status: $status
-        bookingBranchId: $bookingBranchId
-        bookingEmployeeId: $bookingEmployeeId
-        clientEmail: $clientEmail
-        clientFamilyName: $clientFamilyName
-        clientName: $clientName
-        clientPhone: $clientPhone
-      }
+    createBooking(
+      start: $start
+      end: $end
+      status: $status
+      clientId: $clientId
+      branchId: $branchId
       servicesId: $servicesId
+      employeeId: $employeeId
+      clientEmail: $clientEmail
+      clientPhone: $clientPhone
+      clientName: $clientName
+      clientFamilyName: $clientFamilyName
     ) {
       ...BookingData
     }
