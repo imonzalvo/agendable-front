@@ -1,18 +1,14 @@
 import gql from 'graphql-tag';
 
 export const GetServices = gql`
-  query GetServices($id: ID!) {
+  query GetServices($id: String!) {
     getBranch(id: $id) {
       services {
-        items {
-          service {
-            description
-            duration
-            price
-            name
-            id
-          }
-        }
+        description
+        duration
+        price
+        name
+        id
       }
     }
   }

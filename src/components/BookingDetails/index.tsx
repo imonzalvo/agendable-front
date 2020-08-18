@@ -7,7 +7,7 @@ import { compact } from 'lodash';
 import { isMobile } from 'react-device-detect';
 import { formatMessage } from 'umi-plugin-locale';
 
-import { GetBranchServices as GetBranchServicesType } from '../NewBookingModal/__generated__/GetBranchServices';
+import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 import { BookingState } from '@/pages/a/$businessHandle/admin/index.tsx';
 import BookingCard from '@/components/BookingDetails/BookingCard';
@@ -77,25 +77,22 @@ export default function BookingDetails({
   };
 
   const getServices = () => {
-    const services = servicesResponse?.data?.getBranch?.services?.items;
+    const services = servicesResponse?.data?.getBranch?.services;
     if (services) {
-      return compact(services).map(
-        ({ service }) =>
-          !!service && (
-            <Option key={service.id} value={service.id}>
-              {service.name}
-            </Option>
-          ),
-      );
+      return services.map(service => (
+        <Option key={service.id} value={service.id}>
+          {service.name}
+        </Option>
+      ));
     }
     return [];
   };
 
   const getEmployees = () => {
-    const employees = employeesResponse?.data?.getBranch?.employees?.items;
+    const employees = employeesResponse?.data?.getBranch?.employees;
 
     return employees
-      ? compact(employees).map(({ id, givenName }) => (
+      ? employees.map(({ id, givenName }) => (
           <Option key={id} value={id}>
             {givenName}
           </Option>

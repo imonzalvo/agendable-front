@@ -25,9 +25,7 @@ const ServiceList = ({ branchId, selectService }: ServiceListProps) => {
   const response = useQuery(GetServices, { variables: { id: branchId } });
   if (response.loading) return renderSkeleton();
   if (response.error) return <div>Error</div>;
-  const services = response.data.getBranch
-    ? response.data.getBranch.services.items.map(item => item.service)
-    : [];
+  const { services } = response.data.getBranch;
   return services.map(({ id, name, description, price, duration }) => (
     <Card
       key={id}

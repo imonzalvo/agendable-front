@@ -4,7 +4,6 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { useQuery, useSubscription, useApolloClient, QueryResult } from '@apollo/client';
 import moment from 'moment-timezone';
 import { getLocale } from 'umi-plugin-locale';
-import { compact } from 'lodash';
 import { startOfWeek, format, endOfWeek } from 'date-fns';
 import produce from 'immer';
 
@@ -13,9 +12,7 @@ import {
   GetBookingsForBranch,
   ON_UPDATE_BOOKING,
   ON_DELETE_BOOKING,
-  ON_CREATE_BOOKING_WITH_SERVICES,
-  ON_DELETE_BOOKING_SERVICES,
-  ON_CREATE_BOOKING_SERVICES,
+  ON_CREATE_BOOKING,
 } from './queries';
 import TimeSlotWrapper from './TimeSlotWrapper';
 import Toolbar from './Toolbar';
@@ -52,9 +49,9 @@ interface AdminCalendarProps {
 }
 
 const getEvents = (bookingsData?: IGetBookingsForBranch) => {
-  const bookings = bookingsData?.getBranch?.bookings?.items;
+  const bookings = bookingsData?.getBookingsByBranch;
   if (bookings) {
-    return compact(bookings).map(booking => ({
+    return bookings.map(booking => ({
       id: booking.id,
       title: ` ${booking.clientName} ${booking.clientFamilyName}`,
       start: new Date(booking.start),
@@ -74,9 +71,9 @@ const getEvents = (bookingsData?: IGetBookingsForBranch) => {
 const getResourceMap = (
   employeesResponse?: QueryResult<IGetBranchEmployees, Record<string, any>>,
 ) => {
-  const employees = employeesResponse?.data?.getBranch?.employees?.items;
+  const employees = employeesResponse?.data?.getBranch?.employees;
   if (employees) {
-    return compact(employees).map(employee => ({
+    return employees.map(employee => ({
       resourceId: employee.id,
       resourceTitle: `${employee.givenName} ${employee.familyName}`,
     }));
@@ -108,10 +105,13 @@ export default function AdminCalendar({
   });
 
   useSubscription(ON_UPDATE_BOOKING, {
+    variables: {
+      id: branchId,
+    },
     onSubscriptionData: ({ subscriptionData }) => {
       if (
-        subscriptionData.data.onUpdateBooking.branch.id === branchId &&
-        bookingsData?.getBranch?.bookings?.items
+        subscriptionData.data.updatedBooking.branch.id === branchId &&
+        bookingsData?.getBookingsByBranch
       ) {
         client.writeQuery({
           query: GetBookingsForBranch,
@@ -124,10 +124,10 @@ export default function AdminCalendar({
             end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
           },
           data: produce(bookingsData, dS => {
-            const bItems = dS?.getBranch?.bookings?.items;
+            const bItems = dS?.getBookingsByBranch;
             if (bItems) {
-              const i = bItems.findIndex(b => b?.id === subscriptionData.data.onUpdateBooking.id);
-              bItems[i] = subscriptionData.data.onUpdateBooking;
+              const i = bItems.findIndex(b => b?.id === subscriptionData.data.updatedBooking.id);
+              bItems[i] = subscriptionData.data.updatedBooking;
             }
           }),
         });
@@ -135,11 +135,14 @@ export default function AdminCalendar({
     },
   });
 
-  useSubscription(ON_CREATE_BOOKING_WITH_SERVICES, {
+  useSubscription(ON_CREATE_BOOKING, {
+    variables: {
+      id: branchId,
+    },
     onSubscriptionData: ({ subscriptionData }) => {
       if (
-        subscriptionData.data.onCreateBookingWithServices.branch.id === branchId &&
-        bookingsData?.getBranch?.bookings?.items
+        subscriptionData.data.newBooking.branch.id === branchId &&
+        bookingsData?.getBookingsByBranch
       ) {
         client.writeQuery({
           query: GetBookingsForBranch,
@@ -152,7 +155,7 @@ export default function AdminCalendar({
             end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
           },
           data: produce(bookingsData, dS => {
-            dS?.getBranch?.bookings?.items?.push(subscriptionData.data.onCreateBookingWithServices);
+            dS?.getBookingsByBranch?.push(subscriptionData.data.newBooking);
           }),
         });
       }
@@ -160,9 +163,12 @@ export default function AdminCalendar({
   });
 
   useSubscription(ON_DELETE_BOOKING, {
+    variables: {
+      id: branchId,
+    },
     onSubscriptionData: ({ subscriptionData }) => {
-      const bookingIndex = bookingsData?.getBranch?.bookings?.items?.findIndex(
-        b => b?.id === subscriptionData.data.onDeleteBooking.id,
+      const bookingIndex = bookingsData?.getBookingsByBranch?.findIndex(
+        b => b?.id === subscriptionData.data.deletedBooking.id,
       );
       if (bookingIndex) {
         client.writeQuery({
@@ -176,67 +182,7 @@ export default function AdminCalendar({
             end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
           },
           data: produce(bookingsData, dS => {
-            dS?.getBranch?.bookings?.items?.splice(bookingIndex, 1);
-          }),
-        });
-      }
-    },
-  });
-
-  useSubscription(ON_DELETE_BOOKING_SERVICES, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      if (
-        subscriptionData.data.onDeleteBookingServices.booking.branch.id === branchId &&
-        bookingsData?.getBranch?.bookings?.items
-      ) {
-        client.writeQuery({
-          query: GetBookingsForBranch,
-          variables: {
-            id: branchId,
-            start: format(
-              startOfWeek(selectedDate, { weekStartsOn: 1 }),
-              'YYYY-MM-DD[T]HH:mm:ssZZ',
-            ),
-            end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
-          },
-          data: produce(bookingsData, dS => {
-            const bItems = dS?.getBranch?.bookings?.items;
-            if (bItems) {
-              const i = bItems.findIndex(
-                b => b?.id === subscriptionData.data.onDeleteBookingServices.booking.id,
-              );
-              bItems[i] = subscriptionData.data.onDeleteBookingServices.booking;
-            }
-          }),
-        });
-      }
-    },
-  });
-
-  useSubscription(ON_CREATE_BOOKING_SERVICES, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      if (
-        subscriptionData.data.onCreateBookingServices.booking.branch.id === branchId &&
-        bookingsData?.getBranch?.bookings?.items
-      ) {
-        client.writeQuery({
-          query: GetBookingsForBranch,
-          variables: {
-            id: branchId,
-            start: format(
-              startOfWeek(selectedDate, { weekStartsOn: 1 }),
-              'YYYY-MM-DD[T]HH:mm:ssZZ',
-            ),
-            end: format(endOfWeek(selectedDate, { weekStartsOn: 1 }), 'YYYY-MM-DD[T]HH:mm:ssZZ'),
-          },
-          data: produce(bookingsData, dS => {
-            const bItems = dS?.getBranch?.bookings?.items;
-            if (bItems) {
-              const i = bItems.findIndex(
-                b => b?.id === subscriptionData.data.onCreateBookingServices.booking.id,
-              );
-              bItems[i] = subscriptionData.data.onCreateBookingServices.booking;
-            }
+            dS?.getBookingsByBranch?.splice(bookingIndex, 1);
           }),
         });
       }
@@ -277,11 +223,11 @@ export default function AdminCalendar({
    * Check if resource is available on given timeslot
    */
   const isAvailable = (dateTime: Date, resourceId: string) => {
-    const employees = employeesResponse?.data?.getBranch?.employees?.items;
+    const employees = employeesResponse?.data?.getBranch?.employees;
 
     if (employees) {
       const employee = employees.find(e => e && e.id === resourceId);
-      const availabilityItems = employee?.availability?.items;
+      const availabilityItems = employee?.availability;
       if (availabilityItems) {
         const dateTimeMom = moment(dateTime);
         const weekday = isoWeekdays[dateTimeMom.isoWeekday()]; // Get the weekday string constant for dateTime (ie. 1: MONDAY)

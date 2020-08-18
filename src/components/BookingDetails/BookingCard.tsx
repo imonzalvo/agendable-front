@@ -7,7 +7,7 @@ import { keyBy } from 'lodash';
 import { QueryResult } from '@apollo/client';
 import { useResponsive } from 'react-hooks-responsive';
 
-import { GetBranchServices as GetBranchServicesType } from '../NewBookingModal/__generated__/GetBranchServices';
+import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
 import { BookingState } from '@/pages/a/$businessHandle/admin/index.tsx';
 import generateTimesAtIntervals from '@/utils/generateTimesAtIntervals';
 import useEffectSkipMount from '@/hooks/useEffectSkipMount';
@@ -47,13 +47,14 @@ export default function BookingCard({
   onSelectDuration,
 }: BookingCardProps) {
   useEffect(() => {
-    const services = servicesResponse?.data?.getBranch?.services?.items;
-    const servicesObj = keyBy(services, 'service.id');
+    const services = servicesResponse?.data?.getBranch?.services;
+    const servicesObj = keyBy(services, 'id');
+
     if (selectedServices.length > 0 && servicesObj) {
       const totalDuration =
         selectedServices.reduce(
           (acc: number | undefined, serviceId: string | undefined) =>
-            serviceId ? acc || 0 + (servicesObj?.[serviceId]?.service?.duration || 0) : 0,
+            serviceId ? acc || 0 + (servicesObj?.[serviceId]?.duration || 0) : 0,
           0,
         ) || 0;
       if (totalDuration > 0) {

@@ -17,10 +17,10 @@ export interface ModalState {
     date?: Date | string;
     bookingId?: string;
     employeeId?: string;
-    selectedServices?: string[];
+    selectedServices: string[];
     selectedStartTime?: string | Date;
     selectedDuration?: number;
-    services?: IBookingServices;
+    services: IBookingServices;
     clientEmail?: string;
     clientName?: string;
     clientFamilyName?: string;

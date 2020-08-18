@@ -13,36 +13,36 @@
     text-align: center;
 
     &-container {
-      text-align: left;
       padding-bottom: 8px;
+      text-align: left;
       outline: none;
     }
 
     &-title {
       max-width: @stepNavContentMaxWidth;
-      white-space: nowrap;
       overflow: hidden;
+      white-space: nowrap;
       text-overflow: ellipsis;
 
-      &:after {
+      &::after {
         display: none;
       }
     }
 
-    &:after {
-      content: '';
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 100%;
       display: inline-block;
       width: 16px;
       height: 16px;
+      margin-top: -12px;
+      margin-left: -8px;
       border: 1px solid #ccc;
       border-bottom: none;
       border-left: none;
       transform: rotate(45deg);
-      position: absolute;
-      top: 50%;
-      left: 100%;
-      margin-top: -12px;
-      margin-left: -8px;
+      content: '';
     }
 
     &-active {

@@ -6,11 +6,11 @@ import { get } from 'lodash';
 import PageLoading from '@/components/PageLoading';
 import PageNotFound from '@/pages/404';
 import { parsePathnameHandle } from '@/utils/parsePathnameHandle';
-import { GetBusinessByHandle } from './queries';
+import { GET_BUSINESS_BY_HANDLE } from './queries';
 import {
   GetBusinessByHandle as IGetBusinessByHandle,
   GetBusinessByHandle_businessByHandle_items,
-  GetBusinessByHandle_businessByHandle_items_branches_items,
+  GetBusinessByHandle_businessByHandle_items_branches,
 } from './__generated__/GetBusinessByHandle';
 
 export const BusinessContext = createContext({
@@ -37,7 +37,7 @@ export default function BusinessGetter({
     : { businessName: '', loading: true };
   const [business, setBusiness] = useState(initialState);
   const [getBusinessByHandle, { data, error }] = useLazyQuery<IGetBusinessByHandle>(
-    GetBusinessByHandle,
+    GET_BUSINESS_BY_HANDLE,
   );
 
   const pathnameHandle = parsePathnameHandle(pathname);
@@ -69,12 +69,12 @@ export default function BusinessGetter({
     if (data) {
       const businessData: GetBusinessByHandle_businessByHandle_items = get(
         data,
-        'businessByHandle.items[0]',
+        'getBusinessByHandle',
       );
       if (businessData) {
-        const branches: [GetBusinessByHandle_businessByHandle_items_branches_items] = get(
+        const branches: GetBusinessByHandle_businessByHandle_items_branches | null = get(
           businessData,
-          'branches.items',
+          'branches',
         );
         if (branches) {
           localStorage.setItem(
@@ -114,7 +114,7 @@ export default function BusinessGetter({
     return <Alert message="There was an error" description={JSON.stringify(error)} type="error" />;
   }
 
-  if (pathnameHandle && !(get(data, 'businessByHandle.items[0]') || business)) {
+  if (pathnameHandle && !(get(data, 'businessByHandle') || business)) {
     return <PageNotFound />;
   }
 

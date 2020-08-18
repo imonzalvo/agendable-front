@@ -23,9 +23,7 @@ const ProfessionalList = ({ serviceId, selectProfessional }: ProfessionalListPro
   const response = useQuery(GetProfessionals, { variables: { id: serviceId } });
   if (response.loading) return renderSkeleton();
   if (response.error) return <div>Error</div>; // TODO handle error
-  const professionals = response.data.getService
-    ? response.data.getService.employees.items.map(item => item.employee)
-    : [];
+  const { employees: professionals } = response.data.getService;
   return professionals.map(professional => (
     <Card
       key={professional.id}

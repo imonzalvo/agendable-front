@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { Auth } from 'aws-amplify';
 import { Button, Modal, Typography } from 'antd';
 import ProLayout, { BasicLayoutProps } from '@ant-design/pro-layout';
 import { formatMessage } from 'umi-plugin-locale';
@@ -25,7 +24,7 @@ export default function BusinessLayout({ children }: BusinessLayoutProps) {
   } = useContext(BusinessContext);
 
   const logout = () => {
-    Auth.signOut();
+    // TODO: LOGOUT
     setAuthenticated(false);
     setAuthModalVisible(null);
   };

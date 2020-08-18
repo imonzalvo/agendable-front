@@ -1,33 +1,24 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
 // GraphQL query operation: GetBranchServices
 // ====================================================
 
-export interface GetBranchServices_getBranch_services_items_service {
-  __typename: 'Service';
+export interface GetBranchServices_getBranch_services {
+  __typename: "Service";
   id: string;
   name: string;
   duration: number;
-  currency: string | null;
+  currency: string;
   price: number;
 }
 
-export interface GetBranchServices_getBranch_services_items {
-  __typename: 'BranchServices';
-  service: GetBranchServices_getBranch_services_items_service | null;
-}
-
-export interface GetBranchServices_getBranch_services {
-  __typename: 'ModelBranchServicesConnection';
-  items: (GetBranchServices_getBranch_services_items | null)[] | null;
-}
-
 export interface GetBranchServices_getBranch {
-  __typename: 'Branch';
-  services: GetBranchServices_getBranch_services | null;
+  __typename: "Branch";
+  services: GetBranchServices_getBranch_services[];
 }
 
 export interface GetBranchServices {

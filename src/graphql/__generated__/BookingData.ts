@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -7,43 +8,32 @@
 // ====================================================
 
 export interface BookingData_employee {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
   givenName: string;
   familyName: string;
 }
 
-export interface BookingData_services_items_service {
-  __typename: 'Service';
-  id: string;
-}
-
-export interface BookingData_services_items {
-  __typename: 'BookingServices';
-  id: string;
-  service: BookingData_services_items_service | null;
-}
-
 export interface BookingData_services {
-  __typename: 'ModelBookingServicesConnection';
-  items: (BookingData_services_items | null)[] | null;
+  __typename: "Service";
+  id: string;
 }
 
 export interface BookingData_branch {
-  __typename: 'Branch';
+  __typename: "Branch";
   id: string;
 }
 
 export interface BookingData {
-  __typename: 'Booking';
+  __typename: "Booking";
   id: string;
-  start: any;
-  end: any;
+  start: string;
+  end: string;
   clientName: string | null;
-  clientEmail: any | null;
+  clientEmail: string | null;
   clientFamilyName: string | null;
-  clientPhone: any | null;
+  clientPhone: string | null;
   employee: BookingData_employee;
-  services: BookingData_services | null;
+  services: BookingData_services[];
   branch: BookingData_branch;
 }

@@ -1,9 +1,8 @@
-import { gql } from '@apollo/client';
+import gql from 'graphql-tag';
 import { BookingFragment } from '@/graphql/fragments';
 
 export const GetBooking = gql`
-  query GetBooking($id: ID!) {
-    __typename
+  query GetBooking($id: String!) {
     getBooking(id: $id) {
       clientEmail
       clientFamilyName
@@ -14,44 +13,40 @@ export const GetBooking = gql`
       start
       status
       services {
-        items {
-          service {
-            id
-          }
-          id
-        }
+        id
       }
     }
   }
 `;
 
-export const EditBooking = gql`
-  mutation EditBooking(
-    $id: ID!
-    $start: AWSDateTime!
-    $end: AWSDateTime!
-    $status: BookingStatus!
-    $bookingBranchId: ID!
-    $bookingEmployeeId: ID!
-    $clientEmail: AWSEmail
-    $clientFamilyName: String
+export const UPDATE_BOOKING = gql`
+  mutation UpdateBooking(
+    $id: ID
+    $start: String
+    $end: String
+    $status: String
+    $clientId: String
+    $branchId: String
+    $servicesId: [String!]
+    $employeeId: String
+    $clientEmail: String
+    $clientPhone: String
     $clientName: String
-    $clientPhone: AWSPhone
+    $clientFamilyName: String
   ) {
-    __typename
     updateBooking(
-      input: {
-        id: $id
-        start: $start
-        end: $end
-        status: $status
-        bookingBranchId: $bookingBranchId
-        bookingEmployeeId: $bookingEmployeeId
-        clientEmail: $clientEmail
-        clientFamilyName: $clientFamilyName
-        clientName: $clientName
-        clientPhone: $clientPhone
-      }
+      id: $id
+      start: $start
+      end: $end
+      status: $status
+      clientId: $clientId
+      branchId: $branchId
+      servicesId: $servicesId
+      employeeId: $employeeId
+      clientEmail: $clientEmail
+      clientPhone: $clientPhone
+      clientName: $clientName
+      clientFamilyName: $clientFamilyName
     ) {
       ...BookingData
     }
@@ -59,35 +54,9 @@ export const EditBooking = gql`
   ${BookingFragment}
 `;
 
-export const DELETE_BOOKING_SERVICES = gql`
-  mutation DELETE_BOOKING_SERVICES($id: ID!) {
-    __typename
-    deleteBookingServices(input: { id: $id }) {
-      booking {
-        ...BookingData
-      }
-    }
-  }
-  ${BookingFragment}
-`;
-
-export const CREATE_BOOKING_SERVICES = gql`
-  mutation CREATE_BOOKING_SERVICES($bookingId: ID!, $serviceId: ID!) {
-    __typename
-    createBookingServices(
-      input: { bookingServicesBookingId: $bookingId, bookingServicesServiceId: $serviceId }
-    ) {
-      booking {
-        ...BookingData
-      }
-    }
-  }
-  ${BookingFragment}
-`;
-
 export const DELETE_BOOKING = gql`
   mutation DELETE_BOOKING($id: ID!) {
-    deleteBooking(input: { id: $id }) {
+    deleteBooking(id: $id) {
       id
     }
   }

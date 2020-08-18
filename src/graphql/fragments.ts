@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import gql from 'graphql-tag';
 
 export const BookingFragment = gql`
   fragment BookingData on Booking {
@@ -15,12 +15,7 @@ export const BookingFragment = gql`
       familyName
     }
     services {
-      items {
-        id
-        service {
-          id
-        }
-      }
+      id
     }
     branch {
       id

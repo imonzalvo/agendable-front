@@ -1,14 +1,12 @@
 import gql from 'graphql-tag';
 
 export const GetBranches = gql`
-  query GetBranches($id: ID!) {
+  query GetBranches($id: String!) {
     getBusiness(id: $id) {
       branches {
-        items {
-          id
-          name
-          description
-        }
+        id
+        name
+        description
       }
     }
   }

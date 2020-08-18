@@ -1,27 +1,19 @@
 import gql from 'graphql-tag';
 
 export const GetBranchEmployees = gql`
-  query GetBranchEmployees($id: ID!) {
+  query GetBranchEmployees($id: String!) {
     getBranch(id: $id) {
       employees {
-        items {
+        id
+        familyName
+        givenName
+        services {
           id
-          familyName
-          givenName
-          services {
-            items {
-              service {
-                id
-              }
-            }
-          }
-          availability {
-            items {
-              day
-              from
-              to
-            }
-          }
+        }
+        availability {
+          day
+          from
+          to
         }
       }
     }
@@ -29,18 +21,14 @@ export const GetBranchEmployees = gql`
 `;
 
 export const GetBranchServices = gql`
-  query GetBranchServices($id: ID!) {
+  query GetBranchServices($id: String!) {
     getBranch(id: $id) {
       services {
-        items {
-          service {
-            id
-            name
-            duration
-            currency
-            price
-          }
-        }
+        id
+        name
+        duration
+        currency
+        price
       }
     }
   }

@@ -1,17 +1,13 @@
 import gql from 'graphql-tag';
 
-export const GetBusinessByHandle = gql`
-  query GetBusinessByHandle($handle: String!) {
-    businessByHandle(handle: $handle) {
-      items {
+export const GET_BUSINESS_BY_HANDLE = gql`
+  query GET_BUSINESS_BY_HANDLE($handle: String!) {
+    getBusinessByHandle(handle: $handle) {
+      id
+      name
+      branches {
         id
-        name
-        branches {
-          items {
-            id
-            address
-          }
-        }
+        address
       }
     }
   }

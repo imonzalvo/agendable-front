@@ -4,27 +4,27 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: CreateBooking
+// GraphQL mutation operation: CREATE_BOOKING
 // ====================================================
 
-export interface CreateBooking_createBooking_employee {
+export interface CREATE_BOOKING_createBooking_employee {
   __typename: "Employee";
   id: string;
   givenName: string;
   familyName: string;
 }
 
-export interface CreateBooking_createBooking_services {
+export interface CREATE_BOOKING_createBooking_services {
   __typename: "Service";
   id: string;
 }
 
-export interface CreateBooking_createBooking_branch {
+export interface CREATE_BOOKING_createBooking_branch {
   __typename: "Branch";
   id: string;
 }
 
-export interface CreateBooking_createBooking {
+export interface CREATE_BOOKING_createBooking {
   __typename: "Booking";
   id: string;
   start: string;
@@ -33,25 +33,25 @@ export interface CreateBooking_createBooking {
   clientEmail: string | null;
   clientFamilyName: string | null;
   clientPhone: string | null;
-  employee: CreateBooking_createBooking_employee;
-  services: CreateBooking_createBooking_services[];
-  branch: CreateBooking_createBooking_branch;
+  employee: CREATE_BOOKING_createBooking_employee;
+  services: CREATE_BOOKING_createBooking_services[];
+  branch: CREATE_BOOKING_createBooking_branch;
 }
 
-export interface CreateBooking {
-  createBooking: CreateBooking_createBooking;
+export interface CREATE_BOOKING {
+  createBooking: CREATE_BOOKING_createBooking;
 }
 
-export interface CreateBookingVariables {
-  start?: string | null;
-  end?: string | null;
-  status?: string | null;
+export interface CREATE_BOOKINGVariables {
+  start: string;
+  end: string;
+  status: string;
   clientId?: string | null;
   branchId: string;
   servicesId: string[];
   employeeId: string;
   clientEmail?: string | null;
-  clientPhone?: string | null;
-  clientName?: string | null;
   clientFamilyName?: string | null;
+  clientName?: string | null;
+  clientPhone?: string | null;
 }
