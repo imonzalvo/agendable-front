@@ -15,7 +15,7 @@ const BookingHeader = () => {
       case 0:
         return null;
       case 1:
-        return steps === 4 ? 'select-branch' : null;
+        return steps === 5 ? 'select-branch' : null;
       case 2:
         return 'select-service';
       case 3:

@@ -22,7 +22,7 @@ const BranchList = ({ businessId, selectBranch }: BranchListProps) => {
   const response = useQuery(GetBranches, { variables: { id: businessId } });
   if (response.loading) return renderSkeleton();
   if (response.error) return <div>Error</div>;
-  const branches = response.data.getBusiness ? response.data.getBusiness.branches.items : [];
+  const branches = response.data.getBusiness ? response.data.getBusiness.branches : [];
   return branches.map(branch => (
     <Card
       key={branch.id}
