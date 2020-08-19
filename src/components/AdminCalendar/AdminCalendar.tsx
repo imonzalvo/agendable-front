@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Alert, Spin } from 'antd';
+import { Alert, Spin, notification } from 'antd';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { useQuery, useSubscription, useApolloClient, QueryResult } from '@apollo/client';
 import moment from 'moment-timezone';
-import { getLocale } from 'umi-plugin-locale';
+import { getLocale, formatMessage } from 'umi-plugin-locale';
 import { startOfWeek, format, endOfWeek } from 'date-fns';
 import produce from 'immer';
 
@@ -144,6 +144,14 @@ export default function AdminCalendar({
         subscriptionData.data.newBooking.branch.id === branchId &&
         bookingsData?.getBookingsByBranch
       ) {
+        notification.info({
+          message: formatMessage({ id: 'notifications.newBooking' }),
+          description: `${moment(
+            subscriptionData.data.newBooking.start,
+          ).fromNow()} - ${formatMessage({ id: 'booking.with' })} ${
+            subscriptionData.data.newBooking.employee.givenName
+          }`,
+        });
         client.writeQuery({
           query: GetBookingsForBranch,
           variables: {
