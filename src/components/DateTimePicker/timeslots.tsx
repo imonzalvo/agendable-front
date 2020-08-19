@@ -3,6 +3,8 @@ import { Row, Col, Empty, Divider } from 'antd';
 import styles from './timeslotsStyles.less';
 
 import Timeslot from './Timeslot';
+import groupTimeslots, { getText } from '@/utils/groupTimeslots';
+import { TimeslotsContainer } from './styles';
 
 function Timeslots({
   timeslots,
@@ -38,15 +40,24 @@ function Timeslots({
       </>
     );
 
+  const dayParts = groupTimeslots(timeslots);
+
   return (
     <Row style={{ marginBottom: 36 }} justify="center" type="flex">
-      {timeslots.map((item, i) => (
+      {dayParts.map(({ category, timeslots }) => (
         <>
-          {i === 0 && <Divider>Morning (7 - 12)</Divider>}
-          {i === 6 && <Divider>Afternoon (12 - 17)</Divider>}
-          <Col key={`${item.date} ${item.time}`}>
-            <Timeslot date={item.date} time={item.time} handleClick={handleSelectDate} />
-          </Col>
+          <Divider>{getText(category)}</Divider>
+          <TimeslotsContainer>
+            {timeslots.map(timeslot => (
+              <Col key={`${timeslot.date} ${timeslot.time}`}>
+                <Timeslot
+                  date={timeslot.date}
+                  time={timeslot.time}
+                  handleClick={handleSelectDate}
+                />
+              </Col>
+            ))}
+          </TimeslotsContainer>
         </>
       ))}
     </Row>

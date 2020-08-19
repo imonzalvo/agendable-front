@@ -60,3 +60,8 @@ border-radius: 10px;
       }
   
 `;
+
+export const TimeslotsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`;
