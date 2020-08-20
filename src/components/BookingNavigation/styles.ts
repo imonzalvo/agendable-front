@@ -13,6 +13,7 @@ export const Container = styled.div`
 
 export const Icon = styled(IconAntd)<{ hasPreviousStep?: boolean }>`
   font-size: 20px;
+  width: 20px;
   color: white;
   &:hover {
     color: #918d8d;
