@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { Card as CardAntd } from 'antd';
+import { Card as CardAntd, Typography } from 'antd';
+
+const { Text } = Typography;
 
 export const Image = styled.img`
   height: 230px;
@@ -9,6 +11,7 @@ export const Image = styled.img`
 export const ServiceDetail = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const Card = styled(CardAntd)`
@@ -19,4 +22,15 @@ export const Card = styled(CardAntd)`
   :last-child {
     margin-bottom: 36px;
   }
+`;
+
+export const Svg = styled.img`
+  width: 22px;
+  height: auto;
+  vertical-align: middle;
+  padding-bottom: 2px;
+`;
+
+export const PriceText = styled(Text)`
+  font-size: 18px;
 `;

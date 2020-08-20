@@ -3,7 +3,8 @@ import { Card as CardAntd, Button, Typography } from 'antd';
 import { formatMessage } from 'umi-plugin-locale';
 import { useSpring, animated, config } from 'react-spring';
 
-import { Image, ServiceDetail, Card } from './styles';
+import DurationIcon from '@/assets/duration.svg';
+import { Image, ServiceDetail, Card, Svg, PriceText } from './styles';
 
 const { Meta } = CardAntd;
 const { Title, Paragraph, Text } = Typography;
@@ -49,8 +50,11 @@ const CustomCard = ({
       <Paragraph ellipsis={{ rows: 2, expandable: true }}>{details}</Paragraph>
       {!!service && (
         <ServiceDetail>
-          <Text>{`${service.duration} min.`}</Text>
-          <Text strong>{`$${service.price}`}</Text>
+          <Text>
+            <Svg src={DurationIcon} alt="Duration" />
+            {`${service.duration} min.`}
+          </Text>
+          <PriceText strong>{`$${service.price}`}</PriceText>
         </ServiceDetail>
       )}
     </>
