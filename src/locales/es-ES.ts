@@ -21,4 +21,7 @@ export default {
   ...actions,
   ...modal,
   ...dates,
+  'notifications.newBooking': 'New booking',
+  'notifications.updatedBooking': 'Booking updated',
+  'notifications.deletedBooking': 'Booking deleted',
 };

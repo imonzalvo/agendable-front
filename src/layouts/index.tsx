@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, split } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { setContext } from '@apollo/client/link/context';
+import { WebSocketLink } from '@apollo/client/link/ws';
 import RouterTypes from 'umi/routerTypes';
 import { ConfigProvider } from 'antd';
 import bugsnag from '@bugsnag/js';
@@ -85,6 +87,22 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const httpLink = createHttpLink({ uri: url });
 
+  const wsLink = new WebSocketLink({
+    uri: 'ws://ec2-54-245-28-77.us-west-2.compute.amazonaws.com:8080',
+    options: {
+      reconnect: true,
+    },
+  });
+
+  const splitLink = split(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+    },
+    wsLink,
+    httpLink,
+  );
+
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
     const token = localStorage.getItem('token');
@@ -98,7 +116,7 @@ const Layout = ({ children, location }: LayoutProps) => {
   });
 
   const client = new ApolloClient({
-    link: authLink.concat(httpLink),
+    link: authLink.concat(splitLink),
     cache: new InMemoryCache(),
   });
 
