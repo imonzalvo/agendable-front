@@ -88,7 +88,7 @@ const Layout = ({ children, location }: LayoutProps) => {
   const httpLink = createHttpLink({ uri: url });
 
   const wsLink = new WebSocketLink({
-    uri: 'ws://ec2-54-245-28-77.us-west-2.compute.amazonaws.com:8080',
+    uri: 'ws://ec2-54-245-28-77.us-west-2.compute.amazonaws.com:8080/graphql',
     options: {
       reconnect: true,
     },
