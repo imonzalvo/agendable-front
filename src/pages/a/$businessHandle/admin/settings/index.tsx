@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import { Typography, Card, Row, Col, Form, Input, Button, Radio } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Typography, Card, Row, Col, Input, Button, Radio } from 'antd';
 import { useQuery, useSubscription, useApolloClient, QueryResult } from '@apollo/client';
 import { formatMessage } from 'umi-plugin-locale';
 

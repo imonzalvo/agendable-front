@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Row, Col, Typography, Button, Card, Layout, Menu, Icon } from 'antd';
+import { CarryOutOutlined, FacebookOutlined, InstagramOutlined } from '@ant-design/icons';
+import { Row, Col, Typography, Button, Card, Layout, Menu } from 'antd';
 import router from 'umi/router';
 import { formatMessage } from 'umi-plugin-locale';
 
@@ -63,7 +64,7 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
         >
           <Button
             type="primary"
-            icon="carry-out"
+            icon={<CarryOutOutlined />}
             onClick={() => {
               router.push(getUrl('book'));
             }}
@@ -96,7 +97,7 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
             </Typography.Paragraph>
             <Button
               type="link"
-              icon="carry-out"
+              icon={<CarryOutOutlined />}
               onClick={() => {
                 router.push(getUrl('book'));
               }}
@@ -132,12 +133,12 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
               className={styles.footerLink}
               style={{ marginRight: 12 }}
             >
-              <Icon type="instagram" />
+              <InstagramOutlined />
             </a>
           )}
           {!!businessMock.facebookURL && (
             <a href={businessMock.facebookURL} className={styles.footerLink}>
-              <Icon type="facebook" />
+              <FacebookOutlined />
             </a>
           )}
         </div>

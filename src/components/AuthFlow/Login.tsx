@@ -1,6 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { Form, Icon, Input, Button, message } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { LockOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button, message } from 'antd';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
 import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
 import { useMutation } from '@apollo/client';
@@ -54,7 +57,7 @@ function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
           rules: [{ required: true, message: 'Please input your Password!' }],
         })(
           <Input
-            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="password"
             placeholder="Password"
           />,

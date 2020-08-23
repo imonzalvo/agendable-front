@@ -1,5 +1,8 @@
 import React from 'react';
-import { Form, Input, Icon } from 'antd';
+import { MailOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input } from 'antd';
 import { formatMessage } from 'umi-plugin-locale';
 
 interface EmailInputProps {
@@ -30,7 +33,7 @@ export const EmailInput = ({
       initialValue: initialValue,
     })(
       <Input
-        prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+        prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
         placeholder="Email"
         type="email"
         size={size}

@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { Tag as TagAntd, Icon as IconAntd, Typography } from 'antd';
+import { Tag as TagAntd, Typography } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -64,7 +65,7 @@ export const BusinessContainer = styled.div`
   }
 `;
 
-export const Icon = styled(IconAntd)`
+export const CloseIcon = styled(CloseOutlined)`
   font-size: 20px;
   color: white;
   height: min-content;

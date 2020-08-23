@@ -1,4 +1,5 @@
-import { Icon, Menu, Typography } from 'antd';
+import { GlobalOutlined } from '@ant-design/icons';
+import { Menu, Typography } from 'antd';
 import { formatMessage, getLocale, setLocale } from 'umi-plugin-locale';
 
 import { ClickParam } from 'antd/es/menu';
@@ -38,11 +39,7 @@ const SelectLang: React.FC<SelectLangProps> = props => {
         style={{ paddingRight: 38, color: isAdmin ? 'white' : 'rgba(0, 0, 0, 0.65)' }}
         className={classNames(styles.dropDown, className)}
       >
-        <Icon
-          style={{ paddingRight: 4 }}
-          type="global"
-          title={formatMessage({ id: 'navBar.lang' })}
-        />
+        <GlobalOutlined style={{ paddingRight: 4 }} title={formatMessage({ id: 'navBar.lang' })} />
         <Text style={{ color: isAdmin ? 'white' : 'rgba(0, 0, 0, 0.65)' }}>
           {languageLabels[selectedLang]}
         </Text>

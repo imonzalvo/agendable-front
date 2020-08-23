@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Popover, Card, Avatar, Typography, Drawer, Icon, Button } from 'antd';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Popover, Card, Avatar, Typography, Drawer, Button } from 'antd';
 import { EventWrapperProps } from 'react-big-calendar';
 import moment from 'moment-timezone';
 import { formatMessage } from 'umi-plugin-locale';
@@ -122,7 +123,7 @@ export default function CustomEventWrapper({ children, event, setModal }: Custom
           isMobile
             ? [
                 <div style={{ color: '#ff4d4f' }} onClick={onDelete}>
-                  <Icon type="delete" key="delete" /> {formatMessage({ id: 'actions.delete' })}
+                  <DeleteOutlined key="delete" /> {formatMessage({ id: 'actions.delete' })}
                 </div>,
               ]
             : undefined
@@ -130,7 +131,7 @@ export default function CustomEventWrapper({ children, event, setModal }: Custom
         extra={
           isMobile && (
             <Button type="link" onClick={onOpenEdit}>
-              <Icon type="edit" key="edit" /> {formatMessage({ id: 'actions.edit' })}
+              <EditOutlined key="edit" /> {formatMessage({ id: 'actions.edit' })}
             </Button>
           )
         }

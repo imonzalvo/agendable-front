@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 //   BasicLayoutProps as ProLayoutProps,
 //   Settings,
 // } from '@ant-design/pro-layout';
-import { Button, Layout, Icon, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import { Auth } from 'aws-amplify';
 import { match } from 'react-router-dom';
 

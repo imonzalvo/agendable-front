@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Input, Select, Button } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Select, Button } from 'antd';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
 import { formatMessage } from 'umi-plugin-locale';
 
 import { checkUsername } from '../../utils/lambdaFunctions';

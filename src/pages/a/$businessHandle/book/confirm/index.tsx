@@ -1,5 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Form, Button, Input, Select, Icon, message, Card } from 'antd';
+import { PhoneOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Button, Input, Select, message, Card } from 'antd';
 import router from 'umi/router';
 import { useMutation } from '@apollo/client';
 import humps from 'humps';
@@ -158,7 +161,7 @@ const Confirm = ({ form }) => {
           })(
             <Input
               addonBefore={prefixSelector}
-              prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="Phone number"
               style={{ width: '100%' }}
               size="large"

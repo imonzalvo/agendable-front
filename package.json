@@ -47,7 +47,9 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/pro-layout": "^4.10.2",
+    "@ant-design/compatible": "^1.0.5",
+    "@ant-design/icons": "^4.2.2",
+    "@ant-design/pro-layout": "^6.4.9",
     "@antv/data-set": "^0.10.2",
     "@apollo/client": "^3.1.1",
     "@apollo/link-ws": "^2.0.0-beta.3",
@@ -72,7 +74,7 @@
     "@types/styled-components": "^4.1.20",
     "@types/swiper": "^5.2.0",
     "aigle": "^1.14.1",
-    "antd": "^3.26.18",
+    "antd": "^4.6.0",
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-cache-logger": "^1.1.1",
