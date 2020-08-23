@@ -33,7 +33,7 @@ export default (config: any) => {
   config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [
     {
       fileName: 'css/theme-colors-[contenthash:8].css',
-      matchColors: getAntdSerials('#1890ff'),
+      matchColors: getAntdSerials('#33CC99'),
       changeSelector(selector: string): string {
         switch (selector) {
           case '.ant-calendar-today .ant-calendar-date':

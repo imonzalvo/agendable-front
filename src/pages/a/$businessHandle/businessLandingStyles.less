@@ -1,0 +1,81 @@
+@horizontal-margin: calc(10vw);
+
+.layout {
+  width: 100vw;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  padding: 12px @horizontal-margin;
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.mainRow {
+  margin: 0px @horizontal-margin;
+  height: 100%;
+}
+
+.imageContainer {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image {
+  height: auto;
+  width: 100%;
+  max-height: 100%;
+  max-height: 515px;
+  object-fit: cover;
+}
+
+.ctaContainer {
+  z-index: 2;
+  border-radius: 8px;
+  padding: 20px 8px;
+  padding-left: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.displayName {
+  font-size: calc(12px + 0.5vw) !important;
+  text-transform: uppercase;
+}
+
+.tagline {
+  font-size: calc(18px + 3vw) !important;
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+  line-height: 1 !important;
+}
+
+.description {
+  font-size: calc(12px + 0.45vw) !important;
+  margin: 0 0 calc(2px + 0.4vw) !important;
+}
+
+.ctaButton {
+  font-size: calc(24px + 0.45vw);
+  padding: 0;
+}
+
+.footer {
+  background-color: rgba(255, 255, 255, 0);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 @horizontal-margin;
+  padding: 24px 0;
+  align-items: flex-end;
+}
+
+.footerLink {
+  color: #aaaaaa;
+  font-size: 32px;
+}

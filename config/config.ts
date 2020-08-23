@@ -51,78 +51,11 @@ const plugins: IPlugin[] = [
 
 export default {
   plugins,
-  block: {
-    defaultGitUrl: 'https://github.com/ant-design/pro-blocks',
-  },
   hash: false,
   targets: {
     ie: 11,
   },
   devtool: isAntDesignProPreview ? 'source-map' : false,
-  // routes: [
-  //   {
-  //     path: '/',
-  //     component: '../layouts/BlankLayout',
-  //     routes: [
-  //       {
-  //         path: '/',
-  //         exact: true,
-  //         component: './home',
-  //       },
-  //       {
-  //         path: '/services',
-  //         exact: true,
-  //         component: './services',
-  //       },
-  //       {
-  //         path: '/test-card',
-  //         exact: true,
-  //         component: './testCard',
-  //       },
-  //       {
-  //         path: '/date-time-picker',
-  //         exact: true,
-  //         component: './testDateTimePicker',
-  //       },
-  //       {
-  //         path: '/',
-  //         component: '../layouts/AdminLayout',
-  //         Routes: ['src/pages/Authorized'],
-  //         routes: [
-  //           {
-  //             name: 'exception',
-  //             icon: 'warning',
-  //             path: '/exception',
-  //             routes: [
-  //               {
-  //                 name: '403',
-  //                 path: '/exception/403',
-  //                 component: './exception/403',
-  //               },
-  //               {
-  //                 name: '404',
-  //                 path: '/exception/404',
-  //                 component: './exception/404',
-  //               },
-  //               {
-  //                 name: '500',
-  //                 path: '/exception/500',
-  //                 component: './exception/500',
-  //               },
-  //             ],
-  //           },
-  //           {
-  //             path: '/',
-  //             redirect: '/exception/404',
-  //           },
-  //           {
-  //             component: '404',
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // ],
   routes: [
     {
       path: '/',

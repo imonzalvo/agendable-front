@@ -1,4 +1,5 @@
 export default {
+  'button.booking': 'Agendarse',
   'booking.selectBranch': 'Local',
   'booking.selectService': 'Servicio',
   'booking.selectProfessional': 'Profesional',
