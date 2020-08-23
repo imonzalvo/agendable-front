@@ -41,3 +41,7 @@ export interface OnUpdateBooking_updatedBooking {
 export interface OnUpdateBooking {
   updatedBooking: OnUpdateBooking_updatedBooking;
 }
+
+export interface OnUpdateBookingVariables {
+  id?: string | null;
+}

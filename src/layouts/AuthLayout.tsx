@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Spin } from 'antd';
 
 import { AuthContext } from '.';
 import SignUp from '@/components/AuthFlow';

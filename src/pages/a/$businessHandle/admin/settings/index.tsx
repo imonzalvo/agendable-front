@@ -1,90 +1,167 @@
 import React, { useContext } from 'react';
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Typography, Card, Row, Col, Input, Button, Radio } from 'antd';
-import { useQuery, useSubscription, useApolloClient, QueryResult } from '@apollo/client';
+import { Typography, Form, Row, Col, Input, Button, Result, notification } from 'antd';
+import { useQuery, useMutation } from '@apollo/client';
 import { formatMessage } from 'umi-plugin-locale';
 
 import { BusinessContext } from '@/components/BussinessGetter';
 import Spacer from '@/components/common/Spacer';
-import { EmailInput } from '@/utils/formInput';
-import { GET_BUSINESS_DATA } from './settingsQueries';
+import { GET_BUSINESS_DATA, UPDATE_BUSINESS_DATA } from './settingsQueries';
+import {
+  GetBusinessData as IGetBusinessData,
+  GetBusinessDataVariables as IGetBusinessDataVariables,
+} from './__generated__/GetBusinessData';
+import {
+  UpdateBusinessData as IUpdateBusinessData,
+  UpdateBusinessDataVariables as IUpdateBusinessDataVariables,
+  UpdateBusinessData_updateBusiness,
+} from './__generated__/UpdateBusinessData';
+import FullPageSpinner from '@/components/common/FullPageSpinner';
 
 const { Title, Paragraph } = Typography;
 
-function Settings({ form }) {
+export default function Settings() {
   const { business } = useContext(BusinessContext);
-  const { data, loading } = useQuery(GET_BUSINESS_DATA, {
-    variables: {
-      id: business.businessId,
+  const { data, loading, error } = useQuery<IGetBusinessData, IGetBusinessDataVariables>(
+    GET_BUSINESS_DATA,
+    {
+      variables: {
+        id: business.businessId,
+      },
     },
+  );
+  const [updateBusiness, { loading: updateBusinessLoading }] = useMutation<
+    IUpdateBusinessData,
+    IUpdateBusinessDataVariables
+  >(UPDATE_BUSINESS_DATA, {
+    onError: err =>
+      notification.error({
+        message: 'Ocurrió un error',
+        description: JSON.stringify(err),
+      }),
   });
 
-  const { getFieldDecorator } = form;
+  const onFinish = (values: Partial<UpdateBusinessData_updateBusiness>) => {
+    updateBusiness({
+      variables: { id: business.businessId, ...values },
+    });
+  };
 
-  if (loading) return <div>loading</div>;
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
+  };
+
+  if (loading) return <FullPageSpinner />;
+  if (error || !data?.getBusiness)
+    return (
+      <Result
+        status="500"
+        title="Error"
+        subTitle="Algo salió mal"
+        // TODO: hook buttons up
+        extra={[
+          <Button type="ghost">Volver</Button>,
+          <Button type="primary">Contactar soporte</Button>,
+        ]}
+      />
+    );
 
   return (
-    <div
-      style={{
-        padding: '0 128px',
-      }}
-    >
+    <div>
       <Row>
-        <Col span={12} offset={6}>
+        <Col xs={{ span: 24, offset: 0 }} md={{ span: 16, offset: 4 }} lg={{ span: 12, offset: 6 }}>
           <Title level={2}>Configuración del negocio</Title>
-          {/* <Paragraph type="secondary">
-            Configuración general de tu negocio
-          </Paragraph> */}
           <Spacer height={12} />
-          <Form layout="vertical">
+          <Form
+            layout="vertical"
+            name="settings"
+            initialValues={data.getBusiness}
+            size="large"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
             <Title level={4}>Datos principales</Title>
-            {/* <Form.Item label="Nombre del negocio" getFieldDecorator={getFieldDecorator}>
-              <Input
-                initialValue={business.businessId}
-                placeholder={business.businessName}
-                size="large"
-              />
-            </Form.Item> */}
+            <Form.Item
+              label="Nombre del negocio"
+              name="name"
+              rules={[
+                {
+                  type: 'string',
+                  message: formatMessage({ id: 'message.inputError' }, { input: 'Nombre' }),
+                },
+                {
+                  required: true,
+                  message: formatMessage({ id: 'message.inputMissing' }, { input: 'nombre' }),
+                },
+              ]}
+            >
+              <Input placeholder={business.businessName} />
+            </Form.Item>
 
-            <Form.Item label="Dominio">
-              {getFieldDecorator('handle', {
-                rules: [
-                  {
-                    type: 'string',
-                    message: formatMessage({ id: 'message.inputError' }, { input: 'Email' }),
-                  },
-                  {
-                    required: true,
-                    message: formatMessage({ id: 'message.inputMissing' }, { input: 'email' }),
-                  },
-                ],
-                initialValue: data.getBusiness.handle,
-              })(
-                <Input
-                  placeholder={business.businessName}
-                  size="large"
-                  addonAfter=".agendable.io"
-                />,
-              )}
+            <Form.Item
+              label="Dominio"
+              name="handle"
+              rules={[
+                {
+                  type: 'string',
+                  message: formatMessage({ id: 'message.inputError' }, { input: 'Dominio' }),
+                },
+                {
+                  required: true,
+                  message: formatMessage({ id: 'message.inputMissing' }, { input: 'dominio' }),
+                },
+              ]}
+            >
+              <Paragraph type="secondary">
+                Contacta a nuestro equipo de soporte para cambiar tu dominio
+              </Paragraph>
+              <Input disabled placeholder={data.getBusiness.handle} addonAfter=".agendable.io" />
             </Form.Item>
 
             <Title level={4}>Datos de contacto</Title>
-            <Paragraph type="secondary">
-              Your business name is displayed across many areas including on your online booking
-              profile, sales invoices and messages to clients
-            </Paragraph>
-            <EmailInput
-              initialValue={business.businessId}
-              getFieldDecorator={getFieldDecorator}
-              size="large"
-            />
-            <Form.Item label="Email">
-              <Input type="email" placeholder={business.businessName} size="large" />
+
+            <Form.Item
+              name="email"
+              label="Email"
+              rules={[
+                {
+                  type: 'email',
+                  message: formatMessage({ id: 'message.inputError' }, { input: 'Email' }),
+                },
+                {
+                  required: true,
+                  message: formatMessage({ id: 'message.inputMissing' }, { input: 'email' }),
+                },
+              ]}
+            >
+              <Input placeholder="negocio@email.com" />
             </Form.Item>
 
+            <Form.Item
+              name="phone"
+              label="Teléfono"
+              rules={[
+                {
+                  type: 'string',
+                  message: formatMessage({ id: 'message.inputError' }, { input: 'Teléfono' }),
+                },
+              ]}
+            >
+              <Input placeholder="099 123 456" addonBefore="+598" />
+            </Form.Item>
+
+            <Spacer height={12} />
+
             <Form.Item>
-              <Button type="primary">Submit</Button>
+              <Button
+                type="primary"
+                block
+                size="large"
+                htmlType="submit"
+                loading={updateBusinessLoading}
+              >
+                Guardar cambios
+              </Button>
             </Form.Item>
           </Form>
         </Col>
@@ -92,5 +169,3 @@ function Settings({ form }) {
     </div>
   );
 }
-
-export default Form.create({ name: 'settings' })(Settings);

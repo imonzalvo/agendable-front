@@ -41,3 +41,7 @@ export interface OnDeleteBooking_deletedBooking {
 export interface OnDeleteBooking {
   deletedBooking: OnDeleteBooking_deletedBooking;
 }
+
+export interface OnDeleteBookingVariables {
+  id?: string | null;
+}

@@ -41,3 +41,7 @@ export interface OnCreateBooking_newBooking {
 export interface OnCreateBooking {
   newBooking: OnCreateBooking_newBooking;
 }
+
+export interface OnCreateBookingVariables {
+  id?: string | null;
+}
