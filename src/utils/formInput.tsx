@@ -6,9 +6,15 @@ interface EmailInputProps {
   getFieldDecorator: any;
   initialValue: String;
   label?: Boolean;
+  size?: 'default' | 'large';
 }
 
-export const EmailInput = ({ getFieldDecorator, initialValue, label = true }: EmailInputProps) => (
+export const EmailInput = ({
+  getFieldDecorator,
+  initialValue,
+  label = true,
+  size,
+}: EmailInputProps) => (
   <Form.Item label={label && 'E-mail'}>
     {getFieldDecorator('email', {
       rules: [
@@ -27,6 +33,7 @@ export const EmailInput = ({ getFieldDecorator, initialValue, label = true }: Em
         prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
         placeholder="Email"
         type="email"
+        size={size}
       />,
     )}
   </Form.Item>
