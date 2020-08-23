@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Icon as IconAntd, Typography } from 'antd';
+import { Typography } from 'antd';
+import { ArrowLeftOutlined, CloseOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
@@ -11,7 +12,19 @@ export const Container = styled.div`
   justify-content: space-between;
 `;
 
-export const Icon = styled(IconAntd)<{ hasPreviousStep?: boolean }>`
+export const ArrowLeftIcon = styled(ArrowLeftOutlined)<{ hasPreviousStep?: boolean }>`
+  font-size: 20px;
+  width: 20px;
+  color: white;
+  &:hover {
+    color: #918d8d;
+  }
+  > svg {
+    ${props => props.hasPreviousStep && `display: none`};
+  }
+`;
+
+export const CloseIcon = styled(CloseOutlined)<{ hasPreviousStep?: boolean }>`
   font-size: 20px;
   width: 20px;
   color: white;

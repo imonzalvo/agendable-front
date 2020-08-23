@@ -1,5 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { Form, Card } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Card } from 'antd';
 
 export const CustomCard = styled(Card)`
   .ant-card-body {

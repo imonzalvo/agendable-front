@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Select, Card, DatePicker, Input } from 'antd';
+import { Form } from '@ant-design/compatible';
 import moment, { Moment } from 'moment-timezone';
 import produce from 'immer';
 import { QueryResult } from '@apollo/client';
@@ -102,60 +103,62 @@ export default function BookingDetails({
 
   return (
     <Card
-      style={{ height: '75%', marginBottom: 30 }}
+      style={{ marginBottom: 30 }}
       bodyStyle={{ height: '100%' }}
       title={formatMessage({ id: 'modal.bookingDetails' })}
       type="inner"
     >
-      {isMobile ? (
-        <Input
-          type="date"
-          size="large"
-          value={moment(bookingDate).format('YYYY-MM-DD')}
-          onChange={e => {
-            if (e?.target?.value) {
-              setNativeDatePickerValue(e.target.value);
-            }
-          }}
-          onBlur={() => {
-            setBookingDate(moment(nativeDatePickerValue, 'YYYY-MM-DD'));
-          }}
-          style={{ marginBottom: 20 }}
-        />
-      ) : (
-        <DatePicker
-          value={bookingDate}
-          size="large"
-          onChange={newDate => {
-            if (newDate) {
-              setBookingDate(newDate);
-            }
-          }}
-          format="dddd, LL"
-          allowClear={false}
-          className="heading-datepicker"
-          dropdownClassName="heading-datepicker-dropdown"
-        />
-      )}
-      {bookings.map((booking, i) => (
-        <BookingCard
-          date={bookingDate}
-          servicesResponse={servicesResponse}
-          errors={booking.errors}
-          validateBookings={validateBookings}
-          shouldValidate={shouldValidate}
-          renderEmployees={getEmployees}
-          renderServices={getServices}
-          selectedStartTime={booking.selectedStartTime}
-          selectedServices={booking.selectedServices}
-          selectedEmployee={booking.selectedEmployee}
-          selectedDuration={booking.selectedDuration}
-          onSelectStartTime={(e: string) => onSelectStartTime(e, i)}
-          onServiceChange={(e: string[]) => onServiceChange(e, i)}
-          onEmployeeChange={(e?: string) => onEmployeeChange(e, i)}
-          onSelectDuration={(e: number) => onSelectDuration(e, i)}
-        />
-      ))}
+      <Form layout="vertical">
+        {isMobile ? (
+          <Input
+            type="date"
+            size="large"
+            value={moment(bookingDate).format('YYYY-MM-DD')}
+            onChange={e => {
+              if (e?.target?.value) {
+                setNativeDatePickerValue(e.target.value);
+              }
+            }}
+            onBlur={() => {
+              setBookingDate(moment(nativeDatePickerValue, 'YYYY-MM-DD'));
+            }}
+            style={{ marginBottom: 20 }}
+          />
+        ) : (
+          <DatePicker
+            value={bookingDate}
+            size="large"
+            onChange={newDate => {
+              if (newDate) {
+                setBookingDate(newDate);
+              }
+            }}
+            format="dddd, LL"
+            allowClear={false}
+            className="heading-datepicker"
+            dropdownClassName="heading-datepicker-dropdown"
+          />
+        )}
+        {bookings.map((booking, i) => (
+          <BookingCard
+            date={bookingDate}
+            servicesResponse={servicesResponse}
+            errors={booking.errors}
+            validateBookings={validateBookings}
+            shouldValidate={shouldValidate}
+            renderEmployees={getEmployees}
+            renderServices={getServices}
+            selectedStartTime={booking.selectedStartTime}
+            selectedServices={booking.selectedServices}
+            selectedEmployee={booking.selectedEmployee}
+            selectedDuration={booking.selectedDuration}
+            onSelectStartTime={(e: string) => onSelectStartTime(e, i)}
+            onServiceChange={(e: string[]) => onServiceChange(e, i)}
+            onEmployeeChange={(e?: string) => onEmployeeChange(e, i)}
+            onSelectDuration={(e: number) => onSelectDuration(e, i)}
+          />
+        ))}
+      </Form>
     </Card>
   );
 }

@@ -81,6 +81,11 @@ export default {
               exact: true,
               component: './a/$businessHandle/admin',
             },
+            {
+              path: '/a/:businessHandle/admin/settings',
+              exact: true,
+              component: './a/$businessHandle/admin/settings',
+            },
           ],
         },
         {

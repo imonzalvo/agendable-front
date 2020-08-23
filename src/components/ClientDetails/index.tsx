@@ -1,6 +1,9 @@
 import React from 'react';
-import { Form, Input, Col, Row, Icon, Select, Card } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { MailOutlined, PhoneOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Col, Row, Select, Card } from 'antd';
+import { FormComponentProps } from '@ant-design/compatible/lib/form';
 import { parsePhoneNumberFromString, isValidNumber } from 'libphonenumber-js';
 import { formatMessage } from 'umi-plugin-locale';
 
@@ -31,12 +34,8 @@ function ClientDetailsForm({
   );
 
   return (
-    <Card
-      style={{ height: '75%' }}
-      title={formatMessage({ id: 'modal.clientDetails' })}
-      type="inner"
-    >
-      <Form>
+    <Card title={formatMessage({ id: 'modal.clientDetails' })} type="inner">
+      <Form layout="vertical">
         <Row gutter={32}>
           <Col span={12}>
             {/* GIVEN NAME */}
@@ -99,7 +98,7 @@ function ClientDetailsForm({
               })(
                 <Input
                   addonBefore={prefixSelector}
-                  prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder={formatMessage({ id: 'form.phone' })}
                   style={{ width: '100%' }}
                   size="large"
@@ -124,7 +123,7 @@ function ClientDetailsForm({
                 initialValue: clientEmail,
               })(
                 <Input
-                  prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Email"
                   size="large"
                 />,

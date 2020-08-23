@@ -1,11 +1,18 @@
 import React, { useContext } from 'react';
 import Steps from 'rc-steps';
 import { useSpring, animated } from 'react-spring';
-import styles from './assets/index.less';
+import {
+  ShopOutlined,
+  ProfileOutlined,
+  TeamOutlined,
+  ScheduleOutlined,
+  IdcardOutlined,
+} from '@ant-design/icons';
 
 import { BookingContext } from '@/layouts';
 import { getCurrentStep } from '@/utils/utils';
-import GlobalStyles, { SIcon } from './styles';
+import styles from './assets/index.less';
+import GlobalStyles from './styles';
 
 const { Step } = Steps;
 
@@ -48,11 +55,11 @@ const BookingStepper = () => {
       <GlobalStyles />
       <animated.div className="stepper-container" style={props}>
         <Steps current={activeStep} className={styles['rc-steps']} labelPlacement="vertical">
-          {steps === 5 && <Step icon={<SIcon type="shop" />} />}
-          <Step icon={<SIcon type="profile" />} />
-          <Step icon={<SIcon type="team" />} />
-          <Step icon={<SIcon type="schedule" />} />
-          <Step icon={<SIcon type="idcard" />} />
+          {steps === 5 && <Step icon={<ShopOutlined className="icon" />} />}
+          <Step icon={<ProfileOutlined className="icon" />} />
+          <Step icon={<TeamOutlined className="icon" />} />
+          <Step icon={<ScheduleOutlined className="icon" />} />
+          <Step icon={<IdcardOutlined className="icon" />} />
         </Steps>
       </animated.div>
     </>

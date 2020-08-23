@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { Card, Form, Select, Row, Col } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Card, Select, Row, Col } from 'antd';
 import { Moment } from 'moment';
 import moment from 'moment-timezone';
 import momentDurationFormatSetup from 'moment-duration-format';

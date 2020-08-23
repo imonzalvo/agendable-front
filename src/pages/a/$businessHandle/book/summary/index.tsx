@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Button, Typography, Avatar, Result, Icon as IconAntd } from 'antd';
+import { CheckCircleOutlined } from '@ant-design/icons';
+import { Button, Typography, Avatar, Result } from 'antd';
 import { formatMessage } from 'umi-plugin-locale';
 import moment from 'moment';
 
@@ -10,7 +11,7 @@ import GlobalStyles, {
   SectionTop,
   ServiceItem,
   BusinessContainer,
-  Icon,
+  CloseIcon,
 } from './styles';
 import { BookingContext } from '@/layouts';
 import { BusinessContext } from '@/components/BussinessGetter';
@@ -34,7 +35,7 @@ export default function Success() {
     <>
       <GlobalStyles />
       <SectionTop>
-        <Icon type="close" onClick={() => router.push(getUrl(''))} />
+        <CloseIcon onClick={() => router.push(getUrl(''))} />
         <div style={{ marginBottom: 40, width: '90%', maxWidth: 700 }}>
           {bookData.date && (
             <Title style={{ color: 'white', marginBottom: 8 }}>{`${moment(bookData.date).format(
@@ -44,7 +45,7 @@ export default function Success() {
             )}`}</Title>
           )}
           <Tag>
-            <IconAntd type="check-circle" style={{ paddingRight: 4 }} />
+            <CheckCircleOutlined style={{ paddingRight: 4 }} />
             <Text style={{ color: 'white' }}>{formatMessage({ id: 'booking.confirmed' })}</Text>
           </Tag>
         </div>

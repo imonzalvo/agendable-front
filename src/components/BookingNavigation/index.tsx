@@ -3,7 +3,7 @@ import router from 'umi/router';
 import { useResponsive } from 'react-hooks-responsive';
 
 import { getUrl, getCurrentStep } from '@/utils/utils';
-import { Container, Icon, StepTitle } from './styles';
+import { Container, CloseIcon, ArrowLeftIcon, StepTitle } from './styles';
 
 const getMessage = (step: number, mobile: boolean): string => {
   switch (step) {
@@ -32,15 +32,14 @@ const BookingNavigation = ({ previousStep }) => {
 
   return (
     <Container>
-      <Icon
+      <ArrowLeftIcon
         hasPreviousStep={!previousStep}
-        type="arrow-left"
         onClick={() => router.push(getUrl(`book/${previousStep}`))}
       />
       <StepTitle level={2} isMobile={isMobile}>
         {getMessage(currentStep, isMobile)}
       </StepTitle>
-      <Icon type="close" onClick={() => router.push(getUrl(''))} />
+      <CloseIcon onClick={() => router.push(getUrl(''))} />
     </Container>
   );
 };
