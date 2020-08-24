@@ -1,58 +1,56 @@
-import React, { useContext } from 'react';
-import '@ant-design/compatible/assets/index.css';
-import { Typography, Form, Row, Col, Input, Button, Result, notification } from 'antd';
-import { useQuery, useMutation } from '@apollo/client';
-import { formatMessage } from 'umi-plugin-locale';
+import React, { useContext, useState } from 'react';
+import { Button, Result, PageHeader, List, Avatar, Skeleton, Grid, Drawer } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+import { useQuery } from '@apollo/client';
+import { createGlobalStyle } from 'styled-components';
 
 import { BusinessContext } from '@/components/BussinessGetter';
 import Spacer from '@/components/common/Spacer';
-// import { GET_BUSINESS_DATA, UPDATE_BUSINESS_DATA } from './settingsQueries';
-// import {
-//   GetBusinessData as IGetBusinessData,
-//   GetBusinessDataVariables as IGetBusinessDataVariables,
-// } from './__generated__/GetBusinessData';
-// import {
-//   UpdateBusinessData as IUpdateBusinessData,
-//   UpdateBusinessDataVariables as IUpdateBusinessDataVariables,
-//   UpdateBusinessData_updateBusiness,
-// } from './__generated__/UpdateBusinessData';
+import BranchCRUD from './BranchCRUD';
+import { GET_BRANCHES_DATA } from './branchesQueries';
+import {
+  GetBranchesData as IGetBranchesData,
+  GetBranchesDataVariables as IGetBranchesDataVariables,
+  GetBranchesData_getBusiness_branches,
+} from './__generated__/GetBranchesData';
+
 import FullPageSpinner from '@/components/common/FullPageSpinner';
 
-const { Title, Paragraph } = Typography;
+const { useBreakpoint } = Grid;
 
-export default function Settings() {
+const GlobalStyles = createGlobalStyle`
+  .ant-drawer-bottom .ant-drawer-content-wrapper {
+    width: 90%;
+    max-width: 960px;
+    max-height: 90vh;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    overflow-y: scroll;
+    border-radius: 4px 4px 0 0;
+  }
+`;
+
+export default function Branches() {
   const { business } = useContext(BusinessContext);
-  // const { data, loading, error } = useQuery<IGetBusinessData, IGetBusinessDataVariables>(
-  //   GET_BUSINESS_DATA,
-  //   {
-  //     variables: {
-  //       id: business.businessId,
-  //     },
-  //   },
-  // );
-  // const [updateBusiness, { loading: updateBusinessLoading }] = useMutation<
-  //   IUpdateBusinessData,
-  //   IUpdateBusinessDataVariables
-  // >(UPDATE_BUSINESS_DATA, {
-  //   onError: err =>
-  //     notification.error({
-  //       message: 'Ocurrió un error',
-  //       description: JSON.stringify(err),
-  //     }),
-  // });
+  const { data, loading, error } = useQuery<IGetBranchesData, IGetBranchesDataVariables>(
+    GET_BRANCHES_DATA,
+    {
+      variables: {
+        id: business.businessId,
+      },
+    },
+  );
+  const [branchDrawerOpen, setBranchDrawerOpen] = useState<{
+    branch?: GetBranchesData_getBusiness_branches;
+    action: 'UPDATE' | 'CREATE';
+  } | null>(null);
 
-  // const onFinish = (values: Partial<UpdateBusinessData_updateBusiness>) => {
-  //   updateBusiness({
-  //     variables: { id: business.businessId, ...values },
-  //   });
-  // };
+  const screens = useBreakpoint();
 
-  // const onFinishFailed = errorInfo => {
-  //   console.log('Failed:', errorInfo);
-  // };
+  if (loading) return <FullPageSpinner />;
 
-  // if (loading) return <FullPageSpinner />;
-  if (true)
+  if (error || !data?.getBusiness?.branches) {
     return (
       <Result
         status="500"
@@ -65,103 +63,72 @@ export default function Settings() {
         ]}
       />
     );
+  }
 
   return (
-    <div>
-      <Title level={2}>Configuración del negocio</Title>
-      <Spacer height={12} />
-      <Form
-        layout="vertical"
-        name="settings"
-        // initialValues={data.getBusiness}
-        size="large"
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
-      >
-        <Title level={4}>Datos principales</Title>
-        <Form.Item
-          label="Nombre del negocio"
-          name="name"
-          rules={[
-            {
-              type: 'string',
-              message: formatMessage({ id: 'message.inputError' }, { input: 'Nombre' }),
-            },
-            {
-              required: true,
-              message: formatMessage({ id: 'message.inputMissing' }, { input: 'nombre' }),
-            },
+    <>
+      <div>
+        <PageHeader
+          ghost={false}
+          title="Sucursales"
+          extra={[
+            <Button
+              key="1"
+              type="primary"
+              onClick={() => setBranchDrawerOpen({ branch: undefined, action: 'CREATE' })}
+            >
+              Crear nueva sucursal
+            </Button>,
           ]}
-        >
-          <Input placeholder={business.businessName} />
-        </Form.Item>
-
-        <Form.Item
-          label="Dominio"
-          name="handle"
-          rules={[
-            {
-              type: 'string',
-              message: formatMessage({ id: 'message.inputError' }, { input: 'Dominio' }),
-            },
-            {
-              required: true,
-              message: formatMessage({ id: 'message.inputMissing' }, { input: 'dominio' }),
-            },
-          ]}
-        >
-          <Paragraph type="secondary">
-            Contacta a nuestro equipo de soporte para cambiar tu dominio
-          </Paragraph>
-          <Input disabled placeholder={data.getBusiness.handle} addonAfter=".agendable.io" />
-        </Form.Item>
-
-        <Title level={4}>Datos de contacto</Title>
-
-        <Form.Item
-          name="email"
-          label="Email"
-          rules={[
-            {
-              type: 'email',
-              message: formatMessage({ id: 'message.inputError' }, { input: 'Email' }),
-            },
-            {
-              required: true,
-              message: formatMessage({ id: 'message.inputMissing' }, { input: 'email' }),
-            },
-          ]}
-        >
-          <Input placeholder="negocio@email.com" />
-        </Form.Item>
-
-        <Form.Item
-          name="phone"
-          label="Teléfono"
-          rules={[
-            {
-              type: 'string',
-              message: formatMessage({ id: 'message.inputError' }, { input: 'Teléfono' }),
-            },
-          ]}
-        >
-          <Input placeholder="099 123 456" addonBefore="+598" />
-        </Form.Item>
-
+        />
         <Spacer height={12} />
-
-        <Form.Item>
-          <Button
-            type="primary"
-            block
-            size="large"
-            htmlType="submit"
-            loading={updateBusinessLoading}
-          >
-            Guardar cambios
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+        <List
+          loading={loading}
+          itemLayout={screens.sm ? 'horizontal' : 'vertical'}
+          dataSource={data.getBusiness.branches}
+          renderItem={item => (
+            <List.Item
+              actions={[
+                <Button
+                  onClick={() => setBranchDrawerOpen({ branch: item, action: 'UPDATE' })}
+                  icon={<EditOutlined color="primary" />}
+                >
+                  Editar
+                </Button>,
+              ]}
+            >
+              <Skeleton avatar title={false} active loading={false}>
+                <List.Item.Meta
+                  avatar={<Avatar src={item.image || ''} />}
+                  title={item.name}
+                  description={
+                    <>
+                      <div>{item.description}</div>
+                      <div>{item.address}</div>
+                    </>
+                  }
+                />
+              </Skeleton>
+            </List.Item>
+          )}
+        />
+      </div>
+      <GlobalStyles />
+      <Drawer
+        title={`${branchDrawerOpen?.action === 'CREATE' ? 'Crear' : 'Editar'} sucursal`}
+        placement="bottom"
+        closable
+        onClose={() => setBranchDrawerOpen(null)}
+        visible={!!branchDrawerOpen}
+        key="branchDrawer"
+        height="auto"
+      >
+        <BranchCRUD
+          branch={branchDrawerOpen?.branch}
+          action={branchDrawerOpen?.action}
+          onDone={() => setBranchDrawerOpen(null)}
+        />
+      </Drawer>
+    </>
   );
 }

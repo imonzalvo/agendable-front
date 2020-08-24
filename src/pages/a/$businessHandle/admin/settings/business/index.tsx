@@ -3,6 +3,7 @@ import '@ant-design/compatible/assets/index.css';
 import { Typography, Form, Row, Col, Input, Button, Result, notification } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
 import { formatMessage } from 'umi-plugin-locale';
+import Link from 'umi/link';
 
 import { BusinessContext } from '@/components/BussinessGetter';
 import Spacer from '@/components/common/Spacer';
@@ -77,6 +78,7 @@ export default function Settings() {
         size="large"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        requiredMark="optional"
       >
         <Title level={4}>Datos principales</Title>
         <Form.Item
@@ -117,6 +119,11 @@ export default function Settings() {
         </Form.Item>
 
         <Title level={4}>Datos de contacto</Title>
+        <Paragraph type="secondary">
+          Estos son los datos que usaremos para contactarte desde Agendable. Los datos de contacto
+          que verán tus clientes se agregan en la{' '}
+          <Link to="branches">configuración de sucursales</Link>
+        </Paragraph>
 
         <Form.Item
           name="email"
