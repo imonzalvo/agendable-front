@@ -83,8 +83,20 @@ export default {
             },
             {
               path: '/a/:businessHandle/admin/settings',
-              exact: true,
-              component: './a/$businessHandle/admin/settings',
+              exact: false,
+              component: './a/$businessHandle/admin/settings/_layout.tsx',
+              routes: [
+                {
+                  path: '/a/:businessHandle/admin/settings/business',
+                  exact: true,
+                  component: './a/$businessHandle/admin/settings/business',
+                },
+                {
+                  path: '/a/:businessHandle/admin/settings/branches',
+                  exact: true,
+                  component: './a/$businessHandle/admin/settings/branches',
+                },
+              ],
             },
           ],
         },
