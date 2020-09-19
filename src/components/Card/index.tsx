@@ -39,11 +39,6 @@ const CustomCard = ({
   entity,
 }: CustomCardProps) => {
   const [isSelected, setSelected] = useState(false);
-  const spring = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: { ...config.gentle, tension: 500 },
-  });
 
   const renderDescription = () => (
     <>
@@ -101,7 +96,6 @@ const CustomCard = ({
       cover={image ? <Image alt="header" src={image} /> : null}
       actions={[renderAction()]}
       loading={loading}
-      style={spring}
     >
       <Meta title={<Title level={4}>{title}</Title>} description={renderDescription()} />
     </AnimatedCard>

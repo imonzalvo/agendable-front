@@ -16,11 +16,9 @@ export const ArrowLeftIcon = styled(ArrowLeftOutlined)<{ hasPreviousStep?: boole
   font-size: 20px;
   width: 20px;
   color: white;
+  ${props => props.hasPreviousStep && `visibility: hidden`};
   &:hover {
     color: #918d8d;
-  }
-  > svg {
-    ${props => props.hasPreviousStep && `display: none`};
   }
 `;
 
