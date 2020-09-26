@@ -21,6 +21,15 @@ export const DayContainer = styled(Radio.Button)<DayContainerProps>`
   background-color: ${p => (p.isToday ? '#eafff8 !important' : '#fff')};
 `;
 
+export const ToolbarContainer = styled.div<{ isDisplayed: boolean; isCollapsed: boolean }>`
+  position: fixed;
+  z-index: 20;
+  top: 64px;
+  left: ${props => (props.isDisplayed ? (props.isCollapsed ? 90 : 210) : 20)}px;
+  right: 20px;
+  transition: all 140ms ${props => (props.isCollapsed ? 'ease-in' : 'ease-out')};
+`;
+
 export default createGlobalStyle`
   .SingleDatePicker_picker {
     z-index: 10

@@ -21,7 +21,9 @@ export default {
   ...actions,
   ...modal,
   ...dates,
-  'notifications.newBooking': 'Nueva reserva',
-  'notifications.updatedBooking': 'Reserva actualizada',
-  'notifications.deletedBooking': 'Reserva eliminada',
+  'notifications.newBooking': 'New booking',
+  'notifications.updatedBooking': 'Booking updated',
+  'notifications.deletedBooking': 'Booking deleted',
+  'navBar.home': 'Calendar',
+  'navBar.settings': 'Settings',
 };

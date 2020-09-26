@@ -1,20 +1,29 @@
-import React, { useContext, useState } from 'react';
-// import ProLayout, {
-//   MenuDataItem,
-//   BasicLayoutProps as ProLayoutProps,
-//   Settings,
-// } from '@ant-design/pro-layout';
+import React, { useContext, useState, createContext } from 'react';
+import ProLayout, {
+  MenuDataItem,
+  BasicLayoutProps as ProLayoutProps,
+  Settings,
+} from '@ant-design/pro-layout';
 import { Button, Layout, Menu } from 'antd';
 import { Auth } from 'aws-amplify';
-import { match } from 'react-router-dom';
+import { match, useHistory, useLocation } from 'react-router-dom';
+import { useResponsive } from 'react-hooks-responsive';
+import { formatMessage } from 'umi-plugin-locale';
 
-import { isAntDesignPro } from '@/utils/utils';
+import { isAntDesignPro, getUrl } from '@/utils/utils';
 import AuthLayout from '@/layouts/AuthLayout';
 import { AuthContext } from '@/layouts';
 import { BusinessContext } from '@/components/BussinessGetter';
 import SelectLang from '@/components/SelectLang';
+import { SettingOutlined, CalendarOutlined } from '@ant-design/icons';
+import { AnimatedLayout, ButtonFooter } from './styles';
 
-const { Content, Header, Sider } = Layout;
+const { Content, Header, Sider, Footer } = Layout;
+
+export const SiderContext = createContext({
+  isCollapsed: true,
+  isDisplayed: false,
+});
 
 export interface AdminLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -52,8 +61,16 @@ const footerRender: AdminLayoutProps['footerRender'] = (_, defaultDom) => {
 const AdminLayout = (props: AdminLayoutProps) => {
   const { setAuthenticated } = useContext(AuthContext);
   const { business } = useContext(BusinessContext);
+  const history = useHistory();
+  const location = useLocation();
   const [isCollapsed, setCollapsed] = useState(true);
   const { children, settings } = props;
+  const { screenIsAtLeast } = useResponsive({
+    xs: 0,
+    sm: 480,
+    md: 576,
+    lg: 768,
+  });
 
   const handleSignOut = () => {
     Auth.signOut().finally(() => {
@@ -61,53 +78,118 @@ const AdminLayout = (props: AdminLayoutProps) => {
     });
   };
 
-  return (
-    <Layout>
-      {/* <Sider
+  const getTab = () => {
+    if (location.pathname.includes('settings')) {
+      return ['2'];
+    }
+    return ['1'];
+  };
+
+  const displaySider = screenIsAtLeast('lg');
+
+  const renderSider = () => {
+    return (
+      <Sider
         collapsible
-        trigger={null}
         collapsed={isCollapsed}
+        onCollapse={value => setCollapsed(value)}
         style={{
           overflow: 'auto',
           height: '100vh',
           position: 'fixed',
           left: 0,
-          zIndex: 100,
+          zIndex: 22,
         }}
       >
-        <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1">
-            <Icon type="user" />
-            <span>nav 1</span>
+        <div
+          className="logo"
+          style={{
+            height: 64,
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          Logo
+        </div>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={getTab()}>
+          <Menu.Item
+            key="1"
+            style={{ marginTop: 0 }}
+            icon={<CalendarOutlined />}
+            onClick={() => history.push(getUrl('admin'))}
+          >
+            {formatMessage({ id: 'navBar.home' })}
           </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="video-camera" />
-            <span>nav 2</span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="upload" />
-            <span>nav 3</span>
+          <Menu.Item
+            key="2"
+            icon={<SettingOutlined />}
+            onClick={() => history.push(getUrl('admin/settings/business'))}
+          >
+            {formatMessage({ id: 'navBar.settings' })}
           </Menu.Item>
         </Menu>
-      </Sider> */}
-      <Layout>
-        <Header style={{ position: 'fixed', zIndex: 100, width: '100%' }}>
-          {/* <Icon
-            // className="trigger"
-            type={isCollapsed ? 'menu-unfold' : 'menu-fold'}
-            onClick={() => setCollapsed(!isCollapsed)}
-            style={{
-              fontSize: 18,
-              cursor: 'pointer',
-              transition: 'color 0.3s',
-              color: '#fff',
-            }}
-          /> */}
+      </Sider>
+    );
+  };
+
+  const renderFooter = () => {
+    return (
+      <Footer
+        style={{
+          position: 'fixed',
+          display: 'flex',
+          bottom: 0,
+          width: '100%',
+          zIndex: 30,
+          backgroundColor: '#001529',
+          height: 56,
+          padding: 0,
+        }}
+      >
+        <ButtonFooter
+          isSelected={getTab().includes('1')}
+          onClick={() => history.push(getUrl('admin'))}
+        >
+          <CalendarOutlined />
+          {formatMessage({ id: 'navBar.home' })}
+        </ButtonFooter>
+        <ButtonFooter
+          isSelected={getTab().includes('2')}
+          onClick={() => history.push(getUrl('admin/settings/business'))}
+        >
+          <SettingOutlined />
+          {formatMessage({ id: 'navBar.settings' })}
+        </ButtonFooter>
+      </Footer>
+    );
+  };
+
+  return (
+    <Layout>
+      {displaySider && renderSider()}
+      <AnimatedLayout className="site-layout" isCollapsed={isCollapsed} isDisplayed={displaySider}>
+        <Header
+          className="site-layout-background"
+          style={{ position: 'fixed', zIndex: 100, width: '100%' }}
+        >
           <SelectLang isAdmin />
         </Header>
-        <Content style={{ paddingTop: 64, paddingLeft: 0, margin: 20 }}>{children}</Content>
-      </Layout>
+        <Content
+          style={{
+            paddingTop: 64,
+            paddingLeft: 0,
+            margin: 20,
+            paddingBottom: displaySider ? 0 : 56,
+          }}
+        >
+          <SiderContext.Provider value={{ isCollapsed, isDisplayed: displaySider }}>
+            {children}
+          </SiderContext.Provider>
+        </Content>
+      </AnimatedLayout>
+      {!displaySider && renderFooter()}
     </Layout>
   );
 };
