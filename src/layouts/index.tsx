@@ -88,7 +88,7 @@ const Layout = ({ children, location }: LayoutProps) => {
   const httpLink = createHttpLink({ uri: url });
 
   const wsLink = new WebSocketLink({
-    uri: 'ws://agendable.link',
+    uri: 'wss://agendable.link',
     options: {
       reconnect: true,
     },
