@@ -4,10 +4,10 @@ import { formatMessage } from 'umi-plugin-locale';
 import { useSpring, animated, config } from 'react-spring';
 
 import DurationIcon from '@/assets/duration.svg';
-import { Image, ServiceDetail, Card, Svg, PriceText } from './styles';
+import { Image, ServiceDetail, Card, Svg, PriceText, CardTitle } from './styles';
 
 const { Meta } = CardAntd;
-const { Title, Paragraph, Text } = Typography;
+const { Paragraph, Text } = Typography;
 
 const AnimatedCard = animated(Card);
 
@@ -96,8 +96,9 @@ const CustomCard = ({
       cover={image ? <Image alt="header" src={image} /> : null}
       actions={[renderAction()]}
       loading={loading}
+      size="small"
     >
-      <Meta title={<Title level={4}>{title}</Title>} description={renderDescription()} />
+      <Meta title={<CardTitle level={4}>{title}</CardTitle>} description={renderDescription()} />
     </AnimatedCard>
   );
 };

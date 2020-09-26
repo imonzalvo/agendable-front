@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Card as CardAntd, Typography } from 'antd';
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
 export const Image = styled.img`
   height: 230px;
@@ -33,4 +33,9 @@ export const Svg = styled.img`
 
 export const PriceText = styled(Text)`
   font-size: 18px;
+`;
+
+export const CardTitle = styled(Title)`
+  font-size: 17px !important;
+  margin-bottom: 0px !important;
 `;
