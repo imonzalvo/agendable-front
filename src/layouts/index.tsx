@@ -83,12 +83,12 @@ const Layout = ({ children, location }: LayoutProps) => {
   const [steps, setSteps] = useState(5);
   const subdomain = useSubdomain();
 
-  const url = 'http://ec2-54-245-28-77.us-west-2.compute.amazonaws.com:8080';
+  const url = 'https://agendable.link';
 
   const httpLink = createHttpLink({ uri: url });
 
   const wsLink = new WebSocketLink({
-    uri: 'ws://ec2-54-245-28-77.us-west-2.compute.amazonaws.com:8080/graphql',
+    uri: 'ws://agendable.link',
     options: {
       reconnect: true,
     },

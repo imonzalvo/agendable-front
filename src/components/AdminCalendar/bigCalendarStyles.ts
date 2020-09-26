@@ -609,8 +609,7 @@ button.rbc-input::-moz-focus-inner {
   flex-direction: row;
   position: fixed;
   z-index: 20;
-  left: 21px;
-  right: 20px;
+  width: 100%;
   border-top: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }

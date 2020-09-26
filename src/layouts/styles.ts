@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import { Layout, Button } from 'antd';
 
 export const NavigationContainer = styled.div`
   margin-bottom: 48px;
@@ -25,6 +26,31 @@ export const CardContainer = styled.div`
   max-width: 352px;
   @media (max-width: 768px) {
     margin-right: 0px;
+  }
+`;
+
+export const AnimatedLayout = styled(Layout)<{ isCollapsed: boolean; isDisplayed: boolean }>`
+  margin-left: ${props => (props.isDisplayed ? (props.isCollapsed ? 80 : 200) : 0)}px;
+  transition: all ${props => (props.isCollapsed ? '60ms ease-in' : ' 375ms ease-out')};
+`;
+
+export const ButtonFooter = styled(Button)<{ isSelected: boolean }>`
+  width: 50%;
+  height: 100%;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #001529 !important;
+  color: ${props => (props.isSelected ? '#59d9aa' : 'white')};
+
+  > span {
+    margin: 0 !important;
+  }
+
+  > span > svg {
+    font-size: 16px;
   }
 `;
 
