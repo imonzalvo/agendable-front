@@ -244,11 +244,28 @@ export default function AdminCalendar({
         );
         if (employeeAvOnWeekday) {
           // create from and to moments that have the same dayOfYear as given dateTime but with the time of the employeeAvailabiltyItem
+
+          // turns 20:00 into 2000 to compare easily
+          const [fromHour, fromMinute] = employeeAvOnWeekday.from.split(':');
+          const [toHour, toMinute] = employeeAvOnWeekday.to.split(':');
+
+          const fromVal = Number(`${fromHour}${fromMinute}`);
+          const toVal = Number(`${toHour}${toMinute}`);
+
           const from = moment
-            .utc(employeeAvOnWeekday.from, 'H:mm')
-            .dayOfYear(dateTimeMom.dayOfYear());
-          const to = moment.utc(employeeAvOnWeekday.to, 'H:mm').dayOfYear(dateTimeMom.dayOfYear());
-          return dateTimeMom.isBetween(from, to);
+            .utc(dateTimeMom)
+            .hour(Number(fromHour))
+            .minute(Number(fromMinute));
+          const to = moment
+            .utc(dateTimeMom)
+            .hour(Number(toHour))
+            .minute(Number(toMinute));
+
+          if (fromVal > toVal) {
+            to.add(1, 'day');
+          }
+
+          return dateTimeMom.isBetween(from, to, 'minutes', '[]');
         }
       }
     }

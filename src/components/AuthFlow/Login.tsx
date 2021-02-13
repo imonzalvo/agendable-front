@@ -29,8 +29,8 @@ function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
       localStorage.setItem('token', data.login.token);
       setAuthenticated(true);
     },
-    onError: () => {
-      message.error(err.message);
+    onError: err => {
+      message.error(err?.message);
       setAuthenticated(false);
     },
   });
