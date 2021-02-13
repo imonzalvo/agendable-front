@@ -1,5 +1,10 @@
 import React, { useContext } from 'react';
-import { CarryOutOutlined, FacebookOutlined, InstagramOutlined } from '@ant-design/icons';
+import {
+  CarryOutOutlined,
+  FacebookOutlined,
+  InstagramOutlined,
+  GlobalOutlined,
+} from '@ant-design/icons';
 import { Row, Col, Typography, Button, Card, Layout, Menu } from 'antd';
 import router from 'umi/router';
 import { formatMessage } from 'umi-plugin-locale';
@@ -18,16 +23,18 @@ const businessMock = {
     imageGallery: [
       {
         id: 'asdf',
-        src: 'https://i.ytimg.com/vi/dsRzG_xVPmE/maxresdefault.jpg',
+        src: 'https://www.academiadechoferesdelparque.com.uy/img/unidades3.jpg',
       },
     ],
-    displayName: "Kevo's Barbershop",
-    cta: 'Para los mas facheros',
-    description: 'Crack, no podes estar fachero sin un buen fade. Agendate ya.',
+    displayName: 'Academia de Choferes del Parque',
+    cta: 'Aprendé a manejar con los que más saben',
+    description:
+      'En Academia De Chóferes Del Parque funcionamos desde el año 1989 en forma ininterrumpida habiendo formado más de 10.000 conductores',
   },
-  instagramURL: 'sdfasdf',
-  facebookURL: 'asdfasdf',
-  websiteURL: 'asdfasdf',
+  logo: 'https://www.academiadechoferesdelparque.com.uy/img/logo.png',
+  instagramURL: 'https://instagram.com/academiadelparque',
+  facebookURL: 'https://facebook.com/AcademiaDeChoferesDelParque/',
+  websiteURL: 'https://www.academiadechoferesdelparque.com.uy/',
 };
 
 // export interface BusinessHomeProps extends BusinessLayoutProps {}
@@ -40,17 +47,27 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
-        <Typography.Title
-          level={4}
-          style={{
-            height: 31,
-            margin: '16px 24px 16px 0',
-            float: 'left',
-            color: '#000',
-          }}
-        >
-          {businessName}
-        </Typography.Title>
+        {businessMock.logo ? (
+          <img
+            src={businessMock.logo}
+            style={{
+              width: 200,
+              objectFit: 'contain',
+            }}
+          />
+        ) : (
+          <Typography.Title
+            level={4}
+            style={{
+              height: 31,
+              margin: '16px 24px 16px 0',
+              float: 'left',
+              color: '#000',
+            }}
+          >
+            {businessName}
+          </Typography.Title>
+        )}
 
         <Menu
           theme="light"
@@ -127,17 +144,28 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
           />
         </div>
         <div>
+          {!!businessMock.websiteURL && (
+            <a
+              href={businessMock.websiteURL}
+              className={styles.footerLink}
+              style={{ marginRight: 12 }}
+              target="_blank"
+            >
+              <GlobalOutlined />
+            </a>
+          )}
           {!!businessMock.instagramURL && (
             <a
               href={businessMock.instagramURL}
               className={styles.footerLink}
               style={{ marginRight: 12 }}
+              target="_blank"
             >
               <InstagramOutlined />
             </a>
           )}
           {!!businessMock.facebookURL && (
-            <a href={businessMock.facebookURL} className={styles.footerLink}>
+            <a href={businessMock.facebookURL} className={styles.footerLink} target="_blank">
               <FacebookOutlined />
             </a>
           )}

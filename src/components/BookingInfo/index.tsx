@@ -8,6 +8,7 @@ import { Section, Price } from './styles';
 import ServiceDetail from './ServiceDetail';
 import { BusinessContext } from '../BussinessGetter';
 import { getCurrentStep } from '@/utils/utils';
+import mockAvatar from './mockAvatar.png';
 
 const { Meta } = Card;
 const { Title, Text } = Typography;
@@ -64,12 +65,7 @@ const BookingInfo = () => {
       }}
     >
       <Meta
-        avatar={
-          <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            style={{ width: 40, height: 40 }}
-          />
-        }
+        avatar={<Avatar src={mockAvatar} style={{ width: 40, height: 40 }} />}
         title={business.businessName}
         description={(currentStep > 0 && bookData.branch?.address) || ''}
       />

@@ -10,7 +10,7 @@ interface ServiceDetailProps {
   name: string;
   duration?: number;
   price: number;
-  professional?: string;
+  professional?: string | false;
 }
 
 const { Text } = Typography;
