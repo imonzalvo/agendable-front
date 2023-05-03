@@ -43,6 +43,7 @@ export default function BusinessGetter({
   const pathnameHandle = parsePathnameHandle(pathname);
 
   useEffect(() => {
+    console.log('name', subdomain, pathnameHandle);
     const businessHandle = subdomain || pathnameHandle;
     if (businessHandle) {
       if (
@@ -66,6 +67,7 @@ export default function BusinessGetter({
 
   // TODO: Refactor this method using optional chaining.
   useEffect(() => {
+    console.log('data', data);
     if (data) {
       const businessData: GetBusinessByHandle_businessByHandle_items = get(
         data,

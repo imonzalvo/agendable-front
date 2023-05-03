@@ -12,6 +12,7 @@ interface ServiceProps {
 }
 
 export default function SelectService() {
+  console.log('acaaaa');
   const { bookData, setBookData } = useContext(BookingContext);
 
   const selectService = ({ id, duration, price, name }: ServiceProps) => {

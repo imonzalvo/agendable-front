@@ -40,6 +40,7 @@ const BookingInfo = () => {
 
   const renderService = () => (
     <Section>
+      {console.log('book', bookData)}
       {bookData.service.name && currentStep > 1 ? (
         <ServiceDetail
           name={bookData.service.name}

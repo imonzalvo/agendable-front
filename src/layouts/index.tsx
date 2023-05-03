@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { setContext } from '@apollo/client/link/context';
-import { WebSocketLink } from '@apollo/client/link/ws';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
 import RouterTypes from 'umi/routerTypes';
 import { ConfigProvider } from 'antd';
 import bugsnag from '@bugsnag/js';
@@ -83,16 +84,28 @@ const Layout = ({ children, location }: LayoutProps) => {
   const [steps, setSteps] = useState(5);
   const subdomain = useSubdomain();
 
-  const url = 'https://agendable.link';
+  const url = 'https://agendable-dev.onrender.com/graphql';
 
   const httpLink = createHttpLink({ uri: url });
 
-  const wsLink = new WebSocketLink({
-    uri: 'wss://agendable.link',
-    options: {
-      reconnect: true,
-    },
-  });
+  // const wsLink = new WebSocketLink({
+  //   uri: 'ws://localhost:4000/graphql',
+  //   options: {
+  //     reconnect: true,
+  //   },
+  // });
+
+  // const wsLink = new WebSocketLink(
+  //   new SubscriptionClient('ws://localhost:4000/graphql', {
+  //     reconnect: true,
+  //   }),
+  // );
+
+  const wsLink = new GraphQLWsLink(
+    createClient({
+      url: 'wss://agendable-dev.onrender.com/graphql',
+    }),
+  );
 
   const splitLink = split(
     ({ query }) => {
@@ -122,6 +135,7 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const locale = getLocale() === 'es-ES' ? es : en;
 
+  console.log('client', client, !client);
   return (
     <ErrorBoundary>
       {!client ? (
@@ -130,6 +144,7 @@ const Layout = ({ children, location }: LayoutProps) => {
         <ApolloProvider client={client}>
           <ConfigProvider locale={locale}>
             <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
+              {console.log('hola', bookData, steps)}
               <BookingContext.Provider
                 value={{
                   bookData,

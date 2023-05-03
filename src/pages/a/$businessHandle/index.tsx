@@ -23,7 +23,8 @@ const businessMock = {
     imageGallery: [
       {
         id: 'asdf',
-        src: 'https://www.academiadechoferesdelparque.com.uy/img/unidades3.jpg',
+        src:
+          'https://scontent.fmvd1-1.fna.fbcdn.net/v/t1.6435-9/64595531_2556091514409261_4583925518784528384_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZjqDZj5ZrwEAX-2qPn1&_nc_ht=scontent.fmvd1-1.fna&oh=00_AfB6BvG49Nerb90o6_OfyyW8BDpHWc4CbSgHUd4KUvUw4w&oe=64793FE3',
       },
     ],
     displayName: 'Academia de Choferes del Parque',
@@ -31,7 +32,7 @@ const businessMock = {
     description:
       'En Academia De Chóferes Del Parque funcionamos desde el año 1989 en forma ininterrumpida habiendo formado más de 10.000 conductores',
   },
-  logo: 'https://www.academiadechoferesdelparque.com.uy/img/logo.png',
+  logo: 'https://www.academiadechoferesdelparque.com.uy/images/academialogo.svg',
   instagramURL: 'https://instagram.com/academiadelparque',
   facebookURL: 'https://facebook.com/AcademiaDeChoferesDelParque/',
   websiteURL: 'https://www.academiadechoferesdelparque.com.uy/',

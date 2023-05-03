@@ -27,6 +27,7 @@ const renderSkeleton = () =>
 
 const ServiceList = ({ branchId, selectService }: ServiceListProps) => {
   const response = useQuery(GET_SERVICES_DATA, { variables: { id: branchId } });
+  console.log('response service', response);
   if (response.loading) return renderSkeleton();
   if (response.error) return <div>Error</div>;
   const { services } = response.data.getBranch;
