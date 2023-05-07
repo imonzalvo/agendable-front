@@ -46,7 +46,7 @@ export default function EditBookingModal({
   branchId,
   modalParams,
 }: EditBookingModalProps) {
-  console.log(modalParams, modalParams)
+  console.log(modalParams, modalParams);
   const defaultBookingState = {
     id: modalParams?.bookingId,
     selectedServices: modalParams?.services.map(service => service.id),
@@ -204,6 +204,7 @@ export default function EditBookingModal({
                               try {
                                 await editBooking({
                                   variables: {
+                                    id: booking.id,
                                     start: booking.selectedStartTime,
                                     end: moment(booking.selectedStartTime)
                                       .add(booking.selectedDuration, 's')

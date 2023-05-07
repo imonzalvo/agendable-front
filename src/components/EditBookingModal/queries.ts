@@ -21,7 +21,7 @@ export const GetBooking = gql`
 
 export const UPDATE_BOOKING = gql`
   mutation UpdateBooking(
-    $id: ID
+    $id: ID!
     $start: String
     $end: String
     $status: String
