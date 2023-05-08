@@ -34,7 +34,7 @@ function SignUp(): JSX.Element {
       );
     }
     if (currentStep === 2) {
-      return <SignUp3rdStep setCurrentStep={setCurrentStep} username={username} />;
+      return <SignUp3rdStep setCurrentStep={setCurrentStep} email={email} />;
     }
     return null;
   };

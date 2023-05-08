@@ -3,7 +3,6 @@ import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Button, message } from 'antd';
 import { FormComponentProps } from '@ant-design/compatible/lib/form';
-import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
 import { useMutation } from '@apollo/client';
 

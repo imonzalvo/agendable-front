@@ -5,7 +5,6 @@ import ProLayout, {
   Settings,
 } from '@ant-design/pro-layout';
 import { Button, Layout, Menu } from 'antd';
-import { Auth } from 'aws-amplify';
 import { match, useHistory, useLocation } from 'react-router-dom';
 import { useResponsive } from 'react-hooks-responsive';
 import { formatMessage } from 'umi-plugin-locale';
@@ -71,12 +70,6 @@ const AdminLayout = (props: AdminLayoutProps) => {
     md: 576,
     lg: 768,
   });
-
-  const handleSignOut = () => {
-    Auth.signOut().finally(() => {
-      setAuthenticated(false);
-    });
-  };
 
   const getTab = () => {
     if (location.pathname.includes('settings')) {

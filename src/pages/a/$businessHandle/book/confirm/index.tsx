@@ -5,9 +5,7 @@ import '@ant-design/compatible/assets/index.css';
 import { Button, Input, Select, message, Card } from 'antd';
 import router from 'umi/router';
 import { useMutation } from '@apollo/client';
-import humps from 'humps';
 import moment from 'moment-timezone';
-import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
 import { animateScroll as scroll } from 'react-scroll';
 
@@ -18,18 +16,6 @@ import { getUrl } from '@/utils/utils';
 import { EmailInput } from '@/utils/formInput';
 
 moment.locale('es');
-
-interface AttrInterface {
-  attributes: {
-    address: String;
-    email: String;
-    email_verified: Boolean;
-    family_name: String;
-    given_name: String;
-    name: String;
-    sub: String;
-  };
-}
 
 interface UserInterface {
   address: String;
@@ -56,12 +42,6 @@ const Confirm = ({ form }) => {
   useEffect(() => {
     scroll.scrollTo(0);
   }, []);
-
-  Auth.currentAuthenticatedUser()
-    .then(({ attributes }: AttrInterface) => {
-      if (!user) setUser(humps.camelizeKeys(attributes));
-    })
-    .catch(() => {});
 
   const getBookingEnd = () => moment(bookData.date).add(bookData.service.duration, 'minutes');
 

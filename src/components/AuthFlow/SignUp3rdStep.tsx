@@ -3,66 +3,66 @@ import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Button, message } from 'antd';
 import { FormComponentProps } from '@ant-design/compatible/lib/form';
-import { Auth } from 'aws-amplify';
 import { formatMessage } from 'umi-plugin-locale';
 
 import { AuthContext } from '@/layouts';
 import { FormButtonsContainer } from './styles';
+import { useMutation } from '@apollo/client';
+import { CONFIRM_USER } from './queries';
 
 interface ISignUpFormProps extends FormComponentProps {
-  username: string;
+  email: string;
   setCurrentStep: (step: number) => void;
 }
 
-function SignUp3rdStep({ form, username }: ISignUpFormProps): JSX.Element {
+function SignUp3rdStep({ form, email }: ISignUpFormProps): JSX.Element {
   const { setAuthenticated } = useContext(AuthContext);
-  const [isLoading, setLoading] = useState<'CONFIRM' | 'RESEND' | null>(null);
+
+  const [confirmUserMutate, { data, loading: isLoading }] = useMutation(CONFIRM_USER, {
+    onCompleted: data => {
+      message.success('Successfully Signed In!');
+      console.log('data', data.confirmUser);
+      localStorage.setItem('token', data.token);
+      setAuthenticated(true);
+    },
+    onError: err => {
+      message.error(err?.message);
+      setAuthenticated(false);
+    },
+  });
 
   const handleConfirm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    form.validateFields((error, { confirmationCode }) => {
+    form.validateFields((error, { verifyToken }) => {
       if (!error) {
-        setLoading('CONFIRM');
-        Auth.confirmSignUp(username, confirmationCode)
-          .then(() => {
-            message.success('Successfully Signed Up');
-            setAuthenticated(true);
-          })
-          .catch(err => {
-            // TODO: send error to sentry
-            // TODO: Format error msg
-            message.error(JSON.stringify(err));
-          })
-          .finally(() => setLoading(null));
+        if (!error) {
+          confirmUserMutate({
+            variables: {
+              email,
+              verifyToken,
+            },
+          });
+        }
       }
     });
   };
 
-  const handleResendCode = () => {
-    setLoading('RESEND');
-    Auth.resendSignUp(username)
-      .then(() => message.success(formatMessage({ id: 'message.codeSent' })))
-      .catch(err => {
-        // TODO: send error to sentry
-        // TODO: Format error msg
-        message.error(JSON.stringify(err));
-      })
-      .finally(() => setLoading(null));
-  };
+  // const handleResendCode = () => {
+  // };
 
   const { getFieldDecorator } = form;
 
   return (
     <Form onSubmit={handleConfirm}>
       {/* CONFIRMATION CODE */}
-      <Form.Item label={formatMessage({ id: 'form.confirmationCode' })}>
-        {getFieldDecorator('confirmationCode', {
+      <Form.Item label={formatMessage({ id: 'form.verifyToken' })}>
+        {getFieldDecorator('verifyToken', {
           rules: [
             {
               required: true,
               message: formatMessage(
                 { id: 'message.inputMissing' },
-                { input: formatMessage({ id: 'form.confirmationCode' }).toLowerCase() },
+                { input: formatMessage({ id: 'form.verifyToken' }).toLowerCase() },
               ),
               whitespace: false,
             },
@@ -71,14 +71,15 @@ function SignUp3rdStep({ form, username }: ISignUpFormProps): JSX.Element {
       </Form.Item>
       <FormButtonsContainer>
         {/* RESEND CODE */}
+        {/* TODO: Not implemented in backend yet */}
         <Form.Item>
-          <Button type="default" onClick={handleResendCode} loading={isLoading === 'RESEND'}>
+          <Button type="default" onClick={() => {}} loading={false}>
             {formatMessage({ id: 'button.resendCode' })}
           </Button>
         </Form.Item>
         {/* SUBMIT */}
         <Form.Item style={{ marginLeft: 10 }}>
-          <Button type="primary" htmlType="submit" loading={isLoading === 'CONFIRM'}>
+          <Button type="primary" htmlType="submit" loading={isLoading}>
             {formatMessage({ id: 'button.confirm' })}
           </Button>
         </Form.Item>

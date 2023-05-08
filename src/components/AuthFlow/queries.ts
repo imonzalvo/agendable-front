@@ -37,3 +37,14 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const CONFIRM_USER = gql`
+  mutation CONFIRM_USER($email: String, $verifyToken: String) {
+    confirmUser(email: $email, verifyToken: $verifyToken) {
+      token
+      user {
+        email
+      }
+    }
+  }
+`;
