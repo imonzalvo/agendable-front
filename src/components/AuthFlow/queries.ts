@@ -48,3 +48,32 @@ export const CONFIRM_USER = gql`
     }
   }
 `;
+
+// TODO: Move it
+export const SET_UP_BUSINESS = gql`
+  mutation SetUpBusiness(
+    $name: String!
+    $email: String!
+    $phone: String!
+    $handle: String!
+    $address: String!
+    $description: String!
+  ) {
+    setUpBusiness(
+      name: $name
+      email: $email
+      phone: $phone
+      handle: $handle
+      address: $address
+      description: $description
+    ) {
+      id
+      categories {
+        id
+      }
+      branches {
+        id
+      }
+    }
+  }
+`;
