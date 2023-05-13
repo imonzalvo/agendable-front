@@ -58,6 +58,11 @@ export default {
   devtool: isAntDesignProPreview ? 'source-map' : false,
   routes: [
     {
+      path: '/signup',
+      exact: true,
+      component: './signup',
+    },
+    {
       path: '/',
       component: '../layouts',
       routes: [
@@ -65,6 +70,11 @@ export default {
           path: '/404',
           exact: true,
           component: './404',
+        },
+        {
+          path: '/signup',
+          exact: true,
+          component: './signup',
         },
         {
           path: '/a/:businessHandle',
