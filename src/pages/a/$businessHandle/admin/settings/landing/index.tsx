@@ -81,6 +81,11 @@ export default function Settings() {
         requiredMark="optional"
       >
         <Title level={4}>Datos principales</Title>
+        <Paragraph type="secondary">
+          Esta es la informacion que van a ver tus clientes cuando entren a tu agenda web. Para ver
+          como se muestran tus datos
+          <a href={`https://agendable.io/a/${data.getBusiness?.handle}`}> hace click aca</a>
+        </Paragraph>
         <Form.Item
           label="Nombre a mostrar"
           name="displayName"

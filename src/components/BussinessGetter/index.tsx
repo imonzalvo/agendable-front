@@ -90,6 +90,9 @@ export default function BusinessGetter({
             JSON.stringify({
               businessId: businessData.id,
               businessName: businessData.name,
+              website: businessData.website,
+              instagramUrl: businessData.instagramUrl,
+              facebookUrl: businessData.facebookUrl,
               branches,
               landing,
             }),

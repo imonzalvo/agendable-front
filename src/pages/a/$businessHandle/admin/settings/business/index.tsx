@@ -80,6 +80,7 @@ export default function Settings() {
         onFinishFailed={onFinishFailed}
         requiredMark="optional"
       >
+        {console.log('dataaaa', data)}
         <Title level={4}>Datos principales</Title>
         <Form.Item
           label="Nombre del negocio"
@@ -153,6 +154,64 @@ export default function Settings() {
           ]}
         >
           <Input placeholder="099 123 456" addonBefore="+598" />
+        </Form.Item>
+
+        <Spacer height={12} />
+
+        <Title level={4}>Redes sociales</Title>
+        <Paragraph type="secondary">
+          Agregá tus redes sociales para que los usuarios puedan encontrarte
+        </Paragraph>
+
+        <Form.Item
+          name="website"
+          label="Pagina web"
+          rules={[
+            {
+              type: 'string',
+              message: formatMessage({ id: 'message.inputError' }, { input: 'Website' }),
+            },
+            {
+              required: true,
+              message: formatMessage({ id: 'message.inputMissing' }, { input: 'website' }),
+            },
+          ]}
+        >
+          <Input placeholder="www.example.com" />
+        </Form.Item>
+
+        <Form.Item
+          name="instagramUrl"
+          label="Instagram"
+          rules={[
+            {
+              type: 'string',
+              message: formatMessage({ id: 'message.inputError' }, { input: 'Instagram' }),
+            },
+            {
+              required: true,
+              message: formatMessage({ id: 'message.inputMissing' }, { input: 'instagram' }),
+            },
+          ]}
+        >
+          <Input placeholder="https://www.instagram.com/tuNegocio" />
+        </Form.Item>
+
+        <Form.Item
+          name="facebookUrl"
+          label="Facebook"
+          rules={[
+            {
+              type: 'string',
+              message: formatMessage({ id: 'message.inputError' }, { input: 'Facebook' }),
+            },
+            {
+              required: true,
+              message: formatMessage({ id: 'message.inputMissing' }, { input: 'facebook' }),
+            },
+          ]}
+        >
+          <Input placeholder="https://www.facebook.com/tuNegocio" />
         </Form.Item>
 
         <Spacer height={12} />

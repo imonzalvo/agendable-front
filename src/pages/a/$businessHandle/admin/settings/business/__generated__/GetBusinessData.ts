@@ -8,11 +8,14 @@
 // ====================================================
 
 export interface GetBusinessData_getBusiness {
-  __typename: "Business";
+  __typename: 'Business';
   name: string;
   email: string;
   phone: string;
   handle: string;
+  website: string | null;
+  facebookUrl: string | null;
+  instagramUrl: string | null;
 }
 
 export interface GetBusinessData {

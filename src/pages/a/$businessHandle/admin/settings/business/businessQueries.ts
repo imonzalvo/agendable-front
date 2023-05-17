@@ -7,6 +7,9 @@ export const GET_BUSINESS_DATA = gql`
       email
       phone
       handle
+      website
+      facebookUrl
+      instagramUrl
     }
   }
 `;
@@ -18,14 +21,29 @@ export const UPDATE_BUSINESS_DATA = gql`
     $email: String
     $phone: String
     $handle: String
+    $website: String
+    $facebookUrl: String
+    $instagramUrl: String
   ) {
     __typename
-    updateBusiness(id: $id, name: $name, email: $email, phone: $phone, handle: $handle) {
+    updateBusiness(
+      id: $id
+      name: $name
+      email: $email
+      phone: $phone
+      handle: $handle
+      website: $website
+      facebookUrl: $facebookUrl
+      instagramUrl: $instagramUrl
+    ) {
       email
       handle
       id
       name
       phone
+      website
+      facebookUrl
+      instagramUrl
     }
   }
 `;

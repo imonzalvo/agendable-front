@@ -17,6 +17,7 @@ export interface GetLandingData_getBusiness_landing {
 
 export interface GetLandingData_getBusiness {
   __typename: 'Business';
+  handle: string;
   landing: GetLandingData_getBusiness_landing | null;
 }
 

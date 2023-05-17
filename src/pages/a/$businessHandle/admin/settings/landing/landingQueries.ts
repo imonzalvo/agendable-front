@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const GET_LANDING_DATA = gql`
   query GetLandingData($id: String!) {
     getBusiness(id: $id) {
+      handle
       landing {
         id
         cta

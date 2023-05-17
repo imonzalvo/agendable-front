@@ -14,6 +14,9 @@ export interface UpdateBusinessData_updateBusiness {
   id: string;
   name: string;
   phone: string;
+  website: string | null;
+  facebookUrl: string | null;
+  instagramUrl: string | null;
 }
 
 export interface UpdateBusinessData {
@@ -26,4 +29,7 @@ export interface UpdateBusinessDataVariables {
   email?: string | null;
   phone?: string | null;
   handle?: string | null;
+  website?: string | null;
+  facebookUrl?: string | null;
+  instagramUrl?: string | null;
 }
