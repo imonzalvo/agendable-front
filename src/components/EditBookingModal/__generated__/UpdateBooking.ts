@@ -8,24 +8,24 @@
 // ====================================================
 
 export interface UpdateBooking_updateBooking_employee {
-  __typename: "Employee";
+  __typename: 'Employee';
   id: string;
   givenName: string;
   familyName: string;
 }
 
 export interface UpdateBooking_updateBooking_services {
-  __typename: "Service";
+  __typename: 'Service';
   id: string;
 }
 
 export interface UpdateBooking_updateBooking_branch {
-  __typename: "Branch";
+  __typename: 'Branch';
   id: string;
 }
 
 export interface UpdateBooking_updateBooking {
-  __typename: "Booking";
+  __typename: 'Booking';
   id: string;
   start: string;
   end: string;
@@ -39,11 +39,11 @@ export interface UpdateBooking_updateBooking {
 }
 
 export interface UpdateBooking {
-  updateBooking: UpdateBooking_updateBooking;
+  updateBooking: UpdateBooking_updateBooking | null;
 }
 
 export interface UpdateBookingVariables {
-  id?: string | null;
+  id: string;
   start?: string | null;
   end?: string | null;
   status?: string | null;

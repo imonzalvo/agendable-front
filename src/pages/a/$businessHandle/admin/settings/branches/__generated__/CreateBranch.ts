@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface CreateBranch_createBranch {
-  __typename: "Branch";
+  __typename: 'Branch';
   name: string;
   email: string;
   phone: string;
@@ -18,7 +18,7 @@ export interface CreateBranch_createBranch {
 }
 
 export interface CreateBranch {
-  createBranch: CreateBranch_createBranch;
+  createBranch: CreateBranch_createBranch | null;
 }
 
 export interface CreateBranchVariables {

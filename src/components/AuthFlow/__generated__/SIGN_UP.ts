@@ -8,18 +8,18 @@
 // ====================================================
 
 export interface SIGN_UP_signup_user {
-  __typename: "User";
+  __typename: 'User';
   email: string;
 }
 
 export interface SIGN_UP_signup {
-  __typename: "AuthPayload";
-  token: string;
-  user: SIGN_UP_signup_user;
+  __typename: 'AuthPayload';
+  token: string | null;
+  user: SIGN_UP_signup_user | null;
 }
 
 export interface SIGN_UP {
-  signup: SIGN_UP_signup;
+  signup: SIGN_UP_signup | null;
 }
 
 export interface SIGN_UPVariables {

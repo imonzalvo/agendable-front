@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface UpdateBusinessData_updateBusiness {
-  __typename: "Business";
+  __typename: 'Business';
   email: string;
   handle: string;
   id: string;
@@ -17,7 +17,7 @@ export interface UpdateBusinessData_updateBusiness {
 }
 
 export interface UpdateBusinessData {
-  updateBusiness: UpdateBusinessData_updateBusiness;
+  updateBusiness: UpdateBusinessData_updateBusiness | null;
 }
 
 export interface UpdateBusinessDataVariables {

@@ -8,13 +8,13 @@
 // ====================================================
 
 export interface QGetEmployeeAvailableTime_getEmployeeAvailableTime {
-  __typename: "EmployeeAvailableTime";
-  from: string;
-  to: string;
+  __typename: 'EmployeeAvailableTime';
+  from: string | null;
+  to: string | null;
 }
 
 export interface QGetEmployeeAvailableTime {
-  getEmployeeAvailableTime: QGetEmployeeAvailableTime_getEmployeeAvailableTime[] | null;
+  getEmployeeAvailableTime: (QGetEmployeeAvailableTime_getEmployeeAvailableTime | null)[] | null;
 }
 
 export interface QGetEmployeeAvailableTimeVariables {

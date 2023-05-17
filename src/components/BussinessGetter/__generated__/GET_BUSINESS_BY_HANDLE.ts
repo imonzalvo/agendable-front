@@ -8,16 +8,31 @@
 // ====================================================
 
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches {
-  __typename: "Branch";
+  __typename: 'Branch';
   id: string;
   address: string;
 }
 
+export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing_images {
+  __typename: 'BusinessImage';
+  id: string;
+}
+
+export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing {
+  __typename: 'LandingInfo';
+  id: string;
+  displayName: string;
+  cta: string | null;
+  description: string;
+  images: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing_images[];
+}
+
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle {
-  __typename: "Business";
+  __typename: 'Business';
   id: string;
   name: string;
   branches: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches[];
+  landing: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing | null;
 }
 
 export interface GET_BUSINESS_BY_HANDLE {

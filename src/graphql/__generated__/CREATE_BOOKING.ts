@@ -8,24 +8,24 @@
 // ====================================================
 
 export interface CREATE_BOOKING_createBooking_employee {
-  __typename: "Employee";
+  __typename: 'Employee';
   id: string;
   givenName: string;
   familyName: string;
 }
 
 export interface CREATE_BOOKING_createBooking_services {
-  __typename: "Service";
+  __typename: 'Service';
   id: string;
 }
 
 export interface CREATE_BOOKING_createBooking_branch {
-  __typename: "Branch";
+  __typename: 'Branch';
   id: string;
 }
 
 export interface CREATE_BOOKING_createBooking {
-  __typename: "Booking";
+  __typename: 'Booking';
   id: string;
   start: string;
   end: string;
@@ -39,7 +39,7 @@ export interface CREATE_BOOKING_createBooking {
 }
 
 export interface CREATE_BOOKING {
-  createBooking: CREATE_BOOKING_createBooking;
+  createBooking: CREATE_BOOKING_createBooking | null;
 }
 
 export interface CREATE_BOOKINGVariables {

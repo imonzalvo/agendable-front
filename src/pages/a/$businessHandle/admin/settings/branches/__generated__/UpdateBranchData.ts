@@ -7,13 +7,8 @@
 // GraphQL mutation operation: UpdateBranchData
 // ====================================================
 
-export interface UpdateBranchData_updateBranch_services {
-  __typename: "Service";
-  id: string;
-}
-
 export interface UpdateBranchData_updateBranch {
-  __typename: "Branch";
+  __typename: 'Branch';
   id: string;
   name: string;
   email: string;
@@ -21,11 +16,10 @@ export interface UpdateBranchData_updateBranch {
   address: string;
   description: string;
   image: string | null;
-  services: UpdateBranchData_updateBranch_services[];
 }
 
 export interface UpdateBranchData {
-  updateBranch: UpdateBranchData_updateBranch;
+  updateBranch: UpdateBranchData_updateBranch | null;
 }
 
 export interface UpdateBranchDataVariables {
@@ -36,5 +30,4 @@ export interface UpdateBranchDataVariables {
   address?: string | null;
   description?: string | null;
   image?: string | null;
-  servicesId?: string[] | null;
 }

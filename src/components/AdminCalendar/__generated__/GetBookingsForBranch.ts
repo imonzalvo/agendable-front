@@ -8,24 +8,24 @@
 // ====================================================
 
 export interface GetBookingsForBranch_getBookingsByBranch_employee {
-  __typename: "Employee";
+  __typename: 'Employee';
   id: string;
   givenName: string;
   familyName: string;
 }
 
 export interface GetBookingsForBranch_getBookingsByBranch_services {
-  __typename: "Service";
+  __typename: 'Service';
   id: string;
 }
 
 export interface GetBookingsForBranch_getBookingsByBranch_branch {
-  __typename: "Branch";
+  __typename: 'Branch';
   id: string;
 }
 
 export interface GetBookingsForBranch_getBookingsByBranch {
-  __typename: "Booking";
+  __typename: 'Booking';
   id: string;
   start: string;
   end: string;
@@ -39,7 +39,7 @@ export interface GetBookingsForBranch_getBookingsByBranch {
 }
 
 export interface GetBookingsForBranch {
-  getBookingsByBranch: GetBookingsForBranch_getBookingsByBranch[] | null;
+  getBookingsByBranch: (GetBookingsForBranch_getBookingsByBranch | null)[] | null;
 }
 
 export interface GetBookingsForBranchVariables {

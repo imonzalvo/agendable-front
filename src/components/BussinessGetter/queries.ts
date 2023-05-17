@@ -9,6 +9,15 @@ export const GET_BUSINESS_BY_HANDLE = gql`
         id
         address
       }
+      landing {
+        id
+        displayName
+        cta
+        description
+        images {
+          id
+        }
+      }
     }
   }
 `;
