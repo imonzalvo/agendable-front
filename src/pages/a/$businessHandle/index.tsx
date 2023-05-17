@@ -18,39 +18,18 @@ import icon from '@/assets/agendable-icon.svg';
 
 const { Header, Footer } = Layout;
 
-const businessMock = {
-  landing: {
-    imageGallery: [
-      {
-        id: 'asdf',
-        src:
-          'https://scontent.fmvd1-1.fna.fbcdn.net/v/t1.6435-9/64595531_2556091514409261_4583925518784528384_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZjqDZj5ZrwEAX-2qPn1&_nc_ht=scontent.fmvd1-1.fna&oh=00_AfB6BvG49Nerb90o6_OfyyW8BDpHWc4CbSgHUd4KUvUw4w&oe=64793FE3',
-      },
-    ],
-    displayName: 'Academia de Choferes del Parque',
-    cta: 'Aprendé a manejar con los que más saben',
-    description:
-      'En Academia De Chóferes Del Parque funcionamos desde el año 1989 en forma ininterrumpida habiendo formado más de 10.000 conductores',
-  },
-  logo: 'https://www.academiadechoferesdelparque.com.uy/images/academialogo.svg',
-  instagramURL: 'https://instagram.com/academiadelparque',
-  facebookURL: 'https://facebook.com/AcademiaDeChoferesDelParque/',
-  websiteURL: 'https://www.academiadechoferesdelparque.com.uy/',
-};
-
-// export interface BusinessHomeProps extends BusinessLayoutProps {}
-
 export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
   const {
-    business: { businessName },
+    business: { landing: businessLanding, website, instagramUrl, facebookUrl },
   } = useContext(BusinessContext);
 
+  console.log('Actual business', businessLanding, website, instagramUrl, facebookUrl);
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
-        {businessMock.logo ? (
+        {businessLanding.logoUrl ? (
           <img
-            src={businessMock.logo}
+            src={businessLanding.logoUrl}
             style={{
               width: 200,
               objectFit: 'contain',
@@ -66,7 +45,7 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
               color: '#000',
             }}
           >
-            {businessName}
+            {businessLanding.displayName}
           </Typography.Title>
         )}
 
@@ -105,13 +84,11 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
             bordered={false}
           >
             <Typography.Title className={styles.displayName}>
-              {businessMock.landing.displayName}
+              {businessLanding.displayName}
             </Typography.Title>
-            <Typography.Title className={styles.tagline}>
-              {businessMock.landing.cta}
-            </Typography.Title>
+            <Typography.Title className={styles.tagline}>{businessLanding.cta}</Typography.Title>
             <Typography.Paragraph className={styles.description}>
-              {businessMock.landing.description}
+              {businessLanding.description}
             </Typography.Paragraph>
             <Button
               type="link"
@@ -133,7 +110,7 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
           lg={{ span: 15, order: 2 }}
           className={styles.imageContainer}
         >
-          <img src={businessMock.landing.imageGallery[0].src} className={styles.image} />
+          <img src={businessLanding.images[0].url} className={styles.image} />
         </Col>
       </Row>
       <Footer className={styles.footer}>
@@ -145,9 +122,9 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
           />
         </div>
         <div>
-          {!!businessMock.websiteURL && (
+          {!!website && (
             <a
-              href={businessMock.websiteURL}
+              href={website}
               className={styles.footerLink}
               style={{ marginRight: 12 }}
               target="_blank"
@@ -155,9 +132,9 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
               <GlobalOutlined />
             </a>
           )}
-          {!!businessMock.instagramURL && (
+          {!!instagramUrl && (
             <a
-              href={businessMock.instagramURL}
+              href={instagramUrl}
               className={styles.footerLink}
               style={{ marginRight: 12 }}
               target="_blank"
@@ -165,8 +142,8 @@ export default function BusinessHome(props: Partial<BusinessLayoutProps>) {
               <InstagramOutlined />
             </a>
           )}
-          {!!businessMock.facebookURL && (
-            <a href={businessMock.facebookURL} className={styles.footerLink} target="_blank">
+          {!!facebookUrl && (
+            <a href={facebookUrl} className={styles.footerLink} target="_blank">
               <FacebookOutlined />
             </a>
           )}

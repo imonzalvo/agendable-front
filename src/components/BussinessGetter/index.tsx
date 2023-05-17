@@ -7,11 +7,12 @@ import PageLoading from '@/components/PageLoading';
 import PageNotFound from '@/pages/404';
 import { parsePathnameHandle } from '@/utils/parsePathnameHandle';
 import { GET_BUSINESS_BY_HANDLE } from './queries';
+
 import {
-  GetBusinessByHandle as IGetBusinessByHandle,
-  GetBusinessByHandle_businessByHandle_items,
-  GetBusinessByHandle_businessByHandle_items_branches,
-} from './__generated__/GetBusinessByHandle';
+  GET_BUSINESS_BY_HANDLE_getBusinessByHandle as IGetBusinessByHandle,
+  GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches,
+  GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing,
+} from './__generated__/GET_BUSINESS_BY_HANDLE';
 
 export const BusinessContext = createContext({
   business: {
@@ -41,6 +42,7 @@ export default function BusinessGetter({
   const [business, setBusiness] = useState(initialState);
   const [getBusinessByHandle, { data, error }] = useLazyQuery<IGetBusinessByHandle>(
     GET_BUSINESS_BY_HANDLE,
+    { fetchPolicy: 'network-only', nextFetchPolicy: 'no-cache' },
   );
 
   const pathnameHandle = parsePathnameHandle(pathname);
@@ -72,14 +74,15 @@ export default function BusinessGetter({
   useEffect(() => {
     console.log('data', data);
     if (data) {
-      const businessData: GetBusinessByHandle_businessByHandle_items = get(
-        data,
-        'getBusinessByHandle',
-      );
+      const businessData: IGetBusinessByHandle = get(data, 'getBusinessByHandle');
       if (businessData) {
-        const branches: GetBusinessByHandle_businessByHandle_items_branches | null = get(
+        const branches: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches[] | null = get(
           businessData,
           'branches',
+        );
+        const landing: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing | null = get(
+          businessData,
+          'landing',
         );
         if (branches) {
           localStorage.setItem(
@@ -88,12 +91,17 @@ export default function BusinessGetter({
               businessId: businessData.id,
               businessName: businessData.name,
               branches,
+              landing,
             }),
           );
           setBusiness({
             businessId: businessData.id,
             businessName: businessData.name,
+            website: businessData.website,
+            instagramUrl: businessData.instagramUrl,
+            facebookUrl: businessData.facebookUrl,
             branches,
+            landing,
             loading: false,
           });
         } else {

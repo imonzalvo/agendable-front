@@ -16,6 +16,7 @@ export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches {
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing_images {
   __typename: 'BusinessImage';
   id: string;
+  url: string;
 }
 
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing {
@@ -24,6 +25,7 @@ export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing {
   displayName: string;
   cta: string | null;
   description: string;
+  logoUrl: string | null;
   images: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing_images[];
 }
 
@@ -31,6 +33,9 @@ export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle {
   __typename: 'Business';
   id: string;
   name: string;
+  website: string | null;
+  instagramUrl: string | null;
+  facebookUrl: string | null;
   branches: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches[];
   landing: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing | null;
 }

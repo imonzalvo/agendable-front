@@ -5,6 +5,9 @@ export const GET_BUSINESS_BY_HANDLE = gql`
     getBusinessByHandle(handle: $handle) {
       id
       name
+      website
+      instagramUrl
+      facebookUrl
       branches {
         id
         address
@@ -14,8 +17,10 @@ export const GET_BUSINESS_BY_HANDLE = gql`
         displayName
         cta
         description
+        logoUrl
         images {
           id
+          url
         }
       }
     }
