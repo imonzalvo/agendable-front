@@ -96,6 +96,11 @@ export default {
                   exact: true,
                   component: './a/$businessHandle/admin/settings/branches',
                 },
+                {
+                  path: '/a/:businessHandle/admin/settings/landing',
+                  exact: true,
+                  component: './a/$businessHandle/admin/settings/landing',
+                },
               ],
             },
           ],
