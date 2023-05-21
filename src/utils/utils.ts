@@ -5,7 +5,8 @@ const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(
 const isUrl = (path: string): boolean => reg.test(path);
 
 const getUrl = (path: string) => {
-  if (!useSubdomain()) {
+  // TODO: Fix later
+  if (!useSubdomain() || true) {
     return `/a/${window.localStorage.getItem('businessHandle')}/${path}`;
   }
   return `/${path}`;
