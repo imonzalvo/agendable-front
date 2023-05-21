@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import '@ant-design/compatible/assets/index.css';
-import { Typography, Form, Row, Col, Input, Button, Result, notification } from 'antd';
+import { Typography, Form, Row, Col, Input, Button, Result, notification, Upload } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
 import { formatMessage } from 'umi-plugin-locale';
-import Link from 'umi/link';
 
 import { BusinessContext } from '@/components/BussinessGetter';
 import Spacer from '@/components/common/Spacer';
@@ -18,10 +17,13 @@ import {
 } from './__generated__/UpdateLandingInfo';
 import FullPageSpinner from '@/components/common/FullPageSpinner';
 import { GET_LANDING_DATA, UPDATE_LANDING_DATA } from './landingQueries';
-
+import ImageUpload from './imageUpload';
 const { Title, Paragraph } = Typography;
 
 export default function Settings() {
+  const [landingImageUrl, setLandingImageUrl] = useState<string>();
+  const [logoUrl, setLogoUrl] = useState<string>();
+
   const { business } = useContext(BusinessContext);
   const { data, loading, error } = useQuery<IGetLandingData, IGetLandingDataVariables>(
     GET_LANDING_DATA,
@@ -136,7 +138,28 @@ export default function Settings() {
         >
           <Input placeholder={data.getBusiness?.landing?.description} />
         </Form.Item>
+        <Spacer height={12} />
 
+        <Title level={4}>Imagen principal</Title>
+        <Paragraph type="secondary">Esta es la imagen de portada de su agenda web</Paragraph>
+        <ImageUpload
+          currentImage={data.getBusiness?.landing?.images[0].url}
+          imageUrl={landingImageUrl}
+          setImageUrl={setLandingImageUrl}
+          landingId={data.getBusiness.landing.id}
+          imageType="landing"
+        />
+        <Spacer height={12} />
+
+        <Title level={4}>Logo</Title>
+        <Paragraph type="secondary">Este logo se mostrara en la cabecera de su agenda</Paragraph>
+        <ImageUpload
+          currentImage={data.getBusiness?.landing?.logoUrl}
+          imageUrl={logoUrl}
+          setImageUrl={setLogoUrl}
+          landingId={data.getBusiness.landing.id}
+          imageType="logo"
+        />
         <Spacer height={12} />
 
         <Form.Item>

@@ -7,12 +7,19 @@
 // GraphQL query operation: GetLandingData
 // ====================================================
 
+export interface GetLandingData_getBusiness_landing_images {
+  __typename: 'BusinessImage';
+  id: string;
+  url: string;
+}
+
 export interface GetLandingData_getBusiness_landing {
   __typename: 'LandingInfo';
   id: string;
   cta: string | null;
   description: string;
   displayName: string;
+  images: GetLandingData_getBusiness_landing_images[];
 }
 
 export interface GetLandingData_getBusiness {

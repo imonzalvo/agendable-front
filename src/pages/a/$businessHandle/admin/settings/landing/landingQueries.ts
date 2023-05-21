@@ -9,6 +9,11 @@ export const GET_LANDING_DATA = gql`
         cta
         description
         displayName
+        logoUrl
+        images {
+          id
+          url
+        }
       }
     }
   }
