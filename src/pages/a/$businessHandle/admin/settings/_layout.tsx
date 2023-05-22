@@ -38,6 +38,9 @@ export default function SettingsLayout({ children, history }) {
           <Menu.Item key="services" icon={<AppstoreAddOutlined />}>
             Servicios
           </Menu.Item>
+          <Menu.Item key="employees" icon={<AppstoreAddOutlined />}>
+            Empleados
+          </Menu.Item>
           <Menu.Item key="landing" icon={<LayoutOutlined />}>
             Pagina de inicio
           </Menu.Item>

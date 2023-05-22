@@ -84,7 +84,7 @@ const Layout = ({ children, location }: LayoutProps) => {
   const [steps, setSteps] = useState(5);
   const subdomain = useSubdomain();
 
-  const url = 'https://agendable-dev.onrender.com/graphql';
+  const url = 'http://localhost:4000/graphql';
 
   const httpLink = createHttpLink({ uri: url });
 
@@ -103,7 +103,7 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: 'wss://agendable-dev.onrender.com/graphql',
+      url: 'wss://localhost:4000/graphql',
     }),
   );
 

@@ -102,6 +102,11 @@ export default {
                   component: './a/$businessHandle/admin/settings/services',
                 },
                 {
+                  path: '/a/:businessHandle/admin/settings/employees',
+                  exact: true,
+                  component: './a/$businessHandle/admin/settings/employees',
+                },
+                {
                   path: '/a/:businessHandle/admin/settings/landing',
                   exact: true,
                   component: './a/$businessHandle/admin/settings/landing',
