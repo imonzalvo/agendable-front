@@ -40,7 +40,7 @@ export const UPDATE_EMPLOYEE_DATA = gql`
     $givenName: String
     $familyName: String
     $phone: String
-    $availabilityItems: [AvailabilityItemEmployeeInputType]
+    $availabilityItems: [UpdateAvailabilityItemEmployeeInputType]
   ) {
     __typename
     updateEmployee(
@@ -111,6 +111,14 @@ export const CREATE_EMPLOYEE = gql`
         from
         to
       }
+    }
+  }
+`;
+
+export const DELETE_EMPLOYEE_DATA = gql`
+  mutation DeleteEmployee($id: ID!) {
+    deleteEmployee(id: $id) {
+      id
     }
   }
 `;

@@ -44,7 +44,7 @@ export default function Employees() {
     },
   );
   const [employeeDrawerOpen, setEmployeeDrawerOpen] = useState<{
-    service?: GetEmployeesData_getBusiness_employee;
+    employee?: GetEmployeesData_getBusiness_employee;
     action: 'UPDATE' | 'CREATE';
   } | null>(null);
 
@@ -83,7 +83,7 @@ export default function Employees() {
             <Button
               key="1"
               type="primary"
-              onClick={() => setEmployeeDrawerOpen({ service: undefined, action: 'CREATE' })}
+              onClick={() => setEmployeeDrawerOpen({ employee: undefined, action: 'CREATE' })}
             >
               Crear nuevo empleado
             </Button>,
@@ -101,7 +101,7 @@ export default function Employees() {
               <List.Item
                 actions={[
                   <Button
-                    onClick={() => setEmployeeDrawerOpen({ service: item, action: 'UPDATE' })}
+                    onClick={() => setEmployeeDrawerOpen({ employee: item, action: 'UPDATE' })}
                     icon={<EditOutlined color="primary" />}
                   >
                     Editar
@@ -135,7 +135,7 @@ export default function Employees() {
         height="auto"
       >
         <EmployeeCRUD
-          service={employeeDrawerOpen?.service}
+          employee={employeeDrawerOpen?.employee}
           action={employeeDrawerOpen?.action}
           onDone={() => setEmployeeDrawerOpen(null)}
           commonVariables={commonVariables}

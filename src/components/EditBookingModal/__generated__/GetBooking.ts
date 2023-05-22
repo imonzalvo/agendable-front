@@ -3,19 +3,17 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { BookingStatus } from "./../../../../__generated__/globalTypes";
-
 // ====================================================
 // GraphQL query operation: GetBooking
 // ====================================================
 
 export interface GetBooking_getBooking_services {
-  __typename: "Service";
+  __typename: 'Service';
   id: string;
 }
 
 export interface GetBooking_getBooking {
-  __typename: "Booking";
+  __typename: 'Booking';
   clientEmail: string | null;
   clientFamilyName: string | null;
   clientName: string | null;
@@ -23,7 +21,7 @@ export interface GetBooking_getBooking {
   end: string;
   id: string;
   start: string;
-  status: BookingStatus;
+  status: string;
   services: GetBooking_getBooking_services[];
 }
 

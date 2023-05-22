@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { AvailabilityItemEmployeeInputType } from './../../../../../../../../__generated__/globalTypes';
+import { UpdateAvailabilityItemEmployeeInputType } from './../../../../../../../../__generated__/globalTypes';
 
 // ====================================================
 // GraphQL mutation operation: UpdateEmployeeData
@@ -50,5 +50,5 @@ export interface UpdateEmployeeDataVariables {
   givenName?: string | null;
   familyName?: string | null;
   phone?: string | null;
-  availabilityItems?: AvailabilityItemEmployeeInputType | null;
+  availabilityItems?: (UpdateAvailabilityItemEmployeeInputType | null)[] | null;
 }
