@@ -113,6 +113,18 @@ export default {
                 },
               ],
             },
+            {
+              path: '/a/:businessHandle/admin/landing-settings',
+              exact: false,
+              component: './a/$businessHandle/admin/landing-settings/_layout.tsx',
+              routes: [
+                {
+                  path: '/a/:businessHandle/admin/landing-settings',
+                  exact: true,
+                  component: './a/$businessHandle/admin/landing-settings',
+                },
+              ],
+            },
           ],
         },
         {

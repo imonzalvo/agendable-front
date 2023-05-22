@@ -32,17 +32,11 @@ export default function SettingsLayout({ children, history }) {
           <Menu.Item key="business" icon={<SettingOutlined />}>
             Negocio
           </Menu.Item>
-          <Menu.Item key="branches" icon={<ShopOutlined />}>
-            Sucursales
-          </Menu.Item>
           <Menu.Item key="services" icon={<AppstoreAddOutlined />}>
             Servicios
           </Menu.Item>
           <Menu.Item key="employees" icon={<AppstoreAddOutlined />}>
             Empleados
-          </Menu.Item>
-          <Menu.Item key="landing" icon={<LayoutOutlined />}>
-            Pagina de inicio
           </Menu.Item>
         </Menu>
         <Spacer height={18} />

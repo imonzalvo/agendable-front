@@ -14,7 +14,7 @@ import AuthLayout from '@/layouts/AuthLayout';
 import { AuthContext } from '@/layouts';
 import { BusinessContext } from '@/components/BussinessGetter';
 import SelectLang from '@/components/SelectLang';
-import { SettingOutlined, CalendarOutlined } from '@ant-design/icons';
+import { SettingOutlined, CalendarOutlined, LayoutOutlined } from '@ant-design/icons';
 import { AnimatedLayout, ButtonFooter } from './styles';
 
 const { Content, Header, Sider, Footer } = Layout;
@@ -121,6 +121,13 @@ const AdminLayout = (props: AdminLayoutProps) => {
             onClick={() => history.push(getUrl('admin/settings/business'))}
           >
             {formatMessage({ id: 'navBar.settings' })}
+          </Menu.Item>
+          <Menu.Item
+            key="3"
+            icon={<LayoutOutlined />}
+            onClick={() => history.push(getUrl('admin/landing-settings'))}
+          >
+            {formatMessage({ id: 'navBar.landing-settings' })}
           </Menu.Item>
         </Menu>
       </Sider>

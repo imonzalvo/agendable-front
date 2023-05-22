@@ -26,4 +26,5 @@ export default {
   'notifications.deletedBooking': 'Reserva eliminada',
   'navBar.home': 'Calendario',
   'navBar.settings': 'Configuracion',
+  'navBar.landing-settings': 'Pagina de Inicio',
 };
