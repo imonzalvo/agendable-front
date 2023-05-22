@@ -19,6 +19,7 @@ export interface GetLandingData_getBusiness_landing {
   cta: string | null;
   description: string;
   displayName: string;
+  logoUrl: string | null;
   images: GetLandingData_getBusiness_landing_images[];
 }
 

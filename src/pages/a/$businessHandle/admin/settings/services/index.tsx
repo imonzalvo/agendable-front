@@ -6,15 +6,16 @@ import { createGlobalStyle } from 'styled-components';
 
 import { BusinessContext } from '@/components/BussinessGetter';
 import Spacer from '@/components/common/Spacer';
-import BranchCRUD from './BranchCRUD';
-import { GET_BRANCHES_DATA } from './branchesQueries';
+
 import {
-  GetBranchesData as IGetBranchesData,
-  GetBranchesDataVariables as IGetBranchesDataVariables,
-  GetBranchesData_getBusiness_branches,
-} from './__generated__/GetBranchesData';
+  GetBusinessServicesData as IGetBusinessServicesData,
+  GetBusinessServicesDataVariables as IGetBusinessServicesDataVariables,
+  GetBusinessServicesData_getBusiness_services,
+} from './__generated__/GetBusinessServicesData';
+import ServiceCRUD from './ServiceCRUD';
 
 import FullPageSpinner from '@/components/common/FullPageSpinner';
+import { GET_BUSINESS_SERVICES_DATA } from './servicesQueries';
 
 const { useBreakpoint } = Grid;
 
@@ -31,18 +32,18 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export default function Branches() {
+export default function Services() {
   const { business } = useContext(BusinessContext);
-  const { data, loading, error } = useQuery<IGetBranchesData, IGetBranchesDataVariables>(
-    GET_BRANCHES_DATA,
-    {
-      variables: {
-        id: business.businessId,
-      },
+  const { data, loading, error } = useQuery<
+    IGetBusinessServicesData,
+    IGetBusinessServicesDataVariables
+  >(GET_BUSINESS_SERVICES_DATA, {
+    variables: {
+      id: business.businessId,
     },
-  );
-  const [branchDrawerOpen, setBranchDrawerOpen] = useState<{
-    branch?: GetBranchesData_getBusiness_branches;
+  });
+  const [serviceDrawerOpen, setServiceDrawerOpen] = useState<{
+    service?: GetBusinessServicesData_getBusiness_services;
     action: 'UPDATE' | 'CREATE';
   } | null>(null);
 
@@ -50,7 +51,7 @@ export default function Branches() {
 
   if (loading) return <FullPageSpinner />;
 
-  if (error || !data?.getBusiness?.branches) {
+  if (error || !data?.getBusiness?.services) {
     return (
       <Result
         status="500"
@@ -64,18 +65,26 @@ export default function Branches() {
       />
     );
   }
-
+  const branchsId = data.getBusiness.branches.map(branch => branch.id);
+  const categoryId = data.getBusiness.categories[0].id;
+  const employeesId = data.getBusiness.employee.map(employee => employee.id);
+  const commonVariables = {
+    branchesId: branchsId,
+    categoryId: categoryId,
+    employeesId: employeesId,
+    currency: 'UYU',
+  };
   return (
     <>
       <div>
         <PageHeader
           ghost={false}
-          title="Sucursales"
+          title="Servicios"
           extra={[
             <Button
               key="1"
               type="primary"
-              onClick={() => setBranchDrawerOpen({ branch: undefined, action: 'CREATE' })}
+              onClick={() => setServiceDrawerOpen({ service: undefined, action: 'CREATE' })}
             >
               Crear nueva sucursal
             </Button>,
@@ -85,12 +94,12 @@ export default function Branches() {
         <List
           loading={loading}
           itemLayout={screens.sm ? 'horizontal' : 'vertical'}
-          dataSource={data.getBusiness.branches}
+          dataSource={data.getBusiness.services}
           renderItem={item => (
             <List.Item
               actions={[
                 <Button
-                  onClick={() => setBranchDrawerOpen({ branch: item, action: 'UPDATE' })}
+                  onClick={() => setServiceDrawerOpen({ service: item, action: 'UPDATE' })}
                   icon={<EditOutlined color="primary" />}
                 >
                   Editar
@@ -99,11 +108,11 @@ export default function Branches() {
             >
               <Skeleton avatar title={false} active loading={false}>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.image || ''} />}
                   title={item.name}
                   description={
                     <>
-                      <div>{item.address}</div>
+                      <div>{`$ ${item.price} - ${item.duration} mins.`}</div>
+                      <div>{item.description}</div>
                     </>
                   }
                 />
@@ -114,18 +123,19 @@ export default function Branches() {
       </div>
       <GlobalStyles />
       <Drawer
-        title={`${branchDrawerOpen?.action === 'CREATE' ? 'Crear' : 'Editar'} sucursal`}
+        title={`${serviceDrawerOpen?.action === 'CREATE' ? 'Crear' : 'Editar'} servicio`}
         placement="bottom"
         closable
-        onClose={() => setBranchDrawerOpen(null)}
-        visible={!!branchDrawerOpen}
-        key="branchDrawer"
+        onClose={() => setServiceDrawerOpen(null)}
+        visible={!!serviceDrawerOpen}
+        key="serviceDrawer"
         height="auto"
       >
-        <BranchCRUD
-          branch={branchDrawerOpen?.branch}
-          action={branchDrawerOpen?.action}
-          onDone={() => setBranchDrawerOpen(null)}
+        <ServiceCRUD
+          service={serviceDrawerOpen?.service}
+          action={serviceDrawerOpen?.action}
+          onDone={() => setServiceDrawerOpen(null)}
+          commonVariables={commonVariables}
         />
       </Drawer>
     </>

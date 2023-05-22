@@ -1,6 +1,11 @@
 import React from 'react';
 import { Row, Col, Menu, Card, Grid } from 'antd';
-import { SettingOutlined, ShopOutlined, LayoutOutlined } from '@ant-design/icons';
+import {
+  SettingOutlined,
+  ShopOutlined,
+  LayoutOutlined,
+  AppstoreAddOutlined,
+} from '@ant-design/icons';
 import router from 'umi/router';
 
 import Spacer from '@/components/common/Spacer';
@@ -29,6 +34,9 @@ export default function SettingsLayout({ children, history }) {
           </Menu.Item>
           <Menu.Item key="branches" icon={<ShopOutlined />}>
             Sucursales
+          </Menu.Item>
+          <Menu.Item key="services" icon={<AppstoreAddOutlined />}>
+            Servicios
           </Menu.Item>
           <Menu.Item key="landing" icon={<LayoutOutlined />}>
             Pagina de inicio

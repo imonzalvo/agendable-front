@@ -97,6 +97,11 @@ export default {
                   component: './a/$businessHandle/admin/settings/branches',
                 },
                 {
+                  path: '/a/:businessHandle/admin/settings/services',
+                  exact: true,
+                  component: './a/$businessHandle/admin/settings/services',
+                },
+                {
                   path: '/a/:businessHandle/admin/settings/landing',
                   exact: true,
                   component: './a/$businessHandle/admin/settings/landing',
