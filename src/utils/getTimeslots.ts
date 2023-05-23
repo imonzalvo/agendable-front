@@ -30,8 +30,15 @@ export const getTimeslots = (
     const HHFrom = available.from.length === 5 ? available.from : `0${available.from}`;
     const HHTo = available.to.length === 5 ? available.to : `0${available.to}`;
 
-    const from = moment.utc(`${dateSelected} ${HHFrom}`).local();
-    const to = moment.utc(`${dateSelected} ${HHTo}`).local();
+    const from = moment(`${dateSelected} ${HHFrom}`);
+    //TODO: Should we use local??
+    // .utc(`${dateSelected} ${HHFrom}`);
+    // .local();
+    const to = moment(`${dateSelected} ${HHTo}`);
+    //TODO: Should we use local??
+    // .utc(`${dateSelected} ${HHTo}`);
+    // .local();
+
     // Check si el turno disponible sea despues que la hora en que quiera reservar.
     // Check si la reserva del servicio entra en el timeslot.
     if (to.isAfter(now) && to.isSameOrAfter(moment(now).add(duration, 'm'))) {

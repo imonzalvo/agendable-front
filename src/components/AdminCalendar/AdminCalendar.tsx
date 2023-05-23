@@ -252,14 +252,18 @@ export default function AdminCalendar({
           const fromVal = Number(`${fromHour}${fromMinute}`);
           const toVal = Number(`${toHour}${toMinute}`);
 
-          const from = moment
-            .utc(dateTimeMom)
+          const from = moment(dateTimeMom)
+            // TODO: Should we use UTC here??
+            // .utc(dateTimeMom)
             .hour(Number(fromHour))
             .minute(Number(fromMinute));
-          const to = moment
-            .utc(dateTimeMom)
+          const to = moment(dateTimeMom)
+            // TODO: Should we use UTC here??
+            // .utc(dateTimeMom)
             .hour(Number(toHour))
             .minute(Number(toMinute));
+
+          console.log('fromto', from, dateTimeMom);
 
           if (fromVal > toVal) {
             to.add(1, 'day');
