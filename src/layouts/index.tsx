@@ -84,7 +84,7 @@ const Layout = ({ children, location }: LayoutProps) => {
   const [steps, setSteps] = useState(5);
   const subdomain = useSubdomain();
 
-  const url = 'http://agendable-dev.onrender.com/graphql';
+  const url = 'https://agendable-dev.onrender.com/graphql';
 
   const httpLink = createHttpLink({ uri: url });
 
