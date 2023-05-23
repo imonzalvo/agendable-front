@@ -1,17 +1,6 @@
-import React, { useEffect, useContext, useState, useMemo } from 'react';
-import {
-  Form,
-  Input,
-  Button,
-  notification,
-  DatePicker,
-  Row,
-  Select,
-  Space,
-  Popconfirm,
-  TimePicker,
-} from 'antd';
-import Icon, { DeleteOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import React, { useEffect, useContext, useMemo } from 'react';
+import { Form, Input, Button, notification, Select, Space, Popconfirm, TimePicker } from 'antd';
+import { DeleteOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { formatMessage } from 'umi-plugin-locale';
 import { useMutation } from '@apollo/client';
 import { BusinessContext } from '@/components/BussinessGetter';
@@ -27,19 +16,16 @@ import moment from 'moment-timezone';
 import {
   CreateEmployee as ICreateEmployee,
   CreateEmployeeVariables as ICreateEmployeeVariables,
-  CreateEmployee_createEmployee,
 } from './__generated__/CreateEmployee';
 
 import {
   UpdateEmployeeData as IUpdateEmployeeData,
   UpdateEmployeeDataVariables as IUpdateEmployeeDataVariables,
-  UpdateEmployeeData_updateEmployee,
 } from './__generated__/UpdateEmployeeData';
 
 import {
   DeleteEmployee as IDeleteEmployee,
   DeleteEmployeeVariables as IDeleteEmployeeVariables,
-  DeleteEmployee_deleteEmployee,
 } from './__generated__/DeleteEmployee';
 import { GetEmployeesData_getBusiness_employee } from './__generated__/GetEmployeesData';
 import Spacer from '@/components/common/Spacer';
@@ -72,9 +58,6 @@ export default function EmployeeDrawer({
     keys: [],
   });
 
-  console.log('bus11', employee);
-
-  // const TimePicker = DatePicker.TimePicker;
   useEffect(() => {
     form.resetFields();
   }, [employee, action]);
@@ -93,7 +76,7 @@ export default function EmployeeDrawer({
     },
   });
 
-  const [deleteEmployee, { loading: deleteEmployeeLoading }] = useMutation<
+  const [deleteEmployee, { loading: _deleteEmployeeLoading }] = useMutation<
     IDeleteEmployee,
     IDeleteEmployeeVariables
   >(DELETE_EMPLOYEE_DATA, {
@@ -227,6 +210,25 @@ export default function EmployeeDrawer({
     return sortedAvailabilityItems;
   }, [employee]);
 
+  const getMomentFromStringHour = (hour: string) => {
+    const dateObj = new Date();
+
+    const dateStr = dateObj
+      .toISOString()
+      .split('T')
+      .shift();
+
+    return moment(dateStr + ' ' + hour);
+  };
+
+  const defaultAvailabilityItemStartDate = useMemo(() => {
+    return getMomentFromStringHour('8:00');
+  }, []);
+
+  const defaultAvailabilityItemEndDate = useMemo(() => {
+    return getMomentFromStringHour('18:00');
+  }, []);
+
   return (
     <Form
       layout="vertical"
@@ -342,48 +344,6 @@ export default function EmployeeDrawer({
                     <Select.Option value="SUNDAY">Domingo</Select.Option>
                   </Select>
                 </Form.Item>
-                {/* <Form.Item
-                  {...restField}
-                  name={[name, 'from']}
-                  label="Desde"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Seleccionar horario!',
-                      type: 'object',
-                    },
-                  ]}
-                >
-                  <TimePicker format={'HH:mm'} minuteStep={15} />
-                </Form.Item>
-                <Form.Item
-                  {...restField}
-                  name={[name, 'to']}
-                  label="Hasta"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Seleccionar horario!',
-                      type: 'object',
-                    },
-                    {
-                      message: 'Hora de fin debe ser despues de la hora de comienzo!',
-                      validator: (_, value) => {
-                        const fieldsInfo = form.getFieldValue('schedules');
-                        const fieldInfo = fieldsInfo.find(item => item.key == restField.fieldKey);
-                        console.log('info', fieldsInfo, fieldInfo, restField.fieldKey);
-                        const isValidToTime = fieldInfo.from.isBefore(fieldInfo.to);
-                        if (isValidToTime) {
-                          return Promise.resolve();
-                        } else {
-                          return Promise.reject('Some message here');
-                        }
-                      },
-                    },
-                  ]}
-                >
-                  <TimePicker format={'HH:mm'} />
-                </Form.Item> */}
                 <Form.Item
                   {...restField}
                   name={[name, 'range']}
@@ -409,7 +369,16 @@ export default function EmployeeDrawer({
                     },
                   ]}
                 >
-                  <TimePicker.RangePicker format={'HH:mm'} minuteStep={15} picker="time" />
+                  <TimePicker.RangePicker
+                    placeholder={['Comienzo', 'Fin']}
+                    format={'HH:mm'}
+                    minuteStep={15}
+                    picker="time"
+                    defaultValue={[
+                      defaultAvailabilityItemStartDate,
+                      defaultAvailabilityItemEndDate,
+                    ]}
+                  />
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />
               </Space>
