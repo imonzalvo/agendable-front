@@ -263,8 +263,6 @@ export default function AdminCalendar({
             .hour(Number(toHour))
             .minute(Number(toMinute));
 
-          console.log('fromto', from, dateTimeMom);
-
           if (fromVal > toVal) {
             to.add(1, 'day');
           }

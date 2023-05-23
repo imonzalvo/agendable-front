@@ -102,9 +102,10 @@ const AdminLayout = (props: AdminLayoutProps) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            textAlign: 'center',
           }}
         >
-          Logo
+          {business?.landing?.displayName}
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={getTab()}>
           <Menu.Item
@@ -174,7 +175,7 @@ const AdminLayout = (props: AdminLayoutProps) => {
           className="site-layout-background"
           style={{ position: 'fixed', zIndex: 100, width: '100%' }}
         >
-          <SelectLang isAdmin />
+          {/* <SelectLang isAdmin /> */}
         </Header>
         <Content
           style={{
