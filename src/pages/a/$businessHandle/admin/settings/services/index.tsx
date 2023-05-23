@@ -86,7 +86,7 @@ export default function Services() {
               type="primary"
               onClick={() => setServiceDrawerOpen({ service: undefined, action: 'CREATE' })}
             >
-              Crear nueva sucursal
+              Crear nuevo servicio
             </Button>,
           ]}
         />

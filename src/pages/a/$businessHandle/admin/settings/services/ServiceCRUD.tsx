@@ -5,19 +5,29 @@ import { formatMessage } from 'umi-plugin-locale';
 import { useMutation } from '@apollo/client';
 import { BusinessContext } from '@/components/BussinessGetter';
 
-import { UPDATE_SERVICE_DATA, CREATE_SERVICE, GET_BUSINESS_SERVICES_DATA } from './servicesQueries';
+import {
+  UPDATE_SERVICE_DATA,
+  CREATE_SERVICE,
+  GET_BUSINESS_SERVICES_DATA,
+  DELETE_SERVICE_DATA,
+} from './servicesQueries';
 
 import {
   CreateService as ICreateService,
   CreateServiceVariables as ICreateServiceVariables,
   CreateService_createService,
 } from './__generated__/CreateService';
-
 import {
   UpdateServiceData as IUpdateServiceData,
   UpdateServiceDataVariables as IUpdateServiceDataVariables,
   UpdateServiceData_updateService,
 } from './__generated__/UpdateServiceData';
+import {
+  DeleteService as IDeleteServiceData,
+  DeleteServiceVariables as IDeleteServiceDataVariables,
+  DeleteService_deleteService,
+} from './__generated__/DeleteService';
+
 import { GetBusinessServicesData_getBusiness_services } from './__generated__/GetBusinessServicesData';
 import Spacer from '@/components/common/Spacer';
 
@@ -63,6 +73,28 @@ export default function ServiceDrawer({
     ICreateService,
     ICreateServiceVariables
   >(CREATE_SERVICE, {
+    onError: err =>
+      notification.error({
+        message: 'Ocurrió un error',
+        description: JSON.stringify(err),
+      }),
+    onCompleted: () => {
+      onDone();
+    },
+    refetchQueries: [
+      {
+        query: GET_BUSINESS_SERVICES_DATA,
+        variables: {
+          id: business.businessId,
+        },
+      },
+    ],
+  });
+
+  const [deleteService, { loading: deleteServiceLoading }] = useMutation<
+    IDeleteServiceData,
+    IDeleteServiceDataVariables
+  >(DELETE_SERVICE_DATA, {
     onError: err =>
       notification.error({
         message: 'Ocurrió un error',
@@ -190,10 +222,15 @@ export default function ServiceDrawer({
       <Spacer height={18} />
 
       <div style={{ display: 'flex' }}>
-        {/* TODO: Eliminar service */}
-        {/* <Popconfirm
+        <Popconfirm
           title="¿Eliminar sucursal? Esta acción no se puede deshacer."
-          onConfirm={() => {}}
+          onConfirm={() =>
+            deleteService({
+              variables: {
+                id: service.id,
+              },
+            })
+          }
           okText="Si, ELIMINAR"
           cancelText="No, cancelar"
           arrowPointAtCenter
@@ -203,7 +240,7 @@ export default function ServiceDrawer({
           <Button danger type="ghost" icon={<DeleteOutlined />} />
         </Popconfirm>
 
-        <Spacer width={12} /> */}
+        <Spacer width={12} />
 
         <Form.Item style={{ width: '100%' }}>
           <Button

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useMemo } from 'react';
 import {
   Form,
   Input,
@@ -9,6 +9,7 @@ import {
   Select,
   Space,
   Popconfirm,
+  TimePicker,
 } from 'antd';
 import Icon, { DeleteOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { formatMessage } from 'umi-plugin-locale';
@@ -73,7 +74,7 @@ export default function EmployeeDrawer({
 
   console.log('bus11', employee);
 
-  const TimePicker = DatePicker.TimePicker;
+  // const TimePicker = DatePicker.TimePicker;
   useEffect(() => {
     form.resetFields();
   }, [employee, action]);
@@ -137,22 +138,16 @@ export default function EmployeeDrawer({
   });
 
   const formatAvailabilityItems = (values: any) => {
-    return values.schedules.map(
-      (schedule: {
-        day: any;
-        from: { format: (arg0: string) => any };
-        to: { format: (arg0: string) => any };
-      }) => {
-        return {
-          id: schedule.id,
-          day: schedule.day,
-          from: schedule.from.format('HH:mm'),
-          to: schedule.to.format('HH:mm'),
-        };
-      },
-    );
+    return values.schedules.map(schedule => {
+      return {
+        id: schedule.id,
+        day: schedule.day,
+        from: schedule.range[0].format('HH:mm'),
+        to: schedule.range[1].format('HH:mm'),
+      };
+    });
   };
-  const onFinish = values => {
+  const onFinish = (values: any) => {
     console.log('values', values);
     const formattedAvailabilityItems: AvailabilityItemEmployeeInputType = formatAvailabilityItems(
       values,
@@ -182,11 +177,14 @@ export default function EmployeeDrawer({
     }
   };
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
-  const mapEmployeeAvailabilityItems = employee => {
+  const sortedEmployeeAvailabilityItems = useMemo(() => {
+    if (!employee) {
+      return [];
+    }
     const shuffledAvailabilityItems = employee.availability.map(item => {
       const dateObj = new Date();
 
@@ -200,8 +198,7 @@ export default function EmployeeDrawer({
       return {
         id: item.id,
         day: item.day,
-        from: fromMoment,
-        to: toMoment,
+        range: [fromMoment, toMoment],
       };
     });
 
@@ -224,12 +221,11 @@ export default function EmployeeDrawer({
         return 1;
       }
 
-      // names must be equal
       return priorityA.from.isAfter(priorityB.from);
     });
 
     return sortedAvailabilityItems;
-  };
+  }, [employee]);
 
   return (
     <Form
@@ -239,7 +235,7 @@ export default function EmployeeDrawer({
         givenName: employee?.givenName || undefined,
         familyName: employee?.familyName || undefined,
         phone: employee?.phone || undefined,
-        schedules: employee ? mapEmployeeAvailabilityItems(employee) : undefined,
+        schedules: employee ? sortedEmployeeAvailabilityItems : undefined,
       }}
       size="large"
       requiredMark="optional"
@@ -251,7 +247,7 @@ export default function EmployeeDrawer({
         givenName: employee?.givenName || undefined,
         familyName: employee?.familyName || undefined,
         phone: employee?.phone || undefined,
-        schedules: employee ? mapEmployeeAvailabilityItems(employee) : undefined,
+        schedules: employee ? sortedEmployeeAvailabilityItems : undefined,
       })}
       <Title level={4}>Datos Personales</Title>
       <Form.Item
@@ -346,7 +342,7 @@ export default function EmployeeDrawer({
                     <Select.Option value="SUNDAY">Domingo</Select.Option>
                   </Select>
                 </Form.Item>
-                <Form.Item
+                {/* <Form.Item
                   {...restField}
                   name={[name, 'from']}
                   label="Desde"
@@ -358,7 +354,7 @@ export default function EmployeeDrawer({
                     },
                   ]}
                 >
-                  <TimePicker format={'HH:mm'} />
+                  <TimePicker format={'HH:mm'} minuteStep={15} />
                 </Form.Item>
                 <Form.Item
                   {...restField}
@@ -387,13 +383,40 @@ export default function EmployeeDrawer({
                   ]}
                 >
                   <TimePicker format={'HH:mm'} />
+                </Form.Item> */}
+                <Form.Item
+                  {...restField}
+                  name={[name, 'range']}
+                  label="Rango"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Seleccionar horario!',
+                      type: 'array',
+                    },
+                    {
+                      message: 'Hora de fin debe ser despues de la hora de comienzo!',
+                      validator: (_, value) => {
+                        const from = value[0];
+                        const to = value[1];
+                        const isValidToTime = from.isBefore(to);
+                        if (isValidToTime) {
+                          return Promise.resolve();
+                        } else {
+                          return Promise.reject('Some message here');
+                        }
+                      },
+                    },
+                  ]}
+                >
+                  <TimePicker.RangePicker format={'HH:mm'} minuteStep={15} picker="time" />
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />
               </Space>
             ))}
             <Form.Item>
               <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                Add field
+                Agregar rango de horarios
               </Button>
             </Form.Item>
           </>
@@ -401,9 +424,8 @@ export default function EmployeeDrawer({
       </Form.List>
 
       <div style={{ display: 'flex' }}>
-        {/* TODO: Eliminar service */}
         <Popconfirm
-          title="¿Eliminar sucursal? Esta acción no se puede deshacer."
+          title="¿Eliminar Empleado? Esta acción no se puede deshacer."
           onConfirm={() =>
             deleteEmployee({
               variables: {

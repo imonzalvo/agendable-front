@@ -106,11 +106,6 @@ export default {
                   exact: true,
                   component: './a/$businessHandle/admin/settings/employees',
                 },
-                {
-                  path: '/a/:businessHandle/admin/settings/landing',
-                  exact: true,
-                  component: './a/$businessHandle/admin/settings/landing',
-                },
               ],
             },
             {

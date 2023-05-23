@@ -95,3 +95,11 @@ export const CREATE_SERVICE = gql`
     }
   }
 `;
+
+export const DELETE_SERVICE_DATA = gql`
+  mutation DeleteService($id: ID!) {
+    deleteService(id: $id) {
+      id
+    }
+  }
+`;
