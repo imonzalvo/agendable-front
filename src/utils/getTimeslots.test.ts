@@ -10,7 +10,7 @@ describe('getTimeslots tests', (): void => {
   moment.tz.setDefault('America/Montevideo');
   MockDate.set('2019-11-01');
   it('should return the correct dateTime if `today` is before selected date', (): void => {
-    expect(getTimeslots(availablePeriods, '2019-11-16', 30)).toEqual([
+    expect(getTimeslots(availablePeriods, '2019-11-16', 30, 15)).toEqual([
       {
         date: '2019-11-16T03:00:00-03:00',
         time: '03:00',
