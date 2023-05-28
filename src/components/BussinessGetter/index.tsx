@@ -61,7 +61,7 @@ export default function BusinessGetter({
     //     !localStorage.getItem('business')
     //   ) {
     //     localStorage.removeItem('business');
-    //     localStorage.setItem('businessHandle', businessHandle);
+    localStorage.setItem('businessHandle', businessHandle);
     //     getBusinessByHandle({ variables: { handle: businessHandle } });
     //   } else {
     //     setBusiness({
@@ -70,8 +70,7 @@ export default function BusinessGetter({
     //     });
     //   }
     // } else {
-    //   localStorage.removeItem('business');
-    //   localStorage.removeItem('businessHandle');
+    localStorage.removeItem('business');
     // }
     getBusinessByHandle({ variables: { handle: businessHandle } });
   }, [pathnameHandle, subdomain]);
