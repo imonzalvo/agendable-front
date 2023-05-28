@@ -7,15 +7,16 @@ const getPeriodTimeslots = (
   start: Moment,
   duration: number,
   to: Moment,
+  scheduleSeparation: number,
 ): { date: string; time: string }[] => {
   if (to.isBefore(moment(start).add(duration, 'm'))) {
     return [];
   }
   const newStart = moment(start);
-  newStart.add(TIME_SLOT, 'm');
+  newStart.add(scheduleSeparation, 'm');
   return [
     { date: start.format(), time: start.format('HH:mm') },
-    ...getPeriodTimeslots(newStart, duration, to),
+    ...getPeriodTimeslots(newStart, duration, to, scheduleSeparation),
   ];
 };
 
@@ -23,6 +24,7 @@ export const getTimeslots = (
   availables: { from: string; to: string }[],
   dateSelected: string,
   duration: number,
+  scheduleSeparation: number,
 ): { date: string; time: string }[] => {
   const now = moment();
   const timeslots = availables.map(available => {
@@ -42,7 +44,7 @@ export const getTimeslots = (
     // Check si el turno disponible sea despues que la hora en que quiera reservar.
     // Check si la reserva del servicio entra en el timeslot.
     if (to.isAfter(now) && to.isSameOrAfter(moment(now).add(duration, 'm'))) {
-      return getPeriodTimeslots(from, duration, to);
+      return getPeriodTimeslots(from, duration, to, scheduleSeparation);
     }
     return [];
   });

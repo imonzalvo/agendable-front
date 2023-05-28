@@ -12,6 +12,7 @@ import {
   GET_BUSINESS_BY_HANDLE_getBusinessByHandle as IGetBusinessByHandle,
   GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches,
   GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing,
+  GET_BUSINESS_BY_HANDLE_getBusinessByHandle_Configuration,
 } from './__generated__/GET_BUSINESS_BY_HANDLE';
 
 export const BusinessContext = createContext({
@@ -21,6 +22,9 @@ export const BusinessContext = createContext({
     businessId: '',
     branches: [{ id: '' }],
     landing: {
+      id: '',
+    },
+    configuration: {
       id: '',
     },
   },
@@ -84,6 +88,10 @@ export default function BusinessGetter({
           businessData,
           'landing',
         );
+        const configuration: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_Configuration | null = get(
+          businessData,
+          'Configuration',
+        );
         if (branches) {
           localStorage.setItem(
             'business',
@@ -95,6 +103,7 @@ export default function BusinessGetter({
               facebookUrl: businessData.facebookUrl,
               branches,
               landing,
+              configuration,
             }),
           );
           setBusiness({
@@ -106,6 +115,7 @@ export default function BusinessGetter({
             branches,
             landing,
             loading: false,
+            configuration,
           });
         } else {
           setBusiness({

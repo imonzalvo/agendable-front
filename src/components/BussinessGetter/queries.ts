@@ -23,6 +23,10 @@ export const GET_BUSINESS_BY_HANDLE = gql`
           url
         }
       }
+      Configuration {
+        scheduleMinutesSeparation
+        enableEmailsNotifications
+      }
     }
   }
 `;

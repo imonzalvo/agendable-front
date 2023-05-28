@@ -21,6 +21,7 @@ interface DateTimePickerProps {
   serviceDuration: number;
   handleSelectDate: (date: string) => void;
   handleDateChange: (date: Moment) => void;
+  scheduleSeparation: number;
 }
 
 moment.locale('es');
@@ -35,10 +36,11 @@ const DateTimePicker = ({
   serviceDuration,
   handleSelectDate,
   handleDateChange,
+  scheduleSeparation,
 }: DateTimePickerProps) => {
   const [date, setDate] = useState();
   const timeslots = date
-    ? getTimeslots(availablePeriods, date.format('YYYY-MM-DD'), serviceDuration)
+    ? getTimeslots(availablePeriods, date.format('YYYY-MM-DD'), serviceDuration, scheduleSeparation)
     : [];
   const spring = useSpring({
     from: { opacity: 0 },

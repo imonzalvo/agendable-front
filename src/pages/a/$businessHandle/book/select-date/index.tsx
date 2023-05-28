@@ -3,12 +3,15 @@ import router from 'umi/router';
 
 import SelectDateComponent from '@/components/SelectDate';
 import { BookingContext } from '@/layouts';
+import { BusinessContext } from '@/components/BussinessGetter';
 
 const SelectDate = () => {
   const { bookData, setBookData } = useContext(BookingContext);
+  const { business } = useContext(BusinessContext);
 
   const { professional, service } = bookData;
   const serviceDuration = service.duration;
+  const scheduleSeparation = business.configuration.scheduleMinutesSeparation;
 
   const selectDate = (date: string) => {
     setBookData({ ...bookData, date });
@@ -21,6 +24,7 @@ const SelectDate = () => {
         professionalId={professional.id}
         serviceDuration={serviceDuration}
         handleSelectDate={selectDate}
+        scheduleSeparation={scheduleSeparation}
       />
     );
   }

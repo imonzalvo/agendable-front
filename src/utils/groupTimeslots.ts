@@ -49,11 +49,11 @@ export const getText = (category: Category): string => {
     case 'NIGHT':
       return 'Night (24 - 7)';
     case 'MORNING':
-      return 'Morning (7 - 12)';
+      return 'Mañana (7 - 12)';
     case 'AFTERNOON':
-      return 'Afternoon (12 - 17)';
+      return 'Tarde (12 - 17)';
     case 'EVENING':
-      return 'Evening (17 - 24)';
+      return 'Noche (17 - 24)';
   }
 };
 

@@ -9,11 +9,17 @@ interface SelectDateProps {
   professionalId: string;
   serviceDuration: number;
   handleSelectDate: (date: string) => void;
+  scheduleSeparation: number;
 }
 
 const today = moment().format();
 
-const SelectDate = ({ professionalId, serviceDuration, handleSelectDate }: SelectDateProps) => {
+const SelectDate = ({
+  professionalId,
+  serviceDuration,
+  handleSelectDate,
+  scheduleSeparation,
+}: SelectDateProps) => {
   const [date, setDate] = useState(today);
   const response = useQuery(GetEmployeeAvailableTime, {
     variables: { id: professionalId, duration: serviceDuration, date },
@@ -32,6 +38,7 @@ const SelectDate = ({ professionalId, serviceDuration, handleSelectDate }: Selec
       handleSelectDate={handleSelectDate}
       isLoading={response.loading}
       handleDateChange={(date: Moment) => setDate(date.format())}
+      scheduleSeparation={scheduleSeparation}
     />
   );
 };

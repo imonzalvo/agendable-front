@@ -29,6 +29,12 @@ export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing {
   images: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing_images[];
 }
 
+export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_Configuration {
+  __typename: 'Configuration';
+  scheduleMinutesSeparation: number;
+  enableEmailsNotifications: boolean;
+}
+
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle {
   __typename: 'Business';
   id: string;
@@ -38,6 +44,7 @@ export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle {
   facebookUrl: string | null;
   branches: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches[];
   landing: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing | null;
+  Configuration: GET_BUSINESS_BY_HANDLE_getBusinessByHandle_Configuration | null;
 }
 
 export interface GET_BUSINESS_BY_HANDLE {
