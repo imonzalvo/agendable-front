@@ -46,7 +46,6 @@ export default function BusinessGetter({
   const [business, setBusiness] = useState(initialState);
   const [getBusinessByHandle, { data, error }] = useLazyQuery<IGetBusinessByHandle>(
     GET_BUSINESS_BY_HANDLE,
-    { fetchPolicy: 'network-only', nextFetchPolicy: 'no-cache' },
   );
 
   const pathnameHandle = parsePathnameHandle(pathname);
@@ -54,24 +53,27 @@ export default function BusinessGetter({
   useEffect(() => {
     console.log('name', subdomain, pathnameHandle);
     const businessHandle = pathnameHandle;
-    if (businessHandle) {
-      if (
-        localStorage.getItem('businessHandle') !== businessHandle ||
-        !localStorage.getItem('business')
-      ) {
-        localStorage.removeItem('business');
-        localStorage.setItem('businessHandle', businessHandle);
-        getBusinessByHandle({ variables: { handle: businessHandle } });
-      } else {
-        setBusiness({
-          ...business,
-          loading: false,
-        });
-      }
-    } else {
-      localStorage.removeItem('business');
-      localStorage.removeItem('businessHandle');
-    }
+
+    // TODO: Removed this. Should think about a smarter way to cache things
+    // if (businessHandle) {
+    //   if (
+    //     localStorage.getItem('businessHandle') !== businessHandle ||
+    //     !localStorage.getItem('business')
+    //   ) {
+    //     localStorage.removeItem('business');
+    //     localStorage.setItem('businessHandle', businessHandle);
+    //     getBusinessByHandle({ variables: { handle: businessHandle } });
+    //   } else {
+    //     setBusiness({
+    //       ...business,
+    //       loading: false,
+    //     });
+    //   }
+    // } else {
+    //   localStorage.removeItem('business');
+    //   localStorage.removeItem('businessHandle');
+    // }
+    getBusinessByHandle({ variables: { handle: businessHandle } });
   }, [pathnameHandle, subdomain]);
 
   // TODO: Refactor this method using optional chaining.
