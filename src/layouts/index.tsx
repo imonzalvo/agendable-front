@@ -84,7 +84,7 @@ const Layout = ({ children, location }: LayoutProps) => {
   const [steps, setSteps] = useState(5);
   const subdomain = useSubdomain();
 
-  const url = 'https://agendable-dev.onrender.com/graphql';
+  const url = 'http://localhost:4000/graphql';
 
   const httpLink = createHttpLink({ uri: url });
 
@@ -103,7 +103,7 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: 'wss://agendable-dev.onrender.com/graphql',
+      url: 'wss://localhost:4000/graphql',
     }),
   );
 
@@ -135,7 +135,6 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const locale = getLocale() === 'es-ES' ? es : en;
 
-  console.log('client', client, !client);
   return (
     <ErrorBoundary>
       {!client ? (
@@ -144,7 +143,6 @@ const Layout = ({ children, location }: LayoutProps) => {
         <ApolloProvider client={client}>
           <ConfigProvider locale={locale}>
             <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
-              {console.log('hola', bookData, steps)}
               <BookingContext.Provider
                 value={{
                   bookData,
