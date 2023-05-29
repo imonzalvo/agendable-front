@@ -7,7 +7,7 @@ const isUrl = (path: string): boolean => reg.test(path);
 const getUrl = (path: string) => {
   // TODO: Fix later
   if (!useSubdomain() || true) {
-    return `/a/${window.localStorage.getItem('businessHandle')}/${path}`;
+    return `/${window.localStorage.getItem('businessHandle')}/${path}`;
   }
   return `/${path}`;
 };

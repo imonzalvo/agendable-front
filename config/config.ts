@@ -67,54 +67,54 @@ export default {
           component: './404',
         },
         {
-          path: '/a/:businessHandle',
+          path: '/:businessHandle',
           exact: true,
           component: './a/$businessHandle',
         },
         {
-          path: '/a/:businessHandle/admin',
+          path: '/:businessHandle/admin',
           exact: false,
           component: './a/$businessHandle/admin/_layout.tsx',
           routes: [
             {
-              path: '/a/:businessHandle/admin',
+              path: '/:businessHandle/admin',
               exact: true,
               component: './a/$businessHandle/admin',
             },
             {
-              path: '/a/:businessHandle/admin/settings',
+              path: '/:businessHandle/admin/settings',
               exact: false,
               component: './a/$businessHandle/admin/settings/_layout.tsx',
               routes: [
                 {
-                  path: '/a/:businessHandle/admin/settings/business',
+                  path: '/:businessHandle/admin/settings/business',
                   exact: true,
                   component: './a/$businessHandle/admin/settings/business',
                 },
                 {
-                  path: '/a/:businessHandle/admin/settings/branches',
+                  path: '/:businessHandle/admin/settings/branches',
                   exact: true,
                   component: './a/$businessHandle/admin/settings/branches',
                 },
                 {
-                  path: '/a/:businessHandle/admin/settings/services',
+                  path: '/:businessHandle/admin/settings/services',
                   exact: true,
                   component: './a/$businessHandle/admin/settings/services',
                 },
                 {
-                  path: '/a/:businessHandle/admin/settings/employees',
+                  path: '/:businessHandle/admin/settings/employees',
                   exact: true,
                   component: './a/$businessHandle/admin/settings/employees',
                 },
               ],
             },
             {
-              path: '/a/:businessHandle/admin/landing-settings',
+              path: '/:businessHandle/admin/landing-settings',
               exact: false,
               component: './a/$businessHandle/admin/landing-settings/_layout.tsx',
               routes: [
                 {
-                  path: '/a/:businessHandle/admin/landing-settings',
+                  path: '/:businessHandle/admin/landing-settings',
                   exact: true,
                   component: './a/$businessHandle/admin/landing-settings',
                 },
@@ -123,47 +123,47 @@ export default {
           ],
         },
         {
-          path: '/a/:businessHandle/book/success',
+          path: '/:businessHandle/book/success',
           exact: true,
           component: './a/$businessHandle/book/success',
         },
         {
-          path: '/a/:businessHandle/book/summary',
+          path: '/:businessHandle/book/summary',
           exact: true,
           component: './a/$businessHandle/book/summary',
         },
         {
-          path: '/a/:businessHandle/book',
+          path: '/:businessHandle/book',
           exact: false,
           component: './a/$businessHandle/book/_layout.tsx',
           routes: [
             {
-              path: '/a/:businessHandle/book',
+              path: '/:businessHandle/book',
               exact: true,
               component: './a/$businessHandle/book',
             },
             {
-              path: '/a/:businessHandle/book/confirm',
+              path: '/:businessHandle/book/confirm',
               exact: true,
               component: './a/$businessHandle/book/confirm',
             },
             {
-              path: '/a/:businessHandle/book/select-branch',
+              path: '/:businessHandle/book/select-branch',
               exact: true,
               component: './a/$businessHandle/book/select-branch',
             },
             {
-              path: '/a/:businessHandle/book/select-professional',
+              path: '/:businessHandle/book/select-professional',
               exact: true,
               component: './a/$businessHandle/book/select-professional',
             },
             {
-              path: '/a/:businessHandle/book/select-date',
+              path: '/:businessHandle/book/select-date',
               exact: true,
               component: './a/$businessHandle/book/select-date',
             },
             {
-              path: '/a/:businessHandle/book/select-service',
+              path: '/:businessHandle/book/select-service',
               exact: true,
               component: './a/$businessHandle/book/select-service',
             },
