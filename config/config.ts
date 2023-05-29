@@ -308,7 +308,7 @@ export default {
     basePath: '/app',
   },
   chainWebpack: webpackPlugin,
-  base: '/app',
-  // publicPath: '/app/',
+  // base: '/app',
+  publicPath: '/app/',
   // runtimePublicPath: true,
 } as IConfig;
