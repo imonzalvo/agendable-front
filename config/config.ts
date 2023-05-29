@@ -305,7 +305,7 @@ export default {
     },
   },
   manifest: {
-    basePath: '/app',
+    basePath: '/',
   },
   chainWebpack: webpackPlugin,
   // base: '/app',
