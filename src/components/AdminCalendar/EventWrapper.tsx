@@ -13,7 +13,7 @@ import EventWrapperGlobalStyles, { Section, Price } from './eventWrapperStyles';
 import getColor from '@/utils/getColor';
 import { GetBookingsForBranch_getBranch_bookings_items_services as Services } from '@/components/AdminCalendar/__generated__/GetBookingsForBranch';
 import { GetBranchEmployees_getBranch_employees_items as Employee } from '@/queries/__generated__/GetBranchEmployees';
-import { ModalState } from '@/pages/a/$businessHandle/admin';
+import { ModalState } from '@/pages/app/$businessHandle/admin';
 
 const { Meta } = Card;
 const { Title, Text } = Typography;

@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UpdateAvailabilityItemEmployeeInputType } from './../../../../../../../../__generated__/globalTypes';
+import { UpdateAvailabilityItemEmployeeInputType } from '../../../../../../../../__generated__/globalTypes';
 
 // ====================================================
 // GraphQL mutation operation: UpdateEmployeeData

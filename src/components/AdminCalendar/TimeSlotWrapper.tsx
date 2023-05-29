@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment-timezone';
-import { ModalState } from '@/pages/a/$businessHandle/admin';
+import { ModalState } from '@/pages/app/$businessHandle/admin';
 
 function TimeGutter(props) {
   const splitTime = (time: String) => {

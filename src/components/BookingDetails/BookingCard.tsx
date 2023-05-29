@@ -10,7 +10,7 @@ import { QueryResult } from '@apollo/client';
 import { useResponsive } from 'react-hooks-responsive';
 
 import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
-import { BookingState } from '@/pages/a/$businessHandle/admin/index.tsx';
+import { BookingState } from '@/pages/app/$businessHandle/admin';
 import generateTimesAtIntervals from '@/utils/generateTimesAtIntervals';
 import useEffectSkipMount from '@/hooks/useEffectSkipMount';
 import { formatMessage } from 'umi-plugin-locale';

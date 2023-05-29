@@ -135,7 +135,7 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const locale = getLocale() === 'es-ES' ? es : en;
 
-  console.log('client', client, !client);
+  console.log('client', client, !client, location.pathname, subdomain);
   return (
     <ErrorBoundary>
       {!client ? (

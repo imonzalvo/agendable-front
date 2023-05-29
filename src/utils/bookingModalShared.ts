@@ -5,7 +5,7 @@ import { Modal } from 'antd';
 import { QueryResult } from '@apollo/client';
 import { formatMessage } from 'umi-plugin-locale';
 
-import { BookingState } from '@/pages/a/$businessHandle/admin';
+import { BookingState } from '@/pages/app/$businessHandle/admin';
 import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
 
 export const validateBookings = (
