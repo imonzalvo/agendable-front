@@ -5,7 +5,7 @@ import { setLocale, getLocale } from 'umi-plugin-locale';
 
 import useSubdomain from '@/hooks/useSubdomain';
 import themeColorClient from '@/components/SettingDrawer/themeColorClient';
-import BusinessIndex from '@/pages/app/$businessHandle';
+import BusinessIndex from '@/pages/a/$businessHandle';
 
 const { Title } = Typography;
 

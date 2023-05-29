@@ -22,7 +22,7 @@ import {
   confirmCancel,
 } from '@/utils/bookingModalShared';
 import { GetBookingsForBranch } from '@/components/AdminCalendar/queries';
-import { ModalState, BookingState } from '@/pages/app/$businessHandle/admin';
+import { ModalState, BookingState } from '@/pages/a/$businessHandle/admin';
 import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 

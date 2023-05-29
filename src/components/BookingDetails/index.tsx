@@ -10,7 +10,7 @@ import { formatMessage } from 'umi-plugin-locale';
 
 import { GetBranchServices as GetBranchServicesType } from '@/queries/__generated__/GetBranchServices';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
-import { BookingState } from '@/pages/app/$businessHandle/admin';
+import { BookingState } from '@/pages/a/$businessHandle/admin';
 import BookingCard from '@/components/BookingDetails/BookingCard';
 
 moment.locale('es');

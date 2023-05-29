@@ -18,7 +18,7 @@ import TimeSlotWrapper from './TimeSlotWrapper';
 import Toolbar from './Toolbar';
 import ResourceHeader from './ResourceHeader';
 import EventWrapper from './EventWrapper';
-import { ModalState } from '@/pages/app/$businessHandle/admin';
+import { ModalState } from '@/pages/a/$businessHandle/admin';
 import { GetBookingsForBranch as IGetBookingsForBranch } from './__generated__/GetBookingsForBranch';
 import { GetBranchEmployees as IGetBranchEmployees } from '@/queries/__generated__/GetBranchEmployees';
 import BigCalendarStyles from './bigCalendarStyles';
