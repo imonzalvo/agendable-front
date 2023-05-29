@@ -51,9 +51,6 @@ export default (config: any) => {
   ]);
   // }
 
-  config.resolve.alias.set('/', 'path/to/a');
-
-
   // optimize chunks
   config.optimization
     // share the same chunks across different modules
