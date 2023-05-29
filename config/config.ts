@@ -305,7 +305,10 @@ export default {
     },
   },
   manifest: {
-    basePath: '/a',
+    basePath: '/app',
   },
   chainWebpack: webpackPlugin,
+  base: '/app',
+  publicPath: '/app/',
+  runtimePublicPath: true,
 } as IConfig;
