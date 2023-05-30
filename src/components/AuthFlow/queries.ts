@@ -77,3 +77,23 @@ export const SET_UP_BUSINESS = gql`
     }
   }
 `;
+
+export const SET_UP_SERVICES = gql`
+  mutation SetUpServices(
+    $currency: String!
+    $description: String!
+    $duration: Int!
+    $name: String!
+    $price: Float!
+  ) {
+    setUpServices(
+      currency: $currency
+      description: $description
+      duration: $duration
+      name: $name
+      price: $price
+    ) {
+      id
+    }
+  }
+`;

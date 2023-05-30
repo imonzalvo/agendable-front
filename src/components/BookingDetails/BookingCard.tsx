@@ -18,6 +18,61 @@ import { formatMessage } from 'umi-plugin-locale';
 const { Option } = Select;
 momentDurationFormatSetup(moment);
 
+export const getDurations = () => {
+  const durations = [
+    300,
+    600,
+    900,
+    1200,
+    1500,
+    1800,
+    2100,
+    2400,
+    2700,
+    3000,
+    3300,
+    3600,
+    3900,
+    4200,
+    4500,
+    4800,
+    5100,
+    5400,
+    5700,
+    6000,
+    6300,
+    6600,
+    6900,
+    7200,
+    8100,
+    9000,
+    9900,
+    10800,
+    11700,
+    12600,
+    13500,
+    14400,
+    16200,
+    18000,
+    19800,
+    21600,
+    23400,
+    25200,
+    27000,
+    28800,
+    32400,
+    36000,
+    39600,
+    43200,
+  ];
+
+  return durations.map(duration => (
+    <Option value={duration}>
+      {moment.duration(duration, 's').format('h[h] m[min]', { trim: 'both' })}
+    </Option>
+  ));
+};
+
 export interface BookingCardProps extends BookingState {
   date: Moment;
   servicesResponse: QueryResult<GetBranchServicesType, Record<string, any>>;
@@ -87,61 +142,6 @@ export default function BookingCard({
         .dayOfYear(date.dayOfYear());
       return <Option value={timeMoment.format()}>{timeMoment.format('LT')}</Option>;
     });
-  };
-
-  const getDurations = () => {
-    const durations = [
-      300,
-      600,
-      900,
-      1200,
-      1500,
-      1800,
-      2100,
-      2400,
-      2700,
-      3000,
-      3300,
-      3600,
-      3900,
-      4200,
-      4500,
-      4800,
-      5100,
-      5400,
-      5700,
-      6000,
-      6300,
-      6600,
-      6900,
-      7200,
-      8100,
-      9000,
-      9900,
-      10800,
-      11700,
-      12600,
-      13500,
-      14400,
-      16200,
-      18000,
-      19800,
-      21600,
-      23400,
-      25200,
-      27000,
-      28800,
-      32400,
-      36000,
-      39600,
-      43200,
-    ];
-
-    return durations.map(duration => (
-      <Option value={duration}>
-        {moment.duration(duration, 's').format('h[h] m[min]', { trim: 'both' })}
-      </Option>
-    ));
   };
 
   const firstColProps = screenIsAtLeast('sm')

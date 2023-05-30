@@ -145,18 +145,22 @@ const Layout = ({ children, location }: LayoutProps) => {
           <ConfigProvider locale={locale}>
             <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
               {console.log('hola', bookData, steps)}
-              <BookingContext.Provider
-                value={{
-                  bookData,
-                  setBookData,
-                  steps,
-                  setSteps,
-                }}
-              >
-                <BusinessGetter pathname={location.pathname} subdomain={subdomain}>
-                  {children}
-                </BusinessGetter>
-              </BookingContext.Provider>
+              {location.pathname.includes('signup') ? (
+                children
+              ) : (
+                <BookingContext.Provider
+                  value={{
+                    bookData,
+                    setBookData,
+                    steps,
+                    setSteps,
+                  }}
+                >
+                  <BusinessGetter pathname={location.pathname} subdomain={subdomain}>
+                    {children}
+                  </BusinessGetter>
+                </BookingContext.Provider>
+              )}
             </AuthContext.Provider>
           </ConfigProvider>
         </ApolloProvider>

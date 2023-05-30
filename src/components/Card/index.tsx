@@ -25,7 +25,8 @@ interface CustomCardProps {
   details: string;
   handleClick: (entity: any) => void;
   service?: ServiceDetail;
-  entity: any;
+  entity?: any;
+  hasActions?: boolean;
 }
 
 const CustomCard = ({
@@ -37,6 +38,7 @@ const CustomCard = ({
   handleClick,
   service,
   entity,
+  hasActions = true,
 }: CustomCardProps) => {
   const [isSelected, setSelected] = useState(false);
 
@@ -94,7 +96,7 @@ const CustomCard = ({
   return (
     <AnimatedCard
       cover={image ? <Image alt="header" src={image} /> : null}
-      actions={[renderAction()]}
+      actions={!hasActions ? [] : [renderAction()]}
       loading={loading}
       size="small"
     >

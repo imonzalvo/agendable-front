@@ -21,8 +21,7 @@ function SignUp3rdStep({ form, email }: ISignUpFormProps): JSX.Element {
   const [confirmUserMutate, { data, loading: isLoading }] = useMutation(CONFIRM_USER, {
     onCompleted: data => {
       message.success('Successfully Signed In!');
-      console.log('data', data.confirmUser);
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.confirmUser.token);
       setAuthenticated(true);
     },
     onError: err => {

@@ -1,9 +1,33 @@
-import React from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, Button, message } from 'antd';
+import { useMutation } from '@apollo/client';
+import { SET_UP_BUSINESS } from '@/components/AuthFlow/queries';
+import { formatMessage } from 'umi-plugin-react/locale';
+interface BusinessFormProps {
+  setCurrentStep: (step: number) => void;
+}
 
-const BusinessForm = () => {
+const formatToDomain = (text: string) => {
+  const lowerText = text.toLowerCase();
+  return lowerText.replaceAll(/\s/g, '-');
+};
+
+const BusinessForm = ({ setCurrentStep }: BusinessFormProps) => {
+  const [domain, setDomain] = useState('');
+  const [signUpMutate, { data, loading: isLoading }] = useMutation(SET_UP_BUSINESS, {
+    onCompleted: () => {
+      setCurrentStep(1);
+    },
+    onError: err => message.error(JSON.stringify(err)),
+  });
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
+    signUpMutate({
+      variables: {
+        ...values,
+      },
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -24,15 +48,24 @@ const BusinessForm = () => {
         name="name"
         rules={[{ required: true, message: 'Please input the name!' }]}
       >
-        <Input />
+        <Input onChange={e => setDomain(formatToDomain(e.target.value))} />
       </Form.Item>
 
       <Form.Item
-        label="Handle"
+        label="Dominio"
         name="handle"
-        rules={[{ required: true, message: 'Please input the handle!' }]}
+        rules={[
+          {
+            type: 'string',
+            message: formatMessage({ id: 'message.inputError' }, { input: 'Dominio' }),
+          },
+          {
+            required: true,
+            message: formatMessage({ id: 'message.inputMissing' }, { input: 'dominio' }),
+          },
+        ]}
       >
-        <Input />
+        <Input placeholder={domain} addonAfter=".agendable.io" />
       </Form.Item>
       <Form.Item
         label="Phone"
@@ -49,9 +82,16 @@ const BusinessForm = () => {
         <Input />
       </Form.Item>
       <Form.Item
+        label="Address"
+        name="address"
+        rules={[{ required: true, message: 'Please input the address!' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
         label="Description"
         name="description"
-        // rules={[{ required: true, message: 'Please input the email!' }]}
+        rules={[{ required: true, message: 'Please input the description!' }]}
       >
         <Input.TextArea />
       </Form.Item>
