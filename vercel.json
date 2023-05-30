@@ -5,7 +5,7 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "delparque.agendable.io"
+                    "value": "delparque.app.agendable.io"
                 }
             ],
             "destination": "/a/delparque/:path*"
