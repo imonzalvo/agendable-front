@@ -12,5 +12,15 @@
             "source": "/app/:match*",
             "destination": "/:match*"
         }
+    ],
+    "redirect": [
+        {
+            "source": "/app",
+            "destination": "/"
+        },
+        {
+            "source": "/app/:match*",
+            "destination": "/:match*"
+        }
     ]
 }
