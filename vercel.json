@@ -12,7 +12,7 @@
         },
         {
             "source": "/:path*",
-            "destination": "/a/delparque/:path*"
+            "destination": "/a/:subdomain/:path*"
         },
         {
             "source": "/app",
