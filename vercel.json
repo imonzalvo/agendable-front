@@ -2,12 +2,6 @@
     "rewrites": [
         {
             "source": "/:path*",
-            "has": [
-                {
-                    "type": "host",
-                    "value": "(?<subdomain>.*)"
-                }
-            ],
             "destination": "/a/delparque/:subdomain"
         }
     ]
