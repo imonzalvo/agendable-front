@@ -8,10 +8,6 @@
                     "value": "(?<subdomain>.*).agendable.io"
                 }
             ],
-            "destination": "/:path*"
-        },
-        {
-            "source": "/:path*",
             "destination": "/a/:subdomain/:path*"
         },
         {
