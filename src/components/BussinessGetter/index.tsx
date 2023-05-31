@@ -48,7 +48,11 @@ export default function BusinessGetter({
     GET_BUSINESS_BY_HANDLE,
   );
 
+  console.log('pathname', window.location.hostname);
+
   const pathnameHandle = parsePathnameHandle(pathname);
+
+  console.log('pathname', pathnameHandle);
 
   useEffect(() => {
     console.log('name', subdomain, pathnameHandle);

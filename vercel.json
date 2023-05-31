@@ -3,6 +3,14 @@
         {
             "source": "/:path*",
             "destination": "/a/delparque/"
+        },
+        {
+            "source": "/app",
+            "destination": "https://app.agendable.io/"
+        },
+        {
+            "source": "/app/:match*",
+            "destination": "https://app.agendable.io/:match*"
         }
     ]
 }
