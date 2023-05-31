@@ -21,6 +21,16 @@
         {
             "source": "/app/:match*",
             "destination": "/:match*"
+        },
+        {
+            "source": "/app/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "(?<subdomain>.*).agendable.io"
+                }
+            ],
+            "destination": "/:path*"
         }
     ],
     "redirects": [
