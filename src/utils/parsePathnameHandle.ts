@@ -7,7 +7,10 @@ export const parsePathnameHandle = (pathname: string) => {
   const isShortPathBusinessDomain =
     separatedLocation.length == 3 && !separatedLocation.includes('www');
 
-  if (isLongPathBusinessDomain || isShortPathBusinessDomain) {
+  if (
+    (isLongPathBusinessDomain || isShortPathBusinessDomain) &&
+    separatedLocation[separatedLocation.length - 3] != 'app'
+  ) {
     return separatedLocation[separatedLocation.length - 3];
   }
 
