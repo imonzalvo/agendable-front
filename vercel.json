@@ -6,11 +6,11 @@
         },
         {
             "source": "/app",
-            "destination": "https://app.agendable.io/"
+            "destination": "/"
         },
         {
             "source": "/app/:match*",
-            "destination": "https://app.agendable.io/:match*"
+            "destination": "/:match*"
         }
     ]
 }
