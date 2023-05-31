@@ -2,8 +2,28 @@
     "rewrites": [
         {
             "source": "/:path*",
-            "destination": "/a/delparque/"
+            "has": [
+                {
+                    "type": "host",
+                    "value": "(?<subdomain>.*).agendable.io"
+                }
+            ],
+            "destination": "/:path*"
         },
+        {
+            "source": "/:path*",
+            "destination": "/a/delparque/:path*"
+        },
+        {
+            "source": "/app",
+            "destination": "/"
+        },
+        {
+            "source": "/app/:match*",
+            "destination": "/:match*"
+        }
+    ],
+    "redirects": [
         {
             "source": "/app",
             "destination": "/"
