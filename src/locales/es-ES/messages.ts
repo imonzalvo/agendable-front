@@ -13,4 +13,5 @@ export default {
   'message.close': 'Si, cerrar',
   'message.keepOpen': 'No',
   'message.actionIrreversible': 'Esta acción es irreversible',
+  'form.verifyToken': 'Codigo de verificación',
 };

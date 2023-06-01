@@ -257,7 +257,7 @@ const EmployeeForm = () => {
 
     setUser(updatedUser);
     localStorage.setItem('user', JSON.stringify(updatedUser));
-    router.replace(`/a/${user.business.handle}`);
+    router.replace(`/a/${user.business.handle}/admin`);
   };
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>

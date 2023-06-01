@@ -52,6 +52,7 @@ export const CONFIRM_USER = gql`
     confirmUser(email: $email, verifyToken: $verifyToken) {
       token
       user {
+        id
         email
       }
     }
