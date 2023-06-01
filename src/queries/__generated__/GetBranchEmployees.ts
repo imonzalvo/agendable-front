@@ -8,19 +8,19 @@
 // ====================================================
 
 export interface GetBranchEmployees_getBranch_employees_services {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
 }
 
 export interface GetBranchEmployees_getBranch_employees_availability {
-  __typename: 'AvailabilityItem';
+  __typename: "AvailabilityItem";
   day: string;
   from: string;
   to: string;
 }
 
 export interface GetBranchEmployees_getBranch_employees {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
   familyName: string;
   givenName: string;
@@ -29,7 +29,7 @@ export interface GetBranchEmployees_getBranch_employees {
 }
 
 export interface GetBranchEmployees_getBranch {
-  __typename: 'Branch';
+  __typename: "Branch";
   employees: GetBranchEmployees_getBranch_employees[];
 }
 

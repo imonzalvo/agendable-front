@@ -1,0 +1,55 @@
+@import 'variables';
+
+.@{stepsPrefixClass}-small {
+  .@{stepsPrefixClass}-item-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 18px;
+    > .@{stepsPrefixClass}-icon {
+      top: -1px;
+      font-size: 12px;
+      font-size: ~"9px \9"; // ie8-9
+      transform: scale(.75);
+    }
+  }
+  .@{stepsPrefixClass}-item-content {
+    margin-top: 0;
+  }
+  .@{stepsPrefixClass}-item-title {
+    margin-bottom: 4px;
+    color: #666;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  .@{stepsPrefixClass}-item-description {
+    color: #999;
+    font-size: 12px;
+  }
+  .@{stepsPrefixClass}-item-tail {
+    top: 8px;
+    padding: 0 8px;
+    &::after {
+      width: 100%;
+      height: 1px;
+      border-radius: 1px;
+    }
+  }
+
+  .@{stepsPrefixClass}-item-custom .@{stepsPrefixClass}-item-icon  {
+    width: inherit;
+    height: inherit;
+    line-height: inherit;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    > .@{stepsPrefixClass}-icon {
+      top: -2.5px;
+      font-size: 20px;
+      transform: none;
+    }
+  }
+}

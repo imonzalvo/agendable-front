@@ -8,14 +8,14 @@
 // ====================================================
 
 export interface UpdateServiceData_updateService_employees {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
   givenName: string;
   familyName: string;
 }
 
 export interface UpdateServiceData_updateService {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
   name: string;
   duration: number;

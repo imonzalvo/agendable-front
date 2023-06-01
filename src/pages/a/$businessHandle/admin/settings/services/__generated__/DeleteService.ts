@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface DeleteService_deleteService {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
 }
 

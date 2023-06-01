@@ -8,12 +8,12 @@
 // ====================================================
 
 export interface CONFIRM_USER_confirmUser_user {
-  __typename: 'User';
+  __typename: "User";
   email: string;
 }
 
 export interface CONFIRM_USER_confirmUser {
-  __typename: 'AuthPayload';
+  __typename: "AuthPayload";
   token: string | null;
   user: CONFIRM_USER_confirmUser_user | null;
 }

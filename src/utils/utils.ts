@@ -30,6 +30,20 @@ const getCurrentStep = (): number => {
   }
 };
 
+const getCurrentStepBusinessSignup = (): number => {
+  const currentUrl = location.pathname.split('/').pop();
+  switch (currentUrl) {
+    case 'setup-business':
+      return 0;
+    case 'setup-services':
+      return 1;
+    case 'setup-professionals':
+      return 2;
+    default:
+      return 0;
+  }
+};
+
 const isAntDesignPro = (): boolean => {
   if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
     return true;
@@ -53,4 +67,12 @@ const defaultScreenSizes = {
   lg: 768,
 };
 
-export { isAntDesignProOrDev, isAntDesignPro, isUrl, getUrl, defaultScreenSizes, getCurrentStep };
+export {
+  isAntDesignProOrDev,
+  isAntDesignPro,
+  isUrl,
+  getUrl,
+  defaultScreenSizes,
+  getCurrentStep,
+  getCurrentStepBusinessSignup,
+};

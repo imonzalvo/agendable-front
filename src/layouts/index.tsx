@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { setContext } from '@apollo/client/link/context';
@@ -32,8 +32,12 @@ const ErrorBoundary = bugsnagClient.getPlugin('react');
 const renderSpin = () => <PageLoading />;
 
 export const AuthContext = React.createContext({
+  user: {
+    id: '',
+  },
   isAuthenticated: false,
   setAuthenticated: (_value: boolean) => {},
+  setUser: (_value: any) => {},
 });
 
 interface BookDataProps {
@@ -68,12 +72,22 @@ export const BookingContext = React.createContext({
   setSteps: (_value: number) => {},
 });
 
+export const SignupContext = React.createContext({
+  businessData: {
+    id: '',
+  },
+  setBusinessData: (_data: any) => {},
+  steps: 0,
+  setSteps: (_value: number) => {},
+});
+
 interface LayoutProps extends RouterTypes {
   children: any;
 }
 
 const Layout = ({ children, location }: LayoutProps) => {
   const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem('token'));
+  const [user, setUser] = useState(localStorage.getItem('user'));
   const [bookData, setBookData] = useState({
     branch: null,
     service: { id: undefined, duration: undefined, price: undefined, name: undefined },
@@ -84,7 +98,16 @@ const Layout = ({ children, location }: LayoutProps) => {
   const [steps, setSteps] = useState(5);
   const subdomain = useSubdomain();
 
-  const url = 'https://agendable-dev.onrender.com/graphql';
+  const parsedUser = useMemo(() => {
+    if (!!user) {
+      console.log("user??", user)
+      return JSON.parse(user);
+    }
+
+    return null;
+  }, [user]);
+
+  const url = 'http://localhost:4000/graphql';
 
   const httpLink = createHttpLink({ uri: url });
 
@@ -103,7 +126,7 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: 'wss://agendable-dev.onrender.com/graphql',
+      url: 'wss://localhost:4000/graphql',
     }),
   );
 
@@ -143,7 +166,9 @@ const Layout = ({ children, location }: LayoutProps) => {
       ) : (
         <ApolloProvider client={client}>
           <ConfigProvider locale={locale}>
-            <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
+            <AuthContext.Provider
+              value={{ isAuthenticated, setAuthenticated, user: parsedUser, setUser }}
+            >
               {console.log('hola', bookData, steps)}
               {location.pathname.includes('signup') ? (
                 children

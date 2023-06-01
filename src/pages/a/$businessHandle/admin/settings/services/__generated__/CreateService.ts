@@ -8,14 +8,14 @@
 // ====================================================
 
 export interface CreateService_createService_employees {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
   givenName: string;
   familyName: string;
 }
 
 export interface CreateService_createService {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
   name: string;
   duration: number;

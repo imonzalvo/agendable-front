@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface DeleteEmployee_deleteEmployee {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
 }
 

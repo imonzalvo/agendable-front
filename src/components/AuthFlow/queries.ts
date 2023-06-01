@@ -32,6 +32,9 @@ export const LOGIN = gql`
     login(email: $email, password: $password) {
       user {
         name
+        business {
+          id
+        }
       }
       token
     }
@@ -68,32 +71,38 @@ export const SET_UP_BUSINESS = gql`
       description: $description
     ) {
       id
-      categories {
-        id
-      }
+      name
+      website
+      instagramUrl
+      facebookUrl
       branches {
         id
+        address
+      }
+      landing {
+        id
+        displayName
+        cta
+        description
+      }
+      Configuration {
+        scheduleMinutesSeparation
+        enableEmailsNotifications
       }
     }
   }
 `;
 
 export const SET_UP_SERVICES = gql`
-  mutation SetUpServices(
-    $currency: String!
-    $description: String!
-    $duration: Int!
-    $name: String!
-    $price: Float!
-  ) {
-    setUpServices(
-      currency: $currency
-      description: $description
-      duration: $duration
-      name: $name
-      price: $price
-    ) {
-      id
+  mutation SetUpServices($data: [CreateServicesInputType]) {
+    setUpServices(data: $data) {
+      services {
+        id
+        description
+        duration
+        name
+        price
+      }
     }
   }
 `;

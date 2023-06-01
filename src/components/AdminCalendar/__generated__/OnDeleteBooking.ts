@@ -8,24 +8,24 @@
 // ====================================================
 
 export interface OnDeleteBooking_deletedBooking_employee {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
   givenName: string;
   familyName: string;
 }
 
 export interface OnDeleteBooking_deletedBooking_services {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
 }
 
 export interface OnDeleteBooking_deletedBooking_branch {
-  __typename: 'Branch';
+  __typename: "Branch";
   id: string;
 }
 
 export interface OnDeleteBooking_deletedBooking {
-  __typename: 'Booking';
+  __typename: "Booking";
   id: string;
   start: string;
   end: string;

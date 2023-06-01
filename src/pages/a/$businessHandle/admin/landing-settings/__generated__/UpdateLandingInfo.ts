@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface UpdateLandingInfo_updateLandingInfo {
-  __typename: 'LandingInfo';
+  __typename: "LandingInfo";
   id: string;
 }
 

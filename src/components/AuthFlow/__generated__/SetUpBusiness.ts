@@ -8,17 +8,17 @@
 // ====================================================
 
 export interface SetUpBusiness_setUpBusiness_categories {
-  __typename: 'Category';
+  __typename: "Category";
   id: string;
 }
 
 export interface SetUpBusiness_setUpBusiness_branches {
-  __typename: 'Branch';
+  __typename: "Branch";
   id: string;
 }
 
 export interface SetUpBusiness_setUpBusiness {
-  __typename: 'Business';
+  __typename: "Business";
   id: string;
   categories: SetUpBusiness_setUpBusiness_categories[];
   branches: SetUpBusiness_setUpBusiness_branches[];
