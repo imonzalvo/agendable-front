@@ -106,28 +106,31 @@ const Layout = ({ children, location }: LayoutProps) => {
     }
   }, []);
 
-  const url = 'https://agendable-dev.onrender.com/graphql';
-  // const url = 'http://localhost:4000/graphql';
+  const url = 'https://agendable-prod.fly.dev/graphql';
+  // const url = 'https://agendable-dev.onrender.com/graphql';
+  // const url = 'http://localhost:8080/graphql';
 
   const httpLink = createHttpLink({ uri: url });
 
   // const wsLink = new WebSocketLink({
-  //   uri: 'ws://localhost:4000/graphql',
+  //   uri: 'ws://localhost:8080/graphql',
   //   options: {
   //     reconnect: true,
   //   },
   // });
 
   // const wsLink = new WebSocketLink(
-  //   new SubscriptionClient('ws://localhost:4000/graphql', {
+  //   new SubscriptionClient('ws://localhost:8080/graphql', {
   //     reconnect: true,
   //   }),
   // );
 
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: 'wss://agendable-dev.onrender.com/graphql',
-      // url: 'wss://localhost:4000/graphql',
+      url: 'wss://agendable-prod.fly.dev/graphql',
+      // url: 'wss://agendable-dev.onrender.com/graphql',
+
+      // url: 'wss://localhost:8080/graphql',
     }),
   );
 

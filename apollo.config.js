@@ -2,7 +2,7 @@ module.exports = {
   client: {
     service: {
       name: 'agendable-dev',
-      url: 'https://agendable-dev.onrender.com/graphql',
+      url: 'http://agendable-prod.fly.dev/graphql',
       skipSSLValidation: true,
     },
   },
