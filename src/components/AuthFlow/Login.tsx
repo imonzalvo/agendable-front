@@ -22,12 +22,12 @@ interface LoginProps extends FormComponentProps {
 
 function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
   const { setAuthenticated, setUser } = useContext(AuthContext);
-  const [loginMutation, { data, loading: isLoading }] = useMutation(LOGIN, {
+  const [loginMutation, { loading: isLoading }] = useMutation(LOGIN, {
     onCompleted: data => {
       message.success('Successfully Signed In!');
       localStorage.setItem('token', data.login.token);
       setAuthenticated(true);
-      setUser(JSON.stringify(data.login.user));
+      setUser(data.login.user);
       localStorage.setItem('user', JSON.stringify(data.login.user));
     },
     onError: err => {

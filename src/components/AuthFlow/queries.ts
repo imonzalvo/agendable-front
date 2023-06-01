@@ -34,6 +34,12 @@ export const LOGIN = gql`
         name
         business {
           id
+          services {
+            id
+          }
+          employee {
+            id
+          }
         }
       }
       token
@@ -73,6 +79,7 @@ export const SET_UP_BUSINESS = gql`
       id
       name
       website
+      handle
       instagramUrl
       facebookUrl
       branches {
@@ -102,6 +109,24 @@ export const SET_UP_SERVICES = gql`
         duration
         name
         price
+      }
+    }
+  }
+`;
+
+export const SET_UP_EMPLOYEES = gql`
+  mutation SetUpEmployees($data: [CreateEmployeesInputType]) {
+    setUpEmployees(data: $data) {
+      employees {
+        id
+        givenName
+        familyName
+        phone
+        availability {
+          day
+          from
+          to
+        }
       }
     }
   }

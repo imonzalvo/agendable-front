@@ -7,21 +7,36 @@
 // GraphQL mutation operation: SetUpBusiness
 // ====================================================
 
-export interface SetUpBusiness_setUpBusiness_categories {
-  __typename: "Category";
-  id: string;
-}
-
 export interface SetUpBusiness_setUpBusiness_branches {
   __typename: "Branch";
   id: string;
+  address: string;
+}
+
+export interface SetUpBusiness_setUpBusiness_landing {
+  __typename: "LandingInfo";
+  id: string;
+  displayName: string;
+  cta: string | null;
+  description: string;
+}
+
+export interface SetUpBusiness_setUpBusiness_Configuration {
+  __typename: "Configuration";
+  scheduleMinutesSeparation: number;
+  enableEmailsNotifications: boolean;
 }
 
 export interface SetUpBusiness_setUpBusiness {
   __typename: "Business";
   id: string;
-  categories: SetUpBusiness_setUpBusiness_categories[];
+  name: string;
+  website: string | null;
+  instagramUrl: string | null;
+  facebookUrl: string | null;
   branches: SetUpBusiness_setUpBusiness_branches[];
+  landing: SetUpBusiness_setUpBusiness_landing | null;
+  Configuration: SetUpBusiness_setUpBusiness_Configuration | null;
 }
 
 export interface SetUpBusiness {

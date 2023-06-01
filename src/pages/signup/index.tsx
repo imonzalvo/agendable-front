@@ -1,23 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import router from 'umi/router';
 
 import { AuthContext } from '@/layouts';
-import { getUrl } from '@/utils/utils';
 
 export default function Signup() {
   const { user, isAuthenticated } = useContext(AuthContext);
 
-  console.log('hola?', user);
-  let path;
+  useEffect(() => {
+    let path;
 
-  if (!!user && !user.business) {
-    path = 'signup/setup-business';
-  }
+    if (!!user) {
+      if (!!user && !user.business) {
+        path = 'signup/setup-business';
+      }
 
-  if (!!user && !!user.business && !!user.business.id) {
-    path = 'signup/setup-services';
-  }
+      if (!!user && !!user.business && !!user.business.id) {
+        path = 'signup/setup-services';
+      }
 
-  router.push(path);
+      if (!!user && !!user.business && !!user.business.id && !!user.business.services) {
+        path = 'signup/setup-professionals';
+      }
+
+      router.push(path);
+    }
+  }, [user]);
+
   return null;
 }
