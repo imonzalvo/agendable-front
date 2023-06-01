@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface CreateBranch_createBranch {
-  __typename: 'Branch';
+  __typename: "Branch";
   name: string;
   email: string;
   phone: string;

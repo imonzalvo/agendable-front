@@ -8,23 +8,23 @@
 // ====================================================
 
 export interface GetServicesData_getBranch_services_branches {
-  __typename: 'Branch';
+  __typename: "Branch";
   id: string;
 }
 
 export interface GetServicesData_getBranch_services_employees {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
 }
 
 export interface GetServicesData_getBranch_services_category {
-  __typename: 'Category';
+  __typename: "Category";
   id: string;
   name: string;
 }
 
 export interface GetServicesData_getBranch_services {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
   name: string;
   price: number;
@@ -37,7 +37,7 @@ export interface GetServicesData_getBranch_services {
 }
 
 export interface GetServicesData_getBranch {
-  __typename: 'Branch';
+  __typename: "Branch";
   services: GetServicesData_getBranch_services[];
 }
 

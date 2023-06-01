@@ -67,6 +67,33 @@ export default {
           component: './404',
         },
         {
+          path: '/signup',
+          exact: false,
+          component: './signup/_layout.tsx',
+          routes: [
+            {
+              path: '/signup',
+              exact: true,
+              component: './signup',
+            },
+            {
+              path: '/signup/setup-business',
+              exact: true,
+              component: './signup/forms/BusinessForm.tsx',
+            },
+            {
+              path: '/signup/setup-services',
+              exact: true,
+              component: './signup/forms/ServiceForm.tsx',
+            },
+            {
+              path: '/signup/setup-professionals',
+              exact: true,
+              component: './signup/forms/EmployeeForm.tsx',
+            },
+          ],
+        },
+        {
           path: '/a/:businessHandle',
           exact: true,
           component: './a/$businessHandle',

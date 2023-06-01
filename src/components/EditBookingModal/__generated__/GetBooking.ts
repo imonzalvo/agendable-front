@@ -8,12 +8,12 @@
 // ====================================================
 
 export interface GetBooking_getBooking_services {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
 }
 
 export interface GetBooking_getBooking {
-  __typename: 'Booking';
+  __typename: "Booking";
   clientEmail: string | null;
   clientFamilyName: string | null;
   clientName: string | null;

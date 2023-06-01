@@ -8,17 +8,17 @@
 // ====================================================
 
 export interface GetEmployeesData_getBusiness_branches {
-  __typename: 'Branch';
+  __typename: "Branch";
   id: string;
 }
 
 export interface GetEmployeesData_getBusiness_services {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
 }
 
 export interface GetEmployeesData_getBusiness_employee_availability {
-  __typename: 'AvailabilityItem';
+  __typename: "AvailabilityItem";
   id: string;
   day: string;
   from: string;
@@ -26,20 +26,20 @@ export interface GetEmployeesData_getBusiness_employee_availability {
 }
 
 export interface GetEmployeesData_getBusiness_employee_services {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
   name: string;
 }
 
 export interface GetEmployeesData_getBusiness_employee_vacations {
-  __typename: 'VacationsItem';
+  __typename: "VacationsItem";
   id: string;
   from: string;
   to: string;
 }
 
 export interface GetEmployeesData_getBusiness_employee {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
   availability: GetEmployeesData_getBusiness_employee_availability[];
   givenName: string;
@@ -50,7 +50,7 @@ export interface GetEmployeesData_getBusiness_employee {
 }
 
 export interface GetEmployeesData_getBusiness {
-  __typename: 'Business';
+  __typename: "Business";
   branches: GetEmployeesData_getBusiness_branches[];
   services: GetEmployeesData_getBusiness_services[];
   employee: GetEmployeesData_getBusiness_employee[];

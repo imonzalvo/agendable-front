@@ -9,4 +9,5 @@ export default {
   'form.service': 'Servicio',
   'form.staff': 'Profesional',
   'form.duration': 'Duración',
+  'form.price': 'Precio',
 };

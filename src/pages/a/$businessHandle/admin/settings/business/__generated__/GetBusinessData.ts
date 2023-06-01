@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface GetBusinessData_getBusiness {
-  __typename: 'Business';
+  __typename: "Business";
   name: string;
   email: string;
   phone: string;

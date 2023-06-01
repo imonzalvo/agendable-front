@@ -9,4 +9,5 @@ export default {
   'form.service': 'Service',
   'form.staff': 'Staff',
   'form.duration': 'Duration',
+  'form.price': 'Price',
 };

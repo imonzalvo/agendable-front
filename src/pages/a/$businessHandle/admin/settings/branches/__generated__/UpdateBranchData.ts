@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface UpdateBranchData_updateBranch {
-  __typename: 'Branch';
+  __typename: "Branch";
   id: string;
   name: string;
   email: string;

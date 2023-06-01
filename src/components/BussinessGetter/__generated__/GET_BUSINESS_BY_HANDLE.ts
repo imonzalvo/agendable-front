@@ -8,19 +8,19 @@
 // ====================================================
 
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_branches {
-  __typename: 'Branch';
+  __typename: "Branch";
   id: string;
   address: string;
 }
 
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing_images {
-  __typename: 'BusinessImage';
+  __typename: "BusinessImage";
   id: string;
   url: string;
 }
 
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing {
-  __typename: 'LandingInfo';
+  __typename: "LandingInfo";
   id: string;
   displayName: string;
   cta: string | null;
@@ -30,13 +30,13 @@ export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_landing {
 }
 
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle_Configuration {
-  __typename: 'Configuration';
+  __typename: "Configuration";
   scheduleMinutesSeparation: number;
   enableEmailsNotifications: boolean;
 }
 
 export interface GET_BUSINESS_BY_HANDLE_getBusinessByHandle {
-  __typename: 'Business';
+  __typename: "Business";
   id: string;
   name: string;
   website: string | null;

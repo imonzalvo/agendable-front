@@ -8,12 +8,12 @@
 // ====================================================
 
 export interface SIGN_UP_signup_user {
-  __typename: 'User';
+  __typename: "User";
   email: string;
 }
 
 export interface SIGN_UP_signup {
-  __typename: 'AuthPayload';
+  __typename: "AuthPayload";
   token: string | null;
   user: SIGN_UP_signup_user | null;
 }

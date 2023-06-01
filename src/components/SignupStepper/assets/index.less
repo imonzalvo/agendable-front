@@ -1,0 +1,208 @@
+@import '~antd/es/style/themes/default.less';
+@import 'variables';
+
+:global {
+  .@{stepsPrefixClass} {
+    position: relative;
+    bottom: 3px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 715px;
+    padding: 10px;
+    font-size: 0;
+    line-height: 1.5;
+    background-color: #fff;
+    border-radius: 7px;
+
+    &,
+    * {
+      box-sizing: border-box;
+      transition: all 200ms ease-in-out;
+    }
+  }
+
+  .stepper-container {
+    width: 100%;
+    max-width: 715px;
+    border-radius: 7px;
+    box-shadow: @shadow-1-down;
+  }
+
+  .@{stepsPrefixClass}-item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    // flex: 1;/
+    // overflow: hidden;
+    text-align: center;
+    vertical-align: top;
+
+    &-container[role='button'] {
+      cursor: pointer;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    // &:last-child {
+    //   flex: none;
+    // }
+
+    // &:last-child &-tail,
+    // &:last-child &-title:after {
+    //   display: none;
+    // }
+
+    &-container {
+      display: flex;
+    }
+
+    // &-icon,
+    // &-content {
+    //   display: inline-block;
+    //   vertical-align: top;
+    // }
+
+    &-icon {
+      width: 26px;
+      height: 26px;
+      margin-right: 8px;
+      font-size: 14px;
+      line-height: 26px;
+      text-align: center;
+      border: 1px solid @wait-icon-color;
+      border-radius: 26px;
+      transition: background-color 0.3s, border-color 0.3s;
+
+      > .@{stepsPrefixClass}-icon {
+        position: relative;
+        top: -1px;
+        color: @primary-color;
+        line-height: 1;
+
+        &.rcicon {
+          position: relative;
+          top: -2px;
+          font-size: 12px;
+        }
+      }
+    }
+
+    // &-tail {
+    //   position: absolute;
+    //   left: 0;
+    //   width: 100%;
+    //   top: 12px;
+    //   padding: 0 10px;
+    //   &:after {
+    //     content: '';
+    //     display: inline-block;
+    //     background: @wait-tail-color;
+    //     height: 1px;
+    //     border-radius: 1px;
+    //     width: 100%;
+    //     transition: background 0.3s;
+    //   }
+    // }
+    // &-content {
+    //   margin-top: 3px;
+    // }
+    // &-title {
+    //   font-size: 14px;
+    //   margin-bottom: 4px;
+    //   color: #666;
+    //   font-weight: bold;
+    //   display: inline-block;
+    //   padding-right: 10px;
+    //   position: relative;
+    //   &:after {
+    //     content: '';
+    //     height: 1px;
+    //     width: 1000px;
+    //     background: @wait-tail-color;
+    //     display: block;
+    //     position: absolute;
+    //     top: 0.55em;
+    //     left: 100%;
+    //   }
+    // }
+    // &-subtitle {
+    //   font-size: 12px;
+    //   display: inline-block;
+    //   color: #999;
+    //   margin-left: 8px;
+    // }
+    // &-description {
+    //   font-size: 12px;
+    //   color: #999;
+    // }
+    .step-item-status(wait);
+    .step-item-status(process);
+    &-process &-icon {
+      background: @process-icon-color;
+      > .@{stepsPrefixClass}-icon {
+        color: #fff;
+      }
+    }
+    .step-item-status(finish);
+    .step-item-status(error);
+
+    &.@{stepsPrefixClass}-next-error .@{stepsPrefixClass}-item-title::after {
+      background: @error-icon-color;
+    }
+  }
+
+  .@{stepsPrefixClass}-horizontal:not(.@{stepsPrefixClass}-label-vertical) {
+    .@{stepsPrefixClass}-item {
+      margin-right: 10px;
+      // &:last-child {
+      //   margin-right: 0;
+      // }
+      &-tail {
+        display: none;
+      }
+      // &-description {
+      //   max-width: @stepDescriptionMaxWidth;
+      // }
+    }
+  }
+
+  .step-item-status(@status) {
+    @icon-color: '@{status}-icon-color';
+    @title-color: '@{status}-title-color';
+    @description-color: '@{status}-description-color';
+    @tail-color: '@{status}-tail-color';
+    &-@{status} &-icon {
+      background-color: #fff;
+      border-color: @@icon-color;
+      > .@{stepsPrefixClass}-icon {
+        color: @@icon-color;
+        .@{stepsPrefixClass}-icon-dot {
+          background: @@icon-color;
+        }
+      }
+    }
+    &-@{status} &-title {
+      color: @@title-color;
+      &::after {
+        background-color: @@tail-color;
+      }
+    }
+    &-@{status} &-description {
+      color: @@description-color;
+    }
+    &-@{status} &-tail::after {
+      background-color: @@tail-color;
+    }
+  }
+
+  @import 'custom-icon';
+  @import 'small';
+  @import 'vertical';
+  @import 'label-placement';
+  @import 'progress-dot';
+  @import 'nav';
+}

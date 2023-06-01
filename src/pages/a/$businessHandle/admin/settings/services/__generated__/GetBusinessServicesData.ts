@@ -8,29 +8,29 @@
 // ====================================================
 
 export interface GetBusinessServicesData_getBusiness_categories {
-  __typename: 'Category';
+  __typename: "Category";
   id: string;
 }
 
 export interface GetBusinessServicesData_getBusiness_branches {
-  __typename: 'Branch';
+  __typename: "Branch";
   id: string;
 }
 
 export interface GetBusinessServicesData_getBusiness_employee {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
 }
 
 export interface GetBusinessServicesData_getBusiness_services_employees {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
   givenName: string;
   familyName: string;
 }
 
 export interface GetBusinessServicesData_getBusiness_services {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
   name: string;
   duration: number;
@@ -41,7 +41,7 @@ export interface GetBusinessServicesData_getBusiness_services {
 }
 
 export interface GetBusinessServicesData_getBusiness {
-  __typename: 'Business';
+  __typename: "Business";
   categories: GetBusinessServicesData_getBusiness_categories[];
   branches: GetBusinessServicesData_getBusiness_branches[];
   employee: GetBusinessServicesData_getBusiness_employee[];

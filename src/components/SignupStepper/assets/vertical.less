@@ -1,0 +1,53 @@
+@import 'variables';
+
+.@{stepsPrefixClass}-vertical {
+  display: block;
+  .@{stepsPrefixClass}-item {
+    display: block;
+    overflow: visible;
+    &-icon {
+      float: left;
+      &-inner {
+        margin-right: 16px;
+      }
+    }
+    &-content {
+      display: block;
+      min-height: 48px;
+      overflow: hidden;
+    }
+    &-title {
+      line-height: 26px;
+      &::after {
+        display: none;
+      }
+    }
+    &-description {
+      padding-bottom: 12px;
+    }
+    &-tail {
+      position: absolute;
+      top: 0;
+      left: 13px;
+      width: 1px;
+      height: 100%;
+      padding: 30px 0 4px 0;
+      &::after {
+        width: 1px;
+        height: 100%;
+      }
+    }
+  }
+
+  &.@{stepsPrefixClass}-small {
+    .@{stepsPrefixClass}-item-tail {
+      position: absolute;
+      top: 0;
+      left: 9px;
+      padding: 22px 0 4px 0;
+    }
+    .@{stepsPrefixClass}-item-title {
+      line-height: 18px;
+    }
+  }
+}

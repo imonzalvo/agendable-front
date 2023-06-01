@@ -8,13 +8,13 @@
 // ====================================================
 
 export interface GetLandingData_getBusiness_landing_images {
-  __typename: 'BusinessImage';
+  __typename: "BusinessImage";
   id: string;
   url: string;
 }
 
 export interface GetLandingData_getBusiness_landing {
-  __typename: 'LandingInfo';
+  __typename: "LandingInfo";
   id: string;
   cta: string | null;
   description: string;
@@ -24,7 +24,7 @@ export interface GetLandingData_getBusiness_landing {
 }
 
 export interface GetLandingData_getBusiness {
-  __typename: 'Business';
+  __typename: "Business";
   handle: string;
   landing: GetLandingData_getBusiness_landing | null;
 }

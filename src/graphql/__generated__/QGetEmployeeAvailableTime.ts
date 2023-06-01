@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface QGetEmployeeAvailableTime_getEmployeeAvailableTime {
-  __typename: 'EmployeeAvailableTime';
+  __typename: "EmployeeAvailableTime";
   from: string | null;
   to: string | null;
 }

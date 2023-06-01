@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface UpdateBusinessData_updateBusiness {
-  __typename: 'Business';
+  __typename: "Business";
   email: string;
   handle: string;
   id: string;

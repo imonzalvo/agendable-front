@@ -3,14 +3,14 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { AvailabilityItemEmployeeInputType } from '../../../../../../../../__generated__/globalTypes';
+import { AvailabilityItemEmployeeInputType } from "./../../../../../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: CreateEmployee
 // ====================================================
 
 export interface CreateEmployee_createEmployee_availability {
-  __typename: 'AvailabilityItem';
+  __typename: "AvailabilityItem";
   id: string;
   day: string;
   from: string;
@@ -18,20 +18,20 @@ export interface CreateEmployee_createEmployee_availability {
 }
 
 export interface CreateEmployee_createEmployee_services {
-  __typename: 'Service';
+  __typename: "Service";
   id: string;
   name: string;
 }
 
 export interface CreateEmployee_createEmployee_vacations {
-  __typename: 'VacationsItem';
+  __typename: "VacationsItem";
   id: string;
   from: string;
   to: string;
 }
 
 export interface CreateEmployee_createEmployee {
-  __typename: 'Employee';
+  __typename: "Employee";
   id: string;
   availability: CreateEmployee_createEmployee_availability[];
   givenName: string;

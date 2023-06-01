@@ -21,12 +21,14 @@ interface LoginProps extends FormComponentProps {
 }
 
 function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
-  const { setAuthenticated } = useContext(AuthContext);
-  const [loginMutation, { data, loading: isLoading }] = useMutation(LOGIN, {
+  const { setAuthenticated, setUser } = useContext(AuthContext);
+  const [loginMutation, { loading: isLoading }] = useMutation(LOGIN, {
     onCompleted: data => {
       message.success('Successfully Signed In!');
       localStorage.setItem('token', data.login.token);
       setAuthenticated(true);
+      setUser(data.login.user);
+      localStorage.setItem('user', JSON.stringify(data.login.user));
     },
     onError: err => {
       message.error(err?.message);
@@ -63,13 +65,6 @@ function Login({ form: { validateFields, getFieldDecorator } }: LoginProps) {
         )}
       </Form.Item>
       <SingleFormButtonContainer>
-        {/* {getFieldDecorator('remember', {
-          valuePropName: 'checked',
-          initialValue: true,
-        })(<Checkbox>Remember me</Checkbox>)} */}
-        {/* <a className="login-form-forgot" href="">
-          Forgot password
-        </a> */}
         <Button type="primary" htmlType="submit" className="login-form-button" loading={isLoading}>
           {formatMessage({ id: 'navBar.signIn' })}
         </Button>

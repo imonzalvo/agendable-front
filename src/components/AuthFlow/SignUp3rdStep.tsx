@@ -16,14 +16,15 @@ interface ISignUpFormProps extends FormComponentProps {
 }
 
 function SignUp3rdStep({ form, email }: ISignUpFormProps): JSX.Element {
-  const { setAuthenticated } = useContext(AuthContext);
+  const { setAuthenticated, setUser } = useContext(AuthContext);
 
   const [confirmUserMutate, { data, loading: isLoading }] = useMutation(CONFIRM_USER, {
     onCompleted: data => {
       message.success('Successfully Signed In!');
-      console.log('data', data.confirmUser);
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.confirmUser.token);
       setAuthenticated(true);
+      setUser(data.confirmUser.user);
+      localStorage.setItem('user', JSON.stringify(data.confirmUser.user));
     },
     onError: err => {
       message.error(err?.message);
