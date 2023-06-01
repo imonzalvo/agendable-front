@@ -105,9 +105,9 @@ const Layout = ({ children, location }: LayoutProps) => {
     }
 
     return null;
-  }, [user]);
+  }, []);
 
-  const url = 'http://localhost:4000/graphql';
+  const url = 'https://agendable-dev.onrender.com/graphql';
 
   const httpLink = createHttpLink({ uri: url });
 
@@ -126,7 +126,7 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: 'wss://localhost:4000/graphql',
+      url: 'wss://agendable-dev.onrender.com/graphql',
     }),
   );
 
