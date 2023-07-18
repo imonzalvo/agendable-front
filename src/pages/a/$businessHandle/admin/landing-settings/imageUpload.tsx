@@ -57,7 +57,7 @@ function ImageUpload({ imageUrl, setImageUrl, currentImage, landingId, imageType
         listType="picture-card"
         className="avatar-uploader"
         showUploadList={false}
-        action={`http://localhost:4000/images?landingId=${landingId}&imageType=${imageType}`}
+        action={`https://agendable-prod.fly.dev/images?landingId=${landingId}&imageType=${imageType}`}
         beforeUpload={beforeUpload}
         onChange={handleChange}
       >
