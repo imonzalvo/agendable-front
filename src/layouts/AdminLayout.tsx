@@ -13,7 +13,6 @@ import { isAntDesignPro, getUrl } from '@/utils/utils';
 import AuthLayout from '@/layouts/AuthLayout';
 import { AuthContext } from '@/layouts';
 import { BusinessContext } from '@/components/BussinessGetter';
-import SelectLang from '@/components/SelectLang';
 import { SettingOutlined, CalendarOutlined, LayoutOutlined } from '@ant-design/icons';
 import { AnimatedLayout, ButtonFooter } from './styles';
 
