@@ -156,7 +156,7 @@ const Layout = ({ children, location }: LayoutProps) => {
     };
   });
 
-  console.log("process", process.env, process.env.UMI_APP_API_URL, process.env.UMI_APP_SOCKET_URL)
+  console.log("process2", process.env, process.env.UMI_APP_API_URL, process.env.UMI_APP_SOCKET_URL)
 
   const client = new ApolloClient({
     link: authLink.concat(splitLink),
