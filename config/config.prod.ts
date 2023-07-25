@@ -294,8 +294,8 @@ export default {
   define: {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
       ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '',
-      "process.env.UMI_APP_API_URL": 'agendable-prod.fly.dev/graphql/graphql',
-      UMI_APP_API_URL: 'agendable-prod.fly.dev/graphql/graphql',
+      "process.env.UMI_APP_API_URL": 'https://agendable-prod.fly.dev/graphql/graphql',
+      UMI_APP_API_URL: 'https://agendable-prod.fly.dev/graphql/graphql',
       "process.env.UMI_APP_SOCKET_URL": 'wss://agendable-prod.fly.dev/graphql/graphql',
       UMI_APP_SOCKET_URL: 'wss://agendable-prod.fly.dev/graphql/graphql',
   },
