@@ -1,5 +1,21 @@
 export const parsePathnameHandle = (pathname: string) => {
   const location = window.location.hostname;
+
+  if (location.includes('agendable.io')) {
+    getPathnameHandleFromProd(pathname);
+  } else {
+    if (typeof pathname === 'string') {
+      const pathnameArr = pathname.split('/');
+      if (pathnameArr.length >= 2 && pathnameArr[1] === 'a' && pathnameArr[2]) {
+        return pathnameArr[2];
+      }
+    }
+    return null;
+  }
+};
+
+const getPathnameHandleFromProd = (pathname: string) => {
+  const location = window.location.hostname;
   const separatedLocation = location.split('.');
 
   const isLongPathBusinessDomain =
