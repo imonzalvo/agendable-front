@@ -113,19 +113,6 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   const httpLink = createHttpLink({ uri: url });
 
-  // const wsLink = new WebSocketLink({
-  //   uri: 'ws://localhost:8080/graphql',
-  //   options: {
-  //     reconnect: true,
-  //   },
-  // });
-
-  // const wsLink = new WebSocketLink(
-  //   new SubscriptionClient('ws://localhost:8080/graphql', {
-  //     reconnect: true,
-  //   }),
-  // );
-
   const wsLink = new GraphQLWsLink(
     createClient({
       // url: 'wss://agendable-prod.fly.dev/graphql',
