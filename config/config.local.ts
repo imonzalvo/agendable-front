@@ -294,10 +294,10 @@ export default {
   define: {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
       ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '',
-      "process.env.UMI_APP_API_URL": 'https://agendable-dev.onrender.com/graphql',
-      UMI_APP_API_URL: 'https://agendable-dev.onrender.com/graphql',
-      "process.env.UMI_APP_SOCKET_URL": 'wss://agendable-dev.onrender.com/graphql',
-      UMI_APP_SOCKET_URL: 'wss://agendable-dev.onrender.com/graphql',
+      "process.env.UMI_APP_API_URL": 'http://localhost:8080/graphql',
+      UMI_APP_API_URL: 'http://localhost:8080/graphql',
+      "process.env.UMI_APP_SOCKET_URL": 'wss://localhost:8080/graphql',
+      UMI_APP_SOCKET_URL: 'wss://localhost:8080/graphql',
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {

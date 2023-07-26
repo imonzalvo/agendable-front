@@ -108,7 +108,8 @@ const Layout = ({ children, location }: LayoutProps) => {
 
   // const url = 'https://agendable-prod.fly.dev/graphql';
   // const url = 'https://agendable-dev.onrender.com/graphql';
-  const url = 'http://localhost:8080/graphql';
+  const url = `${process.env.UMI_APP_API_URL}`;
+  // const url = 'http://localhost:8080/graphql';
 
   const httpLink = createHttpLink({ uri: url });
 
@@ -128,9 +129,9 @@ const Layout = ({ children, location }: LayoutProps) => {
   const wsLink = new GraphQLWsLink(
     createClient({
       // url: 'wss://agendable-prod.fly.dev/graphql',
-      // url: 'wss://agendable-dev.onrender.com/graphql',
+      url: `${process.env.UMI_APP_SOCKET_URL}`,
 
-      url: 'wss://localhost:8080/graphql',
+      // url: 'wss://localhost:8080/graphql',
     }),
   );
 
@@ -154,6 +155,8 @@ const Layout = ({ children, location }: LayoutProps) => {
       },
     };
   });
+
+  console.log("process2", process.env, process.env.UMI_APP_API_URL, process.env.UMI_APP_SOCKET_URL)
 
   const client = new ApolloClient({
     link: authLink.concat(splitLink),
