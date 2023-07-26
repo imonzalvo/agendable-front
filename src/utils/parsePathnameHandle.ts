@@ -2,7 +2,7 @@ export const parsePathnameHandle = (pathname: string) => {
   const location = window.location.hostname;
 
   if (location.includes('agendable.io')) {
-    getPathnameHandleFromProd(pathname);
+    return getPathnameHandleFromProd(pathname);
   } else {
     if (typeof pathname === 'string') {
       const pathnameArr = pathname.split('/');
